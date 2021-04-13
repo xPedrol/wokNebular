@@ -5,19 +5,21 @@ import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {ThemeModule} from './@theme/theme.module';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {NbCardModule} from '@nebular/theme';
+import {NotFoundComponent} from './shared/not-found/not-found.component';
+import {NgxDatatableModule} from '@swimlane/ngx-datatable';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    NotFoundComponent
   ],
-    imports: [
-        BrowserModule,
-        BrowserAnimationsModule,
-        AppRoutingModule,
-        ThemeModule.forRoot(),
-        NbCardModule,
-    ],
+  imports: [
+    BrowserModule,
+    BrowserAnimationsModule,
+    NgxDatatableModule,
+    AppRoutingModule,
+    ThemeModule.forRoot(),
+  ],
   providers: [],
   bootstrap: [AppComponent]
 })

@@ -3,8 +3,9 @@ import {NbMediaBreakpointsService, NbMenuService, NbSidebarService, NbThemeServi
 
 // import { UserData } from '../../../@core/data/users';
 // import { LayoutService } from '../../../@core/utils';
-import {map, takeUntil} from 'rxjs/operators';
+import {filter, map, takeUntil} from 'rxjs/operators';
 import {Subject} from 'rxjs';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'ngx-header',
@@ -14,6 +15,12 @@ import {Subject} from 'rxjs';
 export class HeaderComponent implements OnInit, OnDestroy {
 
   private destroy$: Subject<void> = new Subject<void>();
+  items = [
+    {title: 'default'},
+    {title: 'dark'},
+    {title: 'cosmic'},
+    {title: 'corporate'}
+  ];
   userPictureOnly = false;
   user: any;
 
@@ -45,10 +52,30 @@ export class HeaderComponent implements OnInit, OnDestroy {
               private themeService: NbThemeService,
               // private userService: UserData,
               // private layoutService: LayoutService,
-              private breakpointService: NbMediaBreakpointsService) {
+              private breakpointService: NbMediaBreakpointsService,
+              private router: Router
+  ) {
   }
 
   ngOnInit(): void {
+    this.menuService.onItemClick()
+      .pipe(
+        filter(({tag}) => tag === 'themeMenu'),
+        map(({item: {title}}) => title),
+      )
+      .subscribe((theme) => {
+        this.changeTheme(theme);
+      });
+    this.menuService.onItemClick()
+      .pipe(
+        filter(({tag}) => tag === 'userMenu'),
+        map(({item: {title}}) => title),
+      )
+      .subscribe((menu) => {
+        if (menu === 'Profile') {
+          this.router.navigate(['/account/profile']);
+        }
+      });
     this.currentTheme = this.themeService.currentTheme;
     const {xl} = this.breakpointService.getBreakpointsMap();
     this.themeService.onMediaQueryChange()

@@ -1,0 +1,43 @@
+<nb-card>
+  <nb-card-header>Estatisticas</nb-card-header>
+  <nb-card-body>
+    <div class="row">
+      <div class="col-xxxl-3 col-md-6">
+        <app-card [color]="'primary'" [title]="'5'" [subTitle]="'Cursos'" [icon]="'book-outline'"></app-card>
+      </div>
+      <div class="col-xxxl-3 col-md-6">
+        <app-card [color]="'success'" [title]="'5'" [subTitle]="'Módulos'" [icon]="'bookmark-outline'"></app-card>
+      </div>
+      <div class="col-xxxl-3 col-md-6">
+        <app-card [color]="'info'" [title]="'5'" [subTitle]="'Tópicos'" [icon]="'archive-outline'"></app-card>
+      </div>
+      <div class="col-xxxl-3 col-md-6">
+        <app-card [color]="'warning'" [title]="'5'" [subTitle]="'Exercícios'" [icon]="'book-open-outline'"></app-card>
+      </div>
+    </div>
+  </nb-card-body>
+</nb-card>
+
+<nb-card>
+  <nb-card-body>
+    <nb-tabset>
+      <nb-tab tabTitle="Cursos">
+        <div class="row">
+          <div class="col-4">
+            <nb-card accent="info">
+              <nb-card-header>Nebula</nb-card-header>
+              <nb-card-body>
+                A nebula is an interstellar cloud of dust, hydrogen, helium and other ionized gases.
+                Originally, nebula was a name for any diffuse astronomical object,
+                including galaxies beyond the Milky Way.
+              </nb-card-body>
+            </nb-card>
+          </div>
+        </div>
+      </nb-tab>
+      <nb-tab tabTitle="Treinamentos">
+        <p>List of <strong>orders</strong>.</p>
+      </nb-tab>
+    </nb-tabset>
+  </nb-card-body>
+</nb-card>

@@ -1,0 +1,15 @@
+<div class="row" *ngIf="url">
+  <div class="col-8 m-auto">
+    <nb-card status="danger">
+      <nb-card-header>Pagina não encontrada</nb-card-header>
+      <nb-card-body class="text-center">
+        <img width="130" src="https://image.flaticon.com/icons/png/512/2748/2748558.png">
+        <p class="mt-4">A página não foi encontrada, clique no botão abaixo para voltar ao dashboard</p>
+        <p><strong>Pagina: </strong>{{url}}</p>
+      </nb-card-body>
+      <nb-card-footer>
+        <button class="float-right" nbButton status="info">Login</button>
+      </nb-card-footer>
+    </nb-card>
+  </div>
+</div>
