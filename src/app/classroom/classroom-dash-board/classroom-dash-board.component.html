@@ -20,23 +20,70 @@
 
 <nb-card>
   <nb-card-body>
+    <div class="row">
+      <div class="col-12  text-right">
+        <span *ngIf="isTeacher" class="m-1">
+        <button size="tiny" nbButton outline status="primary" [hidden]="isParticipating"
+                (click)="isParticipating = !isParticipating;getCourses();">
+          Participando
+        </button>
+        <button size="tiny" nbButton outline status="primary" [hidden]="!isParticipating"
+                (click)="isParticipating = !isParticipating;getCourses();">
+          Lecionando
+        </button>
+        </span>
+        <span class="m-1">
+        <button size="tiny" nbButton outline status="primary" [hidden]="showAll"
+                (click)="showAll = !showAll;getCourses();">
+          Exibir Tudo
+        </button>
+        <button size="tiny" nbButton outline status="primary" [hidden]="!showAll"
+                (click)="showAll = !showAll;getCourses();">
+          Exibir Ativos
+        </button>
+          </span>
+      </div>
+    </div>
     <nb-tabset>
       <nb-tab tabTitle="Cursos">
         <div class="row">
-          <div class="col-4">
+          <div class="col-12 col-md-6 col-lg-4" *ngFor="let course of courses">
             <nb-card accent="info">
-              <nb-card-header>Nebula</nb-card-header>
+              <nb-card-header>{{course.name}}</nb-card-header>
               <nb-card-body>
-                A nebula is an interstellar cloud of dust, hydrogen, helium and other ionized gases.
-                Originally, nebula was a name for any diffuse astronomical object,
-                including galaxies beyond the Milky Way.
+                {{course.description}}
               </nb-card-body>
+              <nb-card-footer class="text-right">
+                <button size="small" class="m-1" nbButton outline status="primary" [routerLink]="['']"
+                        *ngIf="isTeacher">Gerenciar
+                </button>
+                <button size="small" class="m-1" nbButton outline status="primary" [routerLink]="['/student/classroom/course',course?.slug]">
+                  Abrir
+                </button>
+              </nb-card-footer>
             </nb-card>
           </div>
         </div>
       </nb-tab>
       <nb-tab tabTitle="Treinamentos">
-        <p>List of <strong>orders</strong>.</p>
+        <div class="row">
+          <div class="col-12 col-md-6 col-lg-4" *ngFor="let course of trainings">
+            <nb-card accent="primary">
+              <nb-card-header>{{course.name}}</nb-card-header>
+              <nb-card-body>
+                {{course.description}}
+              </nb-card-body>
+              <nb-card-footer class="text-right">
+                <button size="small" class="m-1" nbButton outline status="primary" [routerLink]="['']"
+                        *ngIf="isTeacher">Gerenciar
+                </button>
+                <button size="small" class="m-1" nbButton outline status="primary" [routerLink]="['/student/classroom/course',course?.slug]">
+                  Abrir
+                </button>
+              </nb-card-footer>
+            </nb-card>
+          </div>
+        </div>
       </nb-tab>
     </nb-tabset>
   </nb-card-body>

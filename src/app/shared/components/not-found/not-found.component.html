@@ -8,7 +8,11 @@
         <p><strong>Pagina: </strong>{{url}}</p>
       </nb-card-body>
       <nb-card-footer>
-        <button class="float-right" nbButton status="info">Login</button>
+        <button class="float-right" nbButton status="info" *ngIf="!accountService.account">Login</button>
+        <button class="float-right" nbButton status="info" *ngIf="accountService.account"
+                [routerLink]="['/',accountService.account.isTeacher()?'teacher':'student','dashboard']">
+          Dashboard
+        </button>
       </nb-card-footer>
     </nb-card>
   </div>

@@ -6,6 +6,9 @@ import {NbMediaBreakpointsService, NbMenuService, NbSidebarService, NbThemeServi
 import {filter, map, takeUntil} from 'rxjs/operators';
 import {Subject} from 'rxjs';
 import {Router} from '@angular/router';
+import {AccountService} from '../../../shared/services/account.service';
+import {IAccount} from '../../../shared/models/user/account.model';
+import {AuthService} from '../../../shared/services/auth.service';
 
 @Component({
   selector: 'ngx-header',
@@ -22,8 +25,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
     {title: 'corporate'}
   ];
   userPictureOnly = false;
-  user: any;
-
   themes = [
     {
       value: 'default',
@@ -50,6 +51,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
   constructor(private sidebarService: NbSidebarService,
               private menuService: NbMenuService,
               private themeService: NbThemeService,
+              public authService: AuthService,
+              public accountService: AccountService,
               // private userService: UserData,
               // private layoutService: LayoutService,
               private breakpointService: NbMediaBreakpointsService,
@@ -74,6 +77,9 @@ export class HeaderComponent implements OnInit, OnDestroy {
       .subscribe((menu) => {
         if (menu === 'Profile') {
           this.router.navigate(['/account/profile']);
+        }
+        if (menu === 'Log out') {
+          this.authService.logout();
         }
       });
     this.currentTheme = this.themeService.currentTheme;

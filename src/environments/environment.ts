@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  API_URL: 'https://apiteste.mundodocodigo.com.br/'
+  API_URL: 'https://apiteste.mundodocodigo.com.br/api/',
+  IMAGES_URL: 'https://apiteste.mundodocodigo.com.br/storage/'
 };
 
 /*

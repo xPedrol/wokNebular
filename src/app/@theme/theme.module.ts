@@ -3,7 +3,7 @@ import {CommonModule} from '@angular/common';
 import {
   NbMenuModule,
   NbSidebarModule,
-  NbThemeModule, NbWindowModule,
+  NbThemeModule, NbToastrModule, NbWindowModule,
 } from '@nebular/theme';
 
 import {
@@ -28,6 +28,7 @@ import {COSMIC_THEME} from './styles/theme.cosmic';
 import {CORPORATE_THEME} from './styles/theme.corporate';
 import {DARK_THEME} from './styles/theme.dark';
 import {SharedThemeModuleModule} from './shared-theme-module.module';
+import {FormsModule} from '@angular/forms';
 
 const NB_MODULES = [
 //   NbLayoutModule,
@@ -38,6 +39,7 @@ const NB_MODULES = [
 //   NbSearchModule,
   NbSidebarModule.forRoot(),
   NbWindowModule.forRoot(),
+  NbToastrModule.forRoot({preventDuplicates: true, duplicatesBehaviour: 'all', status})
 //   NbContextMenuModule,
 //   NbButtonModule,
 //   NbSelectModule,
@@ -61,7 +63,7 @@ const PIPES = [
 ];
 
 @NgModule({
-  imports: [CommonModule, SharedThemeModuleModule, NB_MODULES],
+    imports: [CommonModule, SharedThemeModuleModule, NB_MODULES, FormsModule],
   exports: [CommonModule, ...PIPES, ...COMPONENTS, SharedThemeModuleModule, NbSidebarModule, NB_MODULES],
   declarations: [...COMPONENTS, ...PIPES],
 })

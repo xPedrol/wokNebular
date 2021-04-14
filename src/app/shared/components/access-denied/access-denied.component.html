@@ -1,0 +1,18 @@
+<div class="row" *ngIf="view">
+  <div class="col-8 m-auto">
+    <nb-card status="danger">
+      <nb-card-header>Você não tem acesso a esta pagina</nb-card-header>
+      <nb-card-body class="text-center">
+        <img width="130" src="https://image.flaticon.com/icons/png/512/2748/2748558.png">
+        <p class="mt-4">Sem autorização para continuar</p>
+      </nb-card-body>
+      <nb-card-footer>
+        <button class="float-right" nbButton status="info" *ngIf="!accountService.account">Login</button>
+        <button class="float-right" nbButton status="info" *ngIf="accountService.account"
+                [routerLink]="['/',accountService.account.isTeacher()?'teacher':'student','dashboard']">
+          Dashboard
+        </button>
+      </nb-card-footer>
+    </nb-card>
+  </div>
+</div>

@@ -2,7 +2,7 @@ import {NgModule} from '@angular/core';
 import {
   NbActionsModule, NbAlertModule, NbButtonModule,
   NbCardModule, NbCheckboxModule,
-  NbContextMenuModule, NbIconModule, NbInputModule,
+  NbContextMenuModule, NbFormFieldModule, NbIconModule, NbInputModule,
   NbLayoutModule, NbListModule,
   NbMenuModule, NbProgressBarModule,
   NbSearchModule, NbSelectModule, NbTabsetModule,
@@ -29,7 +29,8 @@ import {NbEvaIconsModule} from '@nebular/eva-icons';
     NbListModule,
     NbAlertModule,
     NbInputModule,
-    NbCheckboxModule
+    NbCheckboxModule,
+    NbFormFieldModule
   ]
 })
 export class SharedThemeModuleModule {

@@ -1,4 +1,5 @@
 export const environment = {
   production: true,
-  API_URL: 'https://api.mundodocodigo.com.br/'
+  API_URL: 'https://api.mundodocodigo.com.br/api/',
+  IMAGES_URL: 'https://api.mundodocodigo.com.br/storage/'
 };
