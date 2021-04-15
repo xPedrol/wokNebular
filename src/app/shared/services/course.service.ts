@@ -40,4 +40,13 @@ export class CourseService {
     }
     return of([]);
   }
+
+  getPublicCourses(): Observable<ICourse[]> {
+    const url = `public/courses/contests`;
+    return this.http.get<ICourse[]>(`${SERVER_API_URL}${url}`).pipe(map((courses) => {
+      return courses.map((course: ICourse) => {
+        return new Course(course);
+      });
+    }));
+  }
 }

@@ -1,6 +1,7 @@
 import {ModuleWithProviders, NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {
+  NbDialogModule,
   NbMenuModule,
   NbSidebarModule,
   NbThemeModule, NbToastrModule, NbWindowModule,
@@ -39,6 +40,7 @@ const NB_MODULES = [
 //   NbSearchModule,
   NbSidebarModule.forRoot(),
   NbWindowModule.forRoot(),
+  NbDialogModule.forRoot(),
   NbToastrModule.forRoot({preventDuplicates: true, duplicatesBehaviour: 'all', status})
 //   NbContextMenuModule,
 //   NbButtonModule,

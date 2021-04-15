@@ -1,11 +1,11 @@
 import {NgModule} from '@angular/core';
 import {
-  NbActionsModule, NbAlertModule, NbButtonModule,
+  NbActionsModule, NbAlertModule, NbAutocompleteModule, NbButtonModule,
   NbCardModule, NbCheckboxModule,
   NbContextMenuModule, NbFormFieldModule, NbIconModule, NbInputModule,
   NbLayoutModule, NbListModule,
   NbMenuModule, NbProgressBarModule,
-  NbSearchModule, NbSelectModule, NbTabsetModule,
+  NbSearchModule, NbSelectModule, NbSpinnerModule, NbTabsetModule,
   NbUserModule
 } from '@nebular/theme';
 import {NbEvaIconsModule} from '@nebular/eva-icons';
@@ -30,7 +30,9 @@ import {NbEvaIconsModule} from '@nebular/eva-icons';
     NbAlertModule,
     NbInputModule,
     NbCheckboxModule,
-    NbFormFieldModule
+    NbFormFieldModule,
+    NbSpinnerModule,
+    NbAutocompleteModule
   ]
 })
 export class SharedThemeModuleModule {

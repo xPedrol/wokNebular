@@ -3,12 +3,10 @@ import {ActivatedRoute} from '@angular/router';
 import {Authority} from '../../shared/constants/authority.constants';
 import {CourseService} from '../../shared/services/course.service';
 import {ICourse} from '../../shared/models/course.model';
-
-interface CardSettings {
-  title: string;
-  iconClass: string;
-  type: string;
-}
+import {DashboardService} from '../../shared/services/dashboard.service';
+import {ISummaryStudent} from '../../shared/models/summary-student.model';
+import {NbDialogService} from '@nebular/theme';
+import {AddPublicCourseDialogComponent} from '../add-public-course-dialog/add-public-course-dialog.component';
 
 @Component({
   selector: 'app-classroom-dash-board',
@@ -22,21 +20,41 @@ export class ClassroomDashBoardComponent implements OnInit {
   courses: ICourse[];
   trainings?: ICourse[];
   showAll = false;
+  loadingCourse = true;
+  loadingTraining = true;
+  loadingSummary = true;
+  summary?: ISummaryStudent;
 
   constructor(
     private activatedRoute: ActivatedRoute,
-    private courseService: CourseService
+    private courseService: CourseService,
+    private dashboardService: DashboardService,
+    private dialogService: NbDialogService
   ) {
   }
 
   ngOnInit(): void {
+    this.getSummary();
     if (this.activatedRoute.snapshot.data.authorities.includes(Authority.TEACHER)) {
       this.isTeacher = true;
       this.getCourses();
     }
   }
 
+  getSummary(): void {
+    this.loadingSummary = true;
+    this.dashboardService.getSummaryStudent().subscribe((summary) => {
+      this.summary = summary || null;
+      this.loadingSummary = false;
+    }, () => {
+      this.summary = null;
+      this.loadingSummary = false;
+    });
+  }
+
   getCourses() {
+    this.loadingCourse = true;
+    this.loadingTraining = true;
     if (this.isTeacher) {
       if (this.isParticipating) {
         this.getLearningCourses();
@@ -52,6 +70,11 @@ export class ClassroomDashBoardComponent implements OnInit {
     this.courseService.getCourses(this.showAll)
       .subscribe((courses) => {
         this.divideCourses(courses);
+      }, () => {
+        this.trainings = [];
+        this.courses = [];
+        this.loadingCourse = false;
+        this.loadingTraining = false;
       });
   }
 
@@ -59,6 +82,11 @@ export class ClassroomDashBoardComponent implements OnInit {
     this.courseService.getTeachingCourses(this.showAll)
       .subscribe((courses) => {
         this.divideCourses(courses);
+      }, () => {
+        this.trainings = [];
+        this.courses = [];
+        this.loadingCourse = false;
+        this.loadingTraining = false;
       });
   }
 
@@ -76,6 +104,12 @@ export class ClassroomDashBoardComponent implements OnInit {
     }
     this.trainings = trainings || [];
     this.courses = courses || [];
+    this.loadingCourse = false;
+    this.loadingTraining = false;
+  }
+
+  openAddPublicCourseDialog(): void {
+    this.dialogService.open(AddPublicCourseDialogComponent);
   }
 
 }

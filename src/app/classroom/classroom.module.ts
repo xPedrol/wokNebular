@@ -6,19 +6,23 @@ import {RouterModule} from '@angular/router';
 import {TopicListComponent} from './topic-list/topic-list.component';
 import {ClassroomDashBoardComponent} from './classroom-dash-board/classroom-dash-board.component';
 import {SharedModule} from '../shared/shared.module';
+import { AddPublicCourseDialogComponent } from './add-public-course-dialog/add-public-course-dialog.component';
+import {ReactiveFormsModule} from '@angular/forms';
 
 @NgModule({
   declarations: [
     ClassroomContentComponent,
     ClassroomInitialComponent,
     TopicListComponent,
-    ClassroomDashBoardComponent
+    ClassroomDashBoardComponent,
+    AddPublicCourseDialogComponent
   ],
-  imports: [
-    CommonModule,
-    SharedModule,
-    RouterModule,
-  ],
+    imports: [
+        CommonModule,
+        SharedModule,
+        RouterModule,
+        ReactiveFormsModule,
+    ],
   exports: [
     ClassroomContentComponent,
     SharedModule,

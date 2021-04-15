@@ -1,27 +1,34 @@
 <nb-card>
-  <nb-card-header>Estatisticas</nb-card-header>
-  <nb-card-body>
-    <div class="row">
+  <nb-card-header>Sumário</nb-card-header>
+  <nb-card-body [nbSpinner]="loadingSummary" nbSpinnerStatus="info" nbSpinnerSize="giant" style="min-height: 100px;">
+    <div class="row" *ngIf="summary">
       <div class="col-xxxl-3 col-md-6">
-        <app-card [color]="'primary'" [title]="'5'" [subTitle]="'Cursos'" [icon]="'book-outline'"></app-card>
+        <app-card [color]="'primary'" [title]="summary.totalCourses.toString()" [subTitle]="'Cursos'" [icon]="'book-outline'"></app-card>
       </div>
       <div class="col-xxxl-3 col-md-6">
-        <app-card [color]="'success'" [title]="'5'" [subTitle]="'Módulos'" [icon]="'bookmark-outline'"></app-card>
+        <app-card [color]="'success'" [title]="summary.totalModules.toString()" [subTitle]="'Módulos'" [icon]="'bookmark-outline'"></app-card>
       </div>
       <div class="col-xxxl-3 col-md-6">
-        <app-card [color]="'info'" [title]="'5'" [subTitle]="'Tópicos'" [icon]="'archive-outline'"></app-card>
+        <app-card [color]="'info'" [title]="summary.totalModulesTopics.toString()" [subTitle]="'Tópicos'" [icon]="'archive-outline'"></app-card>
       </div>
       <div class="col-xxxl-3 col-md-6">
-        <app-card [color]="'warning'" [title]="'5'" [subTitle]="'Exercícios'" [icon]="'book-open-outline'"></app-card>
+        <app-card [color]="'warning'" [title]="summary.totalExercises.toString()" [subTitle]="'Exercícios'" [icon]="'book-open-outline'"></app-card>
       </div>
     </div>
   </nb-card-body>
 </nb-card>
-
 <nb-card>
   <nb-card-body>
     <div class="row">
       <div class="col-12  text-right">
+        <button size="tiny" nbButton outline status="primary" class="m-1"
+                (click)="openAddPublicCourseDialog()">
+          <nb-icon icon="plus-outline"></nb-icon> treinamento
+        </button>
+        <button size="tiny" nbButton outline status="primary" class="m-1"
+                (click)="openAddPublicCourseDialog()">
+          <nb-icon icon="plus-outline"></nb-icon> curso
+        </button>
         <span *ngIf="isTeacher" class="m-1">
         <button size="tiny" nbButton outline status="primary" [hidden]="isParticipating"
                 (click)="isParticipating = !isParticipating;getCourses();">
@@ -45,7 +52,7 @@
       </div>
     </div>
     <nb-tabset>
-      <nb-tab tabTitle="Cursos">
+      <nb-tab tabTitle="Cursos"  [nbSpinner]="loadingCourse" nbSpinnerStatus="info" nbSpinnerSize="giant" style="min-height: 100px;">
         <div class="row">
           <div class="col-12 col-md-6 col-lg-4" *ngFor="let course of courses">
             <nb-card accent="info">
@@ -65,7 +72,7 @@
           </div>
         </div>
       </nb-tab>
-      <nb-tab tabTitle="Treinamentos">
+      <nb-tab tabTitle="Treinamentos" [nbSpinner]="loadingTraining" nbSpinnerStatus="info" nbSpinnerSize="giant" style="min-height: 100px;">
         <div class="row">
           <div class="col-12 col-md-6 col-lg-4" *ngFor="let course of trainings">
             <nb-card accent="primary">

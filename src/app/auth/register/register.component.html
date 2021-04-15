@@ -111,7 +111,7 @@
                      [status]="(registerForm.get('affiliation').dirty || registerForm.get('affiliation').touched) ? (registerForm.get('affiliation').invalid  ? 'danger' : 'success') : 'basic'"
                      [required]="true"
                      [attr.aria-invalid]="registerForm.get('affiliation').invalid && registerForm.get('affiliation').touched ? true : null">
-            <nb-option value="">Option empty</nb-option>
+            <nb-option [value]="''">Option empty</nb-option>
             <nb-option value="0">Option 0</nb-option>
             <nb-option value="1">Option 1</nb-option>
             <nb-option value="2">Option 2</nb-option>

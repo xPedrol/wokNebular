@@ -1,0 +1,78 @@
+<nb-card size="medium" style="width: 500px;">
+  <nb-card-header>Adicionar treinamento</nb-card-header>
+  <nb-card-body [nbSpinner]="loadingCourses" nbSpinnerStatus="info" nbSpinnerSize="giant" style="min-height: 100px;">
+    <nb-form-field size="small" *ngIf="options">
+      <input
+        #input
+        id="input"
+        nbInput
+        fullWidth
+        type="text"
+        (input)="onChange(input.value)"
+        placeholder="Digite um curso"
+        [nbAutocomplete]="auto"/>
+
+      <nb-autocomplete #auto (selectedChange)="onSelectionChange($event)">
+
+        <nb-option *ngFor="let option of filteredOptions" [value]="option">
+          {{ option }}
+        </nb-option>
+
+      </nb-autocomplete>
+
+    </nb-form-field>
+
+    <div class="row">
+      <div class="col-12 text-center" style="margin-top: 100px;" *ngIf="!selectedCourse && !loadingCourses">
+        <nb-icon icon="search-outline" style="font-size: 50px;"></nb-icon>
+        <h6>Selecione um curso</h6>
+      </div>
+      <div class="col-12 mt-5" *ngIf="selectedCourse">
+        <nb-card>
+          <nb-card-header>{{selectedCourse?.name}}</nb-card-header>
+          <nb-card-body>
+            <form [formGroup]="form">
+              <div class="row">
+                <div class="col-6">
+                  <input nbInput fullWidth formControlName="code"
+                         [status]="(form.get('code').dirty || form.get('code').touched) ? (form.get('code').invalid  ? 'danger' : 'success') : 'basic'"
+                         [required]="true"
+                         [attr.aria-invalid]="form.get('code').invalid && form.get('code').touched ? true : null">
+                  <ng-container *ngIf="form.get('code').invalid && form.get('code').touched">
+                    <p class="text-danger" *ngIf="form.get('code').errors?.required">
+                      Code is required!
+                    </p>
+                  </ng-container>
+                </div>
+                <div class="col-6">
+                  <nb-select fullWidth formControlName="team"
+                             [status]="(form.get('team').dirty || form.get('team').touched) ? (form.get('team').invalid  ? 'danger' : 'success') : 'basic'"
+                             [required]="true"
+                             [attr.aria-invalid]="form.get('team').invalid && form.get('team').touched ? true : null">
+                    <nb-option [value]="''">Selecione uma opção</nb-option>
+                  </nb-select>
+                  <ng-container *ngIf="form.get('team').invalid && form.get('team').touched">
+                    <p class="text-danger" *ngIf="form.get('team').errors?.required">
+                      Team is required!
+                    </p>
+                  </ng-container>
+                </div>
+              </div>
+            </form>
+          </nb-card-body>
+          <nb-card-footer>
+            Code:{{selectedCourse?.passcode}}
+          </nb-card-footer>
+        </nb-card>
+      </div>
+    </div>
+  </nb-card-body>
+  <nb-card-footer>
+    <div class="row">
+      <div class="col-12 text-right">
+        <button nbButton status="primary" outline size="small" [disabled]="!selectedCourse || form.invalid">Cadastrar
+        </button>
+      </div>
+    </div>
+  </nb-card-footer>
+</nb-card>
