@@ -2,7 +2,7 @@ export interface ISummaryStudent {
   totalCourses: number;
   totalExercises: number;
   totalModules: number;
-  totalModulesTopics: number;
+  totalTopics: number;
 }
 
 export class SummaryStudent implements ISummaryStudent {
@@ -10,13 +10,13 @@ export class SummaryStudent implements ISummaryStudent {
     this._totalCourses = summaryStudent.totalCourses;
     this._totalExercises = summaryStudent.totalExercises;
     this._totalModules = summaryStudent.totalModules;
-    this._totalModulesTopics = summaryStudent.totalModulesTopics;
+    this._totalTopics = summaryStudent.totalTopics;
   }
 
   private _totalCourses: number;
   private _totalExercises: number;
   private _totalModules: number;
-  private _totalModulesTopics: number;
+  private _totalTopics: number;
 
   get totalCourses(): number {
     return this._totalCourses;
@@ -42,11 +42,11 @@ export class SummaryStudent implements ISummaryStudent {
     this._totalModules = value;
   }
 
-  get totalModulesTopics(): number {
-    return this._totalModulesTopics;
+  get totalTopics(): number {
+    return this._totalTopics;
   }
 
-  set totalModulesTopics(value: number) {
-    this._totalModulesTopics = value;
+  set totalTopics(value: number) {
+    this._totalTopics = value;
   }
 }

@@ -3,16 +3,20 @@
   <nb-card-body [nbSpinner]="loadingSummary" nbSpinnerStatus="info" nbSpinnerSize="giant" style="min-height: 100px;">
     <div class="row" *ngIf="summary">
       <div class="col-xxxl-3 col-md-6">
-        <app-card [color]="'primary'" [title]="summary.totalCourses.toString()" [subTitle]="'Cursos'" [icon]="'book-outline'"></app-card>
+        <app-card [color]="'primary'" [title]="summary.totalCourses?.toString()" [subTitle]="'Cursos'"
+                  [icon]="'book-outline'"></app-card>
       </div>
       <div class="col-xxxl-3 col-md-6">
-        <app-card [color]="'success'" [title]="summary.totalModules.toString()" [subTitle]="'Módulos'" [icon]="'bookmark-outline'"></app-card>
+        <app-card [color]="'success'" [title]="summary.totalModules?.toString()" [subTitle]="'Módulos'"
+                  [icon]="'bookmark-outline'"></app-card>
       </div>
       <div class="col-xxxl-3 col-md-6">
-        <app-card [color]="'info'" [title]="summary.totalModulesTopics.toString()" [subTitle]="'Tópicos'" [icon]="'archive-outline'"></app-card>
+        <app-card [color]="'info'" [title]="summary.totalTopics?.toString()" [subTitle]="'Tópicos'"
+                  [icon]="'archive-outline'"></app-card>
       </div>
       <div class="col-xxxl-3 col-md-6">
-        <app-card [color]="'warning'" [title]="summary.totalExercises.toString()" [subTitle]="'Exercícios'" [icon]="'book-open-outline'"></app-card>
+        <app-card [color]="'warning'" [title]="summary.totalExercises?.toString()" [subTitle]="'Exercícios'"
+                  [icon]="'book-open-outline'"></app-card>
       </div>
     </div>
   </nb-card-body>
@@ -23,11 +27,13 @@
       <div class="col-12  text-right">
         <button size="tiny" nbButton outline status="primary" class="m-1"
                 (click)="openAddPublicCourseDialog()">
-          <nb-icon icon="plus-outline"></nb-icon> treinamento
+          <nb-icon icon="plus-outline"></nb-icon>
+          treinamento
         </button>
         <button size="tiny" nbButton outline status="primary" class="m-1"
                 (click)="openAddPublicCourseDialog()">
-          <nb-icon icon="plus-outline"></nb-icon> curso
+          <nb-icon icon="plus-outline"></nb-icon>
+          curso
         </button>
         <span *ngIf="isTeacher" class="m-1">
         <button size="tiny" nbButton outline status="primary" [hidden]="isParticipating"
@@ -52,19 +58,24 @@
       </div>
     </div>
     <nb-tabset>
-      <nb-tab tabTitle="Cursos"  [nbSpinner]="loadingCourse" nbSpinnerStatus="info" nbSpinnerSize="giant" style="min-height: 100px;">
+      <nb-tab tabTitle="Cursos" [nbSpinner]="loadingCourse" nbSpinnerStatus="info" nbSpinnerSize="giant"
+              style="min-height: 100px;">
         <div class="row">
-          <div class="col-12 col-md-6 col-lg-4" *ngFor="let course of courses">
+          <div class="col-12 col-md-6 col-lg-4" *ngFor="let course of courses; let i = index">
             <nb-card accent="info">
               <nb-card-header>{{course.name}}</nb-card-header>
               <nb-card-body>
-                {{course.description}}
+                <p>{{course.description}}</p>
+                <span class="badge badge-primary">Módulos: {{course?.modules?.length}}</span>
+                <span class="badge badge-primary m-1">Tópicos: {{course.amountTopics}}</span>
+                <span class="badge badge-primary">Exercícios: {{course.amountExercises}}</span>
               </nb-card-body>
               <nb-card-footer class="text-right">
                 <button size="small" class="m-1" nbButton outline status="primary" [routerLink]="['']"
                         *ngIf="isTeacher">Gerenciar
                 </button>
-                <button size="small" class="m-1" nbButton outline status="primary" [routerLink]="['/student/classroom/course',course?.slug]">
+                <button size="small" class="m-1" nbButton outline status="primary"
+                        [routerLink]="['/student/classroom/course',course?.slug]">
                   Abrir
                 </button>
               </nb-card-footer>
@@ -72,7 +83,8 @@
           </div>
         </div>
       </nb-tab>
-      <nb-tab tabTitle="Treinamentos" [nbSpinner]="loadingTraining" nbSpinnerStatus="info" nbSpinnerSize="giant" style="min-height: 100px;">
+      <nb-tab tabTitle="Treinamentos" [nbSpinner]="loadingTraining" nbSpinnerStatus="info" nbSpinnerSize="giant"
+              style="min-height: 100px;">
         <div class="row">
           <div class="col-12 col-md-6 col-lg-4" *ngFor="let course of trainings">
             <nb-card accent="primary">
@@ -84,7 +96,8 @@
                 <button size="small" class="m-1" nbButton outline status="primary" [routerLink]="['']"
                         *ngIf="isTeacher">Gerenciar
                 </button>
-                <button size="small" class="m-1" nbButton outline status="primary" [routerLink]="['/student/classroom/course',course?.slug]">
+                <button size="small" class="m-1" nbButton outline status="primary"
+                        [routerLink]="['/student/classroom/course',course?.slug]">
                   Abrir
                 </button>
               </nb-card-footer>

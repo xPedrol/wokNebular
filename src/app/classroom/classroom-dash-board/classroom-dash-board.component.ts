@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {Authority} from '../../shared/constants/authority.constants';
 import {CourseService} from '../../shared/services/course.service';
@@ -6,14 +6,17 @@ import {ICourse} from '../../shared/models/course.model';
 import {DashboardService} from '../../shared/services/dashboard.service';
 import {ISummaryStudent} from '../../shared/models/summary-student.model';
 import {NbDialogService} from '@nebular/theme';
-import {AddPublicCourseDialogComponent} from '../add-public-course-dialog/add-public-course-dialog.component';
+import {AddCourseDialogComponent} from '../add-public-course-dialog/add-course-dialog.component';
+import {Subject} from 'rxjs';
+import {takeUntil} from 'rxjs/operators';
+import {Title} from '@angular/platform-browser';
 
 @Component({
   selector: 'app-classroom-dash-board',
   templateUrl: './classroom-dash-board.component.html',
   styleUrls: ['./classroom-dash-board.component.scss']
 })
-export class ClassroomDashBoardComponent implements OnInit {
+export class ClassroomDashBoardComponent implements OnInit, OnDestroy {
   on = true;
   isTeacher = false;
   isParticipating = false;
@@ -24,6 +27,8 @@ export class ClassroomDashBoardComponent implements OnInit {
   loadingTraining = true;
   loadingSummary = true;
   summary?: ISummaryStudent;
+  authorities: Authority[];
+  subject$ = new Subject();
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -33,17 +38,23 @@ export class ClassroomDashBoardComponent implements OnInit {
   ) {
   }
 
+  ngOnDestroy(): void {
+    this.subject$.next();
+    this.subject$.complete();
+  }
+
   ngOnInit(): void {
+    this.authorities = this.activatedRoute.snapshot.data.authorities;
     this.getSummary();
-    if (this.activatedRoute.snapshot.data.authorities.includes(Authority.TEACHER)) {
+    if (this.authorities && this.authorities.includes(Authority.TEACHER)) {
       this.isTeacher = true;
-      this.getCourses();
     }
+    this.getCourses();
   }
 
   getSummary(): void {
     this.loadingSummary = true;
-    this.dashboardService.getSummaryStudent().subscribe((summary) => {
+    this.dashboardService.getSummaryStudent().pipe(takeUntil(this.subject$)).subscribe((summary) => {
       this.summary = summary || null;
       this.loadingSummary = false;
     }, () => {
@@ -67,7 +78,7 @@ export class ClassroomDashBoardComponent implements OnInit {
   }
 
   getLearningCourses(): void {
-    this.courseService.getCourses(this.showAll)
+    this.courseService.getLearningCourses(this.authorities, this.showAll).pipe(takeUntil(this.subject$))
       .subscribe((courses) => {
         this.divideCourses(courses);
       }, () => {
@@ -79,7 +90,7 @@ export class ClassroomDashBoardComponent implements OnInit {
   }
 
   getTeachingCourses(): void {
-    this.courseService.getTeachingCourses(this.showAll)
+    this.courseService.getTeachingCourses(this.authorities, this.showAll).pipe(takeUntil(this.subject$))
       .subscribe((courses) => {
         this.divideCourses(courses);
       }, () => {
@@ -106,10 +117,37 @@ export class ClassroomDashBoardComponent implements OnInit {
     this.courses = courses || [];
     this.loadingCourse = false;
     this.loadingTraining = false;
+    this.getCourseStatisticsForArrays();
   }
 
   openAddPublicCourseDialog(): void {
-    this.dialogService.open(AddPublicCourseDialogComponent);
+    this.dialogService.open(AddCourseDialogComponent, {
+      context: {
+        isPrivate: false,
+        authorities: this.authorities
+      },
+    }).onClose.pipe(takeUntil(this.subject$)).subscribe((res: any) => {
+      if (res?.refresh) {
+        this.getCourses();
+      }
+    });
   }
 
+  getCourseStatisticsForArrays(): void {
+    this.courses.forEach((course, i) => {
+      this.getCourseStatistics(course.id, i, true);
+    });
+    this.trainings.forEach((course, i) => {
+      this.getCourseStatistics(course.id, i, false);
+    });
+  }
+
+  getCourseStatistics(courseId: number, index: number, isPrivate: boolean): void {
+    this.courseService.getCourseStatistics(this.authorities, courseId).pipe(takeUntil(this.subject$)).subscribe((statistics) => {
+      if (isPrivate) {
+        this.courses[index].amountTopics = statistics.amountTopics;
+        this.courses[index].amountExercises = statistics.amountExercises;
+      }
+    });
+  }
 }

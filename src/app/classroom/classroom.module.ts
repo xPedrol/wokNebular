@@ -1,32 +1,37 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {ClassroomContentComponent} from './classroom-content/classroom-content.component';
-import {ClassroomInitialComponent} from './classroom-initial/classroom-initial.component';
 import {RouterModule} from '@angular/router';
-import {TopicListComponent} from './topic-list/topic-list.component';
 import {ClassroomDashBoardComponent} from './classroom-dash-board/classroom-dash-board.component';
 import {SharedModule} from '../shared/shared.module';
-import { AddPublicCourseDialogComponent } from './add-public-course-dialog/add-public-course-dialog.component';
+import {AddCourseDialogComponent} from './add-public-course-dialog/add-course-dialog.component';
+import {ClassroomCourseComponent} from './classroom-course/classroom-course.component';
 import {ReactiveFormsModule} from '@angular/forms';
+import { CourseRankComponent } from './ranks/course-rank/course-rank.component';
+import {TreeViewComponent} from './tree-view/tree-view.component';
+import { ClassroomTopicComponent } from './classroom-topic/classroom-topic.component';
+import { ClassroomModuleComponent } from './classroom-module/classroom-module.component';
 
 @NgModule({
   declarations: [
     ClassroomContentComponent,
-    ClassroomInitialComponent,
-    TopicListComponent,
+    ClassroomCourseComponent,
     ClassroomDashBoardComponent,
-    AddPublicCourseDialogComponent
+    AddCourseDialogComponent,
+    CourseRankComponent,
+    TreeViewComponent,
+    ClassroomTopicComponent,
+    ClassroomModuleComponent
   ],
-    imports: [
-        CommonModule,
-        SharedModule,
-        RouterModule,
-        ReactiveFormsModule,
-    ],
+  imports: [
+    CommonModule,
+    SharedModule,
+    RouterModule,
+    ReactiveFormsModule,
+  ],
   exports: [
     ClassroomContentComponent,
-    SharedModule,
-    TopicListComponent
+    SharedModule
   ]
 })
 export class ClassroomModule {

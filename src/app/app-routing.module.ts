@@ -44,8 +44,13 @@ const routes: Routes = [
     component: AccessDeniedComponent
   },
   {
-    path: '**',
+    path: '404',
     component: NotFoundComponent
+  },
+  {
+    path: '**',
+    redirectTo: '404',
+    pathMatch: 'full'
   }
 ];
 

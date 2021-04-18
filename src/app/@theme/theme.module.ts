@@ -30,6 +30,7 @@ import {CORPORATE_THEME} from './styles/theme.corporate';
 import {DARK_THEME} from './styles/theme.dark';
 import {SharedThemeModuleModule} from './shared-theme-module.module';
 import {FormsModule} from '@angular/forms';
+import {SessionStorageService} from 'ngx-webstorage';
 
 const NB_MODULES = [
 //   NbLayoutModule,
@@ -39,8 +40,8 @@ const NB_MODULES = [
 //   NbActionsModule,
 //   NbSearchModule,
   NbSidebarModule.forRoot(),
-  NbWindowModule.forRoot(),
   NbDialogModule.forRoot(),
+  NbWindowModule.forRoot(),
   NbToastrModule.forRoot({preventDuplicates: true, duplicatesBehaviour: 'all', status})
 //   NbContextMenuModule,
 //   NbButtonModule,
@@ -65,11 +66,12 @@ const PIPES = [
 ];
 
 @NgModule({
-    imports: [CommonModule, SharedThemeModuleModule, NB_MODULES, FormsModule],
-  exports: [CommonModule, ...PIPES, ...COMPONENTS, SharedThemeModuleModule, NbSidebarModule, NB_MODULES],
+  imports: [CommonModule, SharedThemeModuleModule, NB_MODULES, FormsModule],
+  exports: [CommonModule, ...PIPES, ...COMPONENTS, SharedThemeModuleModule, NB_MODULES],
   declarations: [...COMPONENTS, ...PIPES],
 })
 export class ThemeModule {
+
   static forRoot(): ModuleWithProviders<ThemeModule> {
     return {
       ngModule: ThemeModule,

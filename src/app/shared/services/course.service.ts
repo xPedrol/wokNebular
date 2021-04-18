@@ -5,6 +5,9 @@ import {Course, ICourse} from '../models/course.model';
 import {map} from 'rxjs/operators';
 import {Observable, of} from 'rxjs';
 import {AccountService} from './account.service';
+import {ICourseStatistics} from '../models/course-statistics.model';
+import {SharedFunctions} from '../shared.functions';
+import {Authority} from '../constants/authority.constants';
 
 @Injectable({
   providedIn: 'root'
@@ -13,23 +16,21 @@ export class CourseService {
 
   constructor(
     private http: HttpClient,
-    private accountService: AccountService
+    private accountService: AccountService,
+    private sF: SharedFunctions
   ) {
   }
 
-  getCourses(all: boolean = false): Observable<ICourse[]> {
-    if (this.accountService.account.isStudent()) {
-      const url = `account/courses?all=${all}`;
-      return this.http.get<ICourse[]>(`${SERVER_API_URL}${url}`).pipe(map((courses) => {
-        return courses.map((course: ICourse) => {
-          return new Course(course);
-        });
-      }));
-    }
-    return of([]);
+  getLearningCourses(authorities: Authority[], all: boolean = false): Observable<ICourse[]> {
+    const url = `${this.sF.routeAuthSwitch(authorities)}courses?all=${all}`;
+    return this.http.get<ICourse[]>(`${SERVER_API_URL}${url}`).pipe(map((courses) => {
+      return courses.map((course: ICourse) => {
+        return new Course(course);
+      });
+    }));
   }
 
-  getTeachingCourses(all: boolean = false): Observable<ICourse[]> {
+  getTeachingCourses(authorities: Authority[], all: boolean = false): Observable<ICourse[]> {
     if (this.accountService.account.isTeacher()) {
       const url = `teacher/courses?all=${all}`;
       return this.http.get<ICourse[]>(`${SERVER_API_URL}${url}`).pipe(map((courses) => {
@@ -48,5 +49,40 @@ export class CourseService {
         return new Course(course);
       });
     }));
+  }
+
+  registerIntoCourse(authorities: Authority[], code: string, userTeamId: string) {
+    const formData = new FormData();
+    formData.append('codeCourse', code);
+    formData.append('userTeamId', userTeamId);
+    const url = `/account/courses/registrations`;
+    return this.http.post(`${SERVER_API_URL}${url}`, formData);
+  }
+
+  getCourseStatistics(authorities: Authority[], courseId: number): Observable<ICourseStatistics> {
+    let url = ``;
+    if (this.accountService.account.isTeacher()) {
+      url = `teacher/courses/${courseId}/statistics`;
+    } else if (this.accountService.account.isStudent()) {
+      url = `account/courses/${courseId}/statistics`;
+    }
+
+    return this.http.get<ICourseStatistics>(`${SERVER_API_URL}${url}`);
+  }
+
+  findCourse(
+    authorities: Authority[],
+    id: number | string
+  ): Observable<ICourse> {
+    let url = '';
+    if (this.accountService.account.isTeacher()) {
+      url = `teacher/courses/${id}`;
+    } else if (this.accountService.account.isStudent()) {
+      url = `account/courses/${id}`;
+    }
+    return this.http
+      .get<ICourse>(`${SERVER_API_URL}${url}`).pipe(map((course) => {
+        return new Course(course);
+      }));
   }
 }

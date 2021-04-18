@@ -1,0 +1,78 @@
+<div class="row">
+  <div class="col-12 col-lg-7">
+    <nb-card status="info">
+      <nb-card-header>Tópicos</nb-card-header>
+      <nb-card-body>
+        <app-tree-view [moduleTopics]="moduleTopics" (justSelectModuleTopic)="selectTopic($event)"></app-tree-view>
+      </nb-card-body>
+    </nb-card>
+  </div>
+  <div class="col-12 col-lg-5">
+    <div style="position: sticky;
+  position: -webkit-sticky;
+  top: 90px; /* required */">
+      <div *ngIf="!selectedTopic">
+        <nb-card>
+          <nb-card-header>Descricao de tópico</nb-card-header>
+          <nb-card-body class="text-center">
+            Selecione um curso
+          </nb-card-body>
+        </nb-card>
+      </div>
+      <nb-card class="margin-bottom-0" *ngIf="selectedTopic">
+        <nb-card-header>{{selectedTopic.topic.name}}</nb-card-header>
+        <nb-card-body>
+          <div class="row">
+            <div class="col-12"><span><strong>Informações gerais</strong></span></div>
+            <div class="col-12">
+              <nb-tag class="m-1" size="small" status="success" appearance="filled"
+                      [text]="'Fecha em '+(selectedTopic.endTime.toISOString() | date: 'dd/MM/yyyy')"
+                      *ngIf="selectedTopic.availableToDo"></nb-tag>
+              <nb-tag class="m-1" size="small" status="info" appearance="filled"
+                      [text]="'Pontos necessários '+selectedTopic.minScore"></nb-tag>
+              <nb-tag class="m-1" size="small" status="info" appearance="filled"
+                      [text]="'Média '+selectedTopic.targetScore"></nb-tag>
+              <nb-tag class="m-1" size="small" status="info" appearance="filled"
+                      [text]="'Pontuação máxima '+selectedTopic.maxGrade"></nb-tag>
+              <nb-tag class="m-1" size="small" status="success" appearance="filled"
+                      [text]="'Exercícios A '+selectedTopic.getTotalExercise('A')"></nb-tag>
+              <nb-tag class="m-1" size="small" status="info" appearance="filled"
+                      [text]="'Exercícios B '+selectedTopic.getTotalExercise('B')"></nb-tag>
+              <nb-tag class="m-1" size="small" status="warning" appearance="filled"
+                      [text]="'Exercícios C '+selectedTopic.getTotalExercise('C')"></nb-tag>
+              <nb-tag class="m-1" size="small" status="danger" appearance="filled"
+                      [text]="'Exercícios D '+selectedTopic.getTotalExercise('D')"></nb-tag>
+              <hr>
+            </div>
+            <div class="col-12"><span><strong>Seus dados</strong></span></div>
+            <div class="col-12">
+              <nb-tag class="m-1" size="small" status="success" appearance="filled"
+                      [text]="'Fecha em '+(selectedTopic.endTime.toISOString() | date: 'dd/MM/yyyy')"
+                      *ngIf="selectedTopic.availableToDo"></nb-tag>
+              <nb-tag class="m-1" size="small" status="info" appearance="filled"
+                      [text]="'Pontos necessários '+selectedTopic.minScore"></nb-tag>
+              <nb-tag class="m-1" size="small" status="info" appearance="filled"
+                      [text]="'Média '+selectedTopic.targetScore"></nb-tag>
+              <span *ngIf="selectedTResults">
+              <nb-tag class="m-1" size="small" status="success" appearance="filled"
+                      [text]="'Resolveu'+selectedTResults?.numAresolved+' As'"></nb-tag>
+              <nb-tag class="m-1" size="small" status="info" appearance="filled"
+                      [text]="'Resolveu'+selectedTResults?.numBresolved+' Bs'"></nb-tag>
+              <nb-tag class="m-1" size="small" status="warning" appearance="filled"
+                      [text]="'Resolveu'+selectedTResults?.numCresolved+' Cs'"></nb-tag>
+              <nb-tag class="m-1" size="small" status="danger" appearance="filled"
+                      [text]="'Resolveu'+selectedTResults?.numDresolved+' Ds'"></nb-tag>
+              <nb-tag class="m-1" size="small" status="info" appearance="filled"
+                      *ngIf="selectedTopic. getUnresolvedResolved(selectedTResults) > 0"
+                      [text]="'Falta '+selectedTopic. getUnresolvedResolved(selectedTResults)+' exercícios para resolver'"></nb-tag>
+              <nb-tag class="m-1" size="small" status="success" appearance="filled"
+                      *ngIf="selectedTopic. getUnresolvedResolved(selectedTResults) === 0"
+                      [text]="'Você resolveu todos os exercicios'"></nb-tag>
+                </span>
+            </div>
+          </div>
+        </nb-card-body>
+      </nb-card>
+    </div>
+  </div>
+</div>

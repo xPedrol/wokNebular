@@ -3,7 +3,12 @@
 // @nebular out of the box themes
 @import '~@nebular/theme/styles/themes';
 
+$nb-enable-css-custom-properties: true;
 $nb-themes: nb-register-theme((
+  //background-basic-color-1: color-basic-700,
+  //background-basic-color-2: color-basic-800,
+  background-basic-color-3: #fafafa,
+  //background-basic-color-4: black,
   layout-padding-top: 2.25rem,
   spinner-primary-background-color: unset,
   spinner-info-background-color: unset,
@@ -72,3 +77,4 @@ $nb-themes: nb-register-theme((
   slide-out-shadow-color: 0 4px 14px 0 #8f9bb3,
   slide-out-shadow-color-rtl: 0 4px 14px 0 #8f9bb3,
 ), dark, dark);
+

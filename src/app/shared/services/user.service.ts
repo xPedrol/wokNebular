@@ -4,6 +4,7 @@ import {EMPTY, Observable} from 'rxjs';
 import {IUserTeamBasic} from '../models/basic/userTeam-basic.model';
 import {SERVER_API_URL} from '../../app.constants';
 import {Authority} from '../constants/authority.constants';
+import {AccountService} from './account.service';
 
 @Injectable({
   providedIn: 'root'
@@ -11,19 +12,21 @@ import {Authority} from '../constants/authority.constants';
 export class UserService {
 
   constructor(
-    private http: HttpClient
+    private http: HttpClient,
+    private accountService: AccountService
   ) {
   }
 
-  getUserTeams(authority: Authority): Observable<IUserTeamBasic> {
+  getUserTeamsByAccount(): Observable<IUserTeamBasic[]> {
     let url = '';
-    if (authority === Authority.TEACHER) {
-      url = `teacher/userteams`;
-    } else if (authority === Authority.USER) {
+    // if (this.accountService.account.isTeacher()) {
+    //   url = `teacher/userteams`;
+    // } else
+    if (this.accountService.account.isStudent()) {
       url = `account/userteams`;
     }
     if (url) {
-      return this.http.get<IUserTeamBasic>(`${SERVER_API_URL}${url}`);
+      return this.http.get<IUserTeamBasic[]>(`${SERVER_API_URL}${url}`);
     } else {
       return EMPTY;
     }

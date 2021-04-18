@@ -1,7 +1,7 @@
 <nb-card size="medium" style="width: 500px;">
   <nb-card-header>Adicionar treinamento</nb-card-header>
-  <nb-card-body [nbSpinner]="loadingCourses" nbSpinnerStatus="info" nbSpinnerSize="giant" style="min-height: 100px;">
-    <nb-form-field size="small" *ngIf="options">
+  <nb-card-body [nbSpinner]="loadingCourses && !isPrivate" nbSpinnerStatus="info" nbSpinnerSize="giant" style="min-height: 100px;">
+    <nb-form-field size="small" *ngIf="options && !isPrivate">
       <input
         #input
         id="input"
@@ -23,18 +23,19 @@
     </nb-form-field>
 
     <div class="row">
-      <div class="col-12 text-center" style="margin-top: 100px;" *ngIf="!selectedCourse && !loadingCourses">
+      <div class="col-12 text-center" style="margin-top: 100px;" *ngIf="!selectedCourse && !loadingCourses && !isPrivate">
         <nb-icon icon="search-outline" style="font-size: 50px;"></nb-icon>
         <h6>Selecione um curso</h6>
       </div>
-      <div class="col-12 mt-5" *ngIf="selectedCourse">
+      <div class="col-12 mt-5" *ngIf="selectedCourse || isPrivate">
+        <small *ngIf="isPrivate">Digite o codigo do curso e selecione um time para se matricular</small>
         <nb-card>
-          <nb-card-header>{{selectedCourse?.name}}</nb-card-header>
+          <nb-card-header>{{selectedCourse?selectedCourse?.name:'Curso'}}</nb-card-header>
           <nb-card-body>
             <form [formGroup]="form">
               <div class="row">
                 <div class="col-6">
-                  <input nbInput fullWidth formControlName="code"
+                  <input nbInput fullWidth formControlName="code" placeholder="Código do curso"
                          [status]="(form.get('code').dirty || form.get('code').touched) ? (form.get('code').invalid  ? 'danger' : 'success') : 'basic'"
                          [required]="true"
                          [attr.aria-invalid]="form.get('code').invalid && form.get('code').touched ? true : null">
@@ -45,11 +46,13 @@
                   </ng-container>
                 </div>
                 <div class="col-6">
-                  <nb-select fullWidth formControlName="team"
+                  <nb-select fullWidth formControlName="team" placeholder="Selecione um time"
                              [status]="(form.get('team').dirty || form.get('team').touched) ? (form.get('team').invalid  ? 'danger' : 'success') : 'basic'"
                              [required]="true"
                              [attr.aria-invalid]="form.get('team').invalid && form.get('team').touched ? true : null">
                     <nb-option [value]="''">Selecione uma opção</nb-option>
+                    <nb-option [value]="userTeam.id"
+                               *ngFor="let userTeam of userTeams">{{userTeam?.team?.name}}</nb-option>
                   </nb-select>
                   <ng-container *ngIf="form.get('team').invalid && form.get('team').touched">
                     <p class="text-danger" *ngIf="form.get('team').errors?.required">
@@ -61,7 +64,7 @@
             </form>
           </nb-card-body>
           <nb-card-footer>
-            Code:{{selectedCourse?.passcode}}
+            <p>Code:{{selectedCourse?selectedCourse?.passcode: 'privado'}}</p>
           </nb-card-footer>
         </nb-card>
       </div>
@@ -70,7 +73,10 @@
   <nb-card-footer>
     <div class="row">
       <div class="col-12 text-right">
-        <button nbButton status="primary" outline size="small" [disabled]="!selectedCourse || form.invalid">Cadastrar
+        <button nbButton status="basic" outline size="small" (click)="close()" class="m-1">Fechar
+        </button>
+        <button nbButton status="primary" outline size="small" [disabled]="(!selectedCourse && !isPrivate) || form.invalid"
+                (click)="registerIntoCourse()" class="m-1">Cadastrar
         </button>
       </div>
     </div>

@@ -34,7 +34,7 @@
                  [attr.aria-invalid]="registerForm.get('login').invalid && registerForm.get('login').touched ? true : null">
           <ng-container *ngIf="registerForm.get('login').invalid && registerForm.get('login').touched">
             <p class="text-danger" *ngIf="registerForm.get('login').errors?.required">
-              Email is required!
+              Name is required!
             </p>
           </ng-container>
         </div>
@@ -64,38 +64,61 @@
           <div class="row">
             <div class="col-6">
               <label class="label" for="input-password">Senha</label>
-              <input nbInput
-                     fullWidth
-                     formControlName="password"
-                     name="password"
-                     type="password"
-                     id="input-password"
-                     placeholder="Password"
-                     [status]="(registerForm.get('password').dirty || registerForm.get('password').touched) ? (registerForm.get('password').invalid  ? 'danger' : 'success') : 'basic'"
-                     [required]="true"
-                     [attr.aria-invalid]="registerForm.get('password').invalid && registerForm.get('password').touched ? true : null">
+              <nb-form-field>
+                <input nbInput
+                       fullWidth
+                       formControlName="password"
+                       name="password"
+                       [type]="showPassword?'text':'password'"
+                       id="input-password"
+                       placeholder="Password"
+                       [status]="(registerForm.get('password').dirty || registerForm.get('password').touched) ? (registerForm.get('password').invalid  ? 'danger' : 'success') : 'basic'"
+                       [required]="true"
+                       [attr.aria-invalid]="registerForm.get('password').invalid && registerForm.get('password').touched ? true : null">
+                <button nbSuffix nbButton ghost (click)="showPassword = !showPassword" type="button">
+                  <nb-icon [icon]="showPassword ? 'eye-outline' : 'eye-off-2-outline'"
+                           pack="eva"
+                           [attr.aria-label]="showPassword ? 'hide password' : 'show password'">
+                  </nb-icon>
+                </button>
+              </nb-form-field>
               <ng-container *ngIf="registerForm.get('password').invalid && registerForm.get('password').touched ">
                 <p class="text-danger" *ngIf="registerForm.get('password').errors?.required">
                   Password is required!
+                </p>
+                <p class="text-danger" *ngIf="registerForm.get('password').errors?.minlength">
+                  Password is short!
                 </p>
               </ng-container>
             </div>
 
             <div class="col-6">
               <label class="label" for="input-confirm-Password">Confirmar senha</label>
-              <input nbInput
-                     fullWidth
-                     formControlName="confirmPassword"
-                     name="confirmPassword"
-                     type="confirmPassword"
-                     id="input-confirm-Password"
-                     placeholder="confirmar senha"
-                     [status]="(registerForm.get('confirmPassword').dirty || registerForm.get('confirmPassword').touched) ? (registerForm.get('confirmPassword').invalid  ? 'danger' : 'success') : 'basic'"
-                     [required]="true"
-                     [attr.aria-invalid]="registerForm.get('confirmPassword').invalid && registerForm.get('confirmPassword').touched ? true : null">
-              <ng-container *ngIf="registerForm.get('confirmPassword').invalid && registerForm.get('confirmPassword').touched ">
+              <nb-form-field>
+                <input nbInput
+                       fullWidth
+                       formControlName="confirmPassword"
+                       name="confirmPassword"
+                       [type]="showCPassword?'text':'password'"
+                       id="input-confirm-Password"
+                       placeholder="confirmar senha"
+                       [status]="(registerForm.get('confirmPassword').dirty || registerForm.get('confirmPassword').touched) ? (registerForm.get('confirmPassword').invalid  ? 'danger' : 'success') : 'basic'"
+                       [required]="true"
+                       [attr.aria-invalid]="registerForm.get('confirmPassword').invalid && registerForm.get('confirmPassword').touched ? true : null">
+                <button nbSuffix nbButton ghost (click)="showCPassword = !showCPassword" type="button">
+                  <nb-icon [icon]="showCPassword ? 'eye-outline' : 'eye-off-2-outline'"
+                           pack="eva"
+                           [attr.aria-label]="showCPassword ? 'hide password' : 'show password'">
+                  </nb-icon>
+                </button>
+              </nb-form-field>
+              <ng-container
+                *ngIf="registerForm.get('confirmPassword').invalid && registerForm.get('confirmPassword').touched ">
                 <p class="text-danger" *ngIf="registerForm.get('confirmPassword').errors?.required">
                   Confirmar senha is required!
+                </p>
+                <p class="text-danger" *ngIf="registerForm.get('confirmPassword').errors?.passwordCheck">
+                  As senhas não conhecidem
                 </p>
               </ng-container>
             </div>
@@ -111,12 +134,9 @@
                      [status]="(registerForm.get('affiliation').dirty || registerForm.get('affiliation').touched) ? (registerForm.get('affiliation').invalid  ? 'danger' : 'success') : 'basic'"
                      [required]="true"
                      [attr.aria-invalid]="registerForm.get('affiliation').invalid && registerForm.get('affiliation').touched ? true : null">
-            <nb-option [value]="''">Option empty</nb-option>
-            <nb-option value="0">Option 0</nb-option>
-            <nb-option value="1">Option 1</nb-option>
-            <nb-option value="2">Option 2</nb-option>
-            <nb-option value="3">Option 3</nb-option>
-            <nb-option value="4">Option 4</nb-option>
+            <nb-option [value]="''">Selecione sua faculdade</nb-option>
+            <nb-option [value]="affiliation.id"
+                       *ngFor="let affiliation of affiliations">{{affiliation?.name}}</nb-option>
           </nb-select>
           <ng-container *ngIf="registerForm.get('affiliation').invalid && registerForm.get('affiliation').touched">
             <p class="text-danger" *ngIf="registerForm.get('affiliation').errors?.required">
@@ -125,8 +145,14 @@
           </ng-container>
         </div>
         <div class="form-control-group accept-group">
-          <nb-checkbox>Agree Terms</nb-checkbox>
-          <ng-container *ngIf="registerForm.get('confirmPassword').invalid && registerForm.get('confirmPassword').touched ">
+          <nb-checkbox formControlName="agreeTerms">Agree Terms</nb-checkbox>
+          <ng-container *ngIf="registerForm.get('agreeTerms').invalid && registerForm.get('agreeTerms').touched">
+            <p class="text-danger" *ngIf="registerForm.get('agreeTerms').errors?.required">
+              Você precisa concordar com os termos!
+            </p>
+          </ng-container>
+          <ng-container
+            *ngIf="registerForm.get('confirmPassword').invalid && registerForm.get('confirmPassword').touched ">
             <p class="text-danger" *ngIf="registerForm.get('confirmPassword').errors?.required">
               Confirmar senha is required!
             </p>

@@ -3,24 +3,33 @@ import {CourseService} from '../../shared/services/course.service';
 import {ICourse} from '../../shared/models/course.model';
 import {IUserTeamBasic} from '../../shared/models/basic/userTeam-basic.model';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {UserService} from '../../shared/services/user.service';
+import {NbDialogRef, NbToastrService} from '@nebular/theme';
+import {Authority} from '../../shared/constants/authority.constants';
 
 @Component({
   selector: 'app-add-public-course-dialog',
-  templateUrl: './add-public-course-dialog.component.html',
-  styleUrls: ['./add-public-course-dialog.component.scss']
+  templateUrl: './add-course-dialog.component.html',
+  styleUrls: ['./add-course-dialog.component.scss']
 })
-export class AddPublicCourseDialogComponent implements OnInit {
+export class AddCourseDialogComponent implements OnInit {
   options: string[];
   filteredOptions: string[];
   loadingCourses = true;
   selectedCourseName = '';
   selectedCourse: ICourse;
   courses: ICourse[];
-  teams: IUserTeamBasic[];
+  userTeams: IUserTeamBasic[];
   form: FormGroup;
+  isPrivate = false;
+  authorities: Authority[];
 
   constructor(
-    private courseService: CourseService
+    // private dialogConfig: NbDialogConfig,
+    private courseService: CourseService,
+    private userService: UserService,
+    private toastService: NbToastrService,
+    public dialogRef: NbDialogRef<AddCourseDialogComponent>
   ) {
   }
 
@@ -30,6 +39,13 @@ export class AddPublicCourseDialogComponent implements OnInit {
       team: new FormControl(null, [Validators.required])
     });
     this.getPublicCourses();
+    this.getUserTeams();
+  }
+
+  getUserTeams(): void {
+    this.userService.getUserTeamsByAccount().subscribe(userTeams => {
+      this.userTeams = userTeams || [];
+    });
   }
 
   getPublicCourses(): void {
@@ -41,7 +57,6 @@ export class AddPublicCourseDialogComponent implements OnInit {
       });
       this.filteredOptions = this.options;
       this.loadingCourses = false;
-      console.warn(this.options);
     }, () => this.loadingCourses = false);
   }
 
@@ -63,7 +78,21 @@ export class AddPublicCourseDialogComponent implements OnInit {
     const index = this.options.indexOf(value);
     if (index >= 0) {
       this.selectedCourse = this.courses[index];
+      this.form.get('code').setValue(this.selectedCourse.passcode);
     }
+  }
+
+  registerIntoCourse() {
+    if (this.form.valid) {
+      this.courseService.registerIntoCourse(this.authorities, this.form.get('code').value, this.form.get('team').value).subscribe(() => {
+        this.toastService.show('', 'Registrado com sucesso', {status: 'success'});
+        this.dialogRef.close({refresh: true});
+      });
+    }
+  }
+
+  close() {
+    this.dialogRef.close();
   }
 
 }

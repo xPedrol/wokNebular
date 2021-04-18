@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {IUserLogin} from '../models/user/UserLogin.model';
+import {IUserAuth} from '../models/user/UserLogin.model';
 import {SERVER_API_URL} from '../../app.constants';
 import {catchError, map, mergeMap} from 'rxjs/operators';
 import {SessionStorageService} from 'ngx-webstorage';
@@ -22,7 +22,7 @@ export class AuthService {
   ) {
   }
 
-  login(user: IUserLogin): Observable<Account | null> {
+  login(user: IUserAuth): Observable<Account | null> {
     return this.loginMiddleware(user).pipe(mergeMap((result: boolean) => {
       if (result) {
         return this.accountService.getAccount(true);
@@ -32,7 +32,7 @@ export class AuthService {
     }));
   }
 
-  loginMiddleware(user: IUserLogin): Observable<boolean> {
+  loginMiddleware(user: IUserAuth): Observable<boolean> {
     return this.http.post<any>(`${SERVER_API_URL}authenticate`, user).pipe(
       catchError(() => {
         return of(false);
@@ -41,6 +41,10 @@ export class AuthService {
         this.sessionStorage.store('id_token', obj?.id_token);
         return true;
       }));
+  }
+
+  register(user: IUserAuth): Observable<boolean> {
+    return this.http.post<boolean>(`${SERVER_API_URL}register`, user);
   }
 
   logout(): void {

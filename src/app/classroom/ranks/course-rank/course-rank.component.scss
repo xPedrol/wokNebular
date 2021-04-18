@@ -1,0 +1,22 @@
+table {
+  //width: 100%;
+  border-collapse: collapse;
+  table-layout: auto;
+  margin-bottom: 6px;
+  color: unset;
+}
+
+td {
+  //min-width: 100px;
+  height: 18px;
+  padding: 15px 0 15px 0;
+  border: none;
+}
+th{
+  //min-width: 100px;
+  border: none;
+  padding: 10px 0 10px 0;
+}
+thead{
+  border: none;
+}

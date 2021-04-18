@@ -1,7 +1,7 @@
 import {CourseType} from './enumerations/course-type.model';
 import {IModule} from './module.model';
 import {IAffiliationBasic} from './basic/affiliation-basic.model';
-import {IUserBasic} from './user/user-basic.model';
+import {IUserBasic, UserBasic} from './user/user-basic.model';
 import {Moment} from 'moment';
 
 export interface ICourse {
@@ -19,6 +19,8 @@ export interface ICourse {
   affiliation: IAffiliationBasic;
   teacher: IUserBasic;
   slug: string;
+  amountTopics: number;
+  amountExercises: number;
 
   isTraining(): boolean;
 
@@ -40,7 +42,7 @@ export class Course implements ICourse {
     this._passcode = course.passcode;
     this._slug = course.slug;
     this._startDate = course.startDate;
-    this._teacher = course.teacher;
+    this._teacher = new UserBasic(course.teacher);
   }
 
   private _activated: boolean;
@@ -57,6 +59,8 @@ export class Course implements ICourse {
   private _slug: string;
   private _startDate: moment.Moment;
   private _teacher: IUserBasic;
+  private _amountExercises: number;
+  private _amountTopics: number;
 
   get activated(): boolean {
     return this._activated;
@@ -176,5 +180,21 @@ export class Course implements ICourse {
 
   isPrivate(): boolean {
     return this._courseType === CourseType.PRIVATE;
+  }
+
+  get amountExercises(): number {
+    return this._amountExercises;
+  }
+
+  set amountExercises(value: number) {
+    this._amountExercises = value;
+  }
+
+  get amountTopics(): number {
+    return this._amountTopics;
+  }
+
+  set amountTopics(value: number) {
+    this._amountTopics = value;
   }
 }

@@ -27,4 +27,14 @@ export class DashboardService {
     }
   }
 
+  getSummaryTeacher(): Observable<ISummaryStudent> {
+    if (this.accountService.account.isTeacher()) {
+      return this.httpService.get<ISummaryStudent>(`${SERVER_API_URL}account/summaryTeacher`).pipe(map((summary) => {
+        return new SummaryStudent(summary);
+      }));
+    } else {
+      return EMPTY;
+    }
+  }
+
 }

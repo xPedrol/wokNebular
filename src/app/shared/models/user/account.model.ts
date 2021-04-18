@@ -71,6 +71,15 @@ export class Account {
     return false;
   }
 
+  hasAnyAuthority(authorities: string[]): boolean {
+    if (this.authorities && this.authorities?.length > 0) {
+      return this.authorities.some((authority) => {
+        return authorities.includes(authority);
+      });
+    }
+    return false;
+  }
+
   get id(): number {
     return this._id;
   }
