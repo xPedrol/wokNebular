@@ -1,32 +1,33 @@
 <!--<app-smart-table *ngIf="this.courseRank" [columns]="rankColumns" [data]="courseRank" [editable]="false"></app-smart-table>-->
 <!--<nb-card>-->
 <!--  <nb-card-body>-->
-    <div class="table-responsive"  style="max-height: 500px;overflow: auto;">
-      <table class="table" style="border: black">
-        <thead>
-        <tr>
-          <th scope="col" [ngClass]="column.class" *ngFor="let column of rankColumns">{{column.title}}</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr *ngFor="let rank of courseRank">
-          <td>
-            <nb-user
-              size="large"
-              [name]="rank.login"
-              [picture]="rank.imageUrl"
-            >
-            </nb-user>
-          <td class="text-center">
-            {{rank.point}}
-          </td>
-          <td class="text-center">
-            {{rank.totalSub}}
-          </td>
-        </tr>
-        </tbody>
-      </table>
-    </div>
+<div class="table-responsive" style="min-height: 100px;max-height: 500px;overflow: auto;"
+     [nbSpinner]="loadingCourseRank" nbSpinnerStatus="info" nbSpinnerSize="giant">
+  <table class="table" style="border: black" *ngIf="courseRank">
+    <thead>
+    <tr>
+      <th scope="col" [ngClass]="column.class" *ngFor="let column of rankColumns">{{column.title}}</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let rank of courseRank">
+      <td>
+        <nb-user
+          size="large"
+          [name]="rank.login"
+          [picture]="rank.imageUrl"
+        >
+        </nb-user>
+      <td class="text-center">
+        {{rank.point}}
+      </td>
+      <td class="text-center">
+        {{rank.totalSub}}
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>
 <!--  </nb-card-body>-->
 <!--</nb-card>-->
 

@@ -34,7 +34,7 @@
                  [attr.aria-invalid]="registerForm.get('login').invalid && registerForm.get('login').touched ? true : null">
           <ng-container *ngIf="registerForm.get('login').invalid && registerForm.get('login').touched">
             <p class="text-danger" *ngIf="registerForm.get('login').errors?.required">
-              Name is required!
+              Campo obrigatório
             </p>
           </ng-container>
         </div>
@@ -53,7 +53,7 @@
                  [attr.aria-invalid]="registerForm.get('email').invalid && registerForm.get('email').touched ? true : null">
           <ng-container *ngIf="registerForm.get('email').invalid && registerForm.get('email').touched">
             <p class="text-danger" *ngIf="registerForm.get('email').errors?.required">
-              Email is required!
+              Campo obrigatório
             </p>
             <p class="text-danger" *ngIf="registerForm.get('email').errors?.email">
               Email inválido
@@ -84,10 +84,10 @@
               </nb-form-field>
               <ng-container *ngIf="registerForm.get('password').invalid && registerForm.get('password').touched ">
                 <p class="text-danger" *ngIf="registerForm.get('password').errors?.required">
-                  Password is required!
+                  Campo obrigatório
                 </p>
                 <p class="text-danger" *ngIf="registerForm.get('password').errors?.minlength">
-                  Password is short!
+                  Senha é muito curta!
                 </p>
               </ng-container>
             </div>
@@ -115,7 +115,7 @@
               <ng-container
                 *ngIf="registerForm.get('confirmPassword').invalid && registerForm.get('confirmPassword').touched ">
                 <p class="text-danger" *ngIf="registerForm.get('confirmPassword').errors?.required">
-                  Confirmar senha is required!
+                  Campo obrigatório
                 </p>
                 <p class="text-danger" *ngIf="registerForm.get('confirmPassword').errors?.passwordCheck">
                   As senhas não conhecidem
@@ -140,7 +140,7 @@
           </nb-select>
           <ng-container *ngIf="registerForm.get('affiliation').invalid && registerForm.get('affiliation').touched">
             <p class="text-danger" *ngIf="registerForm.get('affiliation').errors?.required">
-              affiliation is required!
+              Campo obrigatório
             </p>
           </ng-container>
         </div>
@@ -149,12 +149,6 @@
           <ng-container *ngIf="registerForm.get('agreeTerms').invalid && registerForm.get('agreeTerms').touched">
             <p class="text-danger" *ngIf="registerForm.get('agreeTerms').errors?.required">
               Você precisa concordar com os termos!
-            </p>
-          </ng-container>
-          <ng-container
-            *ngIf="registerForm.get('confirmPassword').invalid && registerForm.get('confirmPassword').touched ">
-            <p class="text-danger" *ngIf="registerForm.get('confirmPassword').errors?.required">
-              Confirmar senha is required!
             </p>
           </ng-container>
         </div>

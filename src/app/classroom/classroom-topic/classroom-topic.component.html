@@ -1,1 +1,75 @@
-<p>classroom-topic works!</p>
+<div class="row clearfix">
+  <div class="col-12">
+    <nb-card>
+      <nb-card-body>
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a [routerLink]="[routePrefix,'dashboard']">Dashboard</a></li>
+            <li class="breadcrumb-item"><a
+              [routerLink]="[routePrefix,'classroom','course',courseSlug]">{{courseSlug}}</a></li>
+            <li class="breadcrumb-item"><a
+              [routerLink]="[routePrefix,'classroom','course',courseSlug,'module',disciplineSlug]">{{disciplineSlug}}</a>
+            </li>
+            <li class="breadcrumb-item active" aria-current="page">{{topicSlug}}</li>
+          </ol>
+        </nav>
+      </nb-card-body>
+    </nb-card>
+  </div>
+  <!--  <div class="col-lg-5 d-none d-lg-block col-xl-3">-->
+  <!--    <nb-card>-->
+  <!--      <nb-card-body>-->
+  <!--        <nb-menu [items]="items"></nb-menu>-->
+  <!--      </nb-card-body>-->
+  <!--    </nb-card>-->
+  <!--  </div>-->
+  <div class="col-12 col-xl-7">
+    <nb-card>
+      <nb-card-body>
+        <div *ngIf="topic && topic.html" [innerHTML]="topic.html"></div>
+      </nb-card-body>
+    </nb-card>
+    <div *ngIf="!topic || !topic.html" class="text-center">Conteudo não encontrado</div>
+  </div>
+  <div class="col-12 col-xl-5">
+    <nb-card accent="info" style="position: sticky;
+  position: -webkit-sticky;
+  top: 90px; /* required */">
+      <nb-card-header>Exercícios</nb-card-header>
+      <nb-card-body>
+        <span *ngIf="isTeacher">
+        <nb-list [nbSpinner]="loadingExercise" nbSpinnerStatus="info" nbSpinnerSize="giant" style="min-height: 100px;">
+          <nb-list-item class="d-block" *ngFor="let exercise of exercises" [routerLink]="[url,exercise?.slug]">
+            <div class="row">
+              <div class="col-7 text-left">{{exercise?.name}}</div>
+              <div class="col-5 text-right">
+                <nb-tag class="m-1" size="small" status="info" appearance="filled"
+                        [text]="'Dificuldade: '+exercise?.difficultyLevelId"></nb-tag>
+              </div>
+            </div>
+          </nb-list-item>
+        </nb-list>
+          </span>
+        <span *ngIf="!isTeacher">
+        <nb-list [nbSpinner]="loadingExercise" nbSpinnerStatus="info" nbSpinnerSize="giant" style="min-height: 100px;">
+          <nb-list-item class="d-block" *ngFor="let exerciseR of exerciseResults">
+            <div class="row" [routerLink]="[url,exerciseR?.slugExercise]">
+              <div class="col-5 text-left">{{exerciseR?.nameExercise}}</div>
+              <div class="col-7 text-right">
+                <nb-tag *ngIf="exerciseR?.idSubmission" class="m-1" size="tiny" status="success" appearance="outline"
+                        [text]="'Resolvido'"></nb-tag>
+                <nb-tag *ngIf="exerciseR?.nameRunResult" class="m-1" size="tiny" status="info" appearance="outline"
+                        [text]="exerciseR?.nameRunResult"></nb-tag>
+                <nb-tag class="m-1" size="tiny" status="info" appearance="outline"
+                        [text]="'Dificuldade: '+exerciseR?.difficultyLevelId"></nb-tag>
+<!--                <nb-tag *ngIf="exerciseR?.idSubmission" class="m-1" size="small" status="success" appearance="filled"-->
+<!--                        [text]="exerciseR."></nb-tag>-->
+              </div>
+            </div>
+          </nb-list-item>
+        </nb-list>
+          </span>
+      </nb-card-body>
+    </nb-card>
+  </div>
+</div>

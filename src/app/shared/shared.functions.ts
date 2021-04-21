@@ -2,13 +2,16 @@ import {Injectable} from '@angular/core';
 import {AccountService} from './services/account.service';
 import {Authority} from './constants/authority.constants';
 import {RoutePrefix} from './constants/route-prefix';
+import {IBreadcrumb} from './models/breadcrumb.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SharedFunctions {
 
-  constructor(public accountService: AccountService) {
+  constructor(
+    public accountService: AccountService
+  ) {
   }
 
   routeAuthSwitch(authorities: Authority[], noApi = false): RoutePrefix {
@@ -25,5 +28,12 @@ export class SharedFunctions {
       }
     }
     return RoutePrefix.UNSET;
+  }
+
+  getBreadcrumb(url: string): IBreadcrumb[] {
+    console.warn(url);
+    const breadcrumb = [];
+
+    return breadcrumb;
   }
 }

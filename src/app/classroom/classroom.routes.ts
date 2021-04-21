@@ -18,12 +18,22 @@ import {ClassroomTopicComponent} from './classroom-topic/classroom-topic.compone
 
 export const childrenRoutes: Routes = [
   {
+    path: '',
+    redirectTo: 'dashboard',
+    pathMatch: 'full'
+  },
+  {
     path: 'dashboard',
     component: ClassroomDashBoardComponent
   },
   {
     path: 'classroom',
     children: [
+      {
+        path: '',
+        redirectTo: 'dashboard',
+        pathMatch: 'full'
+      },
       {
         path: 'course/:courseSlug',
         component: ClassroomCourseComponent,
@@ -36,10 +46,13 @@ export const childrenRoutes: Routes = [
         component: ClassroomModuleComponent,
         resolve: {
           moduleTopics: ModuleTopicResolve
+        },
+        data: {
+          data: { breadcrumb: 'Home oi' }
         }
       },
       {
-        path: 'course/:courseSlug/module/:disciplineSlug/topic/topicSlug',
+        path: 'course/:courseSlug/module/:disciplineSlug/topic/:topicSlug',
         component: ClassroomTopicComponent
       }
     ]

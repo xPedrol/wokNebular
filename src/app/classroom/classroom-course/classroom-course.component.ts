@@ -20,7 +20,8 @@ export class ClassroomCourseComponent implements OnInit, OnDestroy {
   isTeacher = false;
   course: ICourse;
   modules: IModule[];
-  status = ['basic', 'primary', 'info', 'success', 'warning', 'danger', 'control'];
+  routePrefix = '/';
+  loadingCourse = true;
 
   constructor(
     private windowService: NbWindowService,
@@ -31,27 +32,19 @@ export class ClassroomCourseComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.authorities = this.activatedRoute.snapshot.data.authorities;
+    this.routePrefix += this.sF.routeAuthSwitch(this.authorities, true);
     if (this.authorities && this.authorities.includes(Authority.TEACHER)) {
       this.isTeacher = true;
     }
+    this.loadingCourse = true;
     this.activatedRoute.data.pipe(takeUntil(this.destroy$)).subscribe(({course}) => {
-      this.course = course;
-    });
-    this.selectedStatus = Math.floor(Math.random() * 8);
+      this.loadingCourse = false;
+      this.course = course || null;
+    }, () => this.loadingCourse = false);
   }
 
   ngOnDestroy(): void {
     this.destroy$.next();
     this.destroy$.complete();
   }
-
-  oi(oi) {
-    console.warn(oi);
-  }
-
-  // openTopicsWindow(moduleId: number) {
-  //   const authorities = this.activatedRoute.snapshot.data.authorities;
-  //   this.windowService.open(TopicListComponent, {title: `Lista de tópicos`, context: {authorities, moduleId: 'moduleId'}});
-  // }
-
 }

@@ -1,11 +1,12 @@
 <ul class="left-timeline">
   <li *ngFor="let mTs of moduleTopics; let i = index">
     <time datetime="2017-11-04T03:45" class="d-block d-md-none left-time"><span>Level {{i + 1}}</span></time>
-    <div class="d-md-block d-none left-icon">{{i+1}}</div>
+    <div class="d-md-block d-none left-icon">{{i + 1}}</div>
     <div class="left-label">
       <div class="row text-center">
-        <div class="col-6 col-md-3 my-1" *ngFor="let mT of mTs" style="cursor: pointer;" (mouseenter) ="selectTopic(mT)"  (mouseleave) ="unSelectTopic()">
-          <div *ngIf="mT.availableToSee">
+        <div [routerLink]="[url,mT.topic.slug]" class="col-6 col-md-3 my-1" *ngFor="let mT of mTs"
+             style="cursor: pointer;" (mouseenter)="selectTopic(mT)" (mouseleave)="unSelectTopic()">
+          <div *ngIf="mT.availableToSee || isTeacher">
             <img width="40" [src]="mT.topic.imageUrl">
             <p>{{mT.topic.name}}</p>
             <ng-container style="margin-top: -10px;">

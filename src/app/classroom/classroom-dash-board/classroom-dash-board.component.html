@@ -66,16 +66,22 @@
               <nb-card-header>{{course.name}}</nb-card-header>
               <nb-card-body>
                 <p>{{course.description}}</p>
-                <span class="badge badge-primary">Módulos: {{course?.modules?.length}}</span>
-                <span class="badge badge-primary m-1">Tópicos: {{course.amountTopics}}</span>
-                <span class="badge badge-primary">Exercícios: {{course.amountExercises}}</span>
+                <nb-tag size="tiny" status="info" appearance="filled" *ngIf="course?.modules?.length"
+                        [text]="'Módulos: '+course?.modules?.length"></nb-tag>
+                <nb-tag size="tiny" status="info" appearance="filled" class="m-1" *ngIf="course.amountTopics"
+                        [text]="'Tópicos: '+course.amountTopics"></nb-tag>
+                <nb-tag size="tiny" status="info" appearance="filled" *ngIf="course.amountExercises"
+                        [text]="'Exercícios: '+course.amountExercises"></nb-tag>
+                <!--                <span class="badge badge-primary">Módulos: {{course?.modules?.length}}</span>-->
+                <!--                <span class="badge badge-primary m-1">Tópicos: {{course.amountTopics}}</span>-->
+                <!--                <span class="badge badge-primary">Exercícios: {{course.amountExercises}}</span>-->
               </nb-card-body>
               <nb-card-footer class="text-right">
                 <button size="small" class="m-1" nbButton outline status="primary" [routerLink]="['']"
                         *ngIf="isTeacher">Gerenciar
                 </button>
                 <button size="small" class="m-1" nbButton outline status="primary"
-                        [routerLink]="['/student/classroom/course',course?.slug]">
+                        [routerLink]="['',isTeacher?'teacher':'student','classroom','course',course?.slug]">
                   Abrir
                 </button>
               </nb-card-footer>
@@ -90,14 +96,20 @@
             <nb-card accent="primary">
               <nb-card-header>{{course.name}}</nb-card-header>
               <nb-card-body>
-                {{course.description}}
+                <p>{{course.description}}</p>
+                <nb-tag size="tiny" status="info" appearance="outline" *ngIf="course?.modules?.length"
+                        [text]="'Módulos: '+course?.modules?.length"></nb-tag>
+                <nb-tag size="tiny" status="info" appearance="outline" class="m-1" *ngIf="course.amountTopics"
+                        [text]="'Tópicos: '+course.amountTopics"></nb-tag>
+                <nb-tag size="tiny" status="info" appearance="outline" *ngIf="course.amountExercises"
+                        [text]="'Exercícios: '+course.amountExercises"></nb-tag>
               </nb-card-body>
               <nb-card-footer class="text-right">
                 <button size="small" class="m-1" nbButton outline status="primary" [routerLink]="['']"
                         *ngIf="isTeacher">Gerenciar
                 </button>
                 <button size="small" class="m-1" nbButton outline status="primary"
-                        [routerLink]="['/student/classroom/course',course?.slug]">
+                        [routerLink]="['',isTeacher?'teacher':'student','classroom','course',course?.slug]">
                   Abrir
                 </button>
               </nb-card-footer>

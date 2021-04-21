@@ -88,7 +88,6 @@ export class RegisterComponent implements OnInit {
 
   passwordValidation = (confirmPassword: FormControl): any => {
     if (this.registerForm) {
-      console.warn('teste');
       if (confirmPassword.value !== this.registerForm.get('password')?.value) {
         return {
           passwordCheck: true

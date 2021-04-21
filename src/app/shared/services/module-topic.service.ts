@@ -6,6 +6,7 @@ import {Observable} from 'rxjs';
 import {SERVER_API_URL} from '../../app.constants';
 import {IModuleTopic, ModuleTopic} from '../models/module-topic.model';
 import {map} from 'rxjs/operators';
+import {ITopic} from '../models/topic.model';
 
 @Injectable({
   providedIn: 'root'
@@ -32,4 +33,10 @@ export class ModuleTopicService {
       return objMts;
     }));
   }
+
+  getTopic(authorities: Authority[], disciplineSlug: string, topicSlug: string): Observable<ITopic> {
+    const url = `${this.sF.routeAuthSwitch(authorities)}modules/${disciplineSlug}/topics/${topicSlug}/topic`;
+    return this.http.get<ITopic>(`${SERVER_API_URL}${url}`);
+  }
 }
+

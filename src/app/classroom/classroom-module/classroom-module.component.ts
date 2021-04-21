@@ -5,6 +5,8 @@ import {Authority} from '../../shared/constants/authority.constants';
 import {takeUntil} from 'rxjs/operators';
 import {Subject} from 'rxjs';
 import {IReportResults} from '../../shared/models/module-topic-user-result.model';
+import {SharedFunctions} from '../../shared/shared.functions';
+import {UserService} from '../../shared/services/user.service';
 
 @Component({
   selector: 'app-classroom-module',
@@ -16,22 +18,31 @@ export class ClassroomModuleComponent implements OnInit, OnDestroy {
   selectedTResults: IReportResults;
   authorities: Authority[];
   moduleTopics: IModuleTopic[][];
-  isTeacher = false;
   subject$ = new Subject();
+  routePrefix = '/';
+  isTeacher = false;
+  courseSlug: string;
+  disciplineSlug: string;
+  loadingTopicResults = true;
 
   constructor(
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private userService: UserService,
+    private sF: SharedFunctions
   ) {
-    this.activatedRoute.data.pipe(takeUntil(this.subject$)).subscribe(({moduleTopics}) => {
-      this.moduleTopics = moduleTopics;
-    });
-    this.authorities = this.activatedRoute.snapshot.data.authorities;
-    if (this.authorities.includes(Authority.TEACHER)) {
-      this.isTeacher = true;
-    }
   }
 
   ngOnInit(): void {
+    this.authorities = this.activatedRoute.snapshot.data.authorities;
+    this.courseSlug = this.activatedRoute.snapshot.params.courseSlug;
+    this.disciplineSlug = this.activatedRoute.snapshot.params.disciplineSlug;
+    this.routePrefix += this.sF.routeAuthSwitch(this.authorities, true);
+    if (this.authorities.includes(Authority.TEACHER)) {
+      this.isTeacher = true;
+    }
+    this.activatedRoute.data.pipe(takeUntil(this.subject$)).subscribe(({moduleTopics}) => {
+      this.moduleTopics = moduleTopics;
+    });
   }
 
   ngOnDestroy(): void {
@@ -40,6 +51,20 @@ export class ClassroomModuleComponent implements OnInit, OnDestroy {
   }
 
   selectTopic(event) {
+    this.selectedTResults = undefined;
     this.selectedTopic = event;
+    if (!this.isTeacher) {
+      this.getTopicResult();
+    }
+  }
+
+  getTopicResult(): void {
+    if (this.selectedTopic && this.selectedTopic.id) {
+      this.loadingTopicResults = true;
+      this.userService.getTopicResult(this.selectedTopic.id).pipe(takeUntil(this.subject$)).subscribe((result) => {
+        this.selectedTResults = result || undefined;
+        this.loadingTopicResults = false;
+      }, () => this.loadingTopicResults = false);
+    }
   }
 }

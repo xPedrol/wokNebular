@@ -11,6 +11,7 @@ import { CourseRankComponent } from './ranks/course-rank/course-rank.component';
 import {TreeViewComponent} from './tree-view/tree-view.component';
 import { ClassroomTopicComponent } from './classroom-topic/classroom-topic.component';
 import { ClassroomModuleComponent } from './classroom-module/classroom-module.component';
+import {BreadcrumbModule} from 'xng-breadcrumb';
 
 @NgModule({
   declarations: [
@@ -23,12 +24,13 @@ import { ClassroomModuleComponent } from './classroom-module/classroom-module.co
     ClassroomTopicComponent,
     ClassroomModuleComponent
   ],
-  imports: [
-    CommonModule,
-    SharedModule,
-    RouterModule,
-    ReactiveFormsModule,
-  ],
+    imports: [
+        CommonModule,
+        SharedModule,
+        RouterModule,
+        ReactiveFormsModule,
+        BreadcrumbModule,
+    ],
   exports: [
     ClassroomContentComponent,
     SharedModule

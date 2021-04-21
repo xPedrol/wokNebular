@@ -3,14 +3,14 @@ import {Authority} from '../../constants/authority.constants';
 
 export interface IAccount {
   id: number;
-  activated: boolean;
-  authorities: string[];
-  email: string;
+  activated?: boolean;
+  authorities?: string[];
+  email?: string;
   firstName: string;
   langKey: string;
   lastName: string;
-  login: string;
-  imageUrl: string;
+  login?: string;
+  imageUrl?: string;
 
   isTeacher(): boolean;
 
@@ -30,16 +30,18 @@ export class Account {
   private _login: string;
   private _imageUrl: string;
 
-  constructor(account: IAccount) {
-    this._id = account.id;
-    this._authorities = account.authorities;
-    this._email = account.email;
-    this._login = account.login;
-    this._imageUrl = account.imageUrl;
-    this._activated = account.activated;
-    this._langKey = account.langKey;
-    this._lastName = account.lastName;
-    this._firstName = account.firstName;
+  constructor(account?: IAccount) {
+    if (account) {
+      this._id = account.id;
+      this._authorities = account.authorities;
+      this._email = account.email;
+      this._login = account.login;
+      this._imageUrl = account.imageUrl;
+      this._activated = account.activated;
+      this._langKey = account.langKey;
+      this._lastName = account.lastName;
+      this._firstName = account.firstName;
+    }
   }
 
   // get getImageUrl(): string {

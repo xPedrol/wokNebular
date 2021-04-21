@@ -1,4 +1,18 @@
 <div class="row">
+  <div class="col-12">
+    <nb-card>
+      <nb-card-body>
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a [routerLink]="[routePrefix,'dashboard']">Dashboard</a></li>
+            <li class="breadcrumb-item"><a
+              [routerLink]="[routePrefix,'classroom','course',courseSlug]">{{courseSlug}}</a></li>
+            <li class="breadcrumb-item active" aria-current="page">{{disciplineSlug}}</li>
+          </ol>
+        </nav>
+      </nb-card-body>
+    </nb-card>
+  </div>
   <div class="col-12 col-lg-7">
     <nb-card status="info">
       <nb-card-header>Tópicos</nb-card-header>
@@ -7,7 +21,7 @@
       </nb-card-body>
     </nb-card>
   </div>
-  <div class="col-12 col-lg-5">
+  <div class="d-none d-lg-block col-12 col-lg-5">
     <div style="position: sticky;
   position: -webkit-sticky;
   top: 90px; /* required */">
@@ -23,7 +37,7 @@
         <nb-card-header>{{selectedTopic.topic.name}}</nb-card-header>
         <nb-card-body>
           <div class="row">
-            <div class="col-12"><span><strong>Informações gerais</strong></span></div>
+            <div class="col-12"><strong>Informações gerais</strong></div>
             <div class="col-12">
               <nb-tag class="m-1" size="small" status="success" appearance="filled"
                       [text]="'Fecha em '+(selectedTopic.endTime.toISOString() | date: 'dd/MM/yyyy')"
@@ -42,17 +56,13 @@
                       [text]="'Exercícios C '+selectedTopic.getTotalExercise('C')"></nb-tag>
               <nb-tag class="m-1" size="small" status="danger" appearance="filled"
                       [text]="'Exercícios D '+selectedTopic.getTotalExercise('D')"></nb-tag>
-              <hr>
             </div>
-            <div class="col-12"><span><strong>Seus dados</strong></span></div>
-            <div class="col-12">
-              <nb-tag class="m-1" size="small" status="success" appearance="filled"
-                      [text]="'Fecha em '+(selectedTopic.endTime.toISOString() | date: 'dd/MM/yyyy')"
-                      *ngIf="selectedTopic.availableToDo"></nb-tag>
-              <nb-tag class="m-1" size="small" status="info" appearance="filled"
-                      [text]="'Pontos necessários '+selectedTopic.minScore"></nb-tag>
-              <nb-tag class="m-1" size="small" status="info" appearance="filled"
-                      [text]="'Média '+selectedTopic.targetScore"></nb-tag>
+            <div class="col-12" *ngIf="!isTeacher">
+              <hr>
+              <strong>Seus dados</strong>
+            </div>
+            <div class="col-12" *ngIf="!isTeacher" [nbSpinner]="loadingTopicResults" nbSpinnerStatus="info"
+                 nbSpinnerSize="giant" style="min-height: 100px;">
               <span *ngIf="selectedTResults">
               <nb-tag class="m-1" size="small" status="success" appearance="filled"
                       [text]="'Resolveu'+selectedTResults?.numAresolved+' As'"></nb-tag>

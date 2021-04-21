@@ -3,7 +3,7 @@ import {HttpClient} from '@angular/common/http';
 import {SERVER_API_URL} from '../../app.constants';
 import {Course, ICourse} from '../models/course.model';
 import {map} from 'rxjs/operators';
-import {Observable, of} from 'rxjs';
+import {EMPTY, Observable, of} from 'rxjs';
 import {AccountService} from './account.service';
 import {ICourseStatistics} from '../models/course-statistics.model';
 import {SharedFunctions} from '../shared.functions';
@@ -74,15 +74,13 @@ export class CourseService {
     authorities: Authority[],
     id: number | string
   ): Observable<ICourse> {
-    let url = '';
-    if (this.accountService.account.isTeacher()) {
-      url = `teacher/courses/${id}`;
-    } else if (this.accountService.account.isStudent()) {
-      url = `account/courses/${id}`;
-    }
+    const url = `${this.sF.routeAuthSwitch(authorities)}courses/${id}`;
     return this.http
       .get<ICourse>(`${SERVER_API_URL}${url}`).pipe(map((course) => {
-        return new Course(course);
+        if (course) {
+          return new Course(course);
+        }
+        return null;
       }));
   }
 }

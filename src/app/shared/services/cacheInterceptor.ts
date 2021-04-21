@@ -2,10 +2,11 @@ import {Injectable} from '@angular/core';
 import {HttpEvent, HttpHandler, HttpInterceptor, HttpRequest, HttpResponse} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {filter, first, shareReplay, tap} from 'rxjs/operators';
+import {SERVER_API_URL} from '../../app.constants';
 
 @Injectable()
 export class CachingInterceptorService implements HttpInterceptor {
-
+  dontCache = ['account'];
   public readonly store: Record<string, Observable<HttpEvent<any>>> = {};
 
   constructor() {
@@ -13,8 +14,10 @@ export class CachingInterceptorService implements HttpInterceptor {
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
 
-    // Don't cache if it's not cacheable
-    if (req.method !== 'GET') {
+    const dontAccept = this.dontCache.some((url) => {
+      return req.url === SERVER_API_URL + url;
+    });
+    if (req.method !== 'GET' || dontAccept || req.headers.get('force')) {
       return next.handle(req);
     }
 

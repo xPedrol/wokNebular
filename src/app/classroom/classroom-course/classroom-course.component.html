@@ -1,12 +1,24 @@
 <div class="row">
-  <div class="col-12 col-lg-4">
-    <nb-card [status]="'info'">
-      <nb-card-header>Cefet AED2-202-ERE</nb-card-header>
+  <div class="col-12">
+    <nb-card>
+      <nb-card-body>
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a [routerLink]="[routePrefix,'dashboard']">Dashboard</a></li>
+            <li class="breadcrumb-item active" aria-current="page">{{course?.slug}}</li>
+          </ol>
+        </nav>
+      </nb-card-body>
+    </nb-card>
+  </div>
+  <div class="col-12 col-lg-5">
+    <nb-card *ngIf="course">
+      <nb-card-header>{{course?.name}}</nb-card-header>
       <nb-card-body>
         <nb-user size="giant"
-                 [title]="course.teacher.email"
-                 [name]="course.teacher.login"
-                 [picture]="course.teacher.imageUrl"
+                 [title]="course?.teacher?.email"
+                 [name]="course?.teacher?.login"
+                 [picture]="course?.teacher?.imageUrl"
         >
         </nb-user>
         <hr>
@@ -18,7 +30,7 @@
               <nb-list-item *ngFor="let module of course?.modules" class="d-block">
                 <div class="row">
                   <div class="col-4 text-left">
-                    <p style="padding-bottom: 0;margin-bottom: 0">{{ module.alias }}</p>
+                    <p style="padding-bottom: 0;margin-bottom: 0">{{ module?.alias }}</p>
                     <!--                    <small>Aaa</small>-->
                   </div>
                   <div class="col-8 text-right">
@@ -27,8 +39,7 @@
                       <nb-icon class="d-block d-sm-none" icon="diagonal-arrow-right-up-outline"></nb-icon>
                     </button>
                     <button nbButton class="m-1" size="small" *ngIf="authorities"
-                            (click)="oi(sF.routeAuthSwitch(authorities,true)+'classroom/course/'+course.slug+'module/'+module.alias)"
-                            [routerLink]="['/'+sF.routeAuthSwitch(authorities,true)+'classroom/course',course.slug,'module',module.discipline.slug]">
+                            [routerLink]="['/'+sF.routeAuthSwitch(authorities,true)+'classroom/course',course?.slug,'module',module?.discipline?.slug]">
                       <span class="d-none d-sm-block">Abrir</span>
                       <nb-icon icon="diagonal-arrow-right-up-outline"></nb-icon>
                     </button>
@@ -41,7 +52,7 @@
       </nb-card-body>
     </nb-card>
   </div>
-  <div class="col-12 col-lg-8">
+  <div class="col-12 col-lg-7">
     <nb-card>
       <nb-card-body>
 
@@ -63,7 +74,7 @@
           <nb-tab tabTitle="Resultados" *ngIf="isTeacher">
           </nb-tab>
           <nb-tab tabTitle="Classificações">
-            <app-course-rank [courseId]="course.id" ></app-course-rank>
+            <app-course-rank [courseId]="course?.id" ></app-course-rank>
           </nb-tab>
         </nb-tabset>
 

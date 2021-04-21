@@ -57,11 +57,9 @@ export class LoginComponent implements OnInit {
         let urlBack: string = this.localStorage.retrieve('url_back');
         if (urlBack) {
           urlBack = urlBack.replace('student', `${this.accountService.account.isTeacher() ? 'teacher' : 'student'}`).replace('teacher', `${this.accountService.account.isTeacher() ? 'teacher' : 'student'}`);
-          console.warn(urlBack);
           this.router.navigateByUrl(urlBack);
           this.localStorage.clear('url_back');
         } else {
-          console.warn(this.accountService.account.isTeacher());
           this.router.navigateByUrl(`/${this.accountService.account.isTeacher() ? 'teacher' : 'student'}/dashboard`);
         }
       });

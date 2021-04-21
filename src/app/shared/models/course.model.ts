@@ -28,21 +28,23 @@ export interface ICourse {
 }
 
 export class Course implements ICourse {
-  constructor(course: ICourse) {
-    this._activated = course.activated;
-    this._affiliation = course.affiliation;
-    this._courseType = course.courseType;
-    this._createdDate = course.createdDate;
-    this._description = course.description;
-    this._endDate = course.endDate;
-    this._id = course.id;
-    this._lastModifiedDate = course.lastModifiedDate;
-    this._modules = course.modules;
-    this._name = course.name;
-    this._passcode = course.passcode;
-    this._slug = course.slug;
-    this._startDate = course.startDate;
-    this._teacher = new UserBasic(course.teacher);
+  constructor(course?: ICourse) {
+    if (course) {
+      this._activated = course.activated;
+      this._affiliation = course.affiliation;
+      this._courseType = course.courseType;
+      this._createdDate = course.createdDate;
+      this._description = course.description;
+      this._endDate = course.endDate;
+      this._id = course.id;
+      this._lastModifiedDate = course.lastModifiedDate;
+      this._modules = course.modules;
+      this._name = course.name;
+      this._passcode = course.passcode;
+      this._slug = course.slug;
+      this._startDate = course.startDate;
+      this._teacher = new UserBasic(course.teacher);
+    }
   }
 
   private _activated: boolean;

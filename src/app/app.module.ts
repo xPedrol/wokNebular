@@ -10,6 +10,7 @@ import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {NgxWebstorageModule} from 'ngx-webstorage';
 import {AuthInterceptor} from './shared/services/auth-interceptor.service';
 import { CachingInterceptorService} from './shared/services/cacheInterceptor';
+import {BreadcrumbModule} from 'xng-breadcrumb';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { CachingInterceptorService} from './shared/services/cacheInterceptor';
     BrowserAnimationsModule,
     AppRoutingModule,
     HttpClientModule,
+    BreadcrumbModule,
     NgxWebstorageModule.forRoot(),
     ThemeModule.forRoot(),
   ],

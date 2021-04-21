@@ -37,7 +37,7 @@
                  [attr.aria-invalid]="loginForm.get('login').invalid && loginForm.get('login').touched ? true : null">
           <ng-container *ngIf="loginForm.get('login').invalid && loginForm.get('login').touched">
             <p class="text-danger" *ngIf="loginForm.get('login').errors?.required">
-              Email is required!
+              Campo obrigatório
             </p>
           </ng-container>
         </div>
@@ -65,7 +65,7 @@
           </nb-form-field>
           <ng-container *ngIf="loginForm.get('password').invalid && loginForm.get('password').touched ">
             <p class="text-danger" *ngIf="loginForm.get('password').errors?.required">
-              Password is required!
+              Campo obrigatório
             </p>
           </ng-container>
         </div>
