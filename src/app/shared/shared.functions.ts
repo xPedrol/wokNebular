@@ -30,10 +30,7 @@ export class SharedFunctions {
     return RoutePrefix.UNSET;
   }
 
-  getBreadcrumb(url: string): IBreadcrumb[] {
-    console.warn(url);
-    const breadcrumb = [];
-
-    return breadcrumb;
+  isChangedUser(authorities: Authority[]): boolean {
+    return !authorities.includes(Authority.TEACHER) && this.accountService.account.isTeacher();
   }
 }

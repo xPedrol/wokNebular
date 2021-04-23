@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {SERVER_API_URL} from '../../app.constants';
 import {Course, ICourse} from '../models/course.model';
 import {map} from 'rxjs/operators';
@@ -21,19 +21,21 @@ export class CourseService {
   ) {
   }
 
-  getLearningCourses(authorities: Authority[], all: boolean = false): Observable<ICourse[]> {
+  getLearningCourses(authorities: Authority[], all: boolean = false, refresh: boolean = false): Observable<ICourse[]> {
     const url = `${this.sF.routeAuthSwitch(authorities)}courses?all=${all}`;
-    return this.http.get<ICourse[]>(`${SERVER_API_URL}${url}`).pipe(map((courses) => {
+    const options = {headers: new HttpHeaders({force: String(refresh)})};
+    return this.http.get<ICourse[]>(`${SERVER_API_URL}${url}`, {...options, responseType: 'json'}).pipe(map((courses) => {
       return courses.map((course: ICourse) => {
         return new Course(course);
       });
     }));
   }
 
-  getTeachingCourses(authorities: Authority[], all: boolean = false): Observable<ICourse[]> {
+  getTeachingCourses(authorities: Authority[], all: boolean = false, refresh: boolean = false): Observable<ICourse[]> {
     if (this.accountService.account.isTeacher()) {
       const url = `teacher/courses?all=${all}`;
-      return this.http.get<ICourse[]>(`${SERVER_API_URL}${url}`).pipe(map((courses) => {
+      const options = {headers: new HttpHeaders({force: String(refresh)})};
+      return this.http.get<ICourse[]>(`${SERVER_API_URL}${url}`, {...options, responseType: 'json'}).pipe(map((courses) => {
         return courses.map((course: ICourse) => {
           return new Course(course);
         });

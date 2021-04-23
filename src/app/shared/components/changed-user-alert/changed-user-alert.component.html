@@ -1,0 +1,8 @@
+<nb-alert status="warning" [closable]="true" *ngIf="sF.isChangedUser(activatedRoute.snapshot.data?.authorities)">
+  <div class="row">
+    <div class="col-12">
+      Você está navegando como estudante. Para acessar o dashboard de professor clique <a
+      [routerLink]="['teacher/dashboard']">aqui</a>
+    </div>
+  </div>
+</nb-alert>

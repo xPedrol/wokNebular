@@ -63,22 +63,22 @@ export class ClassroomDashBoardComponent implements OnInit, OnDestroy {
     });
   }
 
-  getCourses() {
+  getCourses(refresh = false) {
     this.loadingCourse = true;
     this.loadingTraining = true;
     if (this.isTeacher) {
       if (this.isParticipating) {
-        this.getLearningCourses();
+        this.getLearningCourses(refresh);
       } else {
-        this.getTeachingCourses();
+        this.getTeachingCourses(refresh);
       }
     } else {
-      this.getLearningCourses();
+      this.getLearningCourses(refresh);
     }
   }
 
-  getLearningCourses(): void {
-    this.courseService.getLearningCourses(this.authorities, this.showAll).pipe(takeUntil(this.subject$))
+  getLearningCourses(refresh = false): void {
+    this.courseService.getLearningCourses(this.authorities, this.showAll, refresh).pipe(takeUntil(this.subject$))
       .subscribe((courses) => {
         this.divideCourses(courses);
       }, () => {
@@ -89,8 +89,8 @@ export class ClassroomDashBoardComponent implements OnInit, OnDestroy {
       });
   }
 
-  getTeachingCourses(): void {
-    this.courseService.getTeachingCourses(this.authorities, this.showAll).pipe(takeUntil(this.subject$))
+  getTeachingCourses(refresh = false): void {
+    this.courseService.getTeachingCourses(this.authorities, this.showAll, refresh).pipe(takeUntil(this.subject$))
       .subscribe((courses) => {
         this.divideCourses(courses);
       }, () => {
@@ -128,7 +128,7 @@ export class ClassroomDashBoardComponent implements OnInit, OnDestroy {
       },
     }).onClose.pipe(takeUntil(this.subject$)).subscribe((res: any) => {
       if (res?.refresh) {
-        this.getCourses();
+        this.getCourses(res?.refresh);
       }
     });
   }
