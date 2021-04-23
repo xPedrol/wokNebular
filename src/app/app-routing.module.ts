@@ -4,6 +4,7 @@ import {AuthGuard} from './shared/services/auth-guard.service';
 import {NotFoundComponent} from './shared/components/not-found/not-found.component';
 import {Authority} from './shared/constants/authority.constants';
 import {AccessDeniedComponent} from './shared/components/access-denied/access-denied.component';
+import {NoAuthGuard} from './shared/services/no-auth-guard.service';
 
 const routes: Routes = [
   {
@@ -13,7 +14,8 @@ const routes: Routes = [
   },
   {
     path: 'auth',
-    loadChildren: () => import('./auth/auth.module').then(m => m.AuthModule)
+    loadChildren: () => import('./auth/auth.module').then(m => m.AuthModule),
+    canActivate: [NoAuthGuard]
   },
   {
     path: 'account',

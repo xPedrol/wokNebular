@@ -14,7 +14,7 @@ export class SharedFunctions {
   ) {
   }
 
-  routeAuthSwitch(authorities: Authority[], noApi = false): RoutePrefix {
+  routeAuthSwitch(authorities: Authority[] | string[], noApi = false): RoutePrefix {
     if (authorities.includes(Authority.TEACHER)) {
       if (this.accountService.account.isTeacher()) {
         return RoutePrefix.TEACHER;

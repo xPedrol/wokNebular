@@ -31,7 +31,7 @@
           treinamento
         </button>
         <button size="tiny" nbButton outline status="primary" class="m-1"
-                (click)="openAddPublicCourseDialog()">
+                (click)="openAddPublicCourseDialog(true)">
           <nb-icon icon="plus-outline"></nb-icon>
           curso
         </button>
@@ -66,11 +66,11 @@
               <nb-card-header>{{course.name}}</nb-card-header>
               <nb-card-body>
                 <p>{{course.description}}</p>
-                <nb-tag size="tiny" status="info" appearance="filled" *ngIf="course?.modules?.length"
+                <nb-tag size="tiny" status="primary" appearance="outline" *ngIf="course?.modules?.length"
                         [text]="'Módulos: '+course?.modules?.length"></nb-tag>
-                <nb-tag size="tiny" status="info" appearance="filled" class="m-1" *ngIf="course.amountTopics"
+                <nb-tag size="tiny" status="primary" appearance="outline" class="m-1" *ngIf="course.amountTopics"
                         [text]="'Tópicos: '+course.amountTopics"></nb-tag>
-                <nb-tag size="tiny" status="info" appearance="filled" *ngIf="course.amountExercises"
+                <nb-tag size="tiny" status="primary" appearance="outline" *ngIf="course.amountExercises"
                         [text]="'Exercícios: '+course.amountExercises"></nb-tag>
                 <!--                <span class="badge badge-primary">Módulos: {{course?.modules?.length}}</span>-->
                 <!--                <span class="badge badge-primary m-1">Tópicos: {{course.amountTopics}}</span>-->
@@ -97,11 +97,11 @@
               <nb-card-header>{{course.name}}</nb-card-header>
               <nb-card-body>
                 <p>{{course.description}}</p>
-                <nb-tag size="tiny" status="info" appearance="outline" *ngIf="course?.modules?.length"
+                <nb-tag size="tiny" status="primary" appearance="outline" *ngIf="course?.modules?.length"
                         [text]="'Módulos: '+course?.modules?.length"></nb-tag>
-                <nb-tag size="tiny" status="info" appearance="outline" class="m-1" *ngIf="course.amountTopics"
+                <nb-tag size="tiny" status="primary" appearance="outline" class="m-1" *ngIf="course.amountTopics"
                         [text]="'Tópicos: '+course.amountTopics"></nb-tag>
-                <nb-tag size="tiny" status="info" appearance="outline" *ngIf="course.amountExercises"
+                <nb-tag size="tiny" status="primary" appearance="outline" *ngIf="course.amountExercises"
                         [text]="'Exercícios: '+course.amountExercises"></nb-tag>
               </nb-card-body>
               <nb-card-footer class="text-right">

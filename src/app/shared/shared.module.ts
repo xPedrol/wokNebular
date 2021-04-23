@@ -8,8 +8,9 @@ import {SharedFunctions} from './shared.functions';
 import {EchartsLineComponent} from './components/echarts/echarts-line.component';
 import {NgxEchartsModule} from 'ngx-echarts';
 import {EchartsBarComponent} from './components/echarts/echarts-bar.component';
-import {SmartTableComponent} from './components/smart-table/smart-table.component';
-import {Ng2SmartTableModule} from 'ng2-smart-table';
+// import {SmartTableComponent} from './components/smart-table/smart-table.component';
+// import {Ng2SmartTableModule} from 'ng2-smart-table';
+import { NotFoundCardComponent } from './components/not-found-card/not-found-card.component';
 
 
 @NgModule({
@@ -18,14 +19,15 @@ import {Ng2SmartTableModule} from 'ng2-smart-table';
     AccessDeniedComponent,
     EchartsLineComponent,
     EchartsBarComponent,
-    SmartTableComponent
+    // SmartTableComponent,
+    NotFoundCardComponent
   ],
   imports: [
     CommonModule,
     SharedThemeModuleModule,
     RouterModule,
     NgxEchartsModule,
-    Ng2SmartTableModule
+    // Ng2SmartTableModule
   ],
   providers: [SharedFunctions],
   exports: [
@@ -33,7 +35,8 @@ import {Ng2SmartTableModule} from 'ng2-smart-table';
     SharedThemeModuleModule,
     EchartsLineComponent,
     EchartsBarComponent,
-    SmartTableComponent
+    // SmartTableComponent,
+    NotFoundCardComponent
   ]
 })
 export class SharedModule {

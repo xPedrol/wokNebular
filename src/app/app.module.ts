@@ -11,6 +11,7 @@ import {NgxWebstorageModule} from 'ngx-webstorage';
 import {AuthInterceptor} from './shared/services/auth-interceptor.service';
 import { CachingInterceptorService} from './shared/services/cacheInterceptor';
 import {BreadcrumbModule} from 'xng-breadcrumb';
+import {CookieModule} from 'ngx-cookie';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import {BreadcrumbModule} from 'xng-breadcrumb';
     AppRoutingModule,
     HttpClientModule,
     BreadcrumbModule,
+    CookieModule.forRoot(),
     NgxWebstorageModule.forRoot(),
     ThemeModule.forRoot(),
   ],

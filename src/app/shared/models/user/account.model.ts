@@ -17,6 +17,8 @@ export interface IAccount {
   isAdmin(): boolean;
 
   isStudent(): boolean;
+
+  hasAnyAuthority(authorities: string[]): boolean;
 }
 
 export class Account {

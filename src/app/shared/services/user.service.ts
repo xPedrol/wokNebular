@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpParams} from '@angular/common/http';
 import {EMPTY, Observable} from 'rxjs';
 import {IUserTeamBasic} from '../models/basic/userTeam-basic.model';
 import {SERVER_API_URL} from '../../app.constants';
@@ -10,6 +10,10 @@ import {map} from 'rxjs/operators';
 import {IUserProfileStatistics} from '../models/user/user-profile-statistics.model';
 import {IUserExerciseResult, UserExerciseResult} from '../models/user/user-exercise-result.model';
 import {IUserTopicResult} from '../models/user/user-topic-result.model';
+import {ISubmission} from '../models/submission.model';
+import {SharedFunctions} from '../shared.functions';
+import {ISkillBasic} from '../models/basic/skill-basic.model';
+import {IUserSkill, UserSkill} from '../models/user/user-skill.model';
 
 @Injectable({
   providedIn: 'root'
@@ -18,7 +22,8 @@ export class UserService {
 
   constructor(
     private http: HttpClient,
-    private accountService: AccountService
+    private accountService: AccountService,
+    private sF: SharedFunctions
   ) {
   }
 
@@ -79,5 +84,43 @@ export class UserService {
         }
         return null;
       }));
+  }
+
+  getSubmissionByExercise(
+    authorities: Authority[],
+    courseSlug: string,
+    disciplineSlug: string,
+    topicSlug: string,
+    exerciseSlug: string
+  ): Observable<ISubmission[]> {
+    const options = null;
+    // const options = createRequestOption(req);
+    const url = `${this.sF.routeAuthSwitch(authorities)}courses/${courseSlug}/disciplines/${disciplineSlug}/topics/${topicSlug}/exercises/${exerciseSlug}/submissions`;
+    return this.http
+      .get<ISubmission[]>(`${SERVER_API_URL}${url}`, {params: options});
+  }
+
+  getUserSkillsMatriz(): Observable<IUserSkill[][]> {
+    const url = `account/users/skills/`;
+    return this.http.get<IUserSkill[][]>(`${SERVER_API_URL}${url}`).pipe(map((skill) => {
+      return skill = Object.keys(skill).map((key) => {
+        return skill ? skill[key] : [];
+      });
+    }));
+  }
+
+  getUserSkillsArray(): Observable<IUserSkill[]> {
+    const url = `account/users/skills/`;
+    return this.http.get<IUserSkill[][]>(`${SERVER_API_URL}${url}`).pipe(map((skill) => {
+      const skillA: IUserSkill[] = (Object.keys(skill).map((key) => {
+        return skill ? skill[key] : [];
+      })).reduce(
+        (acc, val) => acc.concat(val),
+        []
+      );
+      return skillA.map((skill1) => {
+        return new UserSkill(skill1);
+      });
+    }));
   }
 }

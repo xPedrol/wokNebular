@@ -22,9 +22,7 @@
     </nb-card>
   </div>
   <div class="d-none d-lg-block col-12 col-lg-5">
-    <div style="position: sticky;
-  position: -webkit-sticky;
-  top: 90px; /* required */">
+    <div class="custom-sticky">
       <div *ngIf="!selectedTopic">
         <nb-card>
           <nb-card-header>Descricao de tópico</nb-card-header>
@@ -56,6 +54,8 @@
                       [text]="'Exercícios C '+selectedTopic.getTotalExercise('C')"></nb-tag>
               <nb-tag class="m-1" size="small" status="danger" appearance="filled"
                       [text]="'Exercícios D '+selectedTopic.getTotalExercise('D')"></nb-tag>
+              <nb-tag class="m-1" size="small" status="danger" appearance="filled"
+                      [text]="'Sem classificação '+selectedTopic.getTotalExercise('O')"></nb-tag>
             </div>
             <div class="col-12" *ngIf="!isTeacher">
               <hr>
@@ -64,14 +64,16 @@
             <div class="col-12" *ngIf="!isTeacher" [nbSpinner]="loadingTopicResults" nbSpinnerStatus="info"
                  nbSpinnerSize="giant" style="min-height: 100px;">
               <span *ngIf="selectedTResults">
+                <nb-tag class="m-1" size="small" status="success" appearance="filled"
+                        [text]="'Pontuação total '+selectedTResults?.point"></nb-tag>
               <nb-tag class="m-1" size="small" status="success" appearance="filled"
-                      [text]="'Resolveu'+selectedTResults?.numAresolved+' As'"></nb-tag>
+                      [text]="'Resolveu '+selectedTResults?.numAresolved+' As'"></nb-tag>
               <nb-tag class="m-1" size="small" status="info" appearance="filled"
-                      [text]="'Resolveu'+selectedTResults?.numBresolved+' Bs'"></nb-tag>
+                      [text]="'Resolveu '+selectedTResults?.numBresolved+' Bs'"></nb-tag>
               <nb-tag class="m-1" size="small" status="warning" appearance="filled"
-                      [text]="'Resolveu'+selectedTResults?.numCresolved+' Cs'"></nb-tag>
+                      [text]="'Resolveu '+selectedTResults?.numCresolved+' Cs'"></nb-tag>
               <nb-tag class="m-1" size="small" status="danger" appearance="filled"
-                      [text]="'Resolveu'+selectedTResults?.numDresolved+' Ds'"></nb-tag>
+                      [text]="'Resolveu '+selectedTResults?.numDresolved+' Ds'"></nb-tag>
               <nb-tag class="m-1" size="small" status="info" appearance="filled"
                       *ngIf="selectedTopic. getUnresolvedResolved(selectedTResults) > 0"
                       [text]="'Falta '+selectedTopic. getUnresolvedResolved(selectedTResults)+' exercícios para resolver'"></nb-tag>

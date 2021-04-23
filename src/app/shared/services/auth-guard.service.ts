@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {ActivatedRoute, ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTree} from '@angular/router';
+import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTree} from '@angular/router';
 import {Observable, of} from 'rxjs';
 import {AccountService} from './account.service';
 import {catchError, map} from 'rxjs/operators';
@@ -15,7 +15,7 @@ export class AuthGuard implements CanActivate {
     private accountService: AccountService,
     private router: Router,
     private localStorage: LocalStorageService,
-    private toastrService: NbToastrService
+    private toastService: NbToastrService
   ) {
   }
 
@@ -41,7 +41,7 @@ export class AuthGuard implements CanActivate {
   }
 
   showErrorMessage(url: string) {
-    this.toastrService.show(`Você não tem acesso à pagina ${url}`, 'Acesso negado', {status: 'danger'});
+    this.toastService.show(`Você não tem acesso à pagina ${url}`, 'Acesso negado', {status: 'danger'});
     this.localStorage.store('url_back', url);
     this.router.navigateByUrl('/accessdenied');
   }

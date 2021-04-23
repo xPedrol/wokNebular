@@ -14,6 +14,7 @@ import {IModuleTopic} from '../shared/models/module-topic.model';
 import {ModuleTopicService} from '../shared/services/module-topic.service';
 import {CourseResolve, ModuleTopicResolve} from '../shared/resolves';
 import {ClassroomTopicComponent} from './classroom-topic/classroom-topic.component';
+import {ClassroomExerciseComponent} from './classroom-exercise/classroom-exercise.component';
 
 
 export const childrenRoutes: Routes = [
@@ -46,14 +47,15 @@ export const childrenRoutes: Routes = [
         component: ClassroomModuleComponent,
         resolve: {
           moduleTopics: ModuleTopicResolve
-        },
-        data: {
-          data: { breadcrumb: 'Home oi' }
         }
       },
       {
         path: 'course/:courseSlug/module/:disciplineSlug/topic/:topicSlug',
         component: ClassroomTopicComponent
+      },
+      {
+        path: 'course/:courseSlug/module/:disciplineSlug/topic/:topicSlug/exercise/:exerciseSlug',
+        component: ClassroomExerciseComponent
       }
     ]
   },

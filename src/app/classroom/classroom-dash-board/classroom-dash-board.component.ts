@@ -120,10 +120,10 @@ export class ClassroomDashBoardComponent implements OnInit, OnDestroy {
     this.getCourseStatisticsForArrays();
   }
 
-  openAddPublicCourseDialog(): void {
+  openAddPublicCourseDialog(isPrivate = false): void {
     this.dialogService.open(AddCourseDialogComponent, {
       context: {
-        isPrivate: false,
+        isPrivate,
         authorities: this.authorities
       },
     }).onClose.pipe(takeUntil(this.subject$)).subscribe((res: any) => {

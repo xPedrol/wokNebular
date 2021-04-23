@@ -12,6 +12,7 @@ import {TreeViewComponent} from './tree-view/tree-view.component';
 import { ClassroomTopicComponent } from './classroom-topic/classroom-topic.component';
 import { ClassroomModuleComponent } from './classroom-module/classroom-module.component';
 import {BreadcrumbModule} from 'xng-breadcrumb';
+import { ClassroomExerciseComponent } from './classroom-exercise/classroom-exercise.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import {BreadcrumbModule} from 'xng-breadcrumb';
     CourseRankComponent,
     TreeViewComponent,
     ClassroomTopicComponent,
-    ClassroomModuleComponent
+    ClassroomModuleComponent,
+    ClassroomExerciseComponent
   ],
     imports: [
         CommonModule,

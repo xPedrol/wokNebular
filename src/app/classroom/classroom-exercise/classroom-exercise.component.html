@@ -1,0 +1,130 @@
+<div class="row clearfix">
+  <div class="col-12">
+    <nb-card>
+      <nb-card-body>
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a [routerLink]="[routePrefix,'dashboard']">Dashboard</a></li>
+            <li class="breadcrumb-item"><a
+              [routerLink]="[routePrefix,'classroom','course',courseSlug]">{{courseSlug}}</a></li>
+            <li class="breadcrumb-item"><a
+              [routerLink]="[routePrefix,'classroom','course',courseSlug,'module',disciplineSlug]">{{disciplineSlug}}</a>
+            </li>
+            <li class="breadcrumb-item"><a
+              [routerLink]="[routePrefix,'classroom','course',courseSlug,'module',disciplineSlug,'topic',topicSlug]">{{topicSlug}}</a>
+            </li>
+            <li class="breadcrumb-item active" aria-current="page">{{exerciseSlug}}</li>
+          </ol>
+        </nav>
+      </nb-card-body>
+    </nb-card>
+  </div>
+  <div class="col-12 col-xl-7">
+    <nb-card>
+      <nb-card-header>Conteúdo</nb-card-header>
+      <nb-card-body [nbSpinner]="loadingExercise" nbSpinnerStatus="info" nbSpinnerSize="giant"
+                    style="min-height: 100px;">
+        <div *ngIf="exercise && exercise.statement.html" [innerHTML]="exercise.statement.html"></div>
+        <app-not-found-card *ngIf="!exercise && !loadingExercise"></app-not-found-card>
+      </nb-card-body>
+    </nb-card>
+  </div>
+  <div class="col-12 col-xl-5">
+    <nb-card accent="info" class="custom-sticky">
+      <nb-card-header>
+        <div class="row">
+          <div class="col-6 text-left">
+            <span *ngIf="isTeacher">Soluções</span>
+            <span *ngIf="!isTeacher">Submissões</span>
+          </div>
+          <div class="col-6 text-right">
+            <button nbButton size="small" status="info">
+              <nb-icon icon="cloud-upload-outline"></nb-icon>
+              Upload
+            </button>
+          </div>
+        </div>
+
+      </nb-card-header>
+      <nb-card-body>
+        <!--        <span *ngIf="isTeacher">-->
+        <!--        <nb-list [nbSpinner]="loadingExercise" nbSpinnerStatus="info" nbSpinnerSize="giant" style="min-height: 100px;">-->
+        <!--          <nb-list-item class="d-block" *ngFor="let exercise of exercises">-->
+        <!--            <div class="row" [routerLink]="[url,exercise?.slug]">-->
+        <!--              <div class="col-7 text-left">{{exercise?.name}}</div>-->
+        <!--              <div class="col-5 text-right">-->
+        <!--                <nb-tag class="m-1" size="small" status="info" appearance="filled"-->
+        <!--                        [text]="'Dificuldade: '+exercise?.difficultyLevelId"></nb-tag>-->
+        <!--              </div>-->
+        <!--            </div>-->
+        <!--          </nb-list-item>-->
+        <!--        </nb-list>-->
+        <!--          </span>-->
+        <span *ngIf="!isTeacher">
+        <nb-list *ngIf="!((!submissions || submissions?.length === 0) && !loadingContent)" [nbSpinner]="loadingContent"
+                 nbSpinnerStatus="info" nbSpinnerSize="giant" style="min-height: 100px;">
+          <nb-list-item class="d-block" *ngFor="let submission of submissions">
+            <div class="row">
+              <div class="col-5 text-left">
+                <nb-user
+                  [name]="submission?.cacheResultScoreTopic?.toString()"
+                  [title]="submission?.runResult?.id"
+                ></nb-user>
+              </div>
+              <div class="col-7 text-right">
+                <nb-tag *ngIf="submission?.submitTime" class="m-1" size="tiny" status="info" appearance="outline"
+                        [text]="submission?.submitTime?.toISOString() | date: 'dd/MM/yyyy'"></nb-tag>
+                <nb-tag *ngIf="submission?.language?.id" class="m-1" size="tiny" status="info" appearance="outline"
+                        [text]="submission?.language?.id"></nb-tag>
+                <nb-tag *ngIf="submission?.cacheResultScoreTopic" class="m-1" size="tiny" status="success"
+                        appearance="outline"
+                        [text]="'Julgado'"></nb-tag>
+                 <nb-tag *ngIf="!submission?.cacheResultScoreTopic" class="m-1" size="tiny" status="warning"
+                         appearance="outline"
+                         [text]="'Não foi julgado'"></nb-tag>
+                <!--                <nb-tag *ngIf="exerciseR?.nameRunResult" class="m-1" size="tiny" status="info" appearance="outline"-->
+                <!--                        [text]="exerciseR?.nameRunResult"></nb-tag>-->
+                <!--                <nb-tag class="m-1" size="tiny" status="info" appearance="outline"-->
+                <!--                        [text]="'Dificuldade: '+exerciseR?.difficultyLevelId"></nb-tag>-->
+                <!--                <nb-tag *ngIf="exerciseR?.idSubmission" class="m-1" size="small" status="success" appearance="filled"-->
+                <!--                        [text]="exerciseR."></nb-tag>-->
+              </div>
+            </div>
+          </nb-list-item>
+        </nb-list>
+          <app-not-found-card
+            *ngIf="!loadingContent && (!submissions || submissions?.length === 0)"></app-not-found-card>
+          </span>
+        <span *ngIf="isTeacher">
+        <nb-list *ngIf="!((!solutions || solutions?.length === 0) && !loadingContent)" [nbSpinner]="loadingContent"
+                 nbSpinnerStatus="info" nbSpinnerSize="giant" style="min-height: 100px;">
+          <nb-list-item class="d-block" *ngFor="let solution of solutions">
+            <div class="row">
+              <div class="col-5 text-left">
+                <span>{{solution?.name}}</span>
+                <p>{{solution.description}}</p>
+              </div>
+              <div class="col-7 text-right">
+                <nb-tag class="m-1" size="tiny" status="success"
+                        appearance="outline"
+                        [text]="solution.files?solution.files.length:0+' arquivo(s)'"></nb-tag>
+                 <nb-tag *ngIf="solution.difficultyLevel" class="m-1" size="tiny" status="warning"
+                         appearance="outline"
+                         [text]="'Dificuldade '+solution?.difficultyLevel?.id"></nb-tag>
+                <!--                <nb-tag *ngIf="exerciseR?.nameRunResult" class="m-1" size="tiny" status="info" appearance="outline"-->
+                <!--                        [text]="exerciseR?.nameRunResult"></nb-tag>-->
+                <!--                <nb-tag class="m-1" size="tiny" status="info" appearance="outline"-->
+                <!--                        [text]="'Dificuldade: '+exerciseR?.difficultyLevelId"></nb-tag>-->
+                <!--                <nb-tag *ngIf="exerciseR?.idSubmission" class="m-1" size="small" status="success" appearance="filled"-->
+                <!--                        [text]="exerciseR."></nb-tag>-->
+              </div>
+            </div>
+          </nb-list-item>
+        </nb-list>
+          <app-not-found-card
+            *ngIf="!loadingContent && (!submissions || submissions?.length === 0)"></app-not-found-card>
+          </span>
+      </nb-card-body>
+    </nb-card>
+  </div>
+</div>

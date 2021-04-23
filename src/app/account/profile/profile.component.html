@@ -34,7 +34,18 @@
         <div class="row mt-4">
           <div class="col-12">
             <nb-tabset fullWidth>
-              <nb-tab tabTitle="Users">
+              <nb-tab tabTitle="Skills">
+                <div class="row" *ngIf="!((!userSkills || userSkills?.length === 0) && !loadingUserSkills)"
+                     [nbSpinner]="loadingUserSkills" nbSpinnerStatus="info" nbSpinnerSize="giant"
+                     style="min-height: 100px;">
+                  <div class="col-12 my-2" *ngFor="let userSkill of userSkills">
+                    <div>{{userSkill?.nameSkill}}</div>
+                    <small>{{userSkill.getPercent()}}%</small>
+                    <nb-progress-bar [value]="userSkill.getPercent(true)" status="info"></nb-progress-bar>
+                  </div>
+                </div>
+                <app-not-found-card
+                  *ngIf="!loadingUserSkills && (!userSkills || userSkills?.length === 0)"></app-not-found-card>
               </nb-tab>
               <nb-tab tabTitle="Orders">
                 <p>List of <strong>orders</strong>.</p>
@@ -49,7 +60,7 @@
     </nb-card>
   </div>
   <div class="col-12 col-lg-7">
-    <nb-card>
+    <nb-card class="custom-sticky">
       <nb-card-body>
 
         <nb-tabset>

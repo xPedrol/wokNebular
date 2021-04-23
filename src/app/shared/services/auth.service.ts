@@ -3,11 +3,13 @@ import {HttpClient} from '@angular/common/http';
 import {IUserAuth} from '../models/user/UserLogin.model';
 import {SERVER_API_URL} from '../../app.constants';
 import {catchError, map, mergeMap} from 'rxjs/operators';
-import {SessionStorageService} from 'ngx-webstorage';
+import {LocalStorageService, SessionStorageService} from 'ngx-webstorage';
 import {Observable, of} from 'rxjs';
 import {AccountService} from './account.service';
 import {Account} from '../models/user/account.model';
 import {Router} from '@angular/router';
+import {CookieService} from 'ngx-cookie';
+import * as moment from 'moment';
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +18,8 @@ export class AuthService {
 
   constructor(
     private http: HttpClient,
-    private sessionStorage: SessionStorageService,
+    private localStorage: LocalStorageService,
+    private cookieService: CookieService,
     private accountService: AccountService,
     private router: Router
   ) {
@@ -38,7 +41,9 @@ export class AuthService {
         return of(false);
       }),
       map((obj: any) => {
-        this.sessionStorage.store('id_token', obj?.id_token);
+        const date = new Date(moment().add(3, 'days').format('YYYY-MM-DD'));
+        console.warn(date);
+        this.cookieService.put('id_token', obj?.id_token, {expires: date});
         return true;
       }));
   }
@@ -48,8 +53,8 @@ export class AuthService {
   }
 
   logout(): void {
-    this.sessionStorage.clear('id_token');
-    this.sessionStorage.clear('url_back');
+    this.cookieService.remove('id_token');
+    this.localStorage.clear('url_back');
     this.accountService.account = null;
     this.accountService.account$ = null;
     this.router.navigateByUrl('/auth/login');

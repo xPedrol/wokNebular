@@ -48,11 +48,12 @@ export class EditProfileComponent implements OnInit {
     this.profileForm.get('langKey').setValue(this.user.langKey);
   }
 
-  savePhoto(event) {
+  savePhoto(event: any) {
     event.preventDefault();
     if (this.photo) {
-      console.warn(this.photo);
-      // this.accountService.imageUpload()
+      this.accountService.imageUpload(this.photo).subscribe(() => {
+        console.warn('salvoo');
+      });
     }
   }
 

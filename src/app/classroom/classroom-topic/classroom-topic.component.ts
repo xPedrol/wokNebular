@@ -30,6 +30,7 @@ export class ClassroomTopicComponent implements OnInit, OnDestroy {
   routePrefix = '/';
   isTeacher = false;
   loadingExercise = true;
+  loadingTopic = true;
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -64,10 +65,12 @@ export class ClassroomTopicComponent implements OnInit, OnDestroy {
   }
 
   getTopic() {
+    this.loadingTopic = true;
     this.topicService.getTopic(this.authorities, this.disciplineSlug, this.topicSlug).pipe(takeUntil(this.destroy$))
       .subscribe((topic) => {
         this.topic = topic;
-      });
+        this.loadingTopic = false;
+      }, () => this.loadingTopic = false);
   }
 
   getUserResults(): void {
