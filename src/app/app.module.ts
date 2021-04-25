@@ -12,11 +12,13 @@ import {AuthInterceptor} from './shared/services/auth-interceptor.service';
 import { CachingInterceptorService} from './shared/services/cacheInterceptor';
 import {BreadcrumbModule} from 'xng-breadcrumb';
 import {CookieModule} from 'ngx-cookie';
+import { HomeComponent } from './home/home.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,

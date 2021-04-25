@@ -1,190 +1,191 @@
-<nb-card accent="info">
-  <nb-card-body style="margin-top: 30px;margin-bottom: 30px;">
-    <nb-auth-block class="m-auto">
-      <h1 id="title" class="title">Registro</h1>
-      <p class="sub-title">Olá! Logue com seu nome de usuário</p>
+<div class="layout-content">
+  <nb-card accent="info">
+    <nb-card-body style="margin-top: 30px;margin-bottom: 30px;">
+      <nb-auth-block class="m-auto">
+        <h1 id="title" class="title">Registro</h1>
+        <p class="sub-title">Olá! Logue com seu nome de usuário</p>
 
-      <!--<nb-alert *ngIf="showMessages.error && errors?.length && !submitted" outline="danger" role="alert">-->
-      <!--  <p class="alert-title"><b>Oh snap!</b></p>-->
-      <!--  <ul class="alert-message-list">-->
-      <!--    <li *ngFor="let error of errors" class="alert-message">{{ error }}</li>-->
-      <!--  </ul>-->
-      <!--</nb-alert>-->
+        <!--<nb-alert *ngIf="showMessages.error && errors?.length && !submitted" outline="danger" role="alert">-->
+        <!--  <p class="alert-title"><b>Oh snap!</b></p>-->
+        <!--  <ul class="alert-message-list">-->
+        <!--    <li *ngFor="let error of errors" class="alert-message">{{ error }}</li>-->
+        <!--  </ul>-->
+        <!--</nb-alert>-->
 
-      <!--<nb-alert *ngIf="showMessages.success && messages?.length && !submitted" outline="success" role="alert">-->
-      <!--  <p class="alert-title"><b>Hooray!</b></p>-->
-      <!--  <ul class="alert-message-list">-->
-      <!--    <li *ngFor="let message of messages" class="alert-message">{{ message }}</li>-->
-      <!--  </ul>-->
-      <!--</nb-alert>-->
+        <!--<nb-alert *ngIf="showMessages.success && messages?.length && !submitted" outline="success" role="alert">-->
+        <!--  <p class="alert-title"><b>Hooray!</b></p>-->
+        <!--  <ul class="alert-message-list">-->
+        <!--    <li *ngFor="let message of messages" class="alert-message">{{ message }}</li>-->
+        <!--  </ul>-->
+        <!--</nb-alert>-->
 
-      <form (ngSubmit)="register()" [formGroup]="registerForm" aria-labelledby="title">
+        <form (ngSubmit)="register()" [formGroup]="registerForm" aria-labelledby="title">
 
-        <div class="form-control-group">
-          <label class="label" for="input-login">Nome de usuário</label>
-          <input nbInput
-                 fullWidth
-                 formControlName="login"
-                 name="login"
-                 id="input-login"
-                 placeholder="User name"
-                 autofocus
-                 [status]="(registerForm.get('login').dirty || registerForm.get('login').touched) ? (registerForm.get('login').invalid  ? 'danger' : 'success') : 'basic'"
-                 [required]="true"
-                 [attr.aria-invalid]="registerForm.get('login').invalid && registerForm.get('login').touched ? true : null">
-          <ng-container *ngIf="registerForm.get('login').invalid && registerForm.get('login').touched">
-            <p class="text-danger" *ngIf="registerForm.get('login').errors?.required">
-              Campo obrigatório
-            </p>
-          </ng-container>
-        </div>
-
-        <div class="form-control-group">
-          <label class="label" for="input-email">Email</label>
-          <input nbInput
-                 fullWidth
-                 formControlName="email"
-                 name="email"
-                 id="input-email"
-                 placeholder="Email"
-                 autofocus
-                 [status]="(registerForm.get('email').dirty || registerForm.get('email').touched) ? (registerForm.get('email').invalid  ? 'danger' : 'success') : 'basic'"
-                 [required]="true"
-                 [attr.aria-invalid]="registerForm.get('email').invalid && registerForm.get('email').touched ? true : null">
-          <ng-container *ngIf="registerForm.get('email').invalid && registerForm.get('email').touched">
-            <p class="text-danger" *ngIf="registerForm.get('email').errors?.required">
-              Campo obrigatório
-            </p>
-            <p class="text-danger" *ngIf="registerForm.get('email').errors?.email">
-              Email inválido
-            </p>
-          </ng-container>
-        </div>
-        <div class="form-control-group">
-          <div class="row">
-            <div class="col-6">
-              <label class="label" for="input-password">Senha</label>
-              <nb-form-field>
-                <input nbInput
-                       fullWidth
-                       formControlName="password"
-                       name="password"
-                       [type]="showPassword?'text':'password'"
-                       id="input-password"
-                       placeholder="Password"
-                       [status]="(registerForm.get('password').dirty || registerForm.get('password').touched) ? (registerForm.get('password').invalid  ? 'danger' : 'success') : 'basic'"
-                       [required]="true"
-                       [attr.aria-invalid]="registerForm.get('password').invalid && registerForm.get('password').touched ? true : null">
-                <button nbSuffix nbButton ghost (click)="showPassword = !showPassword" type="button">
-                  <nb-icon [icon]="showPassword ? 'eye-outline' : 'eye-off-2-outline'"
-                           pack="eva"
-                           [attr.aria-label]="showPassword ? 'hide password' : 'show password'">
-                  </nb-icon>
-                </button>
-              </nb-form-field>
-              <ng-container *ngIf="registerForm.get('password').invalid && registerForm.get('password').touched ">
-                <p class="text-danger" *ngIf="registerForm.get('password').errors?.required">
-                  Campo obrigatório
-                </p>
-                <p class="text-danger" *ngIf="registerForm.get('password').errors?.minlength">
-                  Senha é muito curta!
-                </p>
-              </ng-container>
-            </div>
-
-            <div class="col-6">
-              <label class="label" for="input-confirm-Password">Confirmar senha</label>
-              <nb-form-field>
-                <input nbInput
-                       fullWidth
-                       formControlName="confirmPassword"
-                       name="confirmPassword"
-                       [type]="showCPassword?'text':'password'"
-                       id="input-confirm-Password"
-                       placeholder="confirmar senha"
-                       [status]="(registerForm.get('confirmPassword').dirty || registerForm.get('confirmPassword').touched) ? (registerForm.get('confirmPassword').invalid  ? 'danger' : 'success') : 'basic'"
-                       [required]="true"
-                       [attr.aria-invalid]="registerForm.get('confirmPassword').invalid && registerForm.get('confirmPassword').touched ? true : null">
-                <button nbSuffix nbButton ghost (click)="showCPassword = !showCPassword" type="button">
-                  <nb-icon [icon]="showCPassword ? 'eye-outline' : 'eye-off-2-outline'"
-                           pack="eva"
-                           [attr.aria-label]="showCPassword ? 'hide password' : 'show password'">
-                  </nb-icon>
-                </button>
-              </nb-form-field>
-              <ng-container
-                *ngIf="registerForm.get('confirmPassword').invalid && registerForm.get('confirmPassword').touched ">
-                <p class="text-danger" *ngIf="registerForm.get('confirmPassword').errors?.required">
-                  Campo obrigatório
-                </p>
-                <p class="text-danger" *ngIf="registerForm.get('confirmPassword').errors?.passwordCheck">
-                  As senhas não conhecidem
-                </p>
-              </ng-container>
-            </div>
+          <div class="form-control-group">
+            <label class="label" for="input-login">Nome de usuário</label>
+            <input nbInput
+                   fullWidth
+                   formControlName="login"
+                   name="login"
+                   id="input-login"
+                   placeholder="User name"
+                   autofocus
+                   [status]="(registerForm.get('login').dirty || registerForm.get('login').touched) ? (registerForm.get('login').invalid  ? 'danger' : 'success') : 'basic'"
+                   [required]="true"
+                   [attr.aria-invalid]="registerForm.get('login').invalid && registerForm.get('login').touched ? true : null">
+            <ng-container *ngIf="registerForm.get('login').invalid && registerForm.get('login').touched">
+              <p class="text-danger" *ngIf="registerForm.get('login').errors?.required">
+                Campo obrigatório
+              </p>
+            </ng-container>
           </div>
 
-        </div>
-        <div class="form-control-group">
-          <label class="label" for="select-affiliation">affiliation</label>
-          <nb-select fullWidth placeholder="select-affiliation" formControlName="affiliation"
-                     name="affiliation"
-                     id="select-affiliation"
-                     autofocus
-                     [status]="(registerForm.get('affiliation').dirty || registerForm.get('affiliation').touched) ? (registerForm.get('affiliation').invalid  ? 'danger' : 'success') : 'basic'"
-                     [required]="true"
-                     [attr.aria-invalid]="registerForm.get('affiliation').invalid && registerForm.get('affiliation').touched ? true : null">
-            <nb-option [value]="''">Selecione sua faculdade</nb-option>
-            <nb-option [value]="affiliation.id"
-                       *ngFor="let affiliation of affiliations">{{affiliation?.name}}</nb-option>
-          </nb-select>
-          <ng-container *ngIf="registerForm.get('affiliation').invalid && registerForm.get('affiliation').touched">
-            <p class="text-danger" *ngIf="registerForm.get('affiliation').errors?.required">
-              Campo obrigatório
-            </p>
-          </ng-container>
-        </div>
-        <div class="form-control-group accept-group">
-          <nb-checkbox formControlName="agreeTerms">Agree Terms</nb-checkbox>
-          <ng-container *ngIf="registerForm.get('agreeTerms').invalid && registerForm.get('agreeTerms').touched">
-            <p class="text-danger" *ngIf="registerForm.get('agreeTerms').errors?.required">
-              Você precisa concordar com os termos!
-            </p>
-          </ng-container>
-        </div>
+          <div class="form-control-group">
+            <label class="label" for="input-email">Email</label>
+            <input nbInput
+                   fullWidth
+                   formControlName="email"
+                   name="email"
+                   id="input-email"
+                   placeholder="Email"
+                   autofocus
+                   [status]="(registerForm.get('email').dirty || registerForm.get('email').touched) ? (registerForm.get('email').invalid  ? 'danger' : 'success') : 'basic'"
+                   [required]="true"
+                   [attr.aria-invalid]="registerForm.get('email').invalid && registerForm.get('email').touched ? true : null">
+            <ng-container *ngIf="registerForm.get('email').invalid && registerForm.get('email').touched">
+              <p class="text-danger" *ngIf="registerForm.get('email').errors?.required">
+                Campo obrigatório
+              </p>
+              <p class="text-danger" *ngIf="registerForm.get('email').errors?.email">
+                Email inválido
+              </p>
+            </ng-container>
+          </div>
+          <div class="form-control-group">
+            <div class="row">
+              <div class="col-6">
+                <label class="label" for="input-password">Senha</label>
+                <nb-form-field>
+                  <input nbInput
+                         fullWidth
+                         formControlName="password"
+                         name="password"
+                         [type]="showPassword?'text':'password'"
+                         id="input-password"
+                         placeholder="Password"
+                         [status]="(registerForm.get('password').dirty || registerForm.get('password').touched) ? (registerForm.get('password').invalid  ? 'danger' : 'success') : 'basic'"
+                         [required]="true"
+                         [attr.aria-invalid]="registerForm.get('password').invalid && registerForm.get('password').touched ? true : null">
+                  <button nbSuffix nbButton ghost (click)="showPassword = !showPassword" type="button">
+                    <nb-icon [icon]="showPassword ? 'eye-outline' : 'eye-off-2-outline'"
+                             pack="eva"
+                             [attr.aria-label]="showPassword ? 'hide password' : 'show password'">
+                    </nb-icon>
+                  </button>
+                </nb-form-field>
+                <ng-container *ngIf="registerForm.get('password').invalid && registerForm.get('password').touched ">
+                  <p class="text-danger" *ngIf="registerForm.get('password').errors?.required">
+                    Campo obrigatório
+                  </p>
+                  <p class="text-danger" *ngIf="registerForm.get('password').errors?.minlength">
+                    Senha é muito curta!
+                  </p>
+                </ng-container>
+              </div>
 
-        <button nbButton
-                fullWidth
-                status="success"
-                [disabled]="submitted"
-                [class.btn-pulse]="submitted">
-          Registrar
-        </button>
-      </form>
+              <div class="col-6">
+                <label class="label" for="input-confirm-Password">Confirmar senha</label>
+                <nb-form-field>
+                  <input nbInput
+                         fullWidth
+                         formControlName="confirmPassword"
+                         name="confirmPassword"
+                         [type]="showCPassword?'text':'password'"
+                         id="input-confirm-Password"
+                         placeholder="confirmar senha"
+                         [status]="(registerForm.get('confirmPassword').dirty || registerForm.get('confirmPassword').touched) ? (registerForm.get('confirmPassword').invalid  ? 'danger' : 'success') : 'basic'"
+                         [required]="true"
+                         [attr.aria-invalid]="registerForm.get('confirmPassword').invalid && registerForm.get('confirmPassword').touched ? true : null">
+                  <button nbSuffix nbButton ghost (click)="showCPassword = !showCPassword" type="button">
+                    <nb-icon [icon]="showCPassword ? 'eye-outline' : 'eye-off-2-outline'"
+                             pack="eva"
+                             [attr.aria-label]="showCPassword ? 'hide password' : 'show password'">
+                    </nb-icon>
+                  </button>
+                </nb-form-field>
+                <ng-container
+                  *ngIf="registerForm.get('confirmPassword').invalid && registerForm.get('confirmPassword').touched ">
+                  <p class="text-danger" *ngIf="registerForm.get('confirmPassword').errors?.required">
+                    Campo obrigatório
+                  </p>
+                  <p class="text-danger" *ngIf="registerForm.get('confirmPassword').errors?.passwordCheck">
+                    As senhas não conhecidem
+                  </p>
+                </ng-container>
+              </div>
+            </div>
 
-      <section *ngIf="socialLinks && socialLinks.length > 0" class="links" aria-label="Social sign in">
-        or enter with:
-        <div class="socials">
-          <ng-container *ngFor="let socialLink of socialLinks">
-            <a *ngIf="socialLink.link"
-               [routerLink]="socialLink.link"
-               [attr.target]="socialLink.target"
-               [attr.class]="socialLink.icon"
-               [class.with-icon]="socialLink.icon">{{ socialLink.title }}</a>
-            <a *ngIf="socialLink.url"
-               [attr.href]="socialLink.url"
-               [attr.target]="socialLink.target"
-               [attr.class]="socialLink.icon"
-               [class.with-icon]="socialLink.icon">{{ socialLink.title }}</a>
-          </ng-container>
-        </div>
-      </section>
+          </div>
+          <div class="form-control-group">
+            <label class="label" for="select-affiliation">affiliation</label>
+            <nb-select fullWidth placeholder="select-affiliation" formControlName="affiliation"
+                       name="affiliation"
+                       id="select-affiliation"
+                       autofocus
+                       [status]="(registerForm.get('affiliation').dirty || registerForm.get('affiliation').touched) ? (registerForm.get('affiliation').invalid  ? 'danger' : 'success') : 'basic'"
+                       [required]="true"
+                       [attr.aria-invalid]="registerForm.get('affiliation').invalid && registerForm.get('affiliation').touched ? true : null">
+              <nb-option [value]="''">Selecione sua faculdade</nb-option>
+              <nb-option [value]="affiliation.id"
+                         *ngFor="let affiliation of affiliations">{{affiliation?.name}}</nb-option>
+            </nb-select>
+            <ng-container *ngIf="registerForm.get('affiliation').invalid && registerForm.get('affiliation').touched">
+              <p class="text-danger" *ngIf="registerForm.get('affiliation').errors?.required">
+                Campo obrigatório
+              </p>
+            </ng-container>
+          </div>
+          <div class="form-control-group accept-group">
+            <nb-checkbox formControlName="agreeTerms">Agree Terms</nb-checkbox>
+            <ng-container *ngIf="registerForm.get('agreeTerms').invalid && registerForm.get('agreeTerms').touched">
+              <p class="text-danger" *ngIf="registerForm.get('agreeTerms').errors?.required">
+                Você precisa concordar com os termos!
+              </p>
+            </ng-container>
+          </div>
 
-      <section class="another-action" aria-label="Register">
-        Já possui uma conta? <a class="text-link" [routerLink]="['/auth/login']">Login</a>
-      </section>
+          <button nbButton
+                  fullWidth
+                  status="success"
+                  [disabled]="submitted"
+                  [class.btn-pulse]="submitted">
+            Registrar
+          </button>
+        </form>
 
-    </nb-auth-block>
-  </nb-card-body>
-</nb-card>
+        <section *ngIf="socialLinks && socialLinks.length > 0" class="links" aria-label="Social sign in">
+          or enter with:
+          <div class="socials">
+            <ng-container *ngFor="let socialLink of socialLinks">
+              <a *ngIf="socialLink.link"
+                 [routerLink]="socialLink.link"
+                 [attr.target]="socialLink.target"
+                 [attr.class]="socialLink.icon"
+                 [class.with-icon]="socialLink.icon">{{ socialLink.title }}</a>
+              <a *ngIf="socialLink.url"
+                 [attr.href]="socialLink.url"
+                 [attr.target]="socialLink.target"
+                 [attr.class]="socialLink.icon"
+                 [class.with-icon]="socialLink.icon">{{ socialLink.title }}</a>
+            </ng-container>
+          </div>
+        </section>
 
+        <section class="another-action" aria-label="Register">
+          Já possui uma conta? <a class="text-link" [routerLink]="['/auth/login']">Login</a>
+        </section>
+
+      </nb-auth-block>
+    </nb-card-body>
+  </nb-card>
+</div>
