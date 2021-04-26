@@ -16,7 +16,7 @@
   </div>
   <div class="col-12 col-lg-5">
     <nb-card *ngIf="course">
-      <nb-card-header>{{course?.name}}</nb-card-header>
+      <nb-card-header><h6>{{course?.name}}</h6></nb-card-header>
       <nb-card-body>
         <nb-user size="giant"
                  [title]="course?.teacher?.email"
@@ -24,11 +24,11 @@
                  [picture]="course?.teacher?.imageUrl"
         >
         </nb-user>
-        <hr>
-        <small>Módulos</small>
-        <nb-card class="mt-2">
-          <!--                    <nb-card-header>Modules</nb-card-header>-->
-          <nb-card-body>
+        <hr style="background-color: #151a30;">
+        <h6 style="font-size: 15px;color: #8f9ba9;">Módulos</h6>
+<!--        <nb-card class="mt-2">-->
+<!--          &lt;!&ndash;                    <nb-card-header>Modules</nb-card-header>&ndash;&gt;-->
+<!--          <nb-card-body>-->
             <nb-list style="max-height: 500px;overflow: auto;">
               <nb-list-item *ngFor="let module of course?.modules" class="d-block">
                 <div class="row">
@@ -37,23 +37,27 @@
                     <!--                    <small>Aaa</small>-->
                   </div>
                   <div class="col-8 text-right">
-                    <button nbButton class="m-1" size="small" *ngIf="isTeacher">
-                      <span class="d-none d-sm-block">Gerenciar</span>
-                      <nb-icon class="d-block d-sm-none" icon="diagonal-arrow-right-up-outline"></nb-icon>
-                    </button>
-                    <button nbButton class="m-1" size="small" *ngIf="authorities"
-                            [routerLink]="['/'+sF.routeAuthSwitch(authorities,true)+'classroom/course',course?.slug,'module',module?.discipline?.slug]">
-                      <span class="d-none d-sm-block">Abrir</span>
-                      <nb-icon icon="diagonal-arrow-right-up-outline"></nb-icon>
-                    </button>
+                    <div class="row">
+                      <div class="col-12">
+                        <button nbButton outline class="m-1" size="small" *ngIf="isTeacher">
+                          <span class="d-none d-sm-block">Gerenciar</span>
+                          <nb-icon class="d-block d-sm-none" icon="diagonal-arrow-right-up-outline"></nb-icon>
+                        </button>
+                        <button nbButton outline class="m-1" size="small" *ngIf="authorities"
+                                [routerLink]="['/'+sF.routeAuthSwitch(authorities,true)+'classroom/course',course?.slug,'module',module?.discipline?.slug]">
+                          <span class="d-none d-sm-block">Abrir</span>
+                          <nb-icon icon="diagonal-arrow-right-up-outline"></nb-icon>
+                        </button>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </nb-list-item>
             </nb-list>
           </nb-card-body>
         </nb-card>
-      </nb-card-body>
-    </nb-card>
+<!--      </nb-card-body>-->
+<!--    </nb-card>-->
   </div>
   <div class="col-12 col-lg-7">
     <nb-card>

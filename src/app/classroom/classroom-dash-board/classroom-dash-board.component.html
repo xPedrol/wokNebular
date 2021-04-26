@@ -64,7 +64,7 @@
                 style="min-height: 100px;">
           <div class="row">
             <div class="col-12 col-md-6 col-lg-4" *ngFor="let course of courses; let i = index">
-              <nb-card accent="info">
+              <nb-card class="" accent="primary" style="background-color: #1b213973">
                 <nb-card-header>{{course.name}}</nb-card-header>
                 <nb-card-body>
                   <p>{{course.description}}</p>
@@ -78,7 +78,7 @@
                   <!--                <span class="badge badge-primary m-1">Tópicos: {{course.amountTopics}}</span>-->
                   <!--                <span class="badge badge-primary">Exercícios: {{course.amountExercises}}</span>-->
                 </nb-card-body>
-                <nb-card-footer class="text-right">
+                <nb-card-footer class="text-right border-0">
                   <button size="small" class="m-1" nbButton outline status="primary" [routerLink]="['']"
                           *ngIf="isTeacher">Gerenciar
                   </button>
@@ -95,7 +95,7 @@
                 style="min-height: 100px;">
           <div class="row">
             <div class="col-12 col-md-6 col-lg-4" *ngFor="let course of trainings">
-              <nb-card accent="primary">
+              <nb-card accent="primary" style="background-color: #1b213973">
                 <nb-card-header>{{course.name}}</nb-card-header>
                 <nb-card-body>
                   <p>{{course.description}}</p>
@@ -106,7 +106,7 @@
                   <nb-tag size="tiny" status="primary" appearance="outline" *ngIf="course.amountExercises"
                           [text]="'Exercícios: '+course.amountExercises"></nb-tag>
                 </nb-card-body>
-                <nb-card-footer class="text-right">
+                <nb-card-footer class="text-right border-0">
                   <button size="small" class="m-1" nbButton outline status="primary" [routerLink]="['']"
                           *ngIf="isTeacher">Gerenciar
                   </button>
