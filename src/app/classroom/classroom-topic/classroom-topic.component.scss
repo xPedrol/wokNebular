@@ -1,8 +1,10 @@
+@import '../../@theme/styles/themes';
+
 pre{
   border-radius: 15px;
 }
 .topic-item:hover{
-  background-color: #42495e;
+  background-color: nb-theme(background-basic-color-3);
   border-radius: 10px;
   cursor: pointer;
 }

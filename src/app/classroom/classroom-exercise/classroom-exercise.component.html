@@ -31,7 +31,7 @@
   </div>
   <div class="col-12 col-xl-7">
     <nb-card>
-      <nb-card-header>Conteúdo</nb-card-header>
+      <nb-card-header><h6 style="color: #8f9bb3">Conteúdo</h6></nb-card-header>
       <nb-card-body [nbSpinner]="loadingExercise" nbSpinnerStatus="info" nbSpinnerSize="giant"
                     style="min-height: 100px;">
         <div *ngIf="exercise && exercise.statement.html" [innerHTML]="exercise.statement.html"></div>
@@ -44,8 +44,8 @@
       <nb-card-header>
         <div class="row">
           <div class="col-6 text-left">
-            <span *ngIf="isTeacher">Soluções</span>
-            <span *ngIf="!isTeacher">Submissões</span>
+            <span *ngIf="isTeacher"><h6 style="color: #8f9bb3">Soluções</h6></span>
+            <span *ngIf="!isTeacher"><h6 style="color: #8f9bb3">Submissões</h6></span>
           </div>
           <div class="col-6 text-right">
             <button nbButton size="small" status="info">

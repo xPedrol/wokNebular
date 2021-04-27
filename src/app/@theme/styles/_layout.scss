@@ -6,39 +6,3 @@
     }
   }
 }
-
-::-webkit-scrollbar {
-  width: 6px;
-  height: 8px;
-}
-
-/* Track */
-::-webkit-scrollbar-track {
-  background: #151a30;
-}
-
-/* Handle */
-::-webkit-scrollbar-thumb {
-  background: #3d3c42;
-  border-radius: 10px;
-}
-
-/* Handle on hover */
-::-webkit-scrollbar-thumb:hover {
-  background: #555;
-}
-
-html {
-  scroll-behavior: smooth;
-}
-
-.custom-sticky {
-  position: sticky;
-  position: -webkit-sticky;
-  top: 90px; /* required */
-}
-
-.layout-content {
-  max-width: 1350px;
-  margin: auto;
-}

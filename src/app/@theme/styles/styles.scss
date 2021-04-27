@@ -34,31 +34,3 @@
 
   @include nb-overrides();
 };
-.badge{
-  font-weight: normal;
-}
-.breadcrumb{
-  background-color: unset;
-  margin: 0;
-  padding: 0;
-}
-a{
-  text-decoration:none;
-}
-hr{
-  background-color: nb-theme(hr-background);
-}
-.fNMGTf {
-  color: rgb(168, 168, 179);
-  display: flex;
-  -webkit-box-align: center;
-  align-items: center;
-  margin-bottom: 3.2rem;
-  font-size: 14px;
-}
-.fNMGTf a, .fNMGTf span {
-  color: inherit;
-}
-.fNMGTf a:last-child, .fNMGTf span:last-child {
-  color: #0095ff;
-}

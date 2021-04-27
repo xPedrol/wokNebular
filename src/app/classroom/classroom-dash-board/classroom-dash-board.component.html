@@ -78,23 +78,25 @@
           </nb-card-header>
           <nb-card-body>
             <p style="color: rgb(168, 168, 179);">{{course.description}}</p>
-<!--            <nb-tag size="tiny" status="info" appearance="outline" *ngIf="course?.modules?.length"-->
-<!--                    [text]="'Módulos: '+course?.modules?.length"></nb-tag>-->
-<!--            <nb-tag size="tiny" status="info" appearance="outline" class="m-1" *ngIf="course.amountTopics"-->
-<!--                    [text]="'Tópicos: '+course.amountTopics"></nb-tag>-->
-<!--            <nb-tag size="tiny" status="info" appearance="outline" *ngIf="course.amountExercises"-->
-<!--                    [text]="'Exercícios: '+course.amountExercises"></nb-tag>-->
+            <!--            <nb-tag size="tiny" status="info" appearance="outline" *ngIf="course?.modules?.length"-->
+            <!--                    [text]="'Módulos: '+course?.modules?.length"></nb-tag>-->
+            <!--            <nb-tag size="tiny" status="info" appearance="outline" class="m-1" *ngIf="course.amountTopics"-->
+            <!--                    [text]="'Tópicos: '+course.amountTopics"></nb-tag>-->
+            <!--            <nb-tag size="tiny" status="info" appearance="outline" *ngIf="course.amountExercises"-->
+            <!--                    [text]="'Exercícios: '+course.amountExercises"></nb-tag>-->
             <!--                <span class="badge badge-info">Módulos: {{course?.modules?.length}}</span>-->
             <!--                <span class="badge badge-info m-1">Tópicos: {{course.amountTopics}}</span>-->
             <!--                <span class="badge badge-info">Exercícios: {{course.amountExercises}}</span>-->
           </nb-card-body>
-          <nb-card-footer class="text-right border-0" *ngIf="isTeacher">
-            <p><nb-tag  size="tiny" status="info" appearance="outline" *ngIf="course?.modules?.length"
-                    [text]="'Módulos: '+course?.modules?.length"></nb-tag>
-            <nb-tag size="tiny" status="info" appearance="outline" class="m-3" *ngIf="course.amountTopics"
-                    [text]="'Tópicos: '+course.amountTopics"></nb-tag>
-            <nb-tag size="tiny" status="info" appearance="outline" *ngIf="course.amountExercises"
-                    [text]="'Exercícios: '+course.amountExercises"></nb-tag></p>
+          <nb-card-footer class="text-right border-0">
+            <p>
+              <nb-tag size="tiny" status="info" appearance="outline"
+                      [text]="'Módulos: '+(course?.modules?.length?course?.modules?.length:0)"></nb-tag>
+              <nb-tag size="tiny" status="info" appearance="outline" class="m-3"
+                      [text]="'Tópicos: '+(course?.amountTopics?course.amountTopics:0)"></nb-tag>
+              <nb-tag size="tiny" status="info" appearance="outline"
+                      [text]="'Exercícios: '+(course?.amountExercises?course.amountExercises:0)"></nb-tag>
+            </p>
             <button size="small" class="m-1" nbButton outline status="info" [routerLink]="['']"
                     *ngIf="isTeacher">Gerenciar
             </button>
@@ -110,19 +112,33 @@
   <section class="mt-3">
     <h5 class="mb-3">Treinamentos</h5>
     <div class="row">
-      <div class="col-12 col-md-6 col-lg-4" *ngFor="let course of trainings">
-        <nb-card accent="info" style="background-color: #1b213973">
-          <nb-card-header>{{course.name}}</nb-card-header>
+      <div class="col-12 col-md-6 col-lg-4" *ngFor="let course of trainings; let i = index">
+        <nb-card class="course-card border-bottom">
+          <nb-card-header class="border-0 mb-4">
+            <nb-user [name]="course.name"></nb-user>
+            <!--                  {{course.name}}-->
+          </nb-card-header>
           <nb-card-body>
-            <p>{{course.description}}</p>
-            <nb-tag size="tiny" status="info" appearance="outline" *ngIf="course?.modules?.length"
-                    [text]="'Módulos: '+course?.modules?.length"></nb-tag>
-            <nb-tag size="tiny" status="info" appearance="outline" class="m-1" *ngIf="course.amountTopics"
-                    [text]="'Tópicos: '+course.amountTopics"></nb-tag>
-            <nb-tag size="tiny" status="info" appearance="outline" *ngIf="course.amountExercises"
-                    [text]="'Exercícios: '+course.amountExercises"></nb-tag>
+            <p style="color: rgb(168, 168, 179);">{{course.description}}</p>
+            <!--            <nb-tag size="tiny" status="info" appearance="outline" *ngIf="course?.modules?.length"-->
+            <!--                    [text]="'Módulos: '+course?.modules?.length"></nb-tag>-->
+            <!--            <nb-tag size="tiny" status="info" appearance="outline" class="m-1" *ngIf="course.amountTopics"-->
+            <!--                    [text]="'Tópicos: '+course.amountTopics"></nb-tag>-->
+            <!--            <nb-tag size="tiny" status="info" appearance="outline" *ngIf="course.amountExercises"-->
+            <!--                    [text]="'Exercícios: '+course.amountExercises"></nb-tag>-->
+            <!--                <span class="badge badge-info">Módulos: {{course?.modules?.length}}</span>-->
+            <!--                <span class="badge badge-info m-1">Tópicos: {{course.amountTopics}}</span>-->
+            <!--                <span class="badge badge-info">Exercícios: {{course.amountExercises}}</span>-->
           </nb-card-body>
           <nb-card-footer class="text-right border-0">
+            <p>
+              <nb-tag size="tiny" status="info" appearance="outline"
+                      [text]="'Módulos: '+(course?.modules?.length?course?.modules?.length:0)"></nb-tag>
+              <nb-tag size="tiny" status="info" appearance="outline" class="m-3"
+                      [text]="'Tópicos: '+(course?.amountTopics?course.amountTopics:0)"></nb-tag>
+              <nb-tag size="tiny" status="info" appearance="outline"
+                      [text]="'Exercícios: '+(course?.amountExercises?course.amountExercises:0)"></nb-tag>
+            </p>
             <button size="small" class="m-1" nbButton outline status="info" [routerLink]="['']"
                     *ngIf="isTeacher">Gerenciar
             </button>
