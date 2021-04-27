@@ -1,4 +1,20 @@
+@import '../../@theme/styles/themes';
 .badge{
   font-weight: normal;
   font-size: 12px;
+}
+.card-summary{
+  padding: 10px;
+}
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,800&display=swap');
+
+* {
+  font-family: 'Poppins', sans-serif;
+}
+.course-card{
+  transition: 0.5s;
+  //cursor: pointer;
+}
+.course-card:hover{
+ background-color: nb-theme(card-hover-background);
 }

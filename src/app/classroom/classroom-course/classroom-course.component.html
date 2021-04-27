@@ -3,20 +3,17 @@
     <app-changed-user-alert></app-changed-user-alert>
   </div>
   <div class="col-12">
-    <nb-card>
-      <nb-card-body>
-        <nav aria-label="breadcrumb">
-          <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a [routerLink]="[routePrefix,'dashboard']">Dashboard</a></li>
-            <li class="breadcrumb-item active" aria-current="page">{{course?.slug}}</li>
-          </ol>
-        </nav>
-      </nb-card-body>
-    </nb-card>
+    <div class="fNMGTf">
+      <a [routerLink]="[routePrefix,'dashboard']">Dashboard</a>
+      <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 24 24" size="20" height="20" width="20" xmlns="http://www.w3.org/2000/svg"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"></path></svg>
+      <a>{{course?.slug}}</a>
+    </div>
   </div>
   <div class="col-12 col-lg-5">
-    <nb-card *ngIf="course">
-      <nb-card-header><h6>{{course?.name}}</h6></nb-card-header>
+    <nb-card *ngIf="course" class="custom-sticky">
+      <nb-card-header class="border-0 mb-2">
+        <h6 style="color: #8f9bb3">{{course?.name}}</h6>
+      </nb-card-header>
       <nb-card-body>
         <nb-user size="giant"
                  [title]="course?.teacher?.email"
@@ -24,17 +21,17 @@
                  [picture]="course?.teacher?.imageUrl"
         >
         </nb-user>
-        <hr style="background-color: #151a30;">
-        <h6 style="font-size: 15px;color: #8f9ba9;">Módulos</h6>
-<!--        <nb-card class="mt-2">-->
-<!--          &lt;!&ndash;                    <nb-card-header>Modules</nb-card-header>&ndash;&gt;-->
+  <hr>
+<!--        <nb-card class="mt-4"status="basic" style="background-color: #212f4c;border: none">-->
+<!--                              <nb-card-header>-->
+                                <h6 style="font-size: 15px;">Módulos</h6>
+<!--                              </nb-card-header>-->
 <!--          <nb-card-body>-->
-            <nb-list style="max-height: 500px;overflow: auto;">
+            <nb-list style="max-height: 500px;overflow: auto;border-radius: 10px;">
               <nb-list-item *ngFor="let module of course?.modules" class="d-block">
                 <div class="row">
                   <div class="col-4 text-left">
-                    <p style="padding-bottom: 0;margin-bottom: 0">{{ module?.alias }}</p>
-                    <!--                    <small>Aaa</small>-->
+                    <p style="padding-bottom: 0;margin-bottom: 0;color: #8f9bb3;">{{ module?.alias }}</p>
                   </div>
                   <div class="col-8 text-right">
                     <div class="row">
@@ -54,14 +51,14 @@
                 </div>
               </nb-list-item>
             </nb-list>
-          </nb-card-body>
-        </nb-card>
-<!--      </nb-card-body>-->
-<!--    </nb-card>-->
+<!--          </nb-card-body>-->
+<!--        </nb-card>-->
+      </nb-card-body>
+    </nb-card>
   </div>
   <div class="col-12 col-lg-7">
-    <nb-card>
-      <nb-card-body>
+<!--    <nb-card>-->
+<!--      <nb-card-body>-->
 
         <nb-tabset>
           <nb-tab tabTitle="Estatísticas" *ngIf="!isTeacher && false">
@@ -85,7 +82,7 @@
           </nb-tab>
         </nb-tabset>
 
-      </nb-card-body>
-    </nb-card>
+<!--      </nb-card-body>-->
+<!--    </nb-card>-->
   </div>
 </div>

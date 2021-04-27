@@ -1,3 +1,4 @@
+@import '../../@theme/styles/themes';
 *,
 *::before,
 *::after {
@@ -10,12 +11,11 @@
   margin: 0 auto;
   padding: 15px 0;
 }
-
 .timeline::after {
   content: '';
   position: absolute;
   width: 2px;
-  background: #151a30;
+  background: nb-theme(background-basic-color-1);
   top: 0;
   bottom: 0;
   left: 0%;
@@ -61,7 +61,7 @@
   height: 2px;
   top: calc(50% - 1px);
   left: 8px;
-  background: #151a30;
+  background: nb-theme(background-basic-color-1);
   z-index: 1;
 }
 
@@ -76,7 +76,7 @@
   text-align: center;
   font-size: 14px;
   font-weight: bold;
-  color: #0095ff;
+  color: #8f9bb3;
   text-transform: uppercase;
   letter-spacing: 1px;
   z-index: 1;
@@ -97,7 +97,7 @@
   height: 40px;
   padding: 9px 0;
   top: calc(50% - 20px);
-  background: #222b45;
+  background: #8f9bb3;
   border: 2px solid #151a30;
   border-radius: 40px;
   text-align: center;
@@ -116,7 +116,7 @@
 
 .container-t .content {
   padding: 30px 30px 30px 90px;
-  background: #0095ff0a;
+  background: nb-theme(background-basic-color-1);
   position: relative;
   border-radius: 25px 25px 25px 25px;
 }
@@ -170,7 +170,7 @@ img {
 }
 
 .topic-card {
-  background-color: #222b452b;
+  background-color: unset;
   padding: 10px;
   border-radius: 7px;
   transition: 0.3s;
@@ -178,5 +178,5 @@ img {
 
 .topic-card:hover {
   transform: translate(0, 14px);
-  background-color: #42495e;
+  background-color: nb-theme(background-basic-color-3);
 }
