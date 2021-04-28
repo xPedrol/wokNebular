@@ -8,6 +8,7 @@ import { EditPasswordComponent } from './profile/edit-password/edit-password.com
 import {ReactiveFormsModule} from '@angular/forms';
 import {SharedModule} from '../shared/shared.module';
 import { EditAboutDialogComponent } from './profile/edit-about-dialog/edit-about-dialog.component';
+import {NgxMaskModule} from 'ngx-mask';
 
 const routes: Routes = [
   {
@@ -24,12 +25,13 @@ const routes: Routes = [
     EditPasswordComponent,
     EditAboutDialogComponent
   ],
-  imports: [
-    CommonModule,
-    SharedModule,
-    RouterModule.forChild(routes),
-    ReactiveFormsModule
-  ]
+    imports: [
+        CommonModule,
+        SharedModule,
+        RouterModule.forChild(routes),
+        ReactiveFormsModule,
+        NgxMaskModule
+    ]
 })
 export class AccountModule {
 }

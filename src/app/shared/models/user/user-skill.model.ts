@@ -48,6 +48,5 @@ export class UserSkill implements IUserSkill {
     this.skill = userSkill.skill;
     this.slugSkill = userSkill.slugSkill;
     this.user = userSkill.user;
-    console.warn(this.getPercent(true));
   }
 }

@@ -5,6 +5,7 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {environment} from '../../../environments/environment';
 import {map, shareReplay, tap} from 'rxjs/operators';
 import {SERVER_API_URL} from '../../app.constants';
+import {IProfile} from '../models/user/profile.model';
 
 @Injectable({
   providedIn: 'root'
@@ -50,5 +51,10 @@ export class AccountService {
     formData.append('file', image, image.name);
     return this.http.put<boolean>(`${SERVER_API_URL}account/users/image`, formData);
     // .pipe(map(() => { return true; }));
+  }
+
+  saveprofile(profile: IProfile) {
+    const url = `account/profile/`;
+    return this.http.put<boolean>(`${SERVER_API_URL}${url}`, profile);
   }
 }

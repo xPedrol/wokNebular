@@ -39,6 +39,7 @@
     "ng2-completer": "^9.0.1",
     "ngx-cookie": "^5.0.2",
     "ngx-echarts": "^4.2.2",
+    "ngx-mask": "^11.1.5",
     "ngx-webstorage": "^7.0.1",
     "pace-js": "1.0.2",
     "roboto-fontface": "0.8.0",

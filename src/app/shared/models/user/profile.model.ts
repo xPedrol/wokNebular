@@ -1,6 +1,7 @@
 import {Moment} from 'moment';
 import {GenderType} from '../enumerations/gender-type.model';
 import {IUserBasic} from './user-basic.model';
+import * as moment from 'moment';
 
 export interface IProfile {
   id: number;
@@ -47,7 +48,7 @@ export class Profile implements IProfile {
 
   constructor(profile: IProfile) {
     this.aboutMe = profile.aboutMe;
-    this.birthday = profile.birthday;
+    this.birthday = moment(profile.birthday);
     this.city = profile.city;
     this.country = profile.country;
     this.education = profile.education;

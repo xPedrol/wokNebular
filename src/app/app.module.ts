@@ -13,6 +13,7 @@ import { CachingInterceptorService} from './shared/services/cacheInterceptor';
 import {BreadcrumbModule} from 'xng-breadcrumb';
 import {CookieModule} from 'ngx-cookie';
 import { HomeComponent } from './home/home.component';
+import {NgxMaskModule} from 'ngx-mask';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import { HomeComponent } from './home/home.component';
     AppRoutingModule,
     HttpClientModule,
     BreadcrumbModule,
+    NgxMaskModule.forRoot(),
     CookieModule.forRoot(),
     NgxWebstorageModule.forRoot(),
     ThemeModule.forRoot(),

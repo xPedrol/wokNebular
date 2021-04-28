@@ -1,7 +1,7 @@
 import {Moment} from 'moment';
 import {IAffiliationBasic} from '../basic/affiliation-basic.model';
 import {IUserTeamBasic} from '../basic/userTeam-basic.model';
-import {IProfile} from './profile.model';
+import {IProfile, Profile} from './profile.model';
 import {SERVER_API_IMAGE_URL} from '../../../app.constants';
 
 
@@ -99,7 +99,7 @@ export class CompleteUser implements ICompleteUser {
     this.lastName = user.lastName;
     this.login = user.login;
     this.passwordHash = user.passwordHash;
-    this.profile = user.profile;
+    this.profile = new Profile(user.profile);
     this.rememberToken = user.rememberToken;
     this.resetDate = user.resetDate;
     this.resetKey = user.resetKey;
