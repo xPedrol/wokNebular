@@ -1,23 +1,44 @@
-import { Moment } from 'moment';
+import {Moment} from 'moment';
 
 export interface ISubmissionFile {
-  id?: number;
-  name?: string;
-  createdDate?: Moment;
-  lastModifiedDate?: Moment;
-  extension?: string;
-  solutionFile?: string;
-  // submission?: ISubmissionBasic;
+  id: number;
+  name: string;
+  createdDate: Moment;
+  lastModifiedDate: Moment;
+  extension: string;
+  solutionFile: string;
+
+  atob(): string;
+
+  btoa(): string;
 }
 
 export class SubmissionFile implements ISubmissionFile {
-  constructor(
-    public id?: number,
-    public name?: string,
-    public createdDate?: Moment,
-    public lastModifiedDate?: Moment,
-    public extension?: string,
-    public solutionFile?: string,
-    // public submission?: ISubmissionBasic
-  ) {}
+
+
+  createdDate: moment.Moment;
+  extension: string;
+  id: number;
+  lastModifiedDate: moment.Moment;
+  name: string;
+  solutionFile: string;
+
+  constructor(file?: ISubmissionFile) {
+    if (file) {
+      this.createdDate = file.createdDate;
+      this.extension = file.extension;
+      this.id = file.id;
+      this.lastModifiedDate = file.lastModifiedDate;
+      this.name = file.name;
+      this.solutionFile = file.solutionFile;
+    }
+  }
+
+  atob(): string {
+    return atob(this.solutionFile);
+  }
+
+  btoa(): string {
+    return btoa(this.solutionFile);
+  }
 }

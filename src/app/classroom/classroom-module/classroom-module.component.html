@@ -25,14 +25,14 @@
     <div class="custom-sticky">
       <div *ngIf="!selectedTopic">
         <nb-card>
-          <nb-card-header><h6 style="color: #8f9bb3">Descricao de tópico</h6></nb-card-header>
+          <nb-card-header class="border-0"><h6 style="color: #8f9bb3">Descricao de tópico</h6></nb-card-header>
           <nb-card-body class="text-center">
             Selecione um curso
           </nb-card-body>
         </nb-card>
       </div>
       <nb-card class="margin-bottom-0" *ngIf="selectedTopic">
-        <nb-card-header>{{selectedTopic.topic.name}}</nb-card-header>
+        <nb-card-header class="border-0"><h6 style="color: #8f9bb3">{{selectedTopic?.topic?.name}}</h6></nb-card-header>
         <nb-card-body>
           <div class="row">
             <div class="col-12"><strong>Informações gerais</strong></div>

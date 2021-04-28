@@ -4,6 +4,7 @@ import {SharedFunctions} from '../shared.functions';
 import {Authority} from '../constants/authority.constants';
 import {ISolution} from '../models/solution.model';
 import {SERVER_API_URL} from '../../app.constants';
+import {ISolutionFile} from '../models/solution-file.model';
 
 @Injectable({
   providedIn: 'root'
@@ -20,4 +21,5 @@ export class SolutionService {
     const url = `${this.sF.routeAuthSwitch(authorities)}exercises/${exerciseSlug}/solutions`;
     return this.http.get<ISolution[]>(`${SERVER_API_URL}${url}`);
   }
+
 }

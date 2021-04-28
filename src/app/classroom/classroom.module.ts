@@ -13,6 +13,8 @@ import { ClassroomTopicComponent } from './classroom-topic/classroom-topic.compo
 import { ClassroomModuleComponent } from './classroom-module/classroom-module.component';
 import {BreadcrumbModule} from 'xng-breadcrumb';
 import { ClassroomExerciseComponent } from './classroom-exercise/classroom-exercise.component';
+import { ClassroomSubmissionComponent } from './classroom-submission/classroom-submission.component';
+import { ClassroomSubmissionWindowComponent } from './classroom-submission-window/classroom-submission-window.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +26,9 @@ import { ClassroomExerciseComponent } from './classroom-exercise/classroom-exerc
     TreeViewComponent,
     ClassroomTopicComponent,
     ClassroomModuleComponent,
-    ClassroomExerciseComponent
+    ClassroomExerciseComponent,
+    ClassroomSubmissionComponent,
+    ClassroomSubmissionWindowComponent
   ],
     imports: [
         CommonModule,

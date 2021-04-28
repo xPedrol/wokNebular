@@ -32,7 +32,7 @@
   <!--  </div>-->
   <div class="col-12 col-xl-7">
     <nb-card>
-      <nb-card-header><h6 style="color: #8f9bb3">Conteúdo</h6></nb-card-header>
+      <nb-card-header class="border-0"><h6 style="color: #8f9bb3">Conteúdo</h6></nb-card-header>
       <nb-card-body [nbSpinner]="loadingTopic" nbSpinnerStatus="info" nbSpinnerSize="giant"
                     style="min-height: 100px;">
         <div *ngIf="topic && topic.html" [innerHTML]="topic.html"></div>
@@ -42,7 +42,7 @@
   </div>
   <div class="col-12 col-xl-5">
     <nb-card accent="info" class="custom-sticky">
-      <nb-card-header><h6 style="color: #8f9bb3">Exercícios</h6></nb-card-header>
+      <nb-card-header class="border-0"><h6 style="color: #8f9bb3">Exercícios</h6></nb-card-header>
       <nb-card-body>
         <span *ngIf="isTeacher">
         <nb-list *ngIf="!((!exercises || exercises?.length === 0) && !loadingExercise)" [nbSpinner]="loadingExercise" nbSpinnerStatus="info" nbSpinnerSize="giant" style="min-height: 100px;">

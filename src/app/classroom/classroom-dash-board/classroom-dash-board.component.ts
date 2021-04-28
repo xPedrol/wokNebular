@@ -147,6 +147,9 @@ export class ClassroomDashBoardComponent implements OnInit, OnDestroy {
       if (isPrivate) {
         this.courses[index].amountTopics = statistics.amountTopics;
         this.courses[index].amountExercises = statistics.amountExercises;
+      }else{
+        this.trainings[index].amountTopics = statistics.amountTopics;
+        this.trainings[index].amountExercises = statistics.amountExercises;
       }
     });
   }

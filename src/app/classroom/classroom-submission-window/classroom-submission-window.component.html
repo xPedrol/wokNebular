@@ -1,0 +1,11 @@
+<div style="max-height: 500px;width: 500px;">
+    <h6 style="color: #8f9bb3">Submissão - {{submissionId}}</h6>
+    <hr>
+  <div class="row" [nbSpinner]="loadingSubmission" nbSpinnerStatus="info" nbSpinnerSize="medium" style="min-height: 100px;">
+    <div class="col-12 mt-3" *ngFor="let file of submissionFiles">
+      <h6>{{file?.name}}</h6>
+      <pre><code class="hljs" style="border-radius: 7px;">{{file.atob()}}</code></pre>
+    </div>
+  </div>
+</div>
+
