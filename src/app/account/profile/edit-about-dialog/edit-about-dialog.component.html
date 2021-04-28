@@ -1,0 +1,32 @@
+<nb-card>
+  <nb-card-header class="border-0 mb-2">
+    <h6 style="color: #8f9bb3">Sobre mim</h6>
+  </nb-card-header>
+  <nb-card-body>
+    <form [formGroup]="aboutForm" (ngSubmit)="saveAbout()" *ngIf="user">
+      <div class="form-row mt-3">
+        <div class="form-group col-12">
+          <label class="label">Sobre mim</label>
+          <textarea nbInput fullWidth formControlName="aboutMe"></textarea>
+        </div>
+      </div>
+      <div class="form-row mt-3">
+        <div class="form-group col-12">
+          <label class="label">Formação</label>
+          <textarea nbInput fullWidth formControlName="education"></textarea>
+        </div>
+      </div>
+      <div class="form-row mt-3">
+        <div class="form-group col-12">
+          <label class="label">Experiençia</label>
+          <textarea nbInput fullWidth formControlName="experience"></textarea>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group col-12 text-right">
+          <button nbButton status="info" type="submit" size="medium" [disabled]="aboutForm.invalid">Salvar</button>
+        </div>
+      </div>
+    </form>
+  </nb-card-body>
+</nb-card>

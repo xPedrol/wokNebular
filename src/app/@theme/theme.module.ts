@@ -1,6 +1,7 @@
 import {ModuleWithProviders, NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {
+  NbDatepickerModule,
   NbDialogModule,
   NbMenuModule,
   NbSidebarModule,
@@ -30,7 +31,6 @@ import {CORPORATE_THEME} from './styles/theme.corporate';
 import {DARK_THEME} from './styles/theme.dark';
 import {SharedThemeModuleModule} from './shared-theme-module.module';
 import {FormsModule} from '@angular/forms';
-import {SessionStorageService} from 'ngx-webstorage';
 
 const NB_MODULES = [
 //   NbLayoutModule,
@@ -42,6 +42,7 @@ const NB_MODULES = [
   NbSidebarModule.forRoot(),
   NbDialogModule.forRoot(),
   NbWindowModule.forRoot(),
+  NbDatepickerModule.forRoot(),
   NbToastrModule.forRoot({preventDuplicates: true, duplicatesBehaviour: 'all', status})
 //   NbContextMenuModule,
 //   NbButtonModule,

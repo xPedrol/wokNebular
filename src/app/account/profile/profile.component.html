@@ -61,15 +61,13 @@
     </nb-card>
   </div>
   <div class="col-12 col-lg-8 mt-5">
-    <nb-card class="custom-sticky">
-      <nb-card-body>
-
-        <nb-tabset>
-          <nb-tab tabTitle="Informações" [nbSpinner]="loadingUser" nbSpinnerStatus="info" nbSpinnerSize="giant"
-                  style="min-height: 100px;">
-            <!--            <nb-card accent="info">-->
-            <!--              <nb-card-body>-->
-            <span *ngIf="user">
+     <span *ngIf="user">
+       <nb-card>
+         <nb-card-header class="border-0 mb-2">
+        <h6 style="color: #8f9bb3">Informações Gerais</h6>
+      </nb-card-header>
+         <nb-card-body [nbSpinner]="loadingUser" nbSpinnerStatus="info" nbSpinnerSize="giant"
+                       style="min-height: 100px;">
             <div class="row mt-3">
               <div class="col-4 text-center">
                 <nb-icon style="font-size: 25px;" status="info" icon="person-outline"></nb-icon>
@@ -87,50 +85,118 @@
                 <p>{{user.fullContact ? user.fullContact : 'Não informado'}}</p>
               </div>
             </div>
-              <!--              </nb-card-body>-->
-              <!--              <nb-card-footer>-->
-            <hr>
-            <div class="row mt-3">
-              <div class="col-12">
-                <strong>Sobre {{user?.login}}</strong>
-                <p>{{user.profile.aboutMe ? user.profile.aboutMe : 'Não informado'}}</p>
+           </nb-card-body>
+         </nb-card>
+       <nb-card>
+          <nb-card-header class="border-0 mb-2">
+            <div class="row" style="align-items: center">
+              <div class="col-6">
+                <h6 style="color: #8f9bb3">Sobre</h6>
               </div>
-              <div class="col-12 mt-4">
-                <strong>Educação</strong>
-                <p>{{user.profile.education ? user.profile.education : 'Não informado'}}</p>
+              <div class="col-6 text-right">
+                <button nbButton status="basic" ghost (click)="openEditAboutDialog()"><nb-icon icon="edit-outline"></nb-icon></button>
               </div>
             </div>
-              </span>
-            <!--              </nb-card-footer>-->
-            <!--            </nb-card>-->
-            <!--            <nb-card status="info">-->
-            <!--              <nb-card-header>Informacoes técnicas</nb-card-header>-->
-            <!--              <nb-card-body>-->
-            <!--                <div class="row mt-3">-->
-            <!--                  <div class="col-12">-->
-            <!--                    <strong>Sobre {{user?.login}}</strong>-->
-            <!--                    <p>{{user.profile.aboutMe ? user.profile.aboutMe : 'Não informado'}}</p>-->
-            <!--                  </div>-->
-            <!--                  <div class="col-12 mt-4">-->
-            <!--                    <strong>Educação</strong>-->
-            <!--                    <p>{{user.profile.education ? user.profile.education : 'Não informado'}}</p>-->
-            <!--                  </div>-->
-            <!--                </div>-->
-            <!--              </nb-card-body>-->
-            <!--            </nb-card>-->
-          </nb-tab>
-          <nb-tab tabTitle="Perfil">
-            <app-edit-profile *ngIf="user" [user]="user"></app-edit-profile>
-          </nb-tab>
-          <nb-tab tabTitle="Usuario">
-            <app-edit-user></app-edit-user>
-          </nb-tab>
-          <nb-tab tabTitle="Trocar senha">
-            <app-edit-password></app-edit-password>
-          </nb-tab>
-        </nb-tabset>
+      </nb-card-header>
+         <nb-card-body [nbSpinner]="loadingUser" nbSpinnerStatus="info" nbSpinnerSize="giant"
+                       style="min-height: 100px;">
+           <div class="col-12">
+                    <strong>Sobre {{user?.login}}</strong>
+                    <p>{{user.profile.aboutMe ? user.profile.aboutMe : 'Não informado'}}</p>
+                  </div>
+                  <div class="col-12 mt-4">
+                    <strong>Educação</strong>
+                    <p>{{user.profile.education ? user.profile.education : 'Não informado'}}</p>
+                  </div>
+         </nb-card-body>
+       </nb-card>
+       <nb-card>
+         <nb-card-header class="border-0 mb-2">
+        <h6 style="color: #8f9bb3">Editar perfil</h6>
+      </nb-card-header>
+         <nb-card-body>
+           <app-edit-profile *ngIf="user" [user]="user"></app-edit-profile>
+         </nb-card-body>
+       </nb-card>
+        <nb-card>
+         <nb-card-header class="border-0 mb-2">
+        <h6 style="color: #8f9bb3">Editar usuário</h6>
+      </nb-card-header>
+         <nb-card-body>
+           <app-edit-user *ngIf="user" [user]="user"></app-edit-user>
+         </nb-card-body>
+       </nb-card>
+     </span>
+    <!--        <nb-card class="custom-sticky">-->
+    <!--          <nb-card-body>-->
 
-      </nb-card-body>
-    </nb-card>
+    <!--            <nb-tabset>-->
+    <!--              <nb-tab tabTitle="Informações" [nbSpinner]="loadingUser" nbSpinnerStatus="info" nbSpinnerSize="giant"-->
+    <!--                      style="min-height: 100px;">-->
+    <!--                &lt;!&ndash;            <nb-card accent="info">&ndash;&gt;-->
+    <!--                &lt;!&ndash;              <nb-card-body>&ndash;&gt;-->
+    <!--                <span *ngIf="user">-->
+    <!--                <div class="row mt-3">-->
+    <!--                  <div class="col-4 text-center">-->
+    <!--                    <nb-icon style="font-size: 25px;" status="info" icon="person-outline"></nb-icon>-->
+    <!--                    <p><strong>Nome completo</strong></p>-->
+    <!--                    <p>{{user.fullName ? user.fullName : 'Não informado'}}</p>-->
+    <!--                  </div>-->
+    <!--                  <div class="col-4 text-center">-->
+    <!--                    <nb-icon style="font-size: 25px;" status="info" icon="map-outline"></nb-icon>-->
+    <!--                    <p><strong>Localização</strong></p>-->
+    <!--                    <p>{{user.fullAddress}}</p>-->
+    <!--                  </div>-->
+    <!--                  <div class="col-4 text-center">-->
+    <!--                    <nb-icon style="font-size: 25px;" status="info" icon="phone-call-outline"></nb-icon>-->
+    <!--                    <p><strong>Contato</strong></p>-->
+    <!--                    <p>{{user.fullContact ? user.fullContact : 'Não informado'}}</p>-->
+    <!--                  </div>-->
+    <!--                </div>-->
+    <!--                  &lt;!&ndash;              </nb-card-body>&ndash;&gt;-->
+    <!--                  &lt;!&ndash;              <nb-card-footer>&ndash;&gt;-->
+    <!--                <hr>-->
+    <!--                <div class="row mt-3">-->
+    <!--                  <div class="col-12">-->
+    <!--                    <strong>Sobre {{user?.login}}</strong>-->
+    <!--                    <p>{{user.profile.aboutMe ? user.profile.aboutMe : 'Não informado'}}</p>-->
+    <!--                  </div>-->
+    <!--                  <div class="col-12 mt-4">-->
+    <!--                    <strong>Educação</strong>-->
+    <!--                    <p>{{user.profile.education ? user.profile.education : 'Não informado'}}</p>-->
+    <!--                  </div>-->
+    <!--                </div>-->
+    <!--                  </span>-->
+    <!--                &lt;!&ndash;              </nb-card-footer>&ndash;&gt;-->
+    <!--                &lt;!&ndash;            </nb-card>&ndash;&gt;-->
+    <!--                &lt;!&ndash;            <nb-card status="info">&ndash;&gt;-->
+    <!--                &lt;!&ndash;              <nb-card-header>Informacoes técnicas</nb-card-header>&ndash;&gt;-->
+    <!--                &lt;!&ndash;              <nb-card-body>&ndash;&gt;-->
+    <!--                &lt;!&ndash;                <div class="row mt-3">&ndash;&gt;-->
+    <!--                &lt;!&ndash;                  <div class="col-12">&ndash;&gt;-->
+    <!--                &lt;!&ndash;                    <strong>Sobre {{user?.login}}</strong>&ndash;&gt;-->
+    <!--                &lt;!&ndash;                    <p>{{user.profile.aboutMe ? user.profile.aboutMe : 'Não informado'}}</p>&ndash;&gt;-->
+    <!--                &lt;!&ndash;                  </div>&ndash;&gt;-->
+    <!--                &lt;!&ndash;                  <div class="col-12 mt-4">&ndash;&gt;-->
+    <!--                &lt;!&ndash;                    <strong>Educação</strong>&ndash;&gt;-->
+    <!--                &lt;!&ndash;                    <p>{{user.profile.education ? user.profile.education : 'Não informado'}}</p>&ndash;&gt;-->
+    <!--                &lt;!&ndash;                  </div>&ndash;&gt;-->
+    <!--                &lt;!&ndash;                </div>&ndash;&gt;-->
+    <!--                &lt;!&ndash;              </nb-card-body>&ndash;&gt;-->
+    <!--                &lt;!&ndash;            </nb-card>&ndash;&gt;-->
+    <!--              </nb-tab>-->
+    <!--              <nb-tab tabTitle="Perfil">-->
+    <!--                <app-edit-profile *ngIf="user" [user]="user"></app-edit-profile>-->
+    <!--              </nb-tab>-->
+    <!--              <nb-tab tabTitle="Usuario">-->
+    <!--                <app-edit-user></app-edit-user>-->
+    <!--              </nb-tab>-->
+    <!--              <nb-tab tabTitle="Trocar senha">-->
+    <!--                <app-edit-password></app-edit-password>-->
+    <!--              </nb-tab>-->
+    <!--            </nb-tabset>-->
+
+    <!--          </nb-card-body>-->
+    <!--        </nb-card>-->
   </div>
 </div>

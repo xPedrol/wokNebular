@@ -1,6 +1,6 @@
 <form [formGroup]="profileForm" (ngSubmit)="saveProfile()" *ngIf="user">
-  <div class="row mt-3">
-    <div class="col-6">
+  <div class="form-row mt-3">
+    <div class="form-group col-12 col-md-6">
       <label class="label">Nome</label>
       <nb-form-field>
         <input type="text" nbInput fullWidth placeholder="Primeiro nome" formControlName="firstName"
@@ -12,7 +12,7 @@
         </p>
       </ng-container>
     </div>
-    <div class="col-6">
+    <div class="form-group col-12 col-md-6">
       <label class="label">Sobrenome</label>
       <nb-form-field>
         <input type="text" nbInput fullWidth placeholder="Ultimo nome" formControlName="lastName"
@@ -24,7 +24,9 @@
         </p>
       </ng-container>
     </div>
-    <div class="col-8">
+  </div>
+  <div class="form-row">
+    <div class="form-group col-12 col-md-8">
       <label class="label">Email</label>
       <nb-form-field>
         <input type="text" nbInput fullWidth placeholder="Email" formControlName="email"
@@ -36,7 +38,7 @@
         </p>
       </ng-container>
     </div>
-    <div class="col-4">
+    <div class="form-group col-12 col-md-4">
       <label class="label">Idioma</label>
       <nb-form-field>
         <nb-select fullWidth placeholder="Lingua" formControlName="langKey"
@@ -51,21 +53,21 @@
         </p>
       </ng-container>
     </div>
-    <div class="col-12 text-right mt-2">
+    <div class="form-group col-12 col-md-12 text-right">
       <button nbButton status="info" type="submit" size="medium" [disabled]="profileForm.invalid">Salvar</button>
     </div>
   </div>
 </form>
 <hr>
 <form (submit)="savePhoto($event)">
-  <div class="row mt-3">
-    <div class="col-12">
+  <div class="form-row mt-3">
+    <div class="form-group col-12 col-md-12">
       <label class="label">Upload de foto</label>
       <nb-form-field>
         <input type="file" nbInput fullWidth placeholder="Foto" (change)="changePhoto($event.target)">
       </nb-form-field>
     </div>
-    <div class="col-12 text-right mt-2">
+    <div class="form-group col-12 col-md-12 text-right">
       <button nbButton status="info" type="submit" size="medium">Salvar</button>
     </div>
   </div>

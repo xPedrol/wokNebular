@@ -5,7 +5,8 @@ import {ICompleteUser} from '../../shared/models/user/complete-user.model';
 import {takeUntil} from 'rxjs/operators';
 import {IUserProfileStatistics} from '../../shared/models/user/user-profile-statistics.model';
 import {IUserSkill} from '../../shared/models/user/user-skill.model';
-import {ISkillBasic} from '../../shared/models/basic/skill-basic.model';
+import {NbDialogService} from '@nebular/theme';
+import {EditAboutDialogComponent} from './edit-about-dialog/edit-about-dialog.component';
 
 @Component({
   selector: 'app-profile',
@@ -22,7 +23,8 @@ export class ProfileComponent implements OnInit, OnDestroy {
   loadingUserSkills = true;
 
   constructor(
-    private userService: UserService
+    private userService: UserService,
+    private dialogService: NbDialogService
   ) {
   }
 
@@ -57,6 +59,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
     this.loadingUserSkills = true;
     this.userService.getUserSkillsArray().subscribe((skills) => {
       this.userSkills = this.betterSkillsFisrt(skills);
+      this.userSkills.splice(5, this.userSkills.length);
       this.loadingUserSkills = false;
     }, () => this.loadingUserSkills = false);
   }
@@ -77,5 +80,9 @@ export class ProfileComponent implements OnInit, OnDestroy {
       }
     }
     return skills;
+  }
+
+  openEditAboutDialog() {
+    this.dialogService.open(EditAboutDialogComponent, {context: {user: this.user}});
   }
 }

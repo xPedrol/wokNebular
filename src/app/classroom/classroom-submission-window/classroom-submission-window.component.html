@@ -4,7 +4,10 @@
   <div class="row" [nbSpinner]="loadingSubmission" nbSpinnerStatus="info" nbSpinnerSize="medium" style="min-height: 100px;">
     <div class="col-12 mt-3" *ngFor="let file of submissionFiles">
       <h6>{{file?.name}}</h6>
-      <pre><code class="hljs" style="border-radius: 7px;">{{file.atob()}}</code></pre>
+      <pre><code class="hljs java-language" style="border-radius: 7px;">{{file.atob()}}</code></pre>
+    </div>
+    <div class="col-12 text-right">
+      <button nbButton status="info" outline size="small">Detalhes</button>
     </div>
   </div>
 </div>

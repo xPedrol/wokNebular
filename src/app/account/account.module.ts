@@ -7,6 +7,7 @@ import { EditUserComponent } from './profile/edit-user/edit-user.component';
 import { EditPasswordComponent } from './profile/edit-password/edit-password.component';
 import {ReactiveFormsModule} from '@angular/forms';
 import {SharedModule} from '../shared/shared.module';
+import { EditAboutDialogComponent } from './profile/edit-about-dialog/edit-about-dialog.component';
 
 const routes: Routes = [
   {
@@ -20,7 +21,8 @@ const routes: Routes = [
     ProfileComponent,
     EditProfileComponent,
     EditUserComponent,
-    EditPasswordComponent
+    EditPasswordComponent,
+    EditAboutDialogComponent
   ],
   imports: [
     CommonModule,

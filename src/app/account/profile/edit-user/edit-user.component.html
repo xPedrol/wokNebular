@@ -1,1 +1,111 @@
-<p>edit-user works!</p>
+<form [formGroup]="userForm" (ngSubmit)="saveUser()" *ngIf="user">
+  <div class="form-row mt-3">
+    <div class="form-group col-12 col-md-6">
+      <label class="label">Cidade</label>
+      <nb-form-field>
+        <input type="text" nbInput fullWidth placeholder="Cidade" formControlName="city"
+               [status]="(userForm.get('city').dirty || userForm.get('city').touched) ? (userForm.get('city').invalid  ? 'danger' : 'success') : 'basic'">
+      </nb-form-field>
+      <ng-container *ngIf="userForm.get('city').invalid && userForm.get('city').touched">
+        <p class="text-danger" *ngIf="userForm.get('city').errors?.required">
+          Campo obrigatório
+        </p>
+      </ng-container>
+    </div>
+    <div class="form-group col-12 col-md-3">
+      <label class="label">Estado</label>
+      <nb-form-field>
+        <input type="text" nbInput fullWidth placeholder="Estado" formControlName="uf"
+               [status]="(userForm.get('uf').dirty || userForm.get('uf').touched) ? (userForm.get('uf').invalid  ? 'danger' : 'success') : 'basic'">
+      </nb-form-field>
+      <ng-container *ngIf="userForm.get('uf').invalid && userForm.get('uf').touched">
+        <p class="text-danger" *ngIf="userForm.get('uf').errors?.required">
+          Campo obrigatório
+        </p>
+      </ng-container>
+    </div>
+    <div class="form-group col-12 col-md-3">
+      <label class="label">País</label>
+      <nb-form-field>
+        <input type="text" nbInput fullWidth placeholder="País" formControlName="country"
+               [status]="(userForm.get('country').dirty || userForm.get('country').touched) ? (userForm.get('country').invalid  ? 'danger' : 'success') : 'basic'">
+      </nb-form-field>
+      <ng-container *ngIf="userForm.get('country').invalid && userForm.get('country').touched">
+        <p class="text-danger" *ngIf="userForm.get('country').errors?.required">
+          Campo obrigatório
+        </p>
+      </ng-container>
+    </div>
+  </div>
+  <div class="form-row">
+    <div class="form-group col-12 col-md-4">
+      <label class="label">Celular</label>
+      <nb-form-field>
+        <input type="text" nbInput fullWidth placeholder="Celular" formControlName="mobileNumber"
+               [status]="(userForm.get('mobileNumber').dirty || userForm.get('mobileNumber').touched) ? (userForm.get('mobileNumber').invalid  ? 'danger' : 'success') : 'basic'">
+      </nb-form-field>
+      <ng-container *ngIf="userForm.get('mobileNumber').invalid && userForm.get('mobileNumber').touched">
+        <p class="text-danger" *ngIf="userForm.get('mobileNumber').errors?.required">
+          Campo obrigatório
+        </p>
+      </ng-container>
+    </div>
+    <div class="form-group col-12 col-md-4">
+      <label class="label">Gênero</label>
+      <nb-form-field>
+        <nb-select formControlName="gender" fullWidth></nb-select>
+      </nb-form-field>
+      <ng-container *ngIf="userForm.get('gender').invalid && userForm.get('gender').touched">
+        <p class="text-danger" *ngIf="userForm.get('gender').errors?.required">
+          Campo obrigatório
+        </p>
+      </ng-container>
+    </div>
+    <div class="form-group col-12 col-md-4">
+      <label class="label">Data de nascimento</label>
+      <nb-form-field>
+        <input fullWidth nbInput placeholder="Data de nascimento" formControlName="birthday" [nbDatepicker]="dateTimePicker">
+        <nb-datepicker #dateTimePicker></nb-datepicker>
+      </nb-form-field>
+      <ng-container *ngIf="userForm.get('birthday').invalid && userForm.get('birthday').touched">
+        <p class="text-danger" *ngIf="userForm.get('birthday').errors?.required">
+          Campo obrigatório
+        </p>
+      </ng-container>
+    </div>
+  </div>
+  <div class="form-row">
+    <div class="form-group col-12 col-md-12">
+      <span>
+        <nb-checkbox formControlName="publicProfile"
+                     [status]="(userForm.get('publicProfile').dirty || userForm.get('publicProfile').touched) ? (userForm.get('publicProfile').invalid  ? 'danger' : 'info') : 'basic'">
+          Perfil público
+        </nb-checkbox>
+        <ng-container *ngIf="userForm.get('publicProfile').invalid && userForm.get('publicProfile').touched">
+          <p class="text-danger" *ngIf="userForm.get('publicProfile').errors?.required">
+            Campo obrigatório
+          </p>
+        </ng-container>
+      </span>
+      <span class="ml-2">
+        <nb-checkbox formControlName="publicRank"
+                     [status]="(userForm.get('publicRank').dirty || userForm.get('publicRank').touched) ? (userForm.get('publicRank').invalid  ? 'danger' : 'info') : 'basic'">
+          Rank público
+        </nb-checkbox>
+        <ng-container *ngIf="userForm.get('publicRank').invalid && userForm.get('publicRank').touched">
+          <p class="text-danger" *ngIf="userForm.get('publicRank').errors?.required">
+            Campo obrigatório
+          </p>
+        </ng-container>
+      </span>
+    </div>
+    <!--    <div class="col-12 col-md-6">-->
+    <!--        -->
+    <!--    </div>-->
+  </div>
+  <div class="form-row">
+    <div class="form-group col-12 text-right">
+      <button nbButton status="info" type="submit" size="medium" [disabled]="userForm.invalid">Salvar</button>
+    </div>
+  </div>
+</form>
