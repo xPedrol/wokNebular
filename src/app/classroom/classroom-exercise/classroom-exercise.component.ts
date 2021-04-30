@@ -11,7 +11,6 @@ import {takeUntil} from 'rxjs/operators';
 import {UserService} from '../../shared/services/user.service';
 import {SolutionService} from '../../shared/services/solution.service';
 import {NbWindowService} from '@nebular/theme';
-import {ClassroomSubmissionWindowComponent} from '../classroom-submission-window/classroom-submission-window.component';
 
 @Component({
   selector: 'app-classroom-exercise',
@@ -102,13 +101,6 @@ export class ClassroomExerciseComponent implements OnInit, OnDestroy {
         this.solutions = solutions || [];
         this.loadingContent = false;
       }, () => this.loadingContent = false);
-  }
-
-  openSubmissionsWindow(submissionId: number): void {
-    this.windowService.open(ClassroomSubmissionWindowComponent, {
-      windowClass: 'model-full',
-      context: {submissionId, authorities: this.authorities}
-    });
   }
 
 }

@@ -3,12 +3,12 @@
     <div class="form-group col-12 col-md-6">
       <label class="label">Cidade</label>
       <nb-form-field>
-        <nb-select formControlName="city" fullWidth
+        <nb-select formControlName="city" fullWidth size="large"
                    [status]="(userForm.get('city').dirty || userForm.get('city').touched) ? (userForm.get('city').invalid  ? 'danger' : 'success') : 'basic'">
           <nb-option [disabled]="true">Selecione uma cidade</nb-option>
           <nb-option [value]="city" *ngFor="let city of cities">{{city}}</nb-option>
         </nb-select>
-        <!--        <input type="text" nbInput fullWidth placeholder="Cidade" formControlName="city"-->
+        <!--        <input fieldSize="large" type="text" nbInput fullWidth placeholder="Cidade" formControlName="city"-->
         <!--               [status]="(userForm.get('city').dirty || userForm.get('city').touched) ? (userForm.get('city').invalid  ? 'danger' : 'success') : 'basic'">-->
       </nb-form-field>
       <ng-container *ngIf="userForm.get('city').invalid && userForm.get('city').touched">
@@ -20,7 +20,7 @@
     <div class="form-group col-12 col-md-3">
       <label class="label">Estado</label>
       <nb-form-field>
-        <nb-select (ngModelChange)="getCitiesByUF()" formControlName="uf" fullWidth
+        <nb-select (ngModelChange)="getCitiesByUF()" formControlName="uf" fullWidth size="large"
                    [status]="(userForm.get('uf').dirty || userForm.get('uf').touched) ? (userForm.get('uf').invalid  ? 'danger' : 'success') : 'basic'">
           <nb-option [disabled]="true">Selecione um estado</nb-option>
           <nb-option [value]="uf" *ngFor="let uf of ufs">{{uf}}</nb-option>
@@ -35,7 +35,7 @@
     <div class="form-group col-12 col-md-3">
       <label class="label">País</label>
       <nb-form-field>
-        <input type="text" nbInput fullWidth placeholder="País" formControlName="country" [readOnly]="true"
+        <input fieldSize="large" type="text" nbInput fullWidth placeholder="País" formControlName="country" [readOnly]="true"
                [status]="(userForm.get('country').dirty || userForm.get('country').touched) ? (userForm.get('country').invalid  ? 'danger' : 'success') : 'basic'">
       </nb-form-field>
       <ng-container *ngIf="userForm.get('country').invalid && userForm.get('country').touched">
@@ -49,7 +49,7 @@
     <div class="form-group col-12 col-md-4">
       <label class="label">Celular</label>
       <nb-form-field>
-        <input type="text" nbInput fullWidth placeholder="Celular" formControlName="mobileNumber" mask="(00) 0 0000-0000"
+        <input fieldSize="large" type="text" nbInput fullWidth placeholder="Celular" formControlName="mobileNumber" mask="(00) 0 0000-0000"
                [status]="(userForm.get('mobileNumber').dirty || userForm.get('mobileNumber').touched) ? (userForm.get('mobileNumber').invalid  ? 'danger' : 'success') : 'basic'">
       </nb-form-field>
       <ng-container *ngIf="userForm.get('mobileNumber').invalid && userForm.get('mobileNumber').touched">
@@ -64,9 +64,9 @@
     <div class="form-group col-12 col-md-4">
       <label class="label">Gênero</label>
       <nb-form-field>
-        <nb-select formControlName="gender" fullWidth
+        <nb-select formControlName="gender" fullWidth size="large"
                    [status]="(userForm.get('gender').dirty || userForm.get('gender').touched) ? (userForm.get('gender').invalid  ? 'danger' : 'success') : 'basic'">
-          <nb-option [disabled]="true" selected>Selecione um genêro</nb-option>
+          <nb-option [disabled]="true">Selecione um genêro</nb-option>
           <nb-option [value]="gender" *ngFor="let gender of genders">{{gender}}</nb-option>
         </nb-select>
       </nb-form-field>
@@ -79,8 +79,8 @@
     <div class="form-group col-12 col-md-4">
       <label class="label">Data de nascimento</label>
       <nb-form-field>
-        <input fullWidth nbInput placeholder="Data de nascimento" formControlName="birthday"
-               [status]="(userForm.get('birthday').dirty || userForm.get('birthday').touched) ? (userForm.get('birthday').invalid  ? 'danger' : 'success') : 'basic'"
+        <input fieldSize="large" fullWidth nbInput placeholder="Data de nascimento" formControlName="birthday"
+               [status]="(userForm.get('birthday').touched) ? (userForm.get('birthday').invalid  ? 'danger' : 'success') : 'basic'"
                [nbDatepicker]="dateTimePicker">
         <nb-datepicker #dateTimePicker></nb-datepicker>
       </nb-form-field>

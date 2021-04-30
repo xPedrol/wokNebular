@@ -3,7 +3,7 @@
     <div class="form-group col-12 col-md-6">
       <label class="label">Nome</label>
       <nb-form-field>
-        <input type="text" nbInput fullWidth placeholder="Primeiro nome" formControlName="firstName"
+        <input type="text" nbInput fullWidth placeholder="Primeiro nome" formControlName="firstName" fieldSize="large"
                [status]="(profileForm.get('firstName').dirty || profileForm.get('firstName').touched) ? (profileForm.get('firstName').invalid  ? 'danger' : 'success') : 'basic'">
       </nb-form-field>
       <ng-container *ngIf="profileForm.get('firstName').invalid && profileForm.get('firstName').touched">
@@ -15,7 +15,7 @@
     <div class="form-group col-12 col-md-6">
       <label class="label">Sobrenome</label>
       <nb-form-field>
-        <input type="text" nbInput fullWidth placeholder="Ultimo nome" formControlName="lastName"
+        <input type="text" nbInput fullWidth placeholder="Ultimo nome" formControlName="lastName" fieldSize="large"
                [status]="(profileForm.get('lastName').dirty || profileForm.get('lastName').touched) ? (profileForm.get('lastName').invalid  ? 'danger' : 'success') : 'basic'">
       </nb-form-field>
       <ng-container *ngIf="profileForm.get('lastName').invalid && profileForm.get('lastName').touched">
@@ -29,7 +29,7 @@
     <div class="form-group col-12 col-md-8">
       <label class="label">Email</label>
       <nb-form-field>
-        <input type="text" nbInput fullWidth placeholder="Email" formControlName="email"
+        <input type="text" nbInput fullWidth placeholder="Email" formControlName="email" fieldSize="large"
                [status]="(profileForm.get('email').dirty || profileForm.get('email').touched) ? (profileForm.get('email').invalid  ? 'danger' : 'success') : 'basic'">
       </nb-form-field>
       <ng-container *ngIf="profileForm.get('email').invalid && profileForm.get('email').touched">
@@ -41,7 +41,7 @@
     <div class="form-group col-12 col-md-4">
       <label class="label">Idioma</label>
       <nb-form-field>
-        <nb-select fullWidth placeholder="Lingua" formControlName="langKey"
+        <nb-select fullWidth placeholder="Lingua" formControlName="langKey" size="large"
                    [status]="(profileForm.get('langKey').dirty || profileForm.get('langKey').touched) ? (profileForm.get('langKey').invalid  ? 'danger' : 'success') : 'basic'">
           <option>Selecione uma lingua</option>
           <nb-option [value]="lg" *ngFor="let lg of languages">{{lg}}</nb-option>
@@ -64,7 +64,7 @@
     <div class="form-group col-12 col-md-12">
       <label class="label">Upload de foto</label>
       <nb-form-field>
-        <input type="file" nbInput fullWidth placeholder="Foto" (change)="changePhoto($event.target)">
+        <input type="file" nbInput fullWidth placeholder="Foto" (change)="changePhoto($event.target)" fieldSize="large">
       </nb-form-field>
     </div>
     <div class="form-group col-12 col-md-12 text-right">

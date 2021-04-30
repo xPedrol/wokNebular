@@ -31,6 +31,7 @@ $nb-themes: nb-register-theme((
   user-name-text-font-family:'Poppins',
   user-title-text-font-family:'Poppins',
   font-family-primary:'Poppins',
+  header-title-color:#8f9bb3
 ), default, default);
 
 $nb-themes: nb-register-theme((
@@ -56,6 +57,7 @@ $nb-themes: nb-register-theme((
   user-name-text-font-family:'Poppins',
   user-title-text-font-family:'Poppins',
   font-family-primary:'Poppins',
+  header-title-color:#8f9bb3
 ), cosmic, cosmic);
 
 $nb-themes: nb-register-theme((
@@ -79,6 +81,7 @@ $nb-themes: nb-register-theme((
   user-name-text-font-family:'Poppins',
   user-title-text-font-family:'Poppins',
   font-family-primary:'Poppins',
+  header-title-color:#8f9bb3
 ), corporate, corporate);
 
 $nb-themes: nb-register-theme((
@@ -118,6 +121,7 @@ $nb-themes: nb-register-theme((
   card-hover-background:rgb(41, 41, 46),
   hr-background:#29292e,
   list-item-divider-width:0,
+  header-title-color:#8f9bb3
   //header-shadow:#0095ff,
   //slide-out-background: linear-gradient(270deg, #202024 0%, #202024 100%),
   //slide-out-shadow-color: 0 4px 14px 0 #202024,

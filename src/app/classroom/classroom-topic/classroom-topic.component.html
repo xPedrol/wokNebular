@@ -32,7 +32,7 @@
   <!--  </div>-->
   <div class="col-12 col-xl-7">
     <nb-card>
-      <nb-card-header class="border-0"><h6 style="color: #8f9bb3">Conteúdo</h6></nb-card-header>
+      <nb-card-header class="border-0"><h6 class="header-title-color">Conteúdo</h6></nb-card-header>
       <nb-card-body [nbSpinner]="loadingTopic" nbSpinnerStatus="info" nbSpinnerSize="giant"
                     style="min-height: 100px;">
         <div *ngIf="topic && topic.html" [innerHTML]="topic.html"></div>
@@ -42,12 +42,12 @@
   </div>
   <div class="col-12 col-xl-5">
     <nb-card accent="info" class="custom-sticky">
-      <nb-card-header class="border-0"><h6 style="color: #8f9bb3">Exercícios</h6></nb-card-header>
+      <nb-card-header class="border-0"><h6 class="header-title-color">Exercícios</h6></nb-card-header>
       <nb-card-body>
         <span *ngIf="isTeacher">
         <nb-list *ngIf="!((!exercises || exercises?.length === 0) && !loadingExercise)" [nbSpinner]="loadingExercise" nbSpinnerStatus="info" nbSpinnerSize="giant" style="min-height: 100px;">
           <nb-list-item class="d-block topic-item" *ngFor="let exercise of exercises">
-            <div class="row" [routerLink]="[url,exercise?.slug]">
+            <div class="row align-items-center" [routerLink]="[url,exercise?.slug]">
               <div class="col-7 text-left">{{exercise?.name}}</div>
               <div class="col-5 text-right">
                 <nb-tag class="m-1" size="small" status="info" appearance="filled"
@@ -62,7 +62,7 @@
         <span *ngIf="!isTeacher">
         <nb-list *ngIf="!((!exerciseResults || exerciseResults?.length === 0) && !loadingExercise)" [nbSpinner]="loadingExercise" nbSpinnerStatus="info" nbSpinnerSize="giant" style="min-height: 100px;">
           <nb-list-item class="d-block topic-item" *ngFor="let exerciseR of exerciseResults">
-            <div class="row" [routerLink]="[url,exerciseR?.slugExercise]">
+            <div class="row align-items-center" [routerLink]="[url,exerciseR?.slugExercise]">
               <div class="col-5 text-left">{{exerciseR?.nameExercise}}</div>
               <div class="col-7 text-right">
                 <nb-tag *ngIf="exerciseR?.idSubmission" class="m-1" size="tiny" status="success" appearance="outline"

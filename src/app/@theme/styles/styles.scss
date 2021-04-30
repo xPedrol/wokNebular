@@ -3,6 +3,7 @@
 * {
   font-family: 'Poppins', sans-serif;
 }
+
 // themes - our custom or/and out of the box themes
 @import 'themes';
 
@@ -33,4 +34,99 @@
   @include ngx-pace-theme();
 
   @include nb-overrides();
-};
+}
+
+;
+::-webkit-scrollbar {
+  width: 6px;
+  height: 8px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: nb-theme(background-basic-color-3);
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #3d3c42;
+  border-radius: 10px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+.custom-sticky {
+  position: sticky;
+  position: -webkit-sticky;
+  top: 90px; /* required */
+}
+
+.layout-content {
+  max-width: 1350px;
+  margin: auto;
+}
+
+* {
+  font-family: 'Poppins', sans-serif;
+}
+
+.badge {
+  font-weight: normal;
+}
+
+.breadcrumb {
+  background-color: unset;
+  margin: 0;
+  padding: 0;
+}
+
+a {
+  text-decoration: none;
+}
+
+hr {
+  background-color: nb-theme(hr-background);
+}
+
+.fNMGTf {
+  color: rgb(168, 168, 179);
+  display: flex;
+  -webkit-box-align: center;
+  align-items: center;
+  margin-bottom: 3.2rem;
+  font-size: 14px;
+}
+
+.fNMGTf a, .fNMGTf span {
+  color: inherit;
+}
+
+.fNMGTf a:last-child, .fNMGTf span:last-child {
+  color: #0095ff;
+}
+
+.model-full {
+  //width: 60% !important;
+  //height: 100% !important;
+
+  //.cdk-visually-hidden {
+  //  width: 99% !important;
+  //  height: 99% !important;
+  //}
+  //
+  //nb-dialog-container {
+  //  width: 100% !important;
+  //  height: 100% !important;
+  //}
+}
+
+.header-title-color {
+  color: nb-theme(header-title-color)
+}

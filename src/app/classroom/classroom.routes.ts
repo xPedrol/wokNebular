@@ -15,6 +15,7 @@ import {ModuleTopicService} from '../shared/services/module-topic.service';
 import {CourseResolve, ModuleTopicResolve} from '../shared/resolves';
 import {ClassroomTopicComponent} from './classroom-topic/classroom-topic.component';
 import {ClassroomExerciseComponent} from './classroom-exercise/classroom-exercise.component';
+import {ClassroomSolutionComponent} from './classroom-solution/classroom-solution.component';
 
 
 export const childrenRoutes: Routes = [
@@ -56,6 +57,10 @@ export const childrenRoutes: Routes = [
       {
         path: 'course/:courseSlug/module/:disciplineSlug/topic/:topicSlug/exercise/:exerciseSlug',
         component: ClassroomExerciseComponent
+      },
+      {
+        path: 'course/:courseSlug/module/:disciplineSlug/topic/:topicSlug/exercise/:exerciseSlug/solution/:solutionSlug',
+        component: ClassroomSolutionComponent
       }
     ]
   },

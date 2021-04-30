@@ -31,6 +31,7 @@ import {CORPORATE_THEME} from './styles/theme.corporate';
 import {DARK_THEME} from './styles/theme.dark';
 import {SharedThemeModuleModule} from './shared-theme-module.module';
 import {FormsModule} from '@angular/forms';
+import {RouterModule} from '@angular/router';
 
 const NB_MODULES = [
 //   NbLayoutModule,
@@ -67,7 +68,7 @@ const PIPES = [
 ];
 
 @NgModule({
-  imports: [CommonModule, SharedThemeModuleModule, NB_MODULES, FormsModule],
+  imports: [CommonModule, SharedThemeModuleModule, NB_MODULES, FormsModule, RouterModule],
   exports: [CommonModule, ...PIPES, ...COMPONENTS, SharedThemeModuleModule, NB_MODULES],
   declarations: [...COMPONENTS, ...PIPES],
 })

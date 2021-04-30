@@ -14,8 +14,7 @@ import { ClassroomModuleComponent } from './classroom-module/classroom-module.co
 import {BreadcrumbModule} from 'xng-breadcrumb';
 import { ClassroomExerciseComponent } from './classroom-exercise/classroom-exercise.component';
 import { ClassroomSubmissionComponent } from './classroom-submission/classroom-submission.component';
-import { ClassroomSubmissionWindowComponent } from './classroom-submission-window/classroom-submission-window.component';
-
+import { ClassroomSolutionComponent } from './classroom-solution/classroom-solution.component';
 @NgModule({
   declarations: [
     ClassroomContentComponent,
@@ -28,7 +27,7 @@ import { ClassroomSubmissionWindowComponent } from './classroom-submission-windo
     ClassroomModuleComponent,
     ClassroomExerciseComponent,
     ClassroomSubmissionComponent,
-    ClassroomSubmissionWindowComponent
+    ClassroomSolutionComponent
   ],
     imports: [
         CommonModule,

@@ -15,16 +15,18 @@ export class SharedFunctions {
   }
 
   routeAuthSwitch(authorities: Authority[] | string[], noApi = false): RoutePrefix {
-    if (authorities.includes(Authority.TEACHER)) {
-      if (this.accountService.account.isTeacher()) {
-        return RoutePrefix.TEACHER;
-      }
-    } else if (authorities.includes(Authority.USER)) {
-      if (this.accountService.account.isStudent()) {
-        if (noApi) {
-          return RoutePrefix.STUDENT_NO_API;
+    if (authorities) {
+      if (authorities.includes(Authority.TEACHER)) {
+        if (this.accountService.account.isTeacher()) {
+          return RoutePrefix.TEACHER;
         }
-        return RoutePrefix.STUDENT;
+      } else if (authorities.includes(Authority.USER)) {
+        if (this.accountService.account.isStudent()) {
+          if (noApi) {
+            return RoutePrefix.STUDENT_NO_API;
+          }
+          return RoutePrefix.STUDENT;
+        }
       }
     }
     return RoutePrefix.UNSET;

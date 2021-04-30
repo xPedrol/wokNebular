@@ -44,8 +44,8 @@
       <nb-card-header class="border-0">
         <div class="row">
           <div class="col-6 text-left">
-            <span *ngIf="isTeacher"><h6 style="color: #8f9bb3">Soluções</h6></span>
-            <span *ngIf="!isTeacher"><h6 style="color: #8f9bb3">Submissões</h6></span>
+            <span *ngIf="isTeacher"><h6 class="header-title-color">Soluções</h6></span>
+            <span *ngIf="!isTeacher"><h6 class="header-title-color">Submissões</h6></span>
           </div>
           <div class="col-6 text-right">
             <button nbButton size="small" status="info">
@@ -73,8 +73,8 @@
         <span *ngIf="!isTeacher">
         <nb-list *ngIf="!((!submissions || submissions?.length === 0) && !loadingContent)" [nbSpinner]="loadingContent"
                  nbSpinnerStatus="info" nbSpinnerSize="giant" style="min-height: 100px;">
-          <nb-list-item class="d-block content-item" *ngFor="let submission of submissions" (click)="openSubmissionsWindow(submission.id)">
-            <div class="row">
+          <nb-list-item class="d-block content-item" *ngFor="let submission of submissions">
+            <div class="row align-items-center">
               <div class="col-5 text-left">
                 <nb-user
                   [name]="submission?.cacheResultScoreTopic?.toString()"
@@ -108,11 +108,14 @@
         <span *ngIf="isTeacher">
         <nb-list *ngIf="!((!solutions || solutions?.length === 0) && !loadingContent)" [nbSpinner]="loadingContent"
                  nbSpinnerStatus="info" nbSpinnerSize="giant" style="min-height: 100px;">
-          <nb-list-item class="d-block content-item" *ngFor="let solution of solutions">
-            <div class="row">
+          <nb-list-item [routerLink]="['solution',solution.slug]" class="d-block content-item"
+                        *ngFor="let solution of solutions">
+            <div class="row align-items-center">
               <div class="col-5 text-left">
-                <span>{{solution?.name}}</span>
-                <p>{{solution.description}}</p>
+                <p style="margin: 0;">{{solution?.name}}</p>
+                <small>{{solution?.files ? solution?.files.length : 0}}
+                  arquivo{{solution?.files.length !== 1 ? 's' : ''}}</small>
+                <!--                <p>{{solution.description}}</p>-->
               </div>
               <div class="col-7 text-right">
                 <nb-tag class="m-1" size="tiny" status="success"

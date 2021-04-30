@@ -1,14 +1,12 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {NbMediaBreakpointsService, NbMenuService, NbSidebarService, NbThemeService} from '@nebular/theme';
 
-// import { UserData } from '../../../@core/data/users';
-// import { LayoutService } from '../../../@core/utils';
 import {filter, map, takeUntil} from 'rxjs/operators';
 import {Subject} from 'rxjs';
 import {Router} from '@angular/router';
 import {AccountService} from '../../../shared/services/account.service';
-import {IAccount} from '../../../shared/models/user/account.model';
 import {AuthService} from '../../../shared/services/auth.service';
+import {Authority} from '../../../shared/constants/authority.constants';
 
 @Component({
   selector: 'ngx-header',
@@ -16,7 +14,7 @@ import {AuthService} from '../../../shared/services/auth.service';
   templateUrl: './header.component.html',
 })
 export class HeaderComponent implements OnInit, OnDestroy {
-
+  authorities: Authority[];
   private destroy$: Subject<void> = new Subject<void>();
   items = [
     {title: 'default'},

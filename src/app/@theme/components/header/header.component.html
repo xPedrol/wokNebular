@@ -1,27 +1,29 @@
 <div class="header-container">
   <div class="logo-container">
-<!--    <a (click)="toggleSidebar()" href="#" class="sidebar-toggle">-->
-<!--      <nb-icon icon="menu-2-outline"></nb-icon>-->
+    <!--    <a (click)="toggleSidebar()" href="#" class="sidebar-toggle">-->
+    <!--      <nb-icon icon="menu-2-outline"></nb-icon>-->
+    <!--    </a>-->
+<!--    <a [routerLink]="[('/'+sF.routeAuthSwitch(authorities,true)+'dashboard')]">-->
+      <img width="80" src="https://www.mundodocodigo.com.br/assets/images/logo/logo-mundodocodigo-2021-base-74x100.png">
 <!--    </a>-->
-    <img width="80" src="https://www.mundodocodigo.com.br/assets/images/logo/logo-mundodocodigo-2021-base-74x100.png">
-<!--    <a class="logo d-none d-sm-block" href="#" (click)="navigateHome()" style="font-size: 18px;"><strong>Mundo do código</strong></a>-->
+    <!--    <a class="logo d-none d-sm-block" href="#" (click)="navigateHome()" style="font-size: 18px;"><strong>Mundo do código</strong></a>-->
   </div>
-<!--  <nb-select [selected]="currentTheme" (selectedChange)="changeTheme($event)" status="primary">-->
-<!--    <nb-option *ngFor="let theme of themes" [value]="theme.value"> {{ theme.name }}</nb-option>-->
-<!--  </nb-select>-->
+  <!--  <nb-select [selected]="currentTheme" (selectedChange)="changeTheme($event)" status="primary">-->
+  <!--    <nb-option *ngFor="let theme of themes" [value]="theme.value"> {{ theme.name }}</nb-option>-->
+  <!--  </nb-select>-->
 </div>
 
 <div class="header-container">
   <nb-actions size="small">
 
     <nb-action class="control-item">
-<!--      <nb-search type="rotate-layout"></nb-search>-->
+      <!--      <nb-search type="rotate-layout"></nb-search>-->
     </nb-action>
-<!--    <nb-action class="control-item" icon="bell-outline"></nb-action>-->
-<!--    <nb-action class="control-item" icon="settings-2-outline"></nb-action>-->
-    <nb-action class="control-item" icon="sun-outline"  [nbContextMenu]="items" nbContextMenuTag="themeMenu"></nb-action>
+    <!--    <nb-action class="control-item" icon="bell-outline"></nb-action>-->
+    <!--    <nb-action class="control-item" icon="settings-2-outline"></nb-action>-->
+    <nb-action class="control-item" icon="sun-outline" [nbContextMenu]="items" nbContextMenuTag="themeMenu"></nb-action>
     <nb-action class="user-action">
-      <nb-user [nbContextMenu]="userMenu"*ngIf="accountService.account"
+      <nb-user [nbContextMenu]="userMenu" *ngIf="accountService.account"
                [onlyPicture]="userPictureOnly"
                [name]="accountService?.account?.login"
                [title]="accountService?.account?.email"

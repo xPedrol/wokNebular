@@ -36,7 +36,7 @@
     </div>
 
     <div class="row" *ngFor="let rank of courseRank">
-      <div class="cell" data-title="Full Name">
+      <div class="cell" data-title="Usuário">
         <nb-user
           size="large"
           [name]="rank.login"
@@ -44,11 +44,11 @@
         >
         </nb-user>
       </div>
-      <div class="cell text-center" data-title="Age">
-                {{rank.point}}
+      <div class="cell" data-title="Pontos">
+               <p>{{rank.point}}</p>
       </div>
-      <div class="cell text-center" data-title="Job Title">
-        {{rank.totalSub}}
+      <div class="cell" data-title="Submissões">
+        <p>{{rank.totalSub}}</p>
       </div>
     </div>
 

@@ -160,10 +160,11 @@ iframe {
   color: nb-theme(text-basic-color);
   line-height: 1.2;
   font-weight: unset !important;
-
+  text-align: center;
   padding-top: 20px;
   padding-bottom: 20px;
   border-bottom: none;
+  vertical-align: middle;
 }
 
 .row.header .cell {
