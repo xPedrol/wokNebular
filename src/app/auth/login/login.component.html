@@ -80,7 +80,12 @@
                 fullWidth
                 status="success"
                 [disabled]="submitted"
-                [class.btn-pulse]="submitted">
+                [class.btn-pulse]="submitted"
+                [nbSpinner]="submitted"
+                nbSpinnerStatus="basic"
+                nbSpinnerSize="large"
+                nbSpinnerMessage=""
+        >
           Log In
         </button>
       </form>

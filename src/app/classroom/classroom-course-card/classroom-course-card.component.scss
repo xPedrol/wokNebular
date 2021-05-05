@@ -1,0 +1,8 @@
+@import '../../@theme/styles/themes';
+.course-card{
+  transition: 0.5s;
+  cursor: pointer;
+}
+.course-card:hover{
+  background-color: nb-theme(card-hover-background);
+}

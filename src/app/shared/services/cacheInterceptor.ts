@@ -17,7 +17,9 @@ export class CachingInterceptorService implements HttpInterceptor {
     const dontAccept = this.dontCache.some((url) => {
       return req.url === SERVER_API_URL + url;
     });
-    if (req.method !== 'GET' || dontAccept || req.headers.get('force')) {
+    // console.warn(req.url, (Boolean(req.headers.get('force')) === true));
+    // console.warn(req.url, Boolean(req.headers.get('force')));
+    if (req.method !== 'GET' || dontAccept || req.headers.get('force') === 'true') {
       return next.handle(req);
     }
 

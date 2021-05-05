@@ -12,7 +12,7 @@
   <div class="col-12 col-lg-5">
     <nb-card *ngIf="course" class="custom-sticky">
       <nb-card-header class="border-0 mb-2">
-        <h6 style="color: #8f9bb3">{{course?.name}}</h6>
+        <h6 class="header-title-color">{{course?.name}}</h6>
       </nb-card-header>
       <nb-card-body>
         <nb-user size="giant"
@@ -36,7 +36,8 @@
                   <div class="col-8 text-right">
                     <div class="row">
                       <div class="col-12">
-                        <button nbButton outline class="m-1" size="small" *ngIf="isTeacher">
+                        <button nbButton outline class="m-1" size="small" *ngIf="isTeacher"
+                                [routerLink]="['/'+sF.routeAuthSwitch(authorities,true)+'manager/course',course?.slug,'module',module?.discipline?.slug]">
                           <span class="d-none d-sm-block">Gerenciar</span>
                           <nb-icon class="d-block d-sm-none" icon="diagonal-arrow-right-up-outline"></nb-icon>
                         </button>

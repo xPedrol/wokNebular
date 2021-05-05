@@ -62,7 +62,8 @@ export class LoginComponent implements OnInit {
         } else {
           this.router.navigateByUrl(`/${this.accountService.account.isTeacher() ? 'teacher' : 'student'}/dashboard`);
         }
-      });
+        this.submitted = false;
+      }, () => this.submitted = false);
 
     }
   }

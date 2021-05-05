@@ -44,6 +44,7 @@ export class UserRank implements IUserRank {
 export const RankTableColumn = [
   {
     title: 'Usuário',
+    class: 'text-left'
   },
   // {
   //   title: 'Descrição',

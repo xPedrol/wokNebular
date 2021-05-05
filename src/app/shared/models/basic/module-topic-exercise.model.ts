@@ -44,4 +44,30 @@ export class ModuleTopicExercise implements IModuleTopicExercise {
     this.allowSubmit = this.allowSubmit || false;
     this.readonly = this.readonly || false;
   }
+
+  public static countExercisesByLevel(mTEs: IModuleTopicExercise[]) {
+    let totalA = 0;
+    let totalB = 0;
+    let totalC = 0;
+    let totalD = 0;
+    let totalO = 0;
+    mTEs?.forEach((exercise) => {
+      if (exercise.difficultyLevel?.id === 'A') {
+        totalA++;
+      }
+      if (exercise.difficultyLevel?.id === 'B') {
+        totalB++;
+      }
+      if (exercise.difficultyLevel?.id === 'C') {
+        totalC++;
+      }
+      if (exercise.difficultyLevel?.id === 'D') {
+        totalD++;
+      }
+      if (exercise.difficultyLevel?.id === 'O') {
+        totalO++;
+      }
+    });
+    return {totalA, totalB, totalC, totalD, totalO};
+  }
 }

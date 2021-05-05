@@ -1,0 +1,35 @@
+<nb-card class="course-card border-bottom" [routerLink]="['',isTeacher?'teacher':'student','classroom','course',course?.slug]">
+  <nb-card-header class="border-0 mb-4">
+    <nb-user [name]="course.name"></nb-user>
+    <!--                  {{course.name}}-->
+  </nb-card-header>
+  <nb-card-body>
+    <p style="color: rgb(168, 168, 179);">{{course.description}}</p>
+    <!--            <nb-tag size="tiny" status="info" appearance="outline" *ngIf="course?.modules?.length"-->
+    <!--                    [text]="'Módulos: '+course?.modules?.length"></nb-tag>-->
+    <!--            <nb-tag size="tiny" status="info" appearance="outline" class="m-1" *ngIf="course.amountTopics"-->
+    <!--                    [text]="'Tópicos: '+course.amountTopics"></nb-tag>-->
+    <!--            <nb-tag size="tiny" status="info" appearance="outline" *ngIf="course.amountExercises"-->
+    <!--                    [text]="'Exercícios: '+course.amountExercises"></nb-tag>-->
+    <!--                <span class="badge badge-info">Módulos: {{course?.modules?.length}}</span>-->
+    <!--                <span class="badge badge-info m-1">Tópicos: {{course.amountTopics}}</span>-->
+    <!--                <span class="badge badge-info">Exercícios: {{course.amountExercises}}</span>-->
+  </nb-card-body>
+  <nb-card-footer class="text-right border-0">
+    <p>
+      <nb-tag size="tiny" status="info" appearance="outline" class="m-2"
+              [text]="'Módulos: '+(course?.modules?.length?course?.modules?.length:0)"></nb-tag>
+      <nb-tag size="tiny" status="info" appearance="outline" class="m-2"
+              [text]="'Tópicos: '+(course?.amountTopics?course.amountTopics:0)"></nb-tag>
+      <nb-tag size="tiny" status="info" appearance="outline" class="m-2"
+              [text]="'Exercícios: '+(course?.amountExercises?course.amountExercises:0)"></nb-tag>
+    </p>
+    <!--            <button size="small" class="m-1" nbButton outline status="info" [routerLink]="['']"-->
+    <!--                    *ngIf="isTeacher">Gerenciar-->
+    <!--            </button>-->
+    <!--            <button size="small" class="m-1" nbButton outline status="info"-->
+    <!--                    [routerLink]="['',isTeacher?'teacher':'student','classroom','course',course?.slug]">-->
+    <!--              Abrir-->
+    <!--            </button>-->
+  </nb-card-footer>
+</nb-card>

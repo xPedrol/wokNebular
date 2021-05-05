@@ -5,7 +5,8 @@ import {Observable} from 'rxjs';
 import {ICourse} from '../models/course.model';
 import {SERVER_API_URL} from '../../app.constants';
 import {SharedFunctions} from '../shared.functions';
-import {IModule} from '../models/module.model';
+import {IModule, Module} from '../models/module.model';
+import {map} from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -18,9 +19,11 @@ export class ModuleService {
   ) {
   }
 
-  getModule(authorities: Authority[], moduleId: number): Observable<IModule> {
-    const url = `${this.sF.routeAuthSwitch(authorities)}modules/${moduleId}`;
-    return this.http.get<IModule>(`${SERVER_API_URL}${url}`);
+  getModule(authorities: Authority[], courseSlug: string, disciplineSlug: string): Observable<IModule> {
+    const url = `${this.sF.routeAuthSwitch(authorities)}courses/${courseSlug}/disciplines/${disciplineSlug}`;
+    return this.http.get<IModule>(`${SERVER_API_URL}${url}`).pipe(map((module) => {
+      return new Module(module);
+    }));
   }
 
 }

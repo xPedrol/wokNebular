@@ -9,7 +9,6 @@ import {NbDialogService} from '@nebular/theme';
 import {AddCourseDialogComponent} from '../add-public-course-dialog/add-course-dialog.component';
 import {Subject} from 'rxjs';
 import {takeUntil} from 'rxjs/operators';
-import {Title} from '@angular/platform-browser';
 
 @Component({
   selector: 'app-classroom-dash-board',

@@ -15,6 +15,8 @@ import {BreadcrumbModule} from 'xng-breadcrumb';
 import { ClassroomExerciseComponent } from './classroom-exercise/classroom-exercise.component';
 import { ClassroomSubmissionComponent } from './classroom-submission/classroom-submission.component';
 import { ClassroomSolutionComponent } from './classroom-solution/classroom-solution.component';
+import { ModuleRankComponent } from './ranks/module-rank/module-rank.component';
+import { ClassroomCourseCardComponent } from './classroom-course-card/classroom-course-card.component';
 @NgModule({
   declarations: [
     ClassroomContentComponent,
@@ -27,7 +29,9 @@ import { ClassroomSolutionComponent } from './classroom-solution/classroom-solut
     ClassroomModuleComponent,
     ClassroomExerciseComponent,
     ClassroomSubmissionComponent,
-    ClassroomSolutionComponent
+    ClassroomSolutionComponent,
+    ModuleRankComponent,
+    ClassroomCourseCardComponent
   ],
     imports: [
         CommonModule,
@@ -38,7 +42,8 @@ import { ClassroomSolutionComponent } from './classroom-solution/classroom-solut
     ],
   exports: [
     ClassroomContentComponent,
-    SharedModule
+    SharedModule,
+    ModuleRankComponent
   ]
 })
 export class ClassroomModule {

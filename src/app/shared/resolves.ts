@@ -33,29 +33,29 @@ export class CourseResolve implements Resolve<ICourse> {
   }
 }
 
-@Injectable({providedIn: 'root'})
-export class ModuleResolve implements Resolve<IModule> {
-  constructor(private service: ModuleService, private router: Router) {
-  }
-
-  resolve(route: ActivatedRouteSnapshot): Observable<IModule> | Observable<never> {
-    const slug = route.params?.courseSlug;
-    const authorities = route.data.authorities;
-    if (slug) {
-      return this.service.getModule(authorities, slug).pipe(
-        mergeMap((module: IModule) => {
-          if (module) {
-            return of(module);
-          } else {
-            this.router.navigate(['404']);
-            return EMPTY;
-          }
-        })
-      );
-    }
-    return EMPTY;
-  }
-}
+// @Injectable({providedIn: 'root'})
+// export class ModuleResolve implements Resolve<IModule> {
+//   constructor(private service: ModuleService, private router: Router) {
+//   }
+//
+//   resolve(route: ActivatedRouteSnapshot): Observable<IModule> | Observable<never> {
+//     const slug = route.params?.courseSlug;
+//     const authorities = route.data.authorities;
+//     if (slug) {
+//       return this.service.getModule(authorities, slug).pipe(
+//         mergeMap((module: IModule) => {
+//           if (module) {
+//             return of(module);
+//           } else {
+//             this.router.navigate(['404']);
+//             return EMPTY;
+//           }
+//         })
+//       );
+//     }
+//     return EMPTY;
+//   }
+// }
 
 @Injectable({providedIn: 'root'})
 export class ModuleTopicResolve implements Resolve<IModuleTopic[][]> {

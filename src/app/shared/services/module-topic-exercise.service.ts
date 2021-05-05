@@ -5,6 +5,7 @@ import {Authority} from '../constants/authority.constants';
 import {IExerciseBasic} from '../models/basic/exercise-basic.model';
 import {SERVER_API_URL} from '../../app.constants';
 import {IModuleTopicExercise} from '../models/basic/module-topic-exercise.model';
+import {Observable} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -25,5 +26,12 @@ export class ModuleTopicExerciseService {
   getModuleTopicExercise(authorities: Authority[], courseSlug: string, disciplineSlug: string, topicSlug: string, exerciseSlug: string) {
     const url = `${this.sF.routeAuthSwitch(authorities)}course/${courseSlug}/disciplines/${disciplineSlug}/topics/${topicSlug}/exercises/${exerciseSlug}`;
     return this.http.get<IModuleTopicExercise>(`${SERVER_API_URL}${url}`);
+  }
+
+  getModuleTopicExercisesByModuleId(
+    id: number
+  ): Observable<IModuleTopicExercise[]> {
+    return this.http
+      .get<IModuleTopicExercise[]>(`${SERVER_API_URL}teacher/modules/${id}/topics/exercises`);
   }
 }

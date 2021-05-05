@@ -1,0 +1,113 @@
+<div class="row layout-content">
+  <div class="col-12">
+    <app-breadcrumb [courseSlug]="courseSlug" [disciplineSlug]="disciplineSlug" [last]="1"
+                    [routePrefix]="routePrefix"></app-breadcrumb>
+  </div>
+  <div class="col-12 col-lg-5">
+    <nb-card>
+      <nb-card-header class="border-0 mb-2">
+        <!--        <h6 class="header-title-color">Modulo</h6>-->
+      </nb-card-header>
+      <nb-card-body [nbSpinner]="loadingModule" nbSpinnerStatus="info" nbSpinnerSize="giant"
+                    style="min-height: 100px;">
+        <span *ngIf="module">
+          <div class="module-header">
+            <img width="80" [src]="module.discipline.imageUrl" alt="" class="mb-3">
+            <h6 class="header-title-color">{{module.alias}}</h6>
+            <!--            <p>{{module.alias}}</p>-->
+            <span>{{module.topics?.length ? module.topics?.length : 0}} Tópicos</span>
+          </div>
+          <!--        <nb-user size="giant"-->
+          <!--                 [title]="module.alias"-->
+          <!--                 [name]="'Tópicos '+(module.topics?.length?module.topics?.length:0)"-->
+          <!--                 [picture]="module.discipline.imageUrl"-->
+          <!--                 class="border-0"-->
+          <!--        >-->
+          <!--        </nb-user>-->
+        <hr>
+        <div class="row">
+          <!--          <div class="col-12">-->
+          <!--            <h6 style="font-size: 15px;">Informações</h6>-->
+          <!--          </div>-->
+          <div class="col-12 mb-3">
+            <nb-tag size="tiny" status="info" appearance="outline" class="m-1"
+                    [text]="'Disciplina '+module?.discipline?.name"></nb-tag>
+            <nb-tag size="tiny" status="warning" appearance="outline" class="m-1"
+                    [text]="'Curso '+module?.course?.name"></nb-tag>
+            <!--            <hr>-->
+          </div>
+          <div class="col-12" [nbSpinner]="loadingMTEs" nbSpinnerStatus="info"
+               nbSpinnerSize="giant" style="min-height: 100px;">
+            <nb-list [hidden]="loadingMTEs || (!loadingMTEs && (!mTExercises || mTExercises.length === 0))">
+              <nb-list-item class="d-block">
+                <div class="row">
+                  <div class="col-6">
+                    Exercicios A
+                  </div>
+                  <div class="col-6 text-right">
+                    <nb-tag size="tiny" status="success" appearance="outline"
+                            [text]="totalExercisesBylevel.totalA"></nb-tag>
+                  </div>
+                </div>
+              </nb-list-item>
+              <nb-list-item class="d-block">
+                <div class="row">
+                  <div class="col-6">
+                    Exercicios B
+                  </div>
+                  <div class="col-6 text-right">
+                    <nb-tag size="tiny" status="info" appearance="outline"
+                            [text]="totalExercisesBylevel.totalB"></nb-tag>
+                  </div>
+                </div>
+              </nb-list-item>
+              <nb-list-item class="d-block">
+                <div class="row">
+                  <div class="col-6">
+                    Exercicios C
+                  </div>
+                  <div class="col-6 text-right">
+                    <nb-tag size="tiny" status="warning" appearance="outline"
+                            [text]="totalExercisesBylevel.totalC"></nb-tag>
+                  </div>
+                </div>
+              </nb-list-item>
+              <nb-list-item class="d-block">
+                <div class="row">
+                  <div class="col-6">
+                    Exercicios D
+                  </div>
+                  <div class="col-6 text-right">
+                    <nb-tag size="tiny" status="danger" appearance="outline"
+                            [text]="totalExercisesBylevel.totalD"></nb-tag>
+                  </div>
+                </div>
+              </nb-list-item>
+              <nb-list-item class="d-block">
+                <div class="row">
+                  <div class="col-6">
+                    Sem nivel
+                  </div>
+                  <div class="col-6 text-right">
+                    <nb-tag size="tiny" status="basic" appearance="outline"
+                            [text]="totalExercisesBylevel.totalO"></nb-tag>
+                  </div>
+                </div>
+
+              </nb-list-item>
+            </nb-list>
+            <app-not-found-card
+              *ngIf="!loadingMTEs && (!mTExercises || mTExercises.length === 0 )"></app-not-found-card>
+          </div>
+        </div>
+          </span>
+      </nb-card-body>
+    </nb-card>
+  </div>
+  <div class="col-12 col-lg-7">
+    <div *ngIf="module">
+<!--      <h6 class="header-title-color">Classificação</h6>-->
+      <app-module-rank [moduleId]="module.id"></app-module-rank>
+    </div>
+  </div>
+</div>

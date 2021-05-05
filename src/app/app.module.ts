@@ -16,35 +16,38 @@ import { HomeComponent } from './home/home.component';
 import {NgxMaskModule} from 'ngx-mask';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    NotFoundComponent,
-    HomeComponent
-  ],
-  imports: [
-    BrowserModule,
-    BrowserAnimationsModule,
-    AppRoutingModule,
-    HttpClientModule,
-    BreadcrumbModule,
-    NgxMaskModule.forRoot(),
-    CookieModule.forRoot(),
-    NgxWebstorageModule.forRoot(),
-    ThemeModule.forRoot(),
-  ],
-  providers: [
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: AuthInterceptor,
-      multi: true
-    },
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: CachingInterceptorService,
-      multi: true
-    }
-  ],
-  bootstrap: [AppComponent]
+    declarations: [
+        AppComponent,
+        NotFoundComponent,
+        HomeComponent
+    ],
+    imports: [
+        BrowserModule,
+        BrowserAnimationsModule,
+        AppRoutingModule,
+        HttpClientModule,
+        BreadcrumbModule,
+        NgxMaskModule.forRoot(),
+        CookieModule.forRoot(),
+        NgxWebstorageModule.forRoot(),
+        ThemeModule.forRoot(),
+    ],
+    providers: [
+        {
+            provide: HTTP_INTERCEPTORS,
+            useClass: AuthInterceptor,
+            multi: true
+        },
+        {
+            provide: HTTP_INTERCEPTORS,
+            useClass: CachingInterceptorService,
+            multi: true
+        }
+    ],
+    exports: [
+        NotFoundComponent
+    ],
+    bootstrap: [AppComponent]
 })
 export class AppModule {
 }

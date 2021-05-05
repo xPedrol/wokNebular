@@ -12,6 +12,7 @@ import {EchartsBarComponent} from './components/echarts/echarts-bar.component';
 // import {Ng2SmartTableModule} from 'ng2-smart-table';
 import {NotFoundCardComponent} from './components/not-found-card/not-found-card.component';
 import {ChangedUserAlertComponent} from './components/changed-user-alert/changed-user-alert.component';
+import {BreadcrumbComponent} from './components/breadcrumb/breadcrumb.component';
 
 
 @NgModule({
@@ -22,7 +23,8 @@ import {ChangedUserAlertComponent} from './components/changed-user-alert/changed
     EchartsBarComponent,
     // SmartTableComponent,
     NotFoundCardComponent,
-    ChangedUserAlertComponent
+    ChangedUserAlertComponent,
+    BreadcrumbComponent
   ],
   imports: [
     CommonModule,
@@ -39,7 +41,8 @@ import {ChangedUserAlertComponent} from './components/changed-user-alert/changed
     EchartsBarComponent,
     // SmartTableComponent,
     NotFoundCardComponent,
-    ChangedUserAlertComponent
+    ChangedUserAlertComponent,
+    BreadcrumbComponent
   ]
 })
 export class SharedModule {
