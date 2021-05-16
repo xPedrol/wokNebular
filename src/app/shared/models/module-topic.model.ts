@@ -70,7 +70,7 @@ export class ModuleTopic implements IModuleTopic {
 
   constructor(mT: IModuleTopic) {
     this.activated = mT.activated;
-    this.activeTime = mT.activeTime;
+    this.activeTime = moment(mT.activeTime);
     this.createdDate = moment(mT.createdDate);
     this.deactiveTime = moment(mT.deactiveTime);
     this.endTime = moment(mT.endTime);

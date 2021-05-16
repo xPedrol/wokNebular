@@ -25,7 +25,10 @@
         <!--        </div>-->
         <!--      </div>-->
 
-        <div class="row" *ngFor="let mT of moduleTopics; let i = index" [formGroupName]="i">
+        <div class="row" *ngFor="let mT of moduleTopics; let i = index" [formGroupName]="i"
+             [nbPopover]="tabs" [nbPopoverPlacement]="'left'" [nbPopoverTrigger]="'click'"
+             (click)="selectedModuleTopic = mT"
+        >
           <div class="cell text-left">
             <nb-checkbox formControlName="activated"></nb-checkbox>
           </div>
@@ -70,3 +73,34 @@
     </form>
   </div>
 </div>
+<ng-template #tabs>
+  <nb-card class="margin-bottom-0" *ngIf="selectedModuleTopic" style="max-width: 250px">
+    <nb-card-header class="border-0 text-center my-3"><h6
+      class="header-title-color">{{selectedModuleTopic?.topic?.name}}</h6></nb-card-header>
+    <div class="row text-center">
+      <div class="col-12">
+        <nb-tag status="info" appearance="filled"
+                [text]="'Habilitado em '+(selectedModuleTopic.activeTime.format('DD/MM/yyyy'))" size="small"></nb-tag>
+        <nb-tag status="warning" appearance="filled"
+                [text]="'Desabilitado em '+(selectedModuleTopic.activeTime.format('DD/MM/yyyy'))" size="small"></nb-tag>
+        <nb-tag *ngIf="selectedModuleTopic.availableToDo" status="success" appearance="filled"
+                text="Aberto" size="small"></nb-tag>
+        <nb-tag *ngIf="!selectedModuleTopic.availableToDo" status="danger" appearance="filled"
+                text="Fechado" size="small"></nb-tag>
+        <nb-tag *ngIf="selectedModuleTopic.availableToSee" status="success" appearance="filled"
+                text="Visivel" size="small"></nb-tag>
+        <nb-tag *ngIf="!selectedModuleTopic.availableToSee" status="danger" appearance="filled"
+                text="Alunos não podem ver" size="small"></nb-tag>
+        <hr>
+        <nb-tag status="success" appearance="filled"
+                [text]="'Exercicos A: '+selectedModuleTopic.numAExercisesCached" size="small"></nb-tag>
+        <nb-tag status="info" appearance="filled"
+                [text]="'Exercicos B: '+selectedModuleTopic.numBExercisesCached" size="small"></nb-tag>
+        <nb-tag status="warning" apearance="filled"
+                [text]="'Exercicos C: '+selectedModuleTopic.numCExercisesCached" size="small"></nb-tag>
+        <nb-tag status="danger" appearance="filled"
+                [text]="'Exercicos D: '+selectedModuleTopic.numDExercisesCached" size="small"></nb-tag>
+      </div>
+    </div>
+  </nb-card>
+</ng-template>

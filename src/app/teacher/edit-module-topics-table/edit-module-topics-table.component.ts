@@ -17,6 +17,7 @@ export class EditModuleTopicsTableComponent implements OnInit {
   @Input() moduleTopics: IModuleTopic[];
   @Input() authorities: Authority[];
   selectedIndex: number;
+  selectedModuleTopic: IModuleTopic;
   mTForm: FormGroup;
   subject = new Subject();
   tableColumn = [
