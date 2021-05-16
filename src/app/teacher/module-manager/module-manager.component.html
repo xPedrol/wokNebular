@@ -105,9 +105,21 @@
     </nb-card>
   </div>
   <div class="col-12 col-lg-7">
-    <div *ngIf="module">
-<!--      <h6 class="header-title-color">Classificação</h6>-->
-      <app-module-rank [moduleId]="module.id"></app-module-rank>
+
+    <!--      <h6 class="header-title-color">Classificação</h6>-->
+    <app-module-rank *ngIf="module" [moduleId]="module.id"></app-module-rank>
+  </div>
+  <div class="col-12" [nbSpinner]="loadingMTs" nbSpinnerStatus="info" nbSpinnerSize="giant"
+       style="min-height: 100px;">
+    <div class="row" *ngIf="!loadingMTs && (moduleTopics && moduleTopics.length > 0)">
+      <div class="col-12 text-right mb-2">
+        <button size="tiny" nbButton outline status="info" (click)="synchronizeMTsDates()">
+          Sincronizar datas
+        </button>
+      </div>
+      <div class="col-12">
+        <app-edit-module-topics-table [moduleTopics]="moduleTopics" [authorities]="authorities"></app-edit-module-topics-table>
+      </div>
     </div>
   </div>
 </div>

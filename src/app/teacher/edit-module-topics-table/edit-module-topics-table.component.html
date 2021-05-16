@@ -1,0 +1,72 @@
+<div class="wrap-table100">
+  <div class="scroll">
+    <form [formGroup]="mTForm" *ngIf="moduleTopics && moduleTopics.length > 0" (ngSubmit)="saveModuleTopic()">
+      <div class="table" formArrayName="moduleTopics">
+        <div class="row header">
+          <div class="cell" [ngClass]="column.class" *ngFor="let column of tableColumn">
+            {{column?.title}}
+          </div>
+        </div>
+
+        <!--      <div class="row" *ngFor="let rank of courseRank">-->
+        <!--        <div class="cell" data-title="Usuário">-->
+        <!--          <nb-user-->
+        <!--            size="large"-->
+        <!--            [name]="rank.login"-->
+        <!--            [picture]="rank.imageUrl"-->
+        <!--          >-->
+        <!--          </nb-user>-->
+        <!--        </div>-->
+        <!--        <div class="cell" data-title="Pontos">-->
+        <!--          <p>{{rank.point}}</p>-->
+        <!--        </div>-->
+        <!--        <div class="cell" data-title="Submissões">-->
+        <!--          <p>{{rank.totalSub}}</p>-->
+        <!--        </div>-->
+        <!--      </div>-->
+
+        <div class="row" *ngFor="let mT of moduleTopics; let i = index" [formGroupName]="i">
+          <div class="cell text-left">
+            <nb-checkbox formControlName="activated"></nb-checkbox>
+          </div>
+          <div class="cell text-left">
+            <input [hidden]="true" nbInput formControlName="id">
+            {{mT?.topic?.name}}
+          </div>
+          <div class="cell text-left">
+            <div class="input-table">
+              <input type="text" nbInput fullWidth status="basic" formControlName="maxGrade">
+            </div>
+          </div>
+          <div class="cell text-left">
+            <div class="input-table">
+              <input type="text" nbInput fullWidth status="basic" formControlName="minScore">
+            </div>
+          </div>
+          <div class="cell text-left">
+            <div class="input-table">
+              <input type="text" nbInput fullWidth status="basic" formControlName="targetScore">
+            </div>
+          </div>
+          <div class="cell text-left">
+            <div class="input-table">
+              <input type="datetime-local" nbInput fullWidth status="basic" formControlName="startTime">
+            </div>
+          </div>
+          <div class="cell text-left" data-title="Submissões">
+            <div class="input-table">
+              <input type="datetime-local" nbInput status="basic" fullWidth formControlName="endTime">
+            </div>
+          </div>
+          <div class="cell text-right" data-title="action">
+            <div class="input-table">
+              <button nbButton ghost status="basic" (click)="selectedIndex = i">Salvar
+                <nb-icon icon="save-outline"></nb-icon>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

@@ -8,6 +8,11 @@ import {takeUntil} from 'rxjs/operators';
 import {SharedFunctions} from '../../shared/shared.functions';
 import {IModuleTopicExercise, ModuleTopicExercise} from '../../shared/models/basic/module-topic-exercise.model';
 import {ModuleTopicExerciseService} from '../../shared/services/module-topic-exercise.service';
+import {IModuleTopic, ModuleTopic} from '../../shared/models/module-topic.model';
+import {ModuleTopicService} from '../../shared/services/module-topic.service';
+import {Moment} from 'moment';
+import * as moment from 'moment';
+import {NbToastrService} from '@nebular/theme';
 
 @Component({
   selector: 'app-module-manager',
@@ -20,16 +25,20 @@ export class ModuleManagerComponent implements OnInit, OnDestroy {
   courseSlug: string;
   disciplineSlug: string;
   loadingModule = true;
+  loadingMTs = true;
   loadingMTEs = true;
   subject = new Subject();
   routePrefix = '/';
+  moduleTopics: IModuleTopic[];
   mTExercises: IModuleTopicExercise[];
   totalExercisesBylevel: any = {};
 
   constructor(
     private moduleService: ModuleService,
+    private moduleTopicService: ModuleTopicService,
     private mTEService: ModuleTopicExerciseService,
     private activatedRoute: ActivatedRoute,
+    private toastService: NbToastrService,
     private sF: SharedFunctions
   ) {
   }
@@ -57,8 +66,19 @@ export class ModuleManagerComponent implements OnInit, OnDestroy {
       .subscribe((module) => {
         this.module = module;
         this.loadingModule = false;
+        this.getModuleTopics();
         this.getModuleTopicExercises(this.module.id);
       }, () => this.loadingModule = false);
+  }
+
+  getModuleTopics(): void {
+    this.loadingMTs = true;
+    this.moduleTopicService.getModuleTopics(this.authorities, this.courseSlug, this.disciplineSlug, true).pipe(takeUntil(this.subject))
+      .subscribe((mTs) => {
+        this.moduleTopics = (mTs || []) as IModuleTopic[];
+        this.loadingMTs = false;
+        console.warn(this.moduleTopics);
+      }, () => this.loadingMTs = false);
   }
 
   getModuleTopicExercises(moduleId: number): void {
@@ -70,4 +90,28 @@ export class ModuleManagerComponent implements OnInit, OnDestroy {
         this.loadingMTEs = false;
       }, () => this.loadingMTEs = false);
   }
+
+  synchronizeMTsDates(): void {
+    this.moduleTopics = ModuleTopic.synchronizeMTsDates(this.moduleTopics, this.module?.course?.startDate, this.module?.course?.endTime);
+    this.moduleTopics?.forEach((moduleTopic) => {
+      const moduleTopicDates = {
+        activeTime: moduleTopic?.activeTime,
+        deactiveTime: moduleTopic?.deactiveTime,
+        startTime: moduleTopic?.startTime,
+        endTime: moduleTopic?.endTime,
+        freezeTime: moduleTopic?.freezeTime,
+        unfreezeTime: moduleTopic?.unfreezeTime,
+        moduleTopicId: moduleTopic?.id,
+      };
+      this.moduleTopicService
+        .synchronizeMTDates(
+          this.authorities,
+          moduleTopicDates
+        )
+        .subscribe({
+          next: () => this.toastService.show('', 'Registrado com sucesso', {status: 'success'})
+        });
+    });
+  }
+
 }

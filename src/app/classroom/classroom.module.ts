@@ -40,11 +40,11 @@ import { ClassroomCourseCardComponent } from './classroom-course-card/classroom-
         ReactiveFormsModule,
         BreadcrumbModule,
     ],
-  exports: [
-    ClassroomContentComponent,
-    SharedModule,
-    ModuleRankComponent
-  ]
+    exports: [
+        ClassroomContentComponent,
+        SharedModule,
+        ModuleRankComponent
+    ]
 })
 export class ClassroomModule {
 }

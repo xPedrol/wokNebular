@@ -63,7 +63,7 @@ export class UserService {
       .get<IUserExerciseResult[]>(
         `${SERVER_API_URL}account/disciplines/${disciplineSlug}/courses/${courseSlug}/topics/${topicSlug}/submissions/studentResults`)
       .pipe(map((exerciseResults) => {
-        return exerciseResults = exerciseResults.map((exerciseResult) => {
+        return exerciseResults.map((exerciseResult) => {
           return new UserExerciseResult(exerciseResult);
         });
       }));

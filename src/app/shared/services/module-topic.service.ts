@@ -19,7 +19,8 @@ export class ModuleTopicService {
   ) {
   }
 
-  getModuleTopics(authorities: Authority[], courseSlug: string, disciplineSlug: string): Observable<IModuleTopic[][]> {
+  getModuleTopics(authorities: Authority[], courseSlug: string, disciplineSlug: string, array = false)
+    : Observable<IModuleTopic[][] | IModuleTopic[]> {
     const url = `${this.sF.routeAuthSwitch(authorities)}courses/${courseSlug}/modules/${disciplineSlug}/topics`;
     return this.http.get<IModuleTopic[][]>(`${SERVER_API_URL}${url}`).pipe(map((mTs) => {
       let objMts: IModuleTopic[][] = Object.keys(mTs).map((key) =>
@@ -30,13 +31,41 @@ export class ModuleTopicService {
           return new ModuleTopic(mt);
         });
       });
-      return objMts;
+      if (!array) {
+        return objMts;
+      } else {
+        return objMts.reduce(
+          (acc, val) => acc.concat(val),
+          []
+        );
+      }
     }));
   }
 
   getTopic(authorities: Authority[], disciplineSlug: string, topicSlug: string): Observable<ITopic> {
     const url = `${this.sF.routeAuthSwitch(authorities)}modules/${disciplineSlug}/topics/${topicSlug}/topic`;
     return this.http.get<ITopic>(`${SERVER_API_URL}${url}`);
+  }
+
+  update(authorities: Authority[], moduleTopic: IModuleTopic): Observable<IModuleTopic> {
+    const url = `${this.sF.routeAuthSwitch(authorities)}modules/topics`;
+    return this.http
+      .put<IModuleTopic>(`${SERVER_API_URL}${url}`, moduleTopic);
+  }
+
+  synchronizeMTDates(
+    authorities: Authority[],
+    moduleTopicDates: any
+  ): Observable<any> {
+    const url = `${this.sF.routeAuthSwitch(authorities)}modules/topics/${moduleTopicDates?.moduleTopicId}/updateTimesModuleTopic`;
+    // if (authority === Authority.ADMIN || this.accountService.isAdmin()) {
+    //   url = `${SERVER_API_URL}api/admin/modules/topics/${moduleTopicDates?.moduleTopicId}/updateTimesModuleTopic`;
+    // } else if (authority === Authority.TEACHER) {
+    //   url = `${SERVER_API_URL}api/teacher/modules/topics/${moduleTopicDates?.moduleTopicId}/updateTimesModuleTopic`;
+    // }
+    moduleTopicDates.moduleTopicId = undefined;
+    return this.http
+      .put<IModuleTopic>(`${SERVER_API_URL}${url}`, moduleTopicDates);
   }
 }
 
