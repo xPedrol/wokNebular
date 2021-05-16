@@ -17,6 +17,7 @@ import { ClassroomSubmissionComponent } from './classroom-submission/classroom-s
 import { ClassroomSolutionComponent } from './classroom-solution/classroom-solution.component';
 import { ModuleRankComponent } from './ranks/module-rank/module-rank.component';
 import { ClassroomCourseCardComponent } from './classroom-course-card/classroom-course-card.component';
+import { UsersResultsTablesComponent } from './users-results-tables/users-results-tables.component';
 @NgModule({
   declarations: [
     ClassroomContentComponent,
@@ -31,7 +32,8 @@ import { ClassroomCourseCardComponent } from './classroom-course-card/classroom-
     ClassroomSubmissionComponent,
     ClassroomSolutionComponent,
     ModuleRankComponent,
-    ClassroomCourseCardComponent
+    ClassroomCourseCardComponent,
+    UsersResultsTablesComponent
   ],
     imports: [
         CommonModule,

@@ -77,6 +77,7 @@
             </nb-card>
           </nb-tab>
           <nb-tab tabTitle="Resultados" *ngIf="isTeacher">
+            <app-users-results-tables [authorities]="authorities" [moduleId]="course.modules[0].id"></app-users-results-tables>
           </nb-tab>
           <nb-tab tabTitle="Classificações">
             <app-course-rank [courseId]="course?.id" ></app-course-rank>

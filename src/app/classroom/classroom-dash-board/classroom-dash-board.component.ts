@@ -53,13 +53,23 @@ export class ClassroomDashBoardComponent implements OnInit, OnDestroy {
 
   getSummary(): void {
     this.loadingSummary = true;
-    this.dashboardService.getSummaryStudent().pipe(takeUntil(this.subject$)).subscribe((summary) => {
-      this.summary = summary || null;
-      this.loadingSummary = false;
-    }, () => {
-      this.summary = null;
-      this.loadingSummary = false;
-    });
+    if (this.isParticipating) {
+      this.dashboardService.getSummaryStudent().pipe(takeUntil(this.subject$)).subscribe((summary) => {
+        this.summary = summary || null;
+        this.loadingSummary = false;
+      }, () => {
+        this.summary = null;
+        this.loadingSummary = false;
+      });
+    } else {
+      this.dashboardService.getSummaryTeacher().pipe(takeUntil(this.subject$)).subscribe((summary) => {
+        this.summary = summary || null;
+        this.loadingSummary = false;
+      }, () => {
+        this.summary = null;
+        this.loadingSummary = false;
+      });
+    }
   }
 
   getCourses(refresh = false) {
@@ -74,6 +84,7 @@ export class ClassroomDashBoardComponent implements OnInit, OnDestroy {
     } else {
       this.getLearningCourses(refresh);
     }
+    this.getSummary();
   }
 
   getLearningCourses(refresh = false): void {
@@ -146,7 +157,7 @@ export class ClassroomDashBoardComponent implements OnInit, OnDestroy {
       if (isPrivate) {
         this.courses[index].amountTopics = statistics.amountTopics;
         this.courses[index].amountExercises = statistics.amountExercises;
-      }else{
+      } else {
         this.trainings[index].amountTopics = statistics.amountTopics;
         this.trainings[index].amountExercises = statistics.amountExercises;
       }

@@ -15,7 +15,6 @@ import {SharedFunctions} from '../../shared/shared.functions';
 })
 export class ClassroomCourseComponent implements OnInit, OnDestroy {
   destroy$ = new Subject();
-  selectedStatus = 0;
   authorities: Authority[];
   isTeacher = false;
   course: ICourse;

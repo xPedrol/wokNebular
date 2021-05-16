@@ -24,6 +24,11 @@
                   [icon]="'book-open-outline'"></app-card>
       </div>
     </div>
+    <div class="row align-items-center justify-content-between" *ngIf="!summary && !loadingSummary">
+      <div class="col-12">
+        <app-not-found-card></app-not-found-card>
+      </div>
+    </div>
   </section>
   <section class="mt-3" [nbSpinner]="loadingCourse" nbSpinnerStatus="info" nbSpinnerSize="giant" style="min-height: 100px;">
     <!--    </nb-card-body>-->
