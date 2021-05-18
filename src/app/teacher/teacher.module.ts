@@ -7,6 +7,7 @@ import {ModuleManagerComponent} from './module-manager/module-manager.component'
 import {childrenManagerRoutes} from './teacher-manager.route';
 import {EditModuleTopicsTableComponent} from './edit-module-topics-table/edit-module-topics-table.component';
 import {ReactiveFormsModule} from '@angular/forms';
+import { ModuleTopicManagerComponent } from './module-topic-manager/module-topic-manager.component';
 
 const routes: Routes = [
   {
@@ -22,7 +23,8 @@ const routes: Routes = [
 @NgModule({
   declarations: [
     ModuleManagerComponent,
-    EditModuleTopicsTableComponent
+    EditModuleTopicsTableComponent,
+    ModuleTopicManagerComponent
   ],
     imports: [
         CommonModule,

@@ -47,7 +47,7 @@ export class EditUserComponent implements OnInit {
     this.userForm.get('country').setValue(this.user.profile.country);
     this.userForm.get('mobileNumber').setValue(this.user.profile.mobileNumber);
     this.userForm.get('gender').setValue(this.user.profile.gender);
-    this.userForm.get('birthday').setValue(this.user.profile.birthday);
+    this.userForm.get('birthday').setValue(this.user.profile.birthday.format('yyyy-MM-DD'));
     this.userForm.get('publicProfile').setValue(this.user.profile.publicProfile ? this.user.profile.publicProfile : false);
     this.userForm.get('publicRank').setValue(this.user.profile.publicRank ? this.user.profile.publicRank : false);
     this.getCitiesByUF(true);

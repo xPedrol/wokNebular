@@ -79,10 +79,9 @@
     <div class="form-group col-12 col-md-4">
       <label class="label">Data de nascimento</label>
       <nb-form-field>
-        <input fieldSize="large" fullWidth nbInput placeholder="Data de nascimento" formControlName="birthday"
-               [status]="(userForm.get('birthday').touched) ? (userForm.get('birthday').invalid  ? 'danger' : 'success') : 'basic'"
-               [nbDatepicker]="dateTimePicker">
-        <nb-datepicker #dateTimePicker></nb-datepicker>
+        <input fieldSize="large" fullWidth nbInput placeholder="Data de nascimento" formControlName="birthday" type="date"
+               [status]="(userForm.get('birthday').touched) ? (userForm.get('birthday').invalid  ? 'danger' : 'success') : 'basic'">
+<!--        <nb-datepicker #dateTimePicker></nb-datepicker>-->
       </nb-form-field>
       <ng-container *ngIf="userForm.get('birthday').invalid && userForm.get('birthday').touched">
         <p class="text-danger" *ngIf="userForm.get('birthday').errors?.required">

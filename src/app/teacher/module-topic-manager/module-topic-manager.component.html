@@ -1,0 +1,282 @@
+<div class="row layout-content">
+  <div class="col-12">
+    <app-breadcrumb [courseSlug]="courseSlug" [disciplineSlug]="disciplineSlug" [last]="1"
+                    [routePrefix]="routePrefix"></app-breadcrumb>
+  </div>
+  <div class="col-12 col-lg-5">
+    <nb-card>
+      <nb-card-header class="border-0 mb-2">
+        <!--        <h6 class="header-title-color">Modulo</h6>-->
+      </nb-card-header>
+      <nb-card-body [nbSpinner]="loadingMT" nbSpinnerStatus="info" nbSpinnerSize="giant"
+                    style="min-height: 100px;">
+        <span *ngIf="moduleTopic">
+          <div class="module-header">
+            <img width="80" [src]="moduleTopic.topic.imageUrl" alt="" class="mb-3">
+            <h6 class="header-title-color">{{moduleTopic?.topic?.name}}</h6>
+            <!--            <p>{{module.alias}}</p>-->
+            <span>{{moduleTopic.exercises?.length ? moduleTopic.exercises?.length : 0}} Exercícios</span>
+          </div>
+          <!--        <nb-user size="giant"-->
+          <!--                 [title]="module.alias"-->
+          <!--                 [name]="'Tópicos '+(module.topics?.length?module.topics?.length:0)"-->
+          <!--                 [picture]="module.discipline.imageUrl"-->
+          <!--                 class="border-0"-->
+          <!--        >-->
+          <!--        </nb-user>-->
+        <hr>
+        <div class="row">
+          <!--          <div class="col-12">-->
+          <!--            <h6 style="font-size: 15px;">Informações</h6>-->
+          <!--          </div>-->
+          <div class="col-12 mb-3">
+            <nb-tag *ngIf="moduleTopic?.availableToSee" size="tiny" status="info" appearance="outline" class="m-1"
+                    [text]="'Alunos podem acessar'"></nb-tag>
+            <nb-tag *ngIf="!moduleTopic?.availableToSee" size="tiny" status="danger" appearance="outline" class="m-1"
+                    [text]="'Alunos não podem acessar'"></nb-tag>
+            <nb-tag *ngIf="moduleTopic?.availableToDo" size="tiny" status="info" appearance="outline" class="m-1"
+                    [text]="'Alunos podem fazer'"></nb-tag>
+            <nb-tag *ngIf="!moduleTopic?.availableToDo" size="tiny" status="danger" appearance="outline" class="m-1"
+                    [text]="'Alunos não podem fazer'"></nb-tag>
+            <!--            <hr>-->
+          </div>
+           <div class="col-12">
+            <nb-list [hidden]="loadingMT || (!loadingMT && !moduleTopic)">
+              <nb-list-item class="d-block">
+                <div class="row">
+                  <div class="col-6">
+                    Exercicios A
+                  </div>
+                  <div class="col-6 text-right">
+                    <nb-tag size="tiny" status="success" appearance="outline"
+                            [text]="moduleTopic.numAExercisesCached"></nb-tag>
+                  </div>
+                </div>
+              </nb-list-item>
+              <nb-list-item class="d-block">
+                <div class="row">
+                  <div class="col-6">
+                    Exercicios B
+                  </div>
+                  <div class="col-6 text-right">
+                    <nb-tag size="tiny" status="info" appearance="outline"
+                            [text]="moduleTopic.numBExercisesCached"></nb-tag>
+                  </div>
+                </div>
+              </nb-list-item>
+              <nb-list-item class="d-block">
+                <div class="row">
+                  <div class="col-6">
+                    Exercicios C
+                  </div>
+                  <div class="col-6 text-right">
+                    <nb-tag size="tiny" status="warning" appearance="outline"
+                            [text]="moduleTopic.numCExercisesCached"></nb-tag>
+                  </div>
+                </div>
+              </nb-list-item>
+              <nb-list-item class="d-block">
+                <div class="row">
+                  <div class="col-6">
+                    Exercicios D
+                  </div>
+                  <div class="col-6 text-right">
+                    <nb-tag size="tiny" status="danger" appearance="outline"
+                            [text]="moduleTopic.numDExercisesCached"></nb-tag>
+                  </div>
+                </div>
+              </nb-list-item>
+              <!--              <nb-list-item class="d-block">-->
+              <!--                <div class="row">-->
+              <!--                  <div class="col-6">-->
+              <!--                    Sem nivel-->
+              <!--                  </div>-->
+              <!--                  <div class="col-6 text-right">-->
+              <!--                    <nb-tag size="tiny" status="basic" appearance="outline"-->
+              <!--                            [text]="moduleTopic.num"></nb-tag>-->
+              <!--                  </div>-->
+              <!--                </div>-->
+
+              <!--              </nb-list-item>-->
+            </nb-list>
+            <app-not-found-card
+              *ngIf="!loadingMT && !moduleTopic"></app-not-found-card>
+          </div>
+        </div>
+          </span>
+      </nb-card-body>
+    </nb-card>
+  </div>
+  <div class="col-12 col-lg-7">
+    <nb-card>
+      <nb-card-header class="border-0">
+        <h6 class="header-title-color">Editar</h6>
+      </nb-card-header>
+      <nb-card-body [nbSpinner]="loadingMT" nbSpinnerStatus="info" nbSpinnerSize="giant"
+                    style="min-height: 100px;">
+        <form [formGroup]="mTForm" (ngSubmit)="saveModuleTopic()" *ngIf="moduleTopic">
+          <div class="form-row mt-3">
+            <div class="form-group col-12 col-md-3">
+              <label class="label">Pontuação mínima</label>
+              <nb-form-field>
+                <input fieldSize="large" type="number" nbInput fullWidth placeholder="Pontuação mínima"
+                       formControlName="minScore"
+                       [status]="(mTForm.get('minScore').dirty || mTForm.get('minScore').touched) ? (mTForm.get('minScore').invalid  ? 'danger' : 'success') : 'basic'">
+              </nb-form-field>
+              <ng-container *ngIf="mTForm.get('minScore').invalid && mTForm.get('minScore').touched">
+                <p class="text-danger" *ngIf="mTForm.get('minScore').errors?.required">
+                  Campo obrigatório
+                </p>
+              </ng-container>
+            </div>
+            <div class="form-group col-12 col-md-3">
+              <label class="label">Nota máxima</label>
+              <nb-form-field>
+                <input fieldSize="large" type="number" nbInput fullWidth placeholder="Nota máxima"
+                       formControlName="maxGrade"
+                       [status]="(mTForm.get('maxGrade').dirty || mTForm.get('maxGrade').touched) ? (mTForm.get('maxGrade').invalid  ? 'danger' : 'success') : 'basic'">
+              </nb-form-field>
+              <ng-container *ngIf="mTForm.get('maxGrade').invalid && mTForm.get('maxGrade').touched">
+                <p class="text-danger" *ngIf="mTForm.get('maxGrade').errors?.required">
+                  Campo obrigatório
+                </p>
+              </ng-container>
+            </div>
+            <div class="form-group col-12 col-md-3">
+              <label class="label">Média</label>
+              <nb-form-field>
+                <input fieldSize="large" type="text" nbInput fullWidth placeholder="Média" formControlName="targetScore"
+                       [status]="(mTForm.get('targetScore').dirty || mTForm.get('targetScore').touched) ? (mTForm.get('targetScore').invalid  ? 'danger' : 'success') : 'basic'">
+              </nb-form-field>
+              <ng-container *ngIf="mTForm.get('targetScore').invalid && mTForm.get('targetScore').touched">
+                <p class="text-danger" *ngIf="mTForm.get('targetScore').errors?.required">
+                  Campo obrigatório
+                </p>
+              </ng-container>
+            </div>
+            <div class="form-group col-12 col-md-3">
+              <label class="label">Ordem do tópico</label>
+              <nb-form-field>
+                <input fieldSize="large" type="text" nbInput fullWidth placeholder="Ordem do tópico"
+                       formControlName="itemorder"
+                       [status]="(mTForm.get('itemorder').dirty || mTForm.get('itemorder').touched) ? (mTForm.get('itemorder').invalid  ? 'danger' : 'success') : 'basic'">
+              </nb-form-field>
+              <ng-container *ngIf="mTForm.get('itemorder').invalid && mTForm.get('itemorder').touched">
+                <p class="text-danger" *ngIf="mTForm.get('itemorder').errors?.required">
+                  Campo obrigatório
+                </p>
+              </ng-container>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-12 col-md-6">
+              <label class="label">Data de ativação</label>
+              <nb-form-field>
+                <input fieldSize="large" type="datetime-local" nbInput fullWidth placeholder="Data de ativação"
+                       formControlName="activeTime"
+                       [status]="(mTForm.get('activeTime').dirty || mTForm.get('activeTime').touched) ? (mTForm.get('activeTime').invalid  ? 'danger' : 'success') : 'basic'">
+              </nb-form-field>
+              <ng-container *ngIf="mTForm.get('activeTime').invalid && mTForm.get('activeTime').touched">
+                <p class="text-danger" *ngIf="mTForm.get('activeTime').errors?.required">
+                  Campo obrigatório
+                </p>
+              </ng-container>
+            </div>
+            <div class="form-group col-12 col-md-6">
+              <label class="label">Data de desativação</label>
+              <nb-form-field>
+                <input fieldSize="large" type="datetime-local" nbInput fullWidth placeholder="Data de desativação"
+                       formControlName="deactiveTime"
+                       [status]="(mTForm.get('deactiveTime').dirty || mTForm.get('deactiveTime').touched) ? (mTForm.get('deactiveTime').invalid  ? 'danger' : 'success') : 'basic'">
+              </nb-form-field>
+              <ng-container *ngIf="mTForm.get('deactiveTime').invalid && mTForm.get('deactiveTime').touched">
+                <p class="text-danger" *ngIf="mTForm.get('deactiveTime').errors?.required">
+                  Campo obrigatório
+                </p>
+              </ng-container>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-12 col-md-6">
+              <label class="label">Data de início</label>
+              <nb-form-field>
+                <input fieldSize="large" type="datetime-local" nbInput fullWidth placeholder="Data de início"
+                       formControlName="startTime"
+                       [status]="(mTForm.get('startTime').dirty || mTForm.get('startTime').touched) ? (mTForm.get('startTime').invalid  ? 'danger' : 'success') : 'basic'">
+              </nb-form-field>
+              <ng-container *ngIf="mTForm.get('startTime').invalid && mTForm.get('startTime').touched">
+                <p class="text-danger" *ngIf="mTForm.get('startTime').errors?.required">
+                  Campo obrigatório
+                </p>
+              </ng-container>
+            </div>
+            <div class="form-group col-12 col-md-6">
+              <label class="label">Data de término</label>
+              <nb-form-field>
+                <input fieldSize="large" type="datetime-local" nbInput fullWidth placeholder="Data de término"
+                       formControlName="endTime"
+                       [status]="(mTForm.get('endTime').dirty || mTForm.get('endTime').touched) ? (mTForm.get('endTime').invalid  ? 'danger' : 'success') : 'basic'">
+              </nb-form-field>
+              <ng-container *ngIf="mTForm.get('endTime').invalid && mTForm.get('endTime').touched">
+                <p class="text-danger" *ngIf="mTForm.get('endTime').errors?.required">
+                  Campo obrigatório
+                </p>
+              </ng-container>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-12 col-md-6">
+              <label class="label">Data de pausa</label>
+              <nb-form-field>
+                <input fieldSize="large" type="datetime-local" nbInput fullWidth placeholder="Data de pausa"
+                       formControlName="freezeTime"
+                       [status]="(mTForm.get('freezeTime').dirty || mTForm.get('freezeTime').touched) ? (mTForm.get('freezeTime').invalid  ? 'danger' : 'success') : 'basic'">
+              </nb-form-field>
+              <ng-container *ngIf="mTForm.get('freezeTime').invalid && mTForm.get('freezeTime').touched">
+                <p class="text-danger" *ngIf="mTForm.get('freezeTime').errors?.required">
+                  Campo obrigatório
+                </p>
+              </ng-container>
+            </div>
+            <div class="form-group col-12 col-md-6">
+              <label class="label">Data de remover pausa</label>
+              <nb-form-field>
+                <input fieldSize="large" type="datetime-local" nbInput fullWidth placeholder="Data de remover pausa"
+                       formControlName="unfreezeTime"
+                       [status]="(mTForm.get('unfreezeTime').dirty || mTForm.get('unfreezeTime').touched) ? (mTForm.get('unfreezeTime').invalid  ? 'danger' : 'success') : 'basic'">
+              </nb-form-field>
+              <ng-container *ngIf="mTForm.get('unfreezeTime').invalid && mTForm.get('unfreezeTime').touched">
+                <p class="text-danger" *ngIf="mTForm.get('unfreezeTime').errors?.required">
+                  Campo obrigatório
+                </p>
+              </ng-container>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-12 col-md-12">
+      <span>
+        <nb-checkbox formControlName="activated"
+                     [status]="(mTForm.get('activated').dirty || mTForm.get('activated').touched) ? (mTForm.get('activated').invalid  ? 'danger' : 'info') : 'basic'">
+          Ativado
+        </nb-checkbox>
+        <ng-container *ngIf="mTForm.get('activated').invalid && mTForm.get('activated').touched">
+          <p class="text-danger" *ngIf="mTForm.get('activated').errors?.required">
+            Campo obrigatório
+          </p>
+        </ng-container>
+      </span>
+            </div>
+            <!--    <div class="col-12 col-md-6">-->
+            <!--        -->
+            <!--    </div>-->
+          </div>
+          <div class="form-row">
+            <div class="form-group col-12 text-right">
+              <button nbButton status="info" type="submit" size="medium" [disabled]="mTForm.invalid">Salvar</button>
+            </div>
+          </div>
+        </form>
+      </nb-card-body>
+    </nb-card>
+  </div>
+</div>

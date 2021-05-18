@@ -67,5 +67,13 @@ export class ModuleTopicService {
     return this.http
       .put<IModuleTopic>(`${SERVER_API_URL}${url}`, moduleTopicDates);
   }
+
+  getModuleTopicBySlugs(authorities: Authority[], courseSlug: string, disciplineSlug: string, topicSlug: string): Observable<IModuleTopic> {
+    const url = `${this.sF.routeAuthSwitch(authorities)}courses/${courseSlug}/disciplines/${disciplineSlug}/topics/${topicSlug}`;
+    return this.http
+      .get<IModuleTopic>(`${SERVER_API_URL}${url}`).pipe(map((mT) => {
+        return new ModuleTopic(mT);
+      }));
+  }
 }
 

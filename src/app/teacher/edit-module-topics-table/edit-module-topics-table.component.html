@@ -64,6 +64,9 @@
           <div class="cell text-right" data-title="action">
             <div class="input-table">
               <button nbButton ghost status="basic" (click)="selectedIndex = i">Salvar
+              </button>
+              <button nbButton ghost status="info" (click)="selectedIndex = i" [routerLink]="['topic',mT.topic.slug]">
+                Detalhes
                 <nb-icon icon="save-outline"></nb-icon>
               </button>
             </div>

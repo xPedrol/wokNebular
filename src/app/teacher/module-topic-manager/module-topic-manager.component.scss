@@ -1,0 +1,15 @@
+nb-user{
+  border: none;
+}
+.module-header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+//.module-header .description{
+//  margin-top: 10px;
+//}
+.module-header span{
+  font-weight: bold;
+}

@@ -7,6 +7,7 @@ import * as moment from 'moment';
 import {ModuleTopicService} from '../../shared/services/module-topic.service';
 import {Authority} from '../../shared/constants/authority.constants';
 import {NbToastrService} from '@nebular/theme';
+import {SharedFunctions} from '../../shared/shared.functions';
 
 @Component({
   selector: 'app-edit-module-topics-table',
@@ -17,6 +18,7 @@ export class EditModuleTopicsTableComponent implements OnInit {
   @Input() moduleTopics: IModuleTopic[];
   @Input() authorities: Authority[];
   selectedIndex: number;
+  routePrefix = '/';
   selectedModuleTopic: IModuleTopic;
   mTForm: FormGroup;
   subject = new Subject();
@@ -27,7 +29,7 @@ export class EditModuleTopicsTableComponent implements OnInit {
     },
     {
       title: 'Tópico',
-      class: 'text-left'
+      class: 'text-center'
     },
     {
       title: 'Pontuação max.',
@@ -59,11 +61,13 @@ export class EditModuleTopicsTableComponent implements OnInit {
     private fb: FormBuilder,
     private moduleTopicService: ModuleTopicService,
     private toastService: NbToastrService,
+    private sF: SharedFunctions
   ) {
   }
 
 
   ngOnInit(): void {
+    this.routePrefix = this.sF.routeAuthSwitch(this.authorities, true);
     // this.mTForm = new FormGroup({
     //   moduleTopics: new FormControl([])
     // });
