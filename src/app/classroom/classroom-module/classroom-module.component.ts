@@ -7,6 +7,7 @@ import {Subject} from 'rxjs';
 import {IReportResults} from '../../shared/models/module-topic-user-result.model';
 import {SharedFunctions} from '../../shared/shared.functions';
 import {UserService} from '../../shared/services/user.service';
+import {IUserTopicResult} from '../../shared/models/user/user-topic-result.model';
 
 @Component({
   selector: 'app-classroom-module',
@@ -15,7 +16,7 @@ import {UserService} from '../../shared/services/user.service';
 })
 export class ClassroomModuleComponent implements OnInit, OnDestroy {
   selectedTopic: IModuleTopic;
-  selectedTResults: IReportResults;
+  selectedTResults: IUserTopicResult;
   authorities: Authority[];
   moduleTopics: IModuleTopic[][];
   subject$ = new Subject();

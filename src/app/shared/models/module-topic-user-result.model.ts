@@ -1,15 +1,17 @@
-import {IUserBasic} from './user/user-basic.model';
-import {ITopicBasic} from './basic/topic-basic.model';
-
-
 export interface IReportResults {
   maxGrade?: number;
   minScore?: number;
   point?: number;
   targetScore?: number;
-  user?: IUserBasic;
-  topic?: ITopicBasic;
+  emailUser?: string;
+  activatedUser?: boolean;
+  imageUrlTopic?: string;
+  imageUrlUser?: string;
+  loginUser?: string;
   idModuleTopic?: number;
+  langKeyTopic?: string;
+  nameTopic?: string;
+  slugTopic?: string;
   numA?: number;
   numB?: number;
   numC?: number;
@@ -18,25 +20,61 @@ export interface IReportResults {
   numBresolved?: number;
   numCresolved?: number;
   numDresolved?: number;
+
+  getProgress(): number;
 }
 
 export class ReportResults implements IReportResults {
-  constructor(
-    public maxGrade?: number,
-    public minScore?: number,
-    public point?: number,
-    public targetScore?: number,
-    public user?: IUserBasic,
-    public topic?: ITopicBasic,
-    public idModuleTopic?: number,
-    public numA?: number,
-    public numB?: number,
-    public numC?: number,
-    public numD?: number,
-    public numAresolved?: number,
-    public numBresolved?: number,
-    public numCresolved?: number,
-    public numDresolved?: number
-  ) {
+  activatedUser?: boolean;
+  emailUser?: string;
+  idModuleTopic?: number;
+  imageUrlTopic?: string;
+  imageUrlUser?: string;
+  langKeyTopic?: string;
+  loginUser?: string;
+  maxGrade?: number;
+  minScore?: number;
+  nameTopic?: string;
+  numA?: number;
+  numAresolved?: number;
+  numB?: number;
+  numBresolved?: number;
+  numC?: number;
+  numCresolved?: number;
+  numD?: number;
+  numDresolved?: number;
+  point?: number;
+  slugTopic?: string;
+  targetScore?: number;
+
+  constructor(result: IReportResults) {
+    this.activatedUser = result.activatedUser;
+    this.emailUser = result.emailUser;
+    this.idModuleTopic = result.idModuleTopic;
+    this.imageUrlTopic = result.imageUrlTopic;
+    this.imageUrlUser = result.imageUrlUser;
+    this.langKeyTopic = result.langKeyTopic;
+    this.loginUser = result.loginUser;
+    this.maxGrade = result.maxGrade;
+    this.minScore = result.minScore;
+    this.nameTopic = result.nameTopic;
+    this.numA = result.numA;
+    this.numAresolved = result.numAresolved;
+    this.numB = result.numB;
+    this.numBresolved = result.numBresolved;
+    this.numC = result.numC;
+    this.numCresolved = result.numCresolved;
+    this.numD = result.numD;
+    this.numDresolved = result.numDresolved;
+    this.point = result.point;
+    this.slugTopic = result.slugTopic;
+    this.targetScore = result.targetScore;
+  }
+
+  getProgress(): number {
+    if (this?.point && this?.targetScore) {
+      return (100 * this?.point) / this?.targetScore;
+    }
+    return 0;
   }
 }

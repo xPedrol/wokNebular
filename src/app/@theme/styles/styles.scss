@@ -133,3 +133,8 @@ hr {
 *{
   scroll-behavior: smooth;
 }
+
+.scroll{
+  max-height: 600px;
+  overflow: auto;
+}

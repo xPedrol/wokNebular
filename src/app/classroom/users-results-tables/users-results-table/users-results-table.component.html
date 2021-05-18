@@ -1,0 +1,35 @@
+<div class="wrap-table100 border-0">
+  <div class="scroll">
+    <div class="table">
+
+      <div class="row header">
+        <div class="cell" [ngClass]="column.class" *ngFor="let column of columns">
+          {{column?.title}}
+        </div>
+      </div>
+
+      <div class="row" *ngFor="let result of results">
+        <div class="cell text-left" data-title="Usuário">
+          {{result?.nameTopic}}
+        </div>
+        <div class="cell text-left" data-title="Pontos">
+          <nb-progress-bar *ngIf="result.getProgress() > 0" [value]="result.getProgress()" status="info"><span style="font-size: 12px">{{result?.point}}
+            / {{result?.targetScore}}</span></nb-progress-bar>
+          <span  style="font-size: 12px" *ngIf="result.getProgress() <= 0">{{result?.point}}
+            / {{result?.targetScore}}</span>
+        </div>
+        <div class="cell text-left m-md-2" data-title="Exercícios">
+          <nb-tag class="m-1" status="success" size="tiny" appearance="outline"
+                  [text]="'A: '+ result?.numA+' / '+result?.numAresolved"></nb-tag>
+          <nb-tag class="m-1" status="info" size="tiny" appearance="outline"
+                  [text]="'B: '+ result?.numB+' / '+result?.numBresolved"></nb-tag>
+          <nb-tag class="m-1" status="warning" size="tiny" appearance="outline"
+                  [text]="'C: '+ result?.numC+' / '+result?.numCresolved"></nb-tag>
+          <nb-tag class="m-1" status="danger" size="tiny" appearance="outline"
+                  [text]="'D: '+ result?.numD+' / '+result?.numDresolved"></nb-tag>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

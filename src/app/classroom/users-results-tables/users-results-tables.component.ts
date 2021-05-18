@@ -15,6 +15,7 @@ export class UsersResultsTablesComponent implements OnInit, OnDestroy {
   @Input() authorities: Authority[];
   @Input() moduleId: number;
   usersResults: IReportResults[][];
+  loadingResults = true;
 
   constructor(
     private userService: UserService
@@ -31,11 +32,12 @@ export class UsersResultsTablesComponent implements OnInit, OnDestroy {
   }
 
   getUsersResults() {
+    this.loadingResults = true;
     this.userService.getReportResultsByModule(this.authorities, this.moduleId).pipe(takeUntil(this.subject))
       .subscribe((results) => {
         this.usersResults = results || [];
-        console.warn(this.usersResults);
-      });
+        this.loadingResults = false;
+      }, () => this.loadingResults = false);
   }
 
 }

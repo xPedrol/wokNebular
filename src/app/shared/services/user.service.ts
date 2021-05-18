@@ -14,7 +14,7 @@ import {ISubmission} from '../models/submission.model';
 import {SharedFunctions} from '../shared.functions';
 import {ISkillBasic} from '../models/basic/skill-basic.model';
 import {IUserSkill, UserSkill} from '../models/user/user-skill.model';
-import {IReportResults} from '../models/module-topic-user-result.model';
+import {IReportResults, ReportResults} from '../models/module-topic-user-result.model';
 
 @Injectable({
   providedIn: 'root'
@@ -131,6 +131,21 @@ export class UserService {
   ): Observable<IReportResults[][]> {
     const url = `${this.sF.routeAuthSwitch(authorities)}modules/${moduleId}/reportResults`;
     return this.http
-      .get<IReportResults[][]>(`${SERVER_API_URL}${url}`);
+      .get<IReportResults[][]>(`${SERVER_API_URL}${url}`).pipe(map((results) => {
+        results = Object.keys(results).map((key) => {
+          return results ? results[key] : [];
+        });
+        results = results.map((results1) => {
+          return Object.keys(results1).map((key) => {
+            return results1 ? results1[key] : {};
+          });
+        });
+        results = results.map(results1 => {
+          return results1.map(result => {
+            return new ReportResults(result);
+          });
+        });
+        return results;
+      }));
   }
 }

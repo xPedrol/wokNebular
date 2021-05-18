@@ -1,1 +1,14 @@
-<p>users-results-tables works!</p>
+<div class="row scroll" [nbSpinner]="loadingResults" nbSpinnerStatus="info"
+     nbSpinnerSize="giant" style="min-height: 100px;">
+  <div class="col-12" *ngFor="let results of usersResults">
+    <nb-card>
+      <nb-card-header class="border-0">
+        <nb-user [name]="results[0].loginUser" [title]="results[0].emailUser"
+                 [picture]="results[0].imageUrlUser"></nb-user>
+      </nb-card-header>
+      <nb-card-body class="border-0">
+        <app-users-results-table [results]="results"></app-users-results-table>
+      </nb-card-body>
+    </nb-card>
+  </div>
+</div>
