@@ -50,13 +50,13 @@
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background: #3d3c42;
+  background: nb-theme(scrollbar-thumb);
   border-radius: 10px;
 }
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-  background: #555;
+  background: nb-theme(scrollbar-thumb-hover);
 }
 
 html {
@@ -127,11 +127,12 @@ hr {
 .header-title-color {
   color: nb-theme(header-title-color)
 }
-*{
+
+* {
   scroll-behavior: smooth;
 }
 
-.scroll{
+.scroll {
   max-height: 600px;
   overflow: auto;
 }

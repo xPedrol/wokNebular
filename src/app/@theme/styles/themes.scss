@@ -31,7 +31,10 @@ $nb-themes: nb-register-theme((
   user-name-text-font-family:'Poppins',
   user-title-text-font-family:'Poppins',
   font-family-primary:'Poppins',
-  header-title-color:#8f9bb3
+  header-title-color:#8f9bb3,
+  scrollbar-thumb:#b0b1b3,
+  scrollbar-thumb-hover:#919191,
+  hr-background:#edf1f7
 ), default, default);
 
 $nb-themes: nb-register-theme((
@@ -48,8 +51,8 @@ $nb-themes: nb-register-theme((
   card-header-with-select-padding-bottom: 0.5rem,
   select-min-width: 6rem,
   slide-out-background: #252547,
-  tabset-divider-color:#29292e,
-  hr-background:#29292e,
+  tabset-divider-color:#2a2a42,
+  hr-background:#2a2a42,
   slide-out-shadow-color: 2px 0 3px #29157a,
   slide-out-shadow-color-rtl: -2px 0 3px #29157a,
   list-item-divider-width:0,
@@ -57,9 +60,10 @@ $nb-themes: nb-register-theme((
   user-name-text-font-family:'Poppins',
   user-title-text-font-family:'Poppins',
   font-family-primary:'Poppins',
-  header-title-color:#8f9bb3
+  header-title-color:#8f9bb3,
+  scrollbar-thumb:#2a2a42,
+  scrollbar-thumb-hover:#6f5f8b,
 ), cosmic, cosmic);
-
 $nb-themes: nb-register-theme((
   spinner-info-background-color: unset,
   layout-padding-top: 2.25rem,
@@ -81,7 +85,11 @@ $nb-themes: nb-register-theme((
   user-name-text-font-family:'Poppins',
   user-title-text-font-family:'Poppins',
   font-family-primary:'Poppins',
-  header-title-color:#8f9bb3
+  header-title-color:#8f9bb3,
+  scrollbar-thumb:#b0b1b3,
+  scrollbar-thumb-hover:#919191,
+  hr-background:#edf1f7,
+  tabset-divider-color:#dedede,
 ), corporate, corporate);
 
 $nb-themes: nb-register-theme((
@@ -120,6 +128,8 @@ $nb-themes: nb-register-theme((
   shadow:0 0.5rem 2rem 0 #121214,
   card-hover-background:rgb(41, 41, 46),
   hr-background:#29292e,
+  scrollbar-thumb:#3d3c42,
+  scrollbar-thumb-hover:#555,
   list-item-divider-width:0,
   header-title-color:#8f9bb3
   //header-shadow:#0095ff,
