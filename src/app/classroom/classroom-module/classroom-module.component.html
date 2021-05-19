@@ -17,7 +17,8 @@
 <!--    <nb-card status="info">-->
       <h6 class="mb-3 header-title-color">Tópicos</h6>
 <!--      <nb-card-body>-->
-        <app-tree-view [moduleTopics]="moduleTopics" (justSelectModuleTopic)="selectTopic($event)"></app-tree-view>
+        <app-tree-view *ngIf="moduleTopics && moduleTopics?.length > 0" [moduleTopics]="moduleTopics" (justSelectModuleTopic)="selectTopic($event)"></app-tree-view>
+    <app-not-found-card class="m-5" *ngIf="!moduleTopics || moduleTopics?.length === 0"></app-not-found-card>
 <!--      </nb-card-body>-->
 <!--    </nb-card>-->
   </div>
@@ -25,7 +26,7 @@
     <div class="custom-sticky">
       <div *ngIf="!selectedTopic">
         <nb-card>
-          <nb-card-header class="border-0"><h6 style="color: #8f9bb3">Descricao de tópico</h6></nb-card-header>
+          <nb-card-header class="border-0"><h6 class="header-title-color">Descricao de tópico</h6></nb-card-header>
           <nb-card-body class="text-center">
             Selecione um curso
           </nb-card-body>

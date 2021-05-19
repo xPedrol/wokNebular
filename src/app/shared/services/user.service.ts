@@ -127,11 +127,12 @@ export class UserService {
 
   getReportResultsByModule(
     authorities: Authority[],
-    moduleId: number
+    moduleId: number,
+    options: any
   ): Observable<IReportResults[][]> {
     const url = `${this.sF.routeAuthSwitch(authorities)}modules/${moduleId}/reportResults`;
     return this.http
-      .get<IReportResults[][]>(`${SERVER_API_URL}${url}`).pipe(map((results) => {
+      .get<IReportResults[][]>(`${SERVER_API_URL}${url}`, {params: options}).pipe(map((results) => {
         results = Object.keys(results).map((key) => {
           return results ? results[key] : [];
         });

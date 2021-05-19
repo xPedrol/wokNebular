@@ -18,7 +18,7 @@ import {takeUntil} from 'rxjs/operators';
 export class ClassroomDashBoardComponent implements OnInit, OnDestroy {
   on = true;
   isTeacher = false;
-  isParticipating = false;
+  isParticipating = true;
   courses: ICourse[];
   trainings?: ICourse[];
   showAll = false;
@@ -47,6 +47,7 @@ export class ClassroomDashBoardComponent implements OnInit, OnDestroy {
     this.getSummary();
     if (this.authorities && this.authorities.includes(Authority.TEACHER)) {
       this.isTeacher = true;
+      this.isParticipating = false;
     }
     this.getCourses();
   }

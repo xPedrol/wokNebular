@@ -1,5 +1,5 @@
 <nb-card size="medium" style="width: 500px;">
-  <nb-card-header>Adicionar treinamento</nb-card-header>
+  <nb-card-header class="border-0">Adicionar treinamento</nb-card-header>
   <nb-card-body [nbSpinner]="loadingCourses && !isPrivate" nbSpinnerStatus="info" nbSpinnerSize="giant" style="min-height: 100px;">
     <nb-form-field size="small" *ngIf="options && !isPrivate">
       <input
@@ -28,10 +28,10 @@
         <h6>Selecione um curso</h6>
       </div>
       <div class="col-12 mt-5" *ngIf="selectedCourse || isPrivate">
-        <small *ngIf="isPrivate">Digite o codigo do curso e selecione um time para se matricular</small>
+<!--        <small *ngIf="isPrivate">Digite o codigo do curso e selecione um time para se matricular</small>-->
         <nb-card>
-          <nb-card-header>{{selectedCourse?selectedCourse?.name:'Curso'}}</nb-card-header>
-          <nb-card-body>
+          <nb-card-header class="border-0">{{selectedCourse?selectedCourse?.name:'Curso'}}</nb-card-header>
+          <nb-card-body class="border-0">
             <form [formGroup]="form">
               <div class="row">
                 <div class="col-6">
@@ -63,14 +63,14 @@
               </div>
             </form>
           </nb-card-body>
-          <nb-card-footer>
-            <p>Code:{{selectedCourse?selectedCourse?.passcode: 'privado'}}</p>
+          <nb-card-footer class="border-0">
+            <p>Code:{{selectedCourse?selectedCourse?.passcode: ' ---'}}</p>
           </nb-card-footer>
         </nb-card>
       </div>
     </div>
   </nb-card-body>
-  <nb-card-footer>
+  <nb-card-footer class="border-0">
     <div class="row">
       <div class="col-12 text-right">
         <button nbButton status="basic" outline size="small" (click)="close()" class="m-1">Fechar

@@ -7,7 +7,6 @@
           {{column?.title}}
         </div>
       </div>
-
       <div class="row" *ngFor="let result of results">
         <div class="cell text-left" data-title="Usuário">
           {{result?.nameTopic}}
@@ -15,7 +14,7 @@
         <div class="cell text-left" data-title="Pontos">
           <nb-progress-bar *ngIf="result.getProgress() > 0" [value]="result.getProgress()" status="info"><span style="font-size: 12px">{{result?.point}}
             / {{result?.targetScore}}</span></nb-progress-bar>
-          <span  style="font-size: 12px" *ngIf="result.getProgress() <= 0">{{result?.point}}
+          <span  style="font-size: 14px" *ngIf="result.getProgress() <= 0">{{result?.point}}
             / {{result?.targetScore}}</span>
         </div>
         <div class="cell text-left m-md-2" data-title="Exercícios">

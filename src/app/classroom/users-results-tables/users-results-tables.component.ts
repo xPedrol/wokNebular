@@ -16,6 +16,7 @@ export class UsersResultsTablesComponent implements OnInit, OnDestroy {
   @Input() moduleId: number;
   usersResults: IReportResults[][];
   loadingResults = true;
+  options = {size: 2, page: 0};
 
   constructor(
     private userService: UserService
@@ -33,11 +34,22 @@ export class UsersResultsTablesComponent implements OnInit, OnDestroy {
 
   getUsersResults() {
     this.loadingResults = true;
-    this.userService.getReportResultsByModule(this.authorities, this.moduleId).pipe(takeUntil(this.subject))
+    this.userService.getReportResultsByModule(this.authorities, this.moduleId, this.options).pipe(takeUntil(this.subject))
       .subscribe((results) => {
-        this.usersResults = results || [];
+        if (this.usersResults && this.usersResults.length > 0) {
+          this.usersResults = [...this.usersResults, ...results];
+        } else {
+          this.usersResults = results || [];
+        }
         this.loadingResults = false;
       }, () => this.loadingResults = false);
   }
 
+  updateResults() {
+    console.warn('teste');
+    if (!this.loadingResults) {
+      this.options.page++;
+      this.getUsersResults();
+    }
+  }
 }

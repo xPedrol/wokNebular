@@ -106,21 +106,26 @@ export class ModuleTopic implements IModuleTopic {
     endTime = moment(endTime);
     if (moduleTopics && moduleTopics?.length > 0) {
       moduleTopics?.forEach((moduleTopic) => {
-        moduleTopic.activeTime = moment(startDate).add(1, 'minute');
-        moduleTopic.deactiveTime = moment(endTime).subtract(1, 'minute');
-        moduleTopic.startTime = moment(moduleTopic.activeTime).add(1, 'minute');
-        moduleTopic.endTime = moment(moduleTopic.deactiveTime).subtract(
-          1,
-          'minute'
-        );
-        moduleTopic.freezeTime = moment(moduleTopic.startTime).add(1, 'minute');
-        moduleTopic.unfreezeTime = moment(moduleTopic.endTime).subtract(
-          1,
-          'minute'
-        );
+        moduleTopic = ModuleTopic.synchronizeMTDates(moduleTopic, startDate, endTime);
       });
     }
     return moduleTopics;
+  }
+
+  static synchronizeMTDates(moduleTopic: IModuleTopic, startDate: string | Moment, endTime: string | Moment): IModuleTopic {
+    moduleTopic.activeTime = moment(startDate).add(1, 'minute');
+    moduleTopic.deactiveTime = moment(endTime).subtract(1, 'minute');
+    moduleTopic.startTime = moment(moduleTopic.activeTime).add(1, 'minute');
+    moduleTopic.endTime = moment(moduleTopic.deactiveTime).subtract(
+      1,
+      'minute'
+    );
+    moduleTopic.freezeTime = moment(moduleTopic.startTime).add(1, 'minute');
+    moduleTopic.unfreezeTime = moment(moduleTopic.endTime).subtract(
+      1,
+      'minute'
+    );
+    return moduleTopic;
   }
 
   public dateActiveCompare(): boolean {

@@ -4,10 +4,12 @@ import {ActivatedRoute} from '@angular/router';
 import {SharedFunctions} from '../../shared/shared.functions';
 import {Authority} from '../../shared/constants/authority.constants';
 import {ModuleTopicService} from '../../shared/services/module-topic.service';
-import {IModuleTopic} from '../../shared/models/module-topic.model';
+import {IModuleTopic, ModuleTopic} from '../../shared/models/module-topic.model';
 import {takeUntil} from 'rxjs/operators';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {DATE_TIME_FORMAT} from '../../shared/constants/input.constants';
+import {NbToastrService} from '@nebular/theme';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-module-topic-manager',
@@ -28,7 +30,8 @@ export class ModuleTopicManagerComponent implements OnInit, OnDestroy {
   constructor(
     private activatedRoute: ActivatedRoute,
     private moduleTopicService: ModuleTopicService,
-    private sF: SharedFunctions
+    private sF: SharedFunctions,
+    private toastService: NbToastrService
   ) {
   }
 
@@ -70,8 +73,12 @@ export class ModuleTopicManagerComponent implements OnInit, OnDestroy {
   }
 
   saveModuleTopic() {
-
+    this.updateModuleTopicObj();
+    this.moduleTopicService.update(this.authorities, this.moduleTopic).subscribe((mT) => {
+      this.toastService.show('', 'Salvo com sucesso', {status: 'success'});
+    });
   }
+
   updateForm() {
     this.mTForm.get('minScore').setValue(this.moduleTopic.minScore);
     this.mTForm.get('maxGrade').setValue(this.moduleTopic.maxGrade);
@@ -84,5 +91,29 @@ export class ModuleTopicManagerComponent implements OnInit, OnDestroy {
     this.mTForm.get('freezeTime').setValue(this.moduleTopic.freezeTime.format(DATE_TIME_FORMAT));
     this.mTForm.get('unfreezeTime').setValue(this.moduleTopic.unfreezeTime.format(DATE_TIME_FORMAT));
     this.mTForm.get('activated').setValue(this.moduleTopic.activated ? this.moduleTopic.activated : false);
+  }
+
+  updateModuleTopicObj() {
+    this.moduleTopic.minScore = this.mTForm.get('minScore').value;
+    this.moduleTopic.maxGrade = this.mTForm.get('maxGrade').value;
+    this.moduleTopic.targetScore = this.mTForm.get('targetScore').value;
+    this.moduleTopic.itemorder = this.mTForm.get('itemorder').value;
+    this.moduleTopic.activeTime = moment(this.mTForm.get('activeTime').value);
+    this.moduleTopic.deactiveTime = moment(this.mTForm.get('deactiveTime').value);
+    this.moduleTopic.startTime = moment(this.mTForm.get('startTime').value);
+    this.moduleTopic.endTime = moment(this.mTForm.get('endTime').value);
+    this.moduleTopic.freezeTime = moment(this.mTForm.get('freezeTime').value);
+    this.moduleTopic.unfreezeTime = moment(this.mTForm.get('unfreezeTime').value);
+    this.moduleTopic.activated = this.mTForm.get('activated').value;
+  }
+
+  synchronizeMTDates() {
+    console.warn(this.moduleTopic.module.course);
+    this.moduleTopic = ModuleTopic.synchronizeMTDates(
+      this.moduleTopic,
+      this.moduleTopic.module.course.startDate,
+      this.moduleTopic.module.course.endTime
+    );
+    this.updateForm();
   }
 }
