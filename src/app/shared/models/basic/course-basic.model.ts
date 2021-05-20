@@ -1,5 +1,4 @@
-
-import { Moment } from 'moment';
+import {Moment} from 'moment';
 import {IAffiliationBasic} from './affiliation-basic.model';
 import {IUserBasic} from '../user/user-basic.model';
 
@@ -13,12 +12,20 @@ export interface ICoursebasic {
 }
 
 export class Coursebasic implements ICoursebasic {
-  constructor(
-    public id?: number,
-    public name?: string,
-    public affiliation?: IAffiliationBasic,
-    public teacher?: IUserBasic,
-    public startDate?: Moment,
-    public endTime?: Moment
-  ) {}
+  affiliation: IAffiliationBasic;
+  endTime: moment.Moment;
+  id: number;
+  name: string;
+  startDate: moment.Moment;
+  teacher: IUserBasic;
+
+  constructor(course: ICoursebasic) {
+    this.affiliation = course.affiliation;
+    this.endTime = course.endTime;
+    this.id = course.id;
+    this.name = course.name;
+    this.startDate = course.startDate;
+    this.teacher = course.teacher;
+  }
+
 }

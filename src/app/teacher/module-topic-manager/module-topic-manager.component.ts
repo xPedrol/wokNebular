@@ -10,6 +10,8 @@ import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {DATE_TIME_FORMAT} from '../../shared/constants/input.constants';
 import {NbToastrService} from '@nebular/theme';
 import * as moment from 'moment';
+import {ICoursebasic} from '../../shared/models/basic/course-basic.model';
+import {CourseService} from '../../shared/services/course.service';
 
 @Component({
   selector: 'app-module-topic-manager',
@@ -26,10 +28,12 @@ export class ModuleTopicManagerComponent implements OnInit, OnDestroy {
   loadingMT = true;
   routePrefix = '/';
   mTForm: FormGroup;
+  course: ICoursebasic;
 
   constructor(
     private activatedRoute: ActivatedRoute,
     private moduleTopicService: ModuleTopicService,
+    private courseService: CourseService,
     private sF: SharedFunctions,
     private toastService: NbToastrService
   ) {
@@ -54,7 +58,6 @@ export class ModuleTopicManagerComponent implements OnInit, OnDestroy {
     this.moduleTopicService.getModuleTopicBySlugs(this.authorities, this.courseSlug, this.disciplineSlug, this.topicSlug)
       .pipe(takeUntil(this.subject)).subscribe((mT) => {
       this.moduleTopic = mT || undefined;
-      this.loadingMT = false;
       this.mTForm = new FormGroup({
         minScore: new FormControl(null, [Validators.required]),
         maxGrade: new FormControl(null, [Validators.required]),
@@ -68,6 +71,7 @@ export class ModuleTopicManagerComponent implements OnInit, OnDestroy {
         unfreezeTime: new FormControl(null, [Validators.required]),
         activated: new FormControl(false)
       });
+      this.findBasicCourseByModuleId();
       this.updateForm();
     }, () => this.loadingMT = false);
   }
@@ -108,12 +112,18 @@ export class ModuleTopicManagerComponent implements OnInit, OnDestroy {
   }
 
   synchronizeMTDates() {
-    console.warn(this.moduleTopic.module.course);
     this.moduleTopic = ModuleTopic.synchronizeMTDates(
       this.moduleTopic,
-      this.moduleTopic.module.course.startDate,
-      this.moduleTopic.module.course.endTime
+      this.course.startDate,
+      this.course.endTime
     );
     this.updateForm();
+  }
+
+  findBasicCourseByModuleId(): void {
+    this.courseService.findBasicCourseByModuleId(this.moduleTopic?.module?.id).subscribe((course) => {
+      this.course = course || undefined;
+      this.loadingMT = false;
+    }, () => this.loadingMT = false);
   }
 }

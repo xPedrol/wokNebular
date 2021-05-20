@@ -19,6 +19,7 @@ import { ModuleRankComponent } from './ranks/module-rank/module-rank.component';
 import { ClassroomCourseCardComponent } from './classroom-course-card/classroom-course-card.component';
 import { UsersResultsTablesComponent } from './users-results-tables/users-results-tables.component';
 import { UsersResultsTableComponent } from './users-results-tables/users-results-table/users-results-table.component';
+import { SubmitExerciseResolutionComponent } from './submit-exercise-resolution/submit-exercise-resolution.component';
 @NgModule({
   declarations: [
     ClassroomContentComponent,
@@ -35,7 +36,8 @@ import { UsersResultsTableComponent } from './users-results-tables/users-results
     ModuleRankComponent,
     ClassroomCourseCardComponent,
     UsersResultsTablesComponent,
-    UsersResultsTableComponent
+    UsersResultsTableComponent,
+    SubmitExerciseResolutionComponent
   ],
     imports: [
         CommonModule,

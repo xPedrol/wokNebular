@@ -114,7 +114,7 @@
       </nb-card-header>
       <nb-card-body [nbSpinner]="loadingMT" nbSpinnerStatus="info" nbSpinnerSize="giant"
                     style="min-height: 100px;">
-        <form [formGroup]="mTForm" (ngSubmit)="saveModuleTopic()" *ngIf="moduleTopic">
+        <form [formGroup]="mTForm" (ngSubmit)="saveModuleTopic()" *ngIf="moduleTopic && !loadingMT">
           <div class="form-row mt-3">
             <div class="form-group col-12 col-md-3">
               <label class="label">Pontuação mínima</label>

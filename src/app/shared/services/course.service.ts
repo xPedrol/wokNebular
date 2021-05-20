@@ -8,6 +8,7 @@ import {AccountService} from './account.service';
 import {ICourseStatistics} from '../models/course-statistics.model';
 import {SharedFunctions} from '../shared.functions';
 import {Authority} from '../constants/authority.constants';
+import {Coursebasic, ICoursebasic} from '../models/basic/course-basic.model';
 
 @Injectable({
   providedIn: 'root'
@@ -81,6 +82,17 @@ export class CourseService {
       .get<ICourse>(`${SERVER_API_URL}${url}`).pipe(map((course) => {
         if (course) {
           return new Course(course);
+        }
+        return null;
+      }));
+  }
+
+  findBasicCourseByModuleId(moduleId: number): Observable<ICoursebasic> {
+    const url = `teacher/${moduleId}/modules/course`;
+    return this.http
+      .get<ICoursebasic>(`${SERVER_API_URL}${url}`).pipe(map((course) => {
+        if (course) {
+          return new Coursebasic(course);
         }
         return null;
       }));
