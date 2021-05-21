@@ -11,14 +11,10 @@ import {takeUntil} from 'rxjs/operators';
 })
 export class CourseRankComponent implements OnInit, OnDestroy {
   destroy$ = new Subject();
-  @Input() courseId: number;
-  courseRank: IUserRank[];
+  @Input() courseRank: IUserRank[];
   rankColumns = RankTableColumn;
-  loadingCourseRank = true;
 
-  constructor(
-    private rankService: UserRankService
-  ) {
+  constructor() {
   }
 
   ngOnDestroy(): void {
@@ -27,16 +23,7 @@ export class CourseRankComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.getCourseRank();
   }
 
-  getCourseRank(): void {
-    this.rankService.getCourseRank(this.courseId).pipe(takeUntil(this.destroy$)).subscribe((rank) => {
-      this.courseRank = rank || null;
-      this.loadingCourseRank = false;
-    }, () => {
-      this.courseRank = null;
-      this.loadingCourseRank = false;
-    });
-  }
+
 }

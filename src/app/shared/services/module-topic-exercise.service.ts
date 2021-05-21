@@ -34,4 +34,11 @@ export class ModuleTopicExerciseService {
     return this.http
       .get<IModuleTopicExercise[]>(`${SERVER_API_URL}teacher/modules/${id}/topics/exercises`);
   }
+
+  getModuleTopicExercisesByModuleTopicId(
+    moduleTopicId: number
+  ): Observable<IModuleTopicExercise[]> {
+    return this.http
+      .get<IModuleTopicExercise[]>(`${SERVER_API_URL}teacher/modules/topics/${moduleTopicId}/exercises`);
+  }
 }

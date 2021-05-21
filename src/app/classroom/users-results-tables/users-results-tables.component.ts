@@ -46,7 +46,6 @@ export class UsersResultsTablesComponent implements OnInit, OnDestroy {
   }
 
   updateResults() {
-    console.warn('teste');
     if (!this.loadingResults) {
       this.options.page++;
       this.getUsersResults();

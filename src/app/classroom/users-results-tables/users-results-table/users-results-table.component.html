@@ -4,7 +4,7 @@
 
       <div class="row header">
         <div class="cell" [ngClass]="column.class" *ngFor="let column of columns">
-          {{column?.title}}
+          <span class="label" style="font-size: small">{{column?.title}}</span>
         </div>
       </div>
       <div class="row" *ngFor="let result of results">

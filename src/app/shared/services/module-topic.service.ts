@@ -75,5 +75,12 @@ export class ModuleTopicService {
         return new ModuleTopic(mT);
       }));
   }
+
+  getTopicByModuleTopicId(moduleTopicId: number): Observable<ITopic> {
+    const url = `teacher/modules/topics/${moduleTopicId}/topic`;
+    return this.http
+      .get<ITopic>(`${SERVER_API_URL}${url}`);
+  }
 }
+
 

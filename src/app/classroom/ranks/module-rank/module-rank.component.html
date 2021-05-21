@@ -3,7 +3,7 @@
   <div class="table">
       <div class="row header">
         <div class="cell" [ngClass]="column.class" *ngFor="let column of rankColumns">
-          {{column?.title}}
+          <span class="label" style="font-size: small">{{column?.title}}</span>
         </div>
       </div>
 

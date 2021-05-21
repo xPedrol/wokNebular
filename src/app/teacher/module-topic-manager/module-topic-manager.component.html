@@ -174,11 +174,15 @@
               <nb-form-field>
                 <input fieldSize="large" type="datetime-local" nbInput fullWidth placeholder="Data de ativação"
                        formControlName="activeTime"
-                       [status]="(mTForm.get('activeTime').dirty || mTForm.get('activeTime').touched) ? (mTForm.get('activeTime').invalid  ? 'danger' : 'success') : 'basic'">
+                       [status]="(mTForm.get('activeTime').dirty || mTForm.get('activeTime').touched|| !verifyDate(['activeTime'])) ? ((mTForm.get('activeTime').invalid || !verifyDate(['activeTime']))  ? 'danger' : 'success') : 'basic'">
               </nb-form-field>
-              <ng-container *ngIf="mTForm.get('activeTime').invalid && mTForm.get('activeTime').touched">
+              <ng-container
+                *ngIf="(mTForm.get('activeTime').invalid && mTForm.get('activeTime').touched) || !verifyDate(['activeTime'])">
                 <p class="text-danger" *ngIf="mTForm.get('activeTime').errors?.required">
                   Campo obrigatório
+                </p>
+                <p class="text-danger" *ngIf="!verifyDate(['activeTime'])">
+                  Data inválida
                 </p>
               </ng-container>
             </div>
@@ -187,11 +191,15 @@
               <nb-form-field>
                 <input fieldSize="large" type="datetime-local" nbInput fullWidth placeholder="Data de desativação"
                        formControlName="deactiveTime"
-                       [status]="(mTForm.get('deactiveTime').dirty || mTForm.get('deactiveTime').touched) ? (mTForm.get('deactiveTime').invalid  ? 'danger' : 'success') : 'basic'">
+                       [status]="(mTForm.get('deactiveTime').dirty || mTForm.get('deactiveTime').touched || !verifyDate(['deactiveTime'])) ? ((mTForm.get('deactiveTime').invalid || !verifyDate(['deactiveTime']))  ? 'danger' : 'success') : 'basic'">
               </nb-form-field>
-              <ng-container *ngIf="mTForm.get('deactiveTime').invalid && mTForm.get('deactiveTime').touched">
+              <ng-container
+                *ngIf="(mTForm.get('deactiveTime').invalid && mTForm.get('deactiveTime').touched) || !verifyDate(['deactiveTime'])">
                 <p class="text-danger" *ngIf="mTForm.get('deactiveTime').errors?.required">
                   Campo obrigatório
+                </p>
+                <p class="text-danger" *ngIf="!verifyDate(['deactiveTime'])">
+                  Data inválida
                 </p>
               </ng-container>
             </div>
@@ -202,11 +210,15 @@
               <nb-form-field>
                 <input fieldSize="large" type="datetime-local" nbInput fullWidth placeholder="Data de início"
                        formControlName="startTime"
-                       [status]="(mTForm.get('startTime').dirty || mTForm.get('startTime').touched) ? (mTForm.get('startTime').invalid  ? 'danger' : 'success') : 'basic'">
+                       [status]="(mTForm.get('startTime').dirty || mTForm.get('startTime').touched || !verifyDate(['startTime'])) ? ((mTForm.get('startTime').invalid || !verifyDate(['startTime']))  ? 'danger' : 'success') : 'basic'">
               </nb-form-field>
-              <ng-container *ngIf="mTForm.get('startTime').invalid && mTForm.get('startTime').touched">
+              <ng-container
+                *ngIf="(mTForm.get('startTime').invalid && mTForm.get('startTime').touched) || !verifyDate(['startTime'])">
                 <p class="text-danger" *ngIf="mTForm.get('startTime').errors?.required">
                   Campo obrigatório
+                </p>
+                <p class="text-danger" *ngIf="!verifyDate(['startTime'])">
+                  Data inválida
                 </p>
               </ng-container>
             </div>
@@ -215,11 +227,15 @@
               <nb-form-field>
                 <input fieldSize="large" type="datetime-local" nbInput fullWidth placeholder="Data de término"
                        formControlName="endTime"
-                       [status]="(mTForm.get('endTime').dirty || mTForm.get('endTime').touched) ? (mTForm.get('endTime').invalid  ? 'danger' : 'success') : 'basic'">
+                       [status]="(mTForm.get('endTime').dirty || mTForm.get('endTime').touched || !verifyDate(['endTime'])) ? ((mTForm.get('endTime').invalid || !verifyDate(['endTime'])) ? 'danger' : 'success') : 'basic'">
               </nb-form-field>
-              <ng-container *ngIf="mTForm.get('endTime').invalid && mTForm.get('endTime').touched">
+              <ng-container
+                *ngIf="(mTForm.get('endTime').invalid && mTForm.get('endTime').touched) || !verifyDate(['endTime'])">
                 <p class="text-danger" *ngIf="mTForm.get('endTime').errors?.required">
                   Campo obrigatório
+                </p>
+                <p class="text-danger" *ngIf="!verifyDate(['endTime'])">
+                  Data inválida
                 </p>
               </ng-container>
             </div>
@@ -230,11 +246,15 @@
               <nb-form-field>
                 <input fieldSize="large" type="datetime-local" nbInput fullWidth placeholder="Data de pausa"
                        formControlName="freezeTime"
-                       [status]="(mTForm.get('freezeTime').dirty || mTForm.get('freezeTime').touched) ? (mTForm.get('freezeTime').invalid  ? 'danger' : 'success') : 'basic'">
+                       [status]="(mTForm.get('freezeTime').dirty || mTForm.get('freezeTime').touched || !verifyDate(['freezeTime'])) ? ((mTForm.get('freezeTime').invalid || !verifyDate(['freezeTime']))  ? 'danger' : 'success') : 'basic'">
               </nb-form-field>
-              <ng-container *ngIf="mTForm.get('freezeTime').invalid && mTForm.get('freezeTime').touched">
+              <ng-container
+                *ngIf="(mTForm.get('freezeTime').invalid && mTForm.get('freezeTime').touched) || !verifyDate(['freezeTime'])">
                 <p class="text-danger" *ngIf="mTForm.get('freezeTime').errors?.required">
                   Campo obrigatório
+                </p>
+                <p class="text-danger" *ngIf="!verifyDate(['freezeTime'])">
+                  Data inválida
                 </p>
               </ng-container>
             </div>
@@ -243,11 +263,15 @@
               <nb-form-field>
                 <input fieldSize="large" type="datetime-local" nbInput fullWidth placeholder="Data de remover pausa"
                        formControlName="unfreezeTime"
-                       [status]="(mTForm.get('unfreezeTime').dirty || mTForm.get('unfreezeTime').touched) ? (mTForm.get('unfreezeTime').invalid  ? 'danger' : 'success') : 'basic'">
+                       [status]="(mTForm.get('unfreezeTime').dirty || mTForm.get('unfreezeTime').touched || !verifyDate(['unfreezeTime'])) ? ((mTForm.get('unfreezeTime').invalid || !verifyDate(['unfreezeTime']))  ? 'danger' : 'success') : 'basic'">
               </nb-form-field>
-              <ng-container *ngIf="mTForm.get('unfreezeTime').invalid && mTForm.get('unfreezeTime').touched">
+              <ng-container
+                *ngIf="(mTForm.get('unfreezeTime').invalid && mTForm.get('unfreezeTime').touched) || !verifyDate(['unfreezeTime'])">
                 <p class="text-danger" *ngIf="mTForm.get('unfreezeTime').errors?.required">
                   Campo obrigatório
+                </p>
+                <p class="text-danger" *ngIf="!verifyDate(['unfreezeTime'])">
+                  Data inválida
                 </p>
               </ng-container>
             </div>
@@ -275,7 +299,8 @@
               <button class="m-1" nbButton status="primary" type="button" size="medium" (click)="synchronizeMTDates()">
                 Sincronizar datas
               </button>
-              <button class="m-1" nbButton status="info" type="submit" size="medium" [disabled]="mTForm.invalid">
+              <button class="m-1" nbButton status="info" type="submit" size="medium"
+                      [disabled]="mTForm.invalid || !verifyDate(['startTime','endTime','deactiveTime','activeTime','freezeTime','unfreezeTime'])">
                 Salvar
               </button>
             </div>
@@ -283,5 +308,28 @@
         </form>
       </nb-card-body>
     </nb-card>
+  </div>
+  <div class="col-12">
+    <nb-tabset (changeTab)="changeTab($event)">
+      <nb-tab [tabId]="0" tabTitle="Exercícios1" title="Exercícios" [nbSpinner]="loadingMT" nbSpinnerStatus="info" nbSpinnerSize="giant"
+              style="min-height: 100px;">
+        <app-module-topic-exercise-table
+          *ngIf="(moduleTopic?.exercises && moduleTopic?.exercises?.length > 0) && !loadingMT"
+          [mTExercises]="moduleTopic?.exercises"></app-module-topic-exercise-table>
+        <app-not-found-card
+          *ngIf="(!moduleTopic?.exercises || moduleTopic?.exercises?.length === 0) && !loadingMT"></app-not-found-card>
+      </nb-tab>
+      <nb-tab [tabId]="1" tabTitle="Conteudo" [nbSpinner]="loadingTopic" nbSpinnerStatus="info" nbSpinnerSize="giant"
+              style="min-height: 100px;">
+        <nb-card *ngIf="topic && !loadingTopic">
+          <nb-card-body>
+            <div class="row">
+              <div class="col-12 m-auto" [innerHTML]="topic?.html" style="max-width: 1100px;"></div>
+            </div>
+          </nb-card-body>
+        </nb-card>
+        <app-not-found-card *ngIf="!loadingTopic && !topic"></app-not-found-card>
+      </nb-tab>
+    </nb-tabset>
   </div>
 </div>
