@@ -65,9 +65,8 @@
             <div class="input-table">
               <button nbButton ghost status="basic" (click)="selectedIndex = i">Salvar
               </button>
-              <button nbButton ghost status="info" (click)="selectedIndex = i" [routerLink]="['topic',mT.topic.slug]">
+              <button nbButton ghost status="info" type="button" (click)="selectedIndex = i" [routerLink]="['topic',mT.topic.slug]">
                 Detalhes
-                <nb-icon icon="save-outline"></nb-icon>
               </button>
             </div>
           </div>
@@ -103,6 +102,8 @@
                 [text]="'Exercicos C: '+selectedModuleTopic.numCExercisesCached" size="small"></nb-tag>
         <nb-tag status="danger" appearance="filled"
                 [text]="'Exercicos D: '+selectedModuleTopic.numDExercisesCached" size="small"></nb-tag>
+        <nb-tag status="basic" appearance="outline"
+                [text]="'Exercicos N/A: '+selectedModuleTopic.numOExercisesCached()" size="small"></nb-tag>
       </div>
     </div>
   </nb-card>

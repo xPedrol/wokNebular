@@ -39,6 +39,7 @@ export class ClassroomTopicComponent implements OnInit, OnDestroy {
     private userService: UserService,
     private moduleTExerciseService: ModuleTopicExerciseService
   ) {
+    this.sF.setPageData('Tópico');
   }
 
   ngOnInit(): void {
@@ -69,6 +70,7 @@ export class ClassroomTopicComponent implements OnInit, OnDestroy {
     this.topicService.getTopic(this.authorities, this.disciplineSlug, this.topicSlug).pipe(takeUntil(this.destroy$))
       .subscribe((topic) => {
         this.topic = topic;
+        this.sF.setPageData(this.topic?.name);
         this.loadingTopic = false;
       }, () => this.loadingTopic = false);
   }

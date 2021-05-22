@@ -1,6 +1,7 @@
 <div class="row layout-content">
   <div class="col-12">
-    <app-breadcrumb [courseSlug]="courseSlug" [disciplineSlug]="disciplineSlug" [last]="1"
+    <app-breadcrumb [courseSlug]="courseSlug" [disciplineSlug]="disciplineSlug" [topicSlug]="topicSlug" [last]="2"
+                    [classroom]="false"
                     [routePrefix]="routePrefix"></app-breadcrumb>
   </div>
   <div class="col-12 col-lg-5">
@@ -86,18 +87,18 @@
                   </div>
                 </div>
               </nb-list-item>
-              <!--              <nb-list-item class="d-block">-->
-              <!--                <div class="row">-->
-              <!--                  <div class="col-6">-->
-              <!--                    Sem nivel-->
-              <!--                  </div>-->
-              <!--                  <div class="col-6 text-right">-->
-              <!--                    <nb-tag size="tiny" status="basic" appearance="outline"-->
-              <!--                            [text]="moduleTopic.num"></nb-tag>-->
-              <!--                  </div>-->
-              <!--                </div>-->
+                            <nb-list-item class="d-block">
+                              <div class="row">
+                                <div class="col-6">
+                                  Sem nivel
+                                </div>
+                                <div class="col-6 text-right">
+                                  <nb-tag size="tiny" status="basic" appearance="outline"
+                                          [text]="moduleTopic.numOExercisesCached()"></nb-tag>
+                                </div>
+                              </div>
 
-              <!--              </nb-list-item>-->
+                            </nb-list-item>
             </nb-list>
             <app-not-found-card
               *ngIf="!loadingMT && !moduleTopic"></app-not-found-card>
@@ -311,7 +312,8 @@
   </div>
   <div class="col-12">
     <nb-tabset (changeTab)="changeTab($event)">
-      <nb-tab [tabId]="0" tabTitle="Exercícios" title="Exercícios" [nbSpinner]="loadingMT" nbSpinnerStatus="info" nbSpinnerSize="giant"
+      <nb-tab [tabId]="0" tabTitle="Exercícios" title="Exercícios" [nbSpinner]="loadingMT" nbSpinnerStatus="info"
+              nbSpinnerSize="giant"
               style="min-height: 100px;">
         <app-module-topic-exercise-table
           *ngIf="(moduleTopic?.exercises && moduleTopic?.exercises?.length > 0) && !loadingMT"

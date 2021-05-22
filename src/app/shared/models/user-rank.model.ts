@@ -18,14 +18,10 @@ export class UserRank implements IUserRank {
   description: string;
   email: string;
   idUser: number;
-  private _imageUrl: string;
+  imageUrl: string;
   login: string;
   point: number;
   totalSub: number;
-
-  get imageUrl(): string {
-    return SERVER_API_IMAGE_URL + this._imageUrl;
-  }
 
   constructor(rank: IUserRank) {
     this.activated = rank.activated;
@@ -33,7 +29,7 @@ export class UserRank implements IUserRank {
     this.description = rank.description;
     this.email = rank.email;
     this.idUser = rank.idUser;
-    this._imageUrl = rank.imageUrl;
+    this.imageUrl = rank.imageUrl ? SERVER_API_IMAGE_URL + this.imageUrl : undefined;
     this.login = rank.login;
     this.point = rank.point;
     this.totalSub = rank.totalSub;

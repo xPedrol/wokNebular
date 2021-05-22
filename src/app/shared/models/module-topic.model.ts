@@ -40,6 +40,8 @@ export interface IModuleTopic {
   getTotalExercise(type: string): number;
 
   getUnresolvedResolved(results: IReportResults): number;
+
+  numOExercisesCached(): number;
 }
 
 export class ModuleTopic implements IModuleTopic {
@@ -166,5 +168,14 @@ export class ModuleTopic implements IModuleTopic {
     const resolveds = results.numAresolved + results.numBresolved + results.numCresolved + results.numDresolved;
     const unresolveds = this.exercises.length - resolveds;
     return unresolveds < 0 ? 0 : unresolveds;
+  }
+
+  numOExercisesCached(): number {
+    let total = this.exercises?.length;
+    total -= this.numAExercisesCached;
+    total -= this.numBExercisesCached;
+    total -= this.numCExercisesCached;
+    total -= this.numDExercisesCached;
+    return total;
   }
 }

@@ -9,6 +9,7 @@ import {NbDialogService} from '@nebular/theme';
 import {AddCourseDialogComponent} from '../add-public-course-dialog/add-course-dialog.component';
 import {Subject} from 'rxjs';
 import {takeUntil} from 'rxjs/operators';
+import {SharedFunctions} from '../../shared/shared.functions';
 
 @Component({
   selector: 'app-classroom-dash-board',
@@ -33,8 +34,10 @@ export class ClassroomDashBoardComponent implements OnInit, OnDestroy {
     private activatedRoute: ActivatedRoute,
     private courseService: CourseService,
     private dashboardService: DashboardService,
-    private dialogService: NbDialogService
+    private dialogService: NbDialogService,
+    private sF: SharedFunctions
   ) {
+    this.sF.setPageData('Painel de controle');
   }
 
   ngOnDestroy(): void {

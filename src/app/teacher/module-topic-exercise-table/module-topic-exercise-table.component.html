@@ -58,10 +58,9 @@
             <div class="input-table">
               <button nbButton ghost status="basic" type="submit" (click)="selectedIndex = i">Salvar
               </button>
-              <!--              <button nbButton ghost status="info" (click)="selectedIndex = i" [routerLink]="['topic',mT.topic.slug]">-->
-              <!--                Detalhes-->
-              <!--                <nb-icon icon="save-outline"></nb-icon>-->
-              <!--              </button>-->
+              <button nbButton ghost status="info" type="button" (click)="selectedIndex = i" [routerLink]="['exercise',mTE.exercise.slug]">
+                Detalhes
+              </button>
             </div>
           </div>
         </div>

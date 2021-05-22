@@ -1,6 +1,6 @@
 import {NgModule} from '@angular/core';
 import {
-  NbActionsModule, NbAlertModule, NbAutocompleteModule, NbBadgeModule, NbButtonModule,
+  NbActionsModule, NbAlertModule, NbAutocompleteModule, NbBadgeModule, NbButtonGroupModule, NbButtonModule,
   NbCardModule, NbCheckboxModule,
   NbContextMenuModule, NbDatepickerModule, NbDialogModule, NbFormFieldModule, NbIconModule, NbInputModule,
   NbLayoutModule, NbListModule,
@@ -36,7 +36,8 @@ import {NbEvaIconsModule} from '@nebular/eva-icons';
     NbBadgeModule,
     NbPopoverModule,
     NbTagModule,
-    NbDatepickerModule
+    NbDatepickerModule,
+    NbButtonGroupModule
   ]
 })
 export class SharedThemeModuleModule {

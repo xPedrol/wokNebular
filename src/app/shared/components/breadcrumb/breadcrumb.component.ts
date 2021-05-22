@@ -12,10 +12,18 @@ export class BreadcrumbComponent implements OnInit {
   @Input() topicSlug?: string;
   @Input() exerciseSlug?: string;
   @Input() last: number;
+  @Input() classroom = true;
+  routeType = '';
+
   constructor() {
   }
 
   ngOnInit(): void {
+    if (this.classroom) {
+      this.routeType = 'classroom';
+    } else {
+      this.routeType = 'manager';
+    }
   }
 
 }

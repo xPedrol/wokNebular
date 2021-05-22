@@ -9,6 +9,9 @@ import {EditModuleTopicsTableComponent} from './edit-module-topics-table/edit-mo
 import {ReactiveFormsModule} from '@angular/forms';
 import { ModuleTopicManagerComponent } from './module-topic-manager/module-topic-manager.component';
 import { ModuleTopicExerciseTableComponent } from './module-topic-exercise-table/module-topic-exercise-table.component';
+import { ModuleTopicExerciseManagerComponent } from './module-topic-exercise-manager/module-topic-exercise-manager.component';
+import { ModuleTopicExerciseScenarioTableComponent } from './module-topic-exercise-scenario-table/module-topic-exercise-scenario-table.component';
+import { SubmissionTableComponent } from './submission-table/submission-table.component';
 
 const routes: Routes = [
   {
@@ -26,7 +29,10 @@ const routes: Routes = [
     ModuleManagerComponent,
     EditModuleTopicsTableComponent,
     ModuleTopicManagerComponent,
-    ModuleTopicExerciseTableComponent
+    ModuleTopicExerciseTableComponent,
+    ModuleTopicExerciseManagerComponent,
+    ModuleTopicExerciseScenarioTableComponent,
+    SubmissionTableComponent
   ],
     imports: [
         CommonModule,

@@ -31,12 +31,14 @@ export class ClassroomModuleComponent implements OnInit, OnDestroy {
     private userService: UserService,
     private sF: SharedFunctions
   ) {
+    this.sF.setPageData('Módulo');
   }
 
   ngOnInit(): void {
     this.authorities = this.activatedRoute.snapshot.data.authorities;
     this.courseSlug = this.activatedRoute.snapshot.params.courseSlug;
     this.disciplineSlug = this.activatedRoute.snapshot.params.disciplineSlug;
+    this.sF.setPageData(this.disciplineSlug);
     this.routePrefix += this.sF.routeAuthSwitch(this.authorities, true);
     if (this.authorities.includes(Authority.TEACHER)) {
       this.isTeacher = true;

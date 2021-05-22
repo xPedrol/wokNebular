@@ -24,6 +24,7 @@ export class ClassroomSolutionComponent implements OnInit, AfterViewInit {
     private activatedRoute: ActivatedRoute,
     private sF: SharedFunctions,
   ) {
+    this.sF.setPageData('Solução');
   }
 
   ngAfterViewInit() {

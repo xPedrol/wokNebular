@@ -1,6 +1,6 @@
 <div class="row layout-content">
   <div class="col-12">
-    <app-breadcrumb [courseSlug]="courseSlug" [disciplineSlug]="disciplineSlug" [last]="1"
+    <app-breadcrumb [courseSlug]="courseSlug" [disciplineSlug]="disciplineSlug" [last]="1" [classroom]="false"
                     [routePrefix]="routePrefix"></app-breadcrumb>
   </div>
   <div class="col-12 col-lg-5">
@@ -93,7 +93,6 @@
                             [text]="totalExercisesBylevel.totalO"></nb-tag>
                   </div>
                 </div>
-
               </nb-list-item>
             </nb-list>
             <app-not-found-card

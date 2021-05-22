@@ -45,6 +45,7 @@ export class ModuleTopicManagerComponent implements OnInit, OnDestroy {
     private toastService: NbToastrService,
     private moduleTopicExerciseService: ModuleTopicExerciseService
   ) {
+    this.sF.setPageData('Tópico');
   }
 
   ngOnInit(): void {
@@ -66,6 +67,7 @@ export class ModuleTopicManagerComponent implements OnInit, OnDestroy {
     this.moduleTopicService.getModuleTopicBySlugs(this.authorities, this.courseSlug, this.disciplineSlug, this.topicSlug)
       .pipe(takeUntil(this.subject)).subscribe((mT) => {
       this.moduleTopic = mT || undefined;
+      this.sF.setPageData(this.moduleTopic?.topic?.name);
       // this.getModuleTopicExercisesByModuleTopicId();
       this.mTForm = new FormGroup({
         minScore: new FormControl(null, [Validators.required]),

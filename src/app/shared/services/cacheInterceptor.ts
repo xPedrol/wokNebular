@@ -7,7 +7,7 @@ import {SERVER_API_URL} from '../../app.constants';
 @Injectable()
 export class CachingInterceptorService implements HttpInterceptor {
   dontCache = ['account'];
-  public readonly store: Record<string, Observable<HttpEvent<any>>> = {};
+  public store: Record<string, Observable<HttpEvent<any>>> = {};
 
   constructor() {
   }
@@ -20,6 +20,9 @@ export class CachingInterceptorService implements HttpInterceptor {
     // console.warn(req.url, (Boolean(req.headers.get('force')) === true));
     // console.warn(req.url, Boolean(req.headers.get('force')));
     if (req.method !== 'GET' || dontAccept || req.headers.get('force') === 'true') {
+      if (req.method !== 'GET') {
+        this.store = {};
+      }
       return next.handle(req);
     }
 

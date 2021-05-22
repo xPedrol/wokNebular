@@ -1,4 +1,4 @@
-import { Moment } from 'moment';
+import {Moment} from 'moment';
 import {IExerciseBasic} from './basic/exercise-basic.model';
 import {IModuleTopicExerciseBasic} from './basic/moduleTopicExercise-basic.model';
 import {ILanguageBasic} from './basic/language-basic.model';
@@ -36,35 +36,60 @@ export interface ISubmission {
   cacheResultExercise?: string;
   cacheResultTopic?: string;
 }
+
 export class Submission implements ISubmission {
-  constructor(
-    public id?: number,
-    public submittime?: number,
-    public valid?: boolean,
-    public expectedResults?: string,
-    public entryPoint?: string,
-    public createdDate?: Moment,
-    public lastModifiedDate?: Moment,
-    public idSubmmit?: number,
-    public exercise?: IExerciseBasic,
-    public moduleTopicExercise?: IModuleTopicExerciseBasic,
-    public language?: ILanguageBasic,
-    public judgehost?: IJudgehostBasic,
-    public rejudging?: IRejudgingBasic,
-    public userTeam?: IUserTeamBasic,
-    public files?: ISubmissionFile[],
-    public helpScenario?: IScenarioBasic,
-    public runPercentA?: number,
-    public runPercentB?: number,
-    public runPercentC?: number,
-    public runPercentD?: number,
-    public runResult?: IRunResult,
-    public cacheResultScoreExercise?: number,
-    public cacheResultScoreTopic?: number,
-    public cacheResultExercise?: string,
-    public cacheResultTopic?: string,
-    public submitTime?: Moment
-  ) {
-    this.valid = this.valid || false;
+  cacheResultExercise: string;
+  cacheResultScoreExercise: number;
+  cacheResultScoreTopic: number;
+  cacheResultTopic: string;
+  createdDate: moment.Moment;
+  entryPoint: string;
+  exercise: IExerciseBasic;
+  expectedResults: string;
+  files: ISubmissionFile[];
+  helpScenario: IScenarioBasic;
+  id: number;
+  idSubmmit: number;
+  judgehost: IJudgehostBasic;
+  language: ILanguageBasic;
+  lastModifiedDate: moment.Moment;
+  moduleTopicExercise: IModuleTopicExerciseBasic;
+  rejudging: IRejudgingBasic;
+  runPercentA: number;
+  runPercentB: number;
+  runPercentC: number;
+  runPercentD: number;
+  runResult: IRunResult;
+  submitTime: moment.Moment;
+  userTeam: IUserTeamBasic;
+  valid: boolean;
+
+  constructor(submission: ISubmission) {
+    this.cacheResultExercise = submission.cacheResultExercise;
+    this.cacheResultScoreExercise = submission.cacheResultScoreExercise;
+    this.cacheResultScoreTopic = submission.cacheResultScoreTopic;
+    this.cacheResultTopic = submission.cacheResultTopic;
+    this.createdDate = submission.createdDate;
+    this.entryPoint = submission.entryPoint;
+    this.exercise = submission.exercise;
+    this.expectedResults = submission.expectedResults;
+    this.files = submission.files;
+    this.helpScenario = submission.helpScenario;
+    this.id = submission.id;
+    this.idSubmmit = submission.idSubmmit;
+    this.judgehost = submission.judgehost;
+    this.language = submission.language;
+    this.lastModifiedDate = submission.lastModifiedDate;
+    this.moduleTopicExercise = submission.moduleTopicExercise;
+    this.rejudging = submission.rejudging;
+    this.runPercentA = submission.runPercentA;
+    this.runPercentB = submission.runPercentB;
+    this.runPercentC = submission.runPercentC;
+    this.runPercentD = submission.runPercentD;
+    this.runResult = submission.runResult;
+    this.submitTime = submission.submitTime;
+    this.userTeam = submission.userTeam;
+    this.valid = submission.valid;
   }
+
 }

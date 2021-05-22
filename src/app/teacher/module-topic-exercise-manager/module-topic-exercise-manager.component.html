@@ -1,0 +1,92 @@
+<div class="row layout-content">
+  <div class="col-12">
+    <app-breadcrumb [courseSlug]="courseSlug" [disciplineSlug]="disciplineSlug" [last]="3" [classroom]="false"
+                    [routePrefix]="routePrefix" [topicSlug]="topicSlug" [exerciseSlug]="exerciseSlug"></app-breadcrumb>
+  </div>
+  <div class="col-12 col-lg-5">
+    <nb-card>
+      <nb-card-header class="border-0 mb-2">
+        <!--        <h6 class="header-title-color">Modulo</h6>-->
+      </nb-card-header>
+      <nb-card-body [nbSpinner]="loadingMTE" nbSpinnerStatus="info" nbSpinnerSize="giant"
+                    style="min-height: 100px;">
+        <span *ngIf="mTExercise">
+          <div class="module-header">
+            <h6 class="header-title-color">{{mTExercise?.alias}}</h6>
+            <!--            <p>{{module.alias}}</p>-->
+            <!--            <span>{{module.topics?.length ? module.topics?.length : 0}} Tópicos</span>-->
+          </div>
+          <!--        <nb-user size="giant"-->
+          <!--                 [title]="module.alias"-->
+          <!--                 [name]="'Tópicos '+(module.topics?.length?module.topics?.length:0)"-->
+          <!--                 [picture]="module.discipline.imageUrl"-->
+          <!--                 class="border-0"-->
+          <!--        >-->
+          <!--        </nb-user>-->
+          <!--        <hr>-->
+        <div class="row">
+          <!--          <div class="col-12">-->
+          <!--            <h6 style="font-size: 15px;">Informações</h6>-->
+          <!--          </div>-->
+          <div class="col-12 mb-3">
+            <p>Existem muitas variações disponíveis de passagens de Lorem Ipsum, mas a maioria sofreu algum tipo de alteração, seja por inserção de passagens com humor, ou palavras aleatórias que não parecem nem um pouco convincentes.</p>
+            <nb-tag size="tiny" [status]="mTExercise.difficultyLevel.getColor()" appearance="outline" class="m-1"
+                    [text]="'Dificuldade '+(mTExercise.difficultyLevel.id)"></nb-tag>
+            <!--            <nb-tag size="tiny" [status]="mTExercise.difficultyLevel.getColor()" appearance="outline" class="m-1"-->
+            <!--                    [text]="'Dificuldade '+(mTExercise.)"></nb-tag>-->
+                        <hr>
+          </div>
+          <div class="col-12" [nbSpinner]="loadingScenario" nbSpinnerStatus="info"
+               nbSpinnerSize="giant" style="min-height: 100px;">
+            <nb-list [hidden]="loadingScenario || (!loadingScenario && (!scenarios || scenarios.length === 0))">
+              <nb-list-item class="d-block">
+                <div class="row">
+                  <div class="col-6">
+                    Cenário
+                  </div>
+                  <div class="col-6 text-right">
+                    <nb-tag size="tiny" status="info" appearance="outline"
+                            [text]="scenarios?.length?scenarios?.length:0"></nb-tag>
+                  </div>
+                </div>
+              </nb-list-item>
+              <nb-list-item class="d-block">
+                <div class="row">
+                  <div class="col-6">
+                    Submissões
+                  </div>
+                  <div class="col-6 text-right">
+                    <nb-tag size="tiny" status="info" appearance="outline"
+                            [text]="submissions?.length?submissions?.length:0"></nb-tag>
+                  </div>
+                </div>
+              </nb-list-item>
+            </nb-list>
+            <app-not-found-card
+              *ngIf="!loadingScenario && (!scenarios || scenarios.length === 0 )"></app-not-found-card>
+          </div>
+        </div>
+          </span>
+      </nb-card-body>
+    </nb-card>
+  </div>
+  <div class="col-12 col-lg-7" [nbSpinner]="loadingScenario" nbSpinnerStatus="info"
+       nbSpinnerSize="giant" style="min-height: 100px;">
+    <h6 class="header-title-color" *ngIf="(scenarios && scenarios.length > 0) && !loadingScenario">Cenários</h6>
+    <app-module-topic-exercise-scenario-table *ngIf="(scenarios && scenarios.length > 0) && !loadingScenario"
+                                              [scenarios]="scenarios"></app-module-topic-exercise-scenario-table>
+    <app-not-found-card *ngIf="(!scenarios || scenarios.length === 0) && !loadingScenario"></app-not-found-card>
+    <!--      <h6 class="header-title-color">Classificação</h6>-->
+    <!--    <app-module-rank *ngIf="module" [moduleId]="module.id"></app-module-rank>-->
+  </div>
+  <div class="col-12">
+    <nb-tabset (changeTab)="changeTab($event)">
+      <nb-tab [tabId]="0" tabTitle="Submissões" title="Submissões" [nbSpinner]="loadingSubmission"
+              nbSpinnerStatus="info" nbSpinnerSize="giant"
+              style="min-height: 100px;">
+        <app-not-found-card
+          *ngIf="(!submissions || submissions?.length === 0) && !loadingSubmission"></app-not-found-card>
+      </nb-tab>
+    </nb-tabset>
+  </div>
+</div>

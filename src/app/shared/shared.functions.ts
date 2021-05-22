@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {AccountService} from './services/account.service';
 import {Authority} from './constants/authority.constants';
 import {RoutePrefix} from './constants/route-prefix';
-import {IBreadcrumb} from './models/breadcrumb.model';
+import {Title} from '@angular/platform-browser';
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +10,8 @@ import {IBreadcrumb} from './models/breadcrumb.model';
 export class SharedFunctions {
 
   constructor(
-    public accountService: AccountService
+    public accountService: AccountService,
+    private titleService: Title
   ) {
   }
 
@@ -34,5 +35,14 @@ export class SharedFunctions {
 
   isChangedUser(authorities: Authority[]): boolean {
     return !authorities.includes(Authority.TEACHER) && this.accountService.account.isTeacher();
+  }
+
+  setPageData(title?: string): void {
+    if (!title) {
+      title = 'Mundo do código';
+    }else{
+      title = `WOK - ${title}`;
+    }
+    this.titleService.setTitle(title);
   }
 }

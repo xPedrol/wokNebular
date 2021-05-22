@@ -10,7 +10,6 @@ import {ISolution} from '../../shared/models/solution.model';
 import {takeUntil} from 'rxjs/operators';
 import {UserService} from '../../shared/services/user.service';
 import {SolutionService} from '../../shared/services/solution.service';
-import {NbWindowService} from '@nebular/theme';
 
 @Component({
   selector: 'app-classroom-exercise',
@@ -39,8 +38,8 @@ export class ClassroomExerciseComponent implements OnInit, OnDestroy {
     private mTEService: ModuleTopicExerciseService,
     private userService: UserService,
     private solutionService: SolutionService,
-    private windowService: NbWindowService,
   ) {
+    this.sF.setPageData('Exercício');
   }
 
   ngOnInit(): void {
@@ -76,6 +75,7 @@ export class ClassroomExerciseComponent implements OnInit, OnDestroy {
       this.exerciseSlug).pipe(takeUntil(this.destroy$))
       .subscribe((exercise) => {
         this.exercise = exercise || null;
+        this.sF.setPageData(this.exercise?.exercise?.name);
         this.loadingExercise = false;
       }, () => this.loadingExercise = false);
   }

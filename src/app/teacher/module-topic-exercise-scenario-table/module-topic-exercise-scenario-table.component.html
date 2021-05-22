@@ -1,0 +1,57 @@
+<div class="wrap-table100">
+  <div class="scroll">
+    <form [formGroup]="mTForm" *ngIf="scenarios && scenarios.length > 0" (ngSubmit)="saveScenario()">
+      <div class="table" formArrayName="scenarios">
+        <div class="row header">
+          <div class="cell" [ngClass]="column.class" *ngFor="let column of tableColumn">
+            <span class="label" style="font-size: small">{{column?.title}}</span>
+          </div>
+        </div>
+
+        <!--      <div class="row" *ngFor="let rank of courseRank">-->
+        <!--        <div class="cell" data-title="Usuário">-->
+        <!--          <nb-user-->
+        <!--            size="large"-->
+        <!--            [name]="rank.login"-->
+        <!--            [picture]="rank.imageUrl"-->
+        <!--          >-->
+        <!--          </nb-user>-->
+        <!--        </div>-->
+        <!--        <div class="cell" data-title="Pontos">-->
+        <!--          <p>{{rank.point}}</p>-->
+        <!--        </div>-->
+        <!--        <div class="cell" data-title="Submissões">-->
+        <!--          <p>{{rank.totalSub}}</p>-->
+        <!--        </div>-->
+        <!--      </div>-->
+
+        <div class="row" *ngFor="let scenario of scenarios; let i = index" [formGroupName]="i"
+        >
+          <div class="cell text-left" data-title="Ativado">
+            <nb-checkbox formControlName="activated"></nb-checkbox>
+          </div>
+          <div class="cell text-left" data-title="Cénario">
+            <input [hidden]="true" nbInput formControlName="id">
+            {{scenario?.scenario?.name}}
+          </div>
+          <div class="cell text-left" data-title="Dificuldade">
+              {{scenario?.scenario?.difficultyLevelId}}
+          </div>
+          <div class="cell text-left" data-title="Descrição">
+              {{scenario?.scenario?.helpMsg}}
+          </div>
+          <div class="cell text-right">
+              <button size="small" nbButton ghost status="basic" (click)="selectedIndex = i">Salvar
+              </button>
+              <button size="small" nbButton ghost status="info" type="button">
+                Habilidades
+              </button>
+              <button size="small" nbButton ghost status="info" type="button">
+                Arquivos
+              </button>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

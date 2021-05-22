@@ -41,6 +41,7 @@ export class ModuleManagerComponent implements OnInit, OnDestroy {
     private toastService: NbToastrService,
     private sF: SharedFunctions
   ) {
+    this.sF.setPageData('Módulo');
   }
 
   ngOnDestroy(): void {
@@ -65,6 +66,7 @@ export class ModuleManagerComponent implements OnInit, OnDestroy {
     this.moduleService.getModule(this.authorities, this.courseSlug, this.disciplineSlug).pipe(takeUntil(this.subject))
       .subscribe((module) => {
         this.module = module;
+        this.sF.setPageData(this.module?.discipline?.name);
         this.loadingModule = false;
         this.getModuleTopics();
         this.getModuleTopicExercises(this.module.id);
@@ -77,7 +79,6 @@ export class ModuleManagerComponent implements OnInit, OnDestroy {
       .subscribe((mTs) => {
         this.moduleTopics = (mTs || []) as IModuleTopic[];
         this.loadingMTs = false;
-        console.warn(this.moduleTopics);
       }, () => this.loadingMTs = false);
   }
 

@@ -32,6 +32,7 @@ export class ClassroomCourseComponent implements OnInit, OnDestroy {
     private rankService: UserRankService,
     public sF: SharedFunctions
   ) {
+    this.sF.setPageData('Curso');
   }
 
   ngOnInit(): void {
@@ -44,6 +45,7 @@ export class ClassroomCourseComponent implements OnInit, OnDestroy {
     this.activatedRoute.data.pipe(takeUntil(this.destroy$)).subscribe(({course}) => {
       this.loadingCourse = false;
       this.course = course || null;
+      this.sF.setPageData(this.course?.name);
     }, () => this.loadingCourse = false);
   }
 
