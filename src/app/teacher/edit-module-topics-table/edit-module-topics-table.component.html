@@ -29,39 +29,39 @@
              [nbPopover]="tabs" [nbPopoverPlacement]="'left'" [nbPopoverTrigger]="'click'"
              (click)="selectedModuleTopic = mT"
         >
-          <div class="cell text-left">
+          <div class="cell text-left" data-title="Ativado">
             <nb-checkbox formControlName="activated"></nb-checkbox>
           </div>
-          <div class="cell text-left">
+          <div class="cell text-left" data-title="Nome do tópico">
             <input [hidden]="true" nbInput formControlName="id">
             {{mT?.topic?.name}}
           </div>
-          <div class="cell text-left">
+          <div class="cell text-left" data-title="Nota máxima">
             <div class="input-table">
               <input type="text" nbInput fullWidth status="basic" formControlName="maxGrade">
             </div>
           </div>
-          <div class="cell text-left">
+          <div class="cell text-left" data-title="Pontuação mínima">
             <div class="input-table">
               <input type="text" nbInput fullWidth status="basic" formControlName="minScore">
             </div>
           </div>
-          <div class="cell text-left">
+          <div class="cell text-left" data-title="Média necessária">
             <div class="input-table">
               <input type="text" nbInput fullWidth status="basic" formControlName="targetScore">
             </div>
           </div>
-          <div class="cell text-left">
+          <div class="cell text-left" data-title="Data de início">
             <div class="input-table">
               <input type="datetime-local" nbInput fullWidth status="basic" formControlName="startTime">
             </div>
           </div>
-          <div class="cell text-left" data-title="Submissões">
+          <div class="cell text-left" data-title="Data de encerramento">
             <div class="input-table">
               <input type="datetime-local" nbInput status="basic" fullWidth formControlName="endTime">
             </div>
           </div>
-          <div class="cell text-right" data-title="action">
+          <div class="cell text-right">
             <div class="input-table">
               <button nbButton ghost status="basic" (click)="selectedIndex = i">Salvar
               </button>

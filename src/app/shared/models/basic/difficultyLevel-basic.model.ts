@@ -6,5 +6,10 @@ export interface IDifficultyLevelBasic {
 }
 
 export class DifficultyLevelBasic implements IDifficultyLevelBasic {
-  constructor(public id: string, public name?: string, public topicCoefficient?: number, public exerciseCoefficient?: number) {}
+  constructor() {}
+
+  exerciseCoefficient: number;
+  id: string;
+  name: string;
+  topicCoefficient: number;
 }

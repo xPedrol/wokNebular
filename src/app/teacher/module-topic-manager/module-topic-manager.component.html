@@ -311,7 +311,7 @@
   </div>
   <div class="col-12">
     <nb-tabset (changeTab)="changeTab($event)">
-      <nb-tab [tabId]="0" tabTitle="Exercícios1" title="Exercícios" [nbSpinner]="loadingMT" nbSpinnerStatus="info" nbSpinnerSize="giant"
+      <nb-tab [tabId]="0" tabTitle="Exercícios" title="Exercícios" [nbSpinner]="loadingMT" nbSpinnerStatus="info" nbSpinnerSize="giant"
               style="min-height: 100px;">
         <app-module-topic-exercise-table
           *ngIf="(moduleTopic?.exercises && moduleTopic?.exercises?.length > 0) && !loadingMT"

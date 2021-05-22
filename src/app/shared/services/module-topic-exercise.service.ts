@@ -41,4 +41,9 @@ export class ModuleTopicExerciseService {
     return this.http
       .get<IModuleTopicExercise[]>(`${SERVER_API_URL}teacher/modules/topics/${moduleTopicId}/exercises`);
   }
+
+  updateModuleTopicExercise(mTE: IModuleTopicExercise) {
+    return this.http
+      .put<IModuleTopicExercise[]>(`${SERVER_API_URL}teacher/modules/topics/exercises`, mTE);
+  }
 }

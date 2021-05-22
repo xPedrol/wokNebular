@@ -3,6 +3,9 @@ import {FormArray, FormBuilder, FormGroup} from '@angular/forms';
 import {IModuleTopicExercise} from '../../shared/models/basic/module-topic-exercise.model';
 import {difficultyLevel} from '../../shared/constants/difficulty-level';
 import {IModuleTopic} from '../../shared/models/module-topic.model';
+import {ModuleTopicExerciseService} from '../../shared/services/module-topic-exercise.service';
+import {NbToastrService} from '@nebular/theme';
+import {DifficultyLevelBasic} from '../../shared/models/basic/difficultyLevel-basic.model';
 
 @Component({
   selector: 'app-module-topic-exercise-table',
@@ -46,7 +49,9 @@ export class ModuleTopicExerciseTableComponent implements OnInit {
   ];
 
   constructor(
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private moduleTopicExerciseService: ModuleTopicExerciseService,
+    private toastService: NbToastrService
   ) {
   }
 
@@ -60,9 +65,20 @@ export class ModuleTopicExerciseTableComponent implements OnInit {
   }
 
   saveModuleTopicExercise() {
-    if (this.selectedIndex) {
+    if (this.selectedIndex >= 0) {
       const userCtrl = this.mTEForm.get('mTEs') as FormArray;
       const mtE: IModuleTopicExercise = userCtrl.at(this.selectedIndex).value;
+      const completeMTE = this.mTExercises[this.selectedIndex];
+      completeMTE.alias = mtE.alias;
+      completeMTE.activated = mtE.activated ? true : false;
+      completeMTE.allowJudge = mtE.allowJudge ? true : false;
+      completeMTE.allowSubmit = mtE.allowSubmit ? true : false;
+      // @ts-ignore
+      completeMTE.difficultyLevel = {...new DifficultyLevelBasic(), id: mtE.difficultyLevel};
+      // completeMTE.moduleTopic = undefined;
+      this.moduleTopicExerciseService.updateModuleTopicExercise(completeMTE).subscribe(() => {
+        this.toastService.show('', 'Registrado com sucesso', {status: 'success'});
+      });
     }
   }
 
