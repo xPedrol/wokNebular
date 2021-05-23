@@ -1,5 +1,5 @@
-<div class="row border-0" style="width: 100%" nbInfiniteList listenWindowScroll (bottomThreshold)="updateResults()" [threshold]="0">
-  <div class="col-12" *ngFor="let results of usersResults">
+<div class="border-0" nbInfiniteList listenWindowScroll (bottomThreshold)="updateResults()" [threshold]="0">
+  <div *ngFor="let results of usersResults">
     <nb-card>
       <nb-card-header class="border-0">
         <nb-user [name]="results[0].loginUser" [title]="results[0].emailUser"

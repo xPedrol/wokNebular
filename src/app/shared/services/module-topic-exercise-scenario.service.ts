@@ -20,10 +20,9 @@ export class ModuleTopicExerciseScenarioService {
     return this.http
       .get<IModuleTopicExerciseScenario[]>(`${SERVER_API_URL}teacher/modules/topics/exercises/${mTEId}/scenarios`)
       .pipe(map((scenarios) => {
-        scenarios.map((scenario) => {
+        return scenarios.map((scenario) => {
           return new ModuleTopicExerciseScenario(scenario);
         });
-        return scenarios;
       }));
   }
 }

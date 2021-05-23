@@ -1,6 +1,6 @@
 import {Moment} from 'moment';
 import {IModuleTopicExerciseBasic} from './basic/moduleTopicExercise-basic.model';
-import {IScenarioBasic} from './basic/scenario-basic.model';
+import {IScenarioBasic, ScenarioBasic} from './basic/scenario-basic.model';
 
 export interface IModuleTopicExerciseScenario {
   id?: number;
@@ -25,7 +25,7 @@ export class ModuleTopicExerciseScenario implements IModuleTopicExerciseScenario
     this.id = mTEScenario.id;
     this.lastModifiedDate = mTEScenario.lastModifiedDate;
     this.moduleTopicExercise = mTEScenario.moduleTopicExercise;
-    this.scenario = mTEScenario.scenario;
+    this.scenario = new ScenarioBasic(mTEScenario.scenario);
   }
 
 }

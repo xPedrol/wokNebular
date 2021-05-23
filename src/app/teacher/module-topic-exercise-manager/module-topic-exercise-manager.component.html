@@ -29,7 +29,8 @@
           <!--            <h6 style="font-size: 15px;">Informações</h6>-->
           <!--          </div>-->
           <div class="col-12 mb-3">
-            <p>Existem muitas variações disponíveis de passagens de Lorem Ipsum, mas a maioria sofreu algum tipo de alteração, seja por inserção de passagens com humor, ou palavras aleatórias que não parecem nem um pouco convincentes.</p>
+            <p *ngIf="mTExercise?.exercise?.description">{{mTExercise?.exercise?.description}}</p>
+            <p *ngIf="!mTExercise?.exercise?.description" class="text-danger">Sem descrição</p>
             <nb-tag size="tiny" [status]="mTExercise.difficultyLevel.getColor()" appearance="outline" class="m-1"
                     [text]="'Dificuldade '+(mTExercise.difficultyLevel.id)"></nb-tag>
             <!--            <nb-tag size="tiny" [status]="mTExercise.difficultyLevel.getColor()" appearance="outline" class="m-1"-->
@@ -84,6 +85,7 @@
       <nb-tab [tabId]="0" tabTitle="Submissões" title="Submissões" [nbSpinner]="loadingSubmission"
               nbSpinnerStatus="info" nbSpinnerSize="giant"
               style="min-height: 100px;">
+        <app-submission-table *ngIf="(submissions && submissions?.length > 0) && !loadingSubmission" [submissions]="submissions"></app-submission-table>
         <app-not-found-card
           *ngIf="(!submissions || submissions?.length === 0) && !loadingSubmission"></app-not-found-card>
       </nb-tab>

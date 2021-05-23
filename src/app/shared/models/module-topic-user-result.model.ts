@@ -1,3 +1,5 @@
+import {SERVER_API_IMAGE_URL} from '../../app.constants';
+
 export interface IReportResults {
   maxGrade?: number;
   minScore?: number;
@@ -51,8 +53,8 @@ export class ReportResults implements IReportResults {
     this.activatedUser = result.activatedUser;
     this.emailUser = result.emailUser;
     this.idModuleTopic = result.idModuleTopic;
-    this.imageUrlTopic = result.imageUrlTopic;
-    this.imageUrlUser = result.imageUrlUser;
+    this.imageUrlTopic = result.imageUrlTopic ? SERVER_API_IMAGE_URL + result.imageUrlTopic : null;
+    this.imageUrlUser = result.imageUrlUser ? SERVER_API_IMAGE_URL + result.imageUrlUser : null;
     this.langKeyTopic = result.langKeyTopic;
     this.loginUser = result.loginUser;
     this.maxGrade = result.maxGrade;

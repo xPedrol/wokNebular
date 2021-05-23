@@ -11,7 +11,7 @@ import { ModuleTopicManagerComponent } from './module-topic-manager/module-topic
 import { ModuleTopicExerciseTableComponent } from './module-topic-exercise-table/module-topic-exercise-table.component';
 import { ModuleTopicExerciseManagerComponent } from './module-topic-exercise-manager/module-topic-exercise-manager.component';
 import { ModuleTopicExerciseScenarioTableComponent } from './module-topic-exercise-scenario-table/module-topic-exercise-scenario-table.component';
-import { SubmissionTableComponent } from './submission-table/submission-table.component';
+import { ScenarioSkillsDialogComponent } from './scenario-skills-dialog/scenario-skills-dialog.component';
 
 const routes: Routes = [
   {
@@ -32,7 +32,7 @@ const routes: Routes = [
     ModuleTopicExerciseTableComponent,
     ModuleTopicExerciseManagerComponent,
     ModuleTopicExerciseScenarioTableComponent,
-    SubmissionTableComponent
+    ScenarioSkillsDialogComponent
   ],
     imports: [
         CommonModule,

@@ -1,0 +1,23 @@
+<div class="wrap-table100">
+        <div class="table">
+          <div class="row header">
+            <div class="cell" [ngClass]="column.class" *ngFor="let column of tableColumn">
+              <span class="label" style="font-size: small">{{column?.title}}</span>
+            </div>
+          </div>
+                <div class="row" *ngFor="let skill of scenarioSkills"
+                >
+                  <div class="cell text-left" data-title="Cenário">
+                    <input [hidden]="true" nbInput formControlName="id">
+                    {{skill?.testScenario?.name}}
+                  </div>
+                  <div class="cell text-left" data-title="Habilidade">
+                    <input [hidden]="true" nbInput formControlName="id">
+                    {{skill?.skill?.name}}
+                  </div>
+                  <div class="cell text-left" data-title="Pontos">
+                    {{skill?.points}}
+                  </div>
+                </div>
+        </div>
+    </div>

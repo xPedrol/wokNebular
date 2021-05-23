@@ -1,8 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {FormArray, FormBuilder, FormGroup} from '@angular/forms';
 import {IModuleTopicExerciseScenario} from '../../shared/models/module-topic-exercise-scenario.model';
-import {IModuleTopic} from '../../shared/models/module-topic.model';
-import {DATE_TIME_FORMAT} from '../../shared/constants/input.constants';
 
 @Component({
   selector: 'app-module-topic-exercise-scenario-table',
@@ -11,7 +9,6 @@ import {DATE_TIME_FORMAT} from '../../shared/constants/input.constants';
 })
 export class ModuleTopicExerciseScenarioTableComponent implements OnInit {
   mTForm: FormGroup;
-  selectedIndex: number;
   @Input() scenarios: IModuleTopicExerciseScenario[];
   tableColumn = [
     {
@@ -30,14 +27,15 @@ export class ModuleTopicExerciseScenarioTableComponent implements OnInit {
       title: 'Descrição',
       class: 'text-left'
     },
-    {
-      title: '',
-      class: 'text-left'
-    }
+    // {
+    //   title: '',
+    //   class: 'text-left'
+    // }
   ];
 
   constructor(
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    // private dialogService: NbDialogService
   ) {
   }
 
@@ -66,5 +64,9 @@ export class ModuleTopicExerciseScenarioTableComponent implements OnInit {
 
   saveScenario(): void {
   }
+
+  // openScenarioSkill() {
+  //   this.dialogService.open(ScenarioSkillsDialogComponent);
+  // }
 
 }

@@ -9,45 +9,43 @@ import {NotFoundComponent} from './shared/components/not-found/not-found.compone
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {NgxWebstorageModule} from 'ngx-webstorage';
 import {AuthInterceptor} from './shared/services/auth-interceptor.service';
-import { CachingInterceptorService} from './shared/services/cacheInterceptor';
-import {BreadcrumbModule} from 'xng-breadcrumb';
+import {CachingInterceptorService} from './shared/services/cacheInterceptor';
 import {CookieModule} from 'ngx-cookie';
-import { HomeComponent } from './home/home.component';
+import {HomeComponent} from './home/home.component';
 import {NgxMaskModule} from 'ngx-mask';
 
 @NgModule({
-    declarations: [
-        AppComponent,
-        NotFoundComponent,
-        HomeComponent
-    ],
-    imports: [
-        BrowserModule,
-        BrowserAnimationsModule,
-        AppRoutingModule,
-        HttpClientModule,
-        BreadcrumbModule,
-        NgxMaskModule.forRoot(),
-        CookieModule.forRoot(),
-        NgxWebstorageModule.forRoot(),
-        ThemeModule.forRoot(),
-    ],
-    providers: [
-        {
-            provide: HTTP_INTERCEPTORS,
-            useClass: AuthInterceptor,
-            multi: true
-        },
-        {
-            provide: HTTP_INTERCEPTORS,
-            useClass: CachingInterceptorService,
-            multi: true
-        }
-    ],
-    exports: [
-        NotFoundComponent
-    ],
-    bootstrap: [AppComponent]
+  declarations: [
+    AppComponent,
+    NotFoundComponent,
+    HomeComponent
+  ],
+  imports: [
+    BrowserModule,
+    BrowserAnimationsModule,
+    AppRoutingModule,
+    HttpClientModule,
+    NgxMaskModule.forRoot(),
+    CookieModule.forRoot(),
+    NgxWebstorageModule.forRoot(),
+    ThemeModule.forRoot(),
+  ],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: CachingInterceptorService,
+      multi: true
+    }
+  ],
+  exports: [
+    NotFoundComponent
+  ],
+  bootstrap: [AppComponent]
 })
 export class AppModule {
 }

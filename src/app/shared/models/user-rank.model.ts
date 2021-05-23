@@ -29,7 +29,7 @@ export class UserRank implements IUserRank {
     this.description = rank.description;
     this.email = rank.email;
     this.idUser = rank.idUser;
-    this.imageUrl = rank.imageUrl ? SERVER_API_IMAGE_URL + this.imageUrl : undefined;
+    this.imageUrl = rank.imageUrl ? SERVER_API_IMAGE_URL + this.imageUrl : null;
     this.login = rank.login;
     this.point = rank.point;
     this.totalSub = rank.totalSub;

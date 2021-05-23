@@ -1,0 +1,51 @@
+<div class="wrap-table100">
+  <div class="scroll">
+    <div class="table" formArrayName="moduleTopics">
+      <div class="row header">
+        <div class="cell" [ngClass]="column.class" *ngFor="let column of tableColumn">
+          <span class="label" style="font-size: small">{{column?.title}}</span>
+        </div>
+      </div>
+
+      <!--      <div class="row" *ngFor="let rank of courseRank">-->
+      <!--        <div class="cell" data-title="Usuário">-->
+      <!--          <nb-user-->
+      <!--            size="large"-->
+      <!--            [name]="rank.login"-->
+      <!--            [picture]="rank.imageUrl"-->
+      <!--          >-->
+      <!--          </nb-user>-->
+      <!--        </div>-->
+      <!--        <div class="cell" data-title="Pontos">-->
+      <!--          <p>{{rank.point}}</p>-->
+      <!--        </div>-->
+      <!--        <div class="cell" data-title="Submissões">-->
+      <!--          <p>{{rank.totalSub}}</p>-->
+      <!--        </div>-->
+      <!--      </div>-->
+
+      <div class="row" *ngFor="let submission of submissions; let i = index"
+      >
+        <div class="cell text-left" data-title="Time">
+          {{submission.userTeam?.team?.name}}
+        </div>
+        <div class="cell text-left" data-title="Linguagem">
+          {{submission?.language?.id}}
+        </div>
+        <div class="cell text-left" data-title="Resultado">
+          <nb-tag size="tiny" status="success" appearance="outline" [text]="'A: '+submission?.runPercentA"></nb-tag>
+          <nb-tag size="tiny" status="info" appearance="outline" [text]="'B: '+submission?.runPercentB"></nb-tag>
+          <nb-tag size="tiny" status="warning" appearance="outline" [text]="'C: '+submission?.runPercentC"></nb-tag>
+          <nb-tag size="tiny" status="danger" appearance="outline" [text]="'D: '+submission?.runPercentD"></nb-tag>
+        </div>
+        <div class="cell text-right">
+          <div class="input-table">
+            <button nbButton ghost status="info" type="button">
+              Detalhes
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
