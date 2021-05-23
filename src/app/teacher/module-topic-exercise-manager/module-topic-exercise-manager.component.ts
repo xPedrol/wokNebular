@@ -41,7 +41,6 @@ export class ModuleTopicExerciseManagerComponent implements OnInit {
   ngOnInit(): void {
     this.getParams();
     this.getModuleTopicExercise();
-    this.getSubmissions();
   }
 
   getParams(): void {
@@ -71,6 +70,7 @@ export class ModuleTopicExerciseManagerComponent implements OnInit {
       this.exerciseSlug
     ).subscribe((exercise) => {
       this.mTExercise = exercise || undefined;
+      this.getSubmissions();
       this.sF.setPageData(this.mTExercise?.exercise?.name);
       this.loadingMTE = false;
       this.getModuleTopicExerciseScenarioByMTEId();
@@ -79,8 +79,9 @@ export class ModuleTopicExerciseManagerComponent implements OnInit {
 
   getSubmissions(): void {
     this.loadingSubmission = true;
-    this.submissionService.getSubmissionsBySlugs(this.authorities, this.courseSlug, this.disciplineSlug).subscribe((submissions) => {
+    this.submissionService.getSubmissionsBySlugs(this.authorities, this.mTExercise.id).subscribe((submissions) => {
       this.submissions = submissions || [];
+      console.warn(submissions);
       this.loadingSubmission = false;
     }, () => this.loadingSubmission = false);
   }

@@ -19,21 +19,23 @@
           <div class="cell text-left" data-title="Dificuldade">
             <nb-tag appearance="outline" [status]="scenario?.scenario?.getColor()" [text]="scenario?.scenario?.difficultyLevelId"></nb-tag>
           </div>
-          <div class="cell text-left" data-title="Descrição">
+          <div class="cell text-left" data-title="Mensagem de ajuda" style="white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis; max-width: 200px;">
             {{scenario?.scenario?.helpMsg}}
           </div>
-<!--          <div class="cell text-right">-->
-<!--            <div class="input-table">-->
-<!--              <button size="small" nbButton ghost status="basic" (click)="selectedIndex = i">Salvar-->
-<!--              </button>-->
-<!--              <button size="small" nbButton ghost status="info" type="button" (click)="openScenarioSkill()">-->
-<!--                Habilidades-->
-<!--              </button>-->
-<!--              <button size="small" nbButton ghost status="info" type="button">-->
-<!--                Arquivos-->
-<!--              </button>-->
-<!--            </div>-->
-<!--          </div>-->
+          <div class="cell text-right">
+            <div class="input-table">
+              <button size="small" nbButton ghost status="basic" (click)="selectedIndex = i">Salvar
+              </button>
+              <button size="small" nbButton ghost status="info" type="button">
+                Habilidades
+              </button>
+              <button size="small" nbButton ghost status="info" type="button">
+                Arquivos
+              </button>
+            </div>
+          </div>
         </div>
       </div>
     </form>

@@ -91,9 +91,8 @@
                 text="Fechado" size="small"></nb-tag>
         <nb-tag *ngIf="selectedModuleTopic.availableToSee" status="success" appearance="filled"
                 text="Visivel" size="small"></nb-tag>
-        <nb-tag *ngIf="!selectedModuleTopic.availableToSee" status="danger" appearance="filled"
+        <nb-tag class="mb-3" *ngIf="!selectedModuleTopic.availableToSee" status="danger" appearance="filled"
                 text="Alunos não podem ver" size="small"></nb-tag>
-        <hr>
         <nb-tag status="success" appearance="filled"
                 [text]="'Exercicos A: '+selectedModuleTopic.numAExercisesCached" size="small"></nb-tag>
         <nb-tag status="info" appearance="filled"

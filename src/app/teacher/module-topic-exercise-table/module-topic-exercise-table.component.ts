@@ -2,7 +2,6 @@ import {Component, Input, OnInit} from '@angular/core';
 import {FormArray, FormBuilder, FormGroup} from '@angular/forms';
 import {IModuleTopicExercise} from '../../shared/models/basic/module-topic-exercise.model';
 import {difficultyLevel} from '../../shared/constants/difficulty-level';
-import {IModuleTopic} from '../../shared/models/module-topic.model';
 import {ModuleTopicExerciseService} from '../../shared/services/module-topic-exercise.service';
 import {NbToastrService} from '@nebular/theme';
 import {DifficultyLevelBasic} from '../../shared/models/basic/difficultyLevel-basic.model';

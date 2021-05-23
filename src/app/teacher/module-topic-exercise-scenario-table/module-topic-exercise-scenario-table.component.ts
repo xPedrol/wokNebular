@@ -9,6 +9,7 @@ import {IModuleTopicExerciseScenario} from '../../shared/models/module-topic-exe
 })
 export class ModuleTopicExerciseScenarioTableComponent implements OnInit {
   mTForm: FormGroup;
+  selectedIndex: number;
   @Input() scenarios: IModuleTopicExerciseScenario[];
   tableColumn = [
     {
@@ -24,13 +25,13 @@ export class ModuleTopicExerciseScenarioTableComponent implements OnInit {
       class: 'text-center'
     },
     {
-      title: 'Descrição',
+      title: 'Msg. Ajuda',
       class: 'text-left'
     },
-    // {
-    //   title: '',
-    //   class: 'text-left'
-    // }
+    {
+      title: '',
+      class: 'text-left'
+    }
   ];
 
   constructor(

@@ -7,7 +7,8 @@ import {IUserTeamBasic} from './basic/userTeam-basic.model';
 import {IJudgehostBasic} from './basic/judgehost-basic.mode';
 import {ISubmissionFile} from './submission-file.model';
 import {IScenarioBasic} from './basic/scenario-basic.model';
-import {IRunResult} from './run-result.model';
+import {IRunResult, RunResult} from './run-result.model';
+import * as moment from 'moment';
 
 export interface ISubmission {
   id?: number;
@@ -69,7 +70,7 @@ export class Submission implements ISubmission {
     this.cacheResultScoreExercise = submission.cacheResultScoreExercise;
     this.cacheResultScoreTopic = submission.cacheResultScoreTopic;
     this.cacheResultTopic = submission.cacheResultTopic;
-    this.createdDate = submission.createdDate;
+    this.createdDate = moment(submission.createdDate);
     this.entryPoint = submission.entryPoint;
     this.exercise = submission.exercise;
     this.expectedResults = submission.expectedResults;
@@ -79,17 +80,16 @@ export class Submission implements ISubmission {
     this.idSubmmit = submission.idSubmmit;
     this.judgehost = submission.judgehost;
     this.language = submission.language;
-    this.lastModifiedDate = submission.lastModifiedDate;
+    this.lastModifiedDate = moment(submission.lastModifiedDate);
     this.moduleTopicExercise = submission.moduleTopicExercise;
     this.rejudging = submission.rejudging;
     this.runPercentA = submission.runPercentA;
     this.runPercentB = submission.runPercentB;
     this.runPercentC = submission.runPercentC;
     this.runPercentD = submission.runPercentD;
-    this.runResult = submission.runResult;
-    this.submitTime = submission.submitTime;
+    this.runResult = new RunResult(submission.runResult);
+    this.submitTime = moment(submission.submitTime);
     this.userTeam = submission.userTeam;
     this.valid = submission.valid;
   }
-
 }

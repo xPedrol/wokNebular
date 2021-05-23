@@ -1,6 +1,6 @@
 <div class="wrap-table100">
   <div class="scroll">
-    <div class="table" formArrayName="moduleTopics">
+    <div class="table">
       <div class="row header">
         <div class="cell" [ngClass]="column.class" *ngFor="let column of tableColumn">
           <span class="label" style="font-size: small">{{column?.title}}</span>
@@ -26,17 +26,31 @@
 
       <div class="row" *ngFor="let submission of submissions; let i = index"
       >
+        <div class="cell text-left" data-title="Data de submissão">
+          {{submission.submitTime?.toISOString() | date:'dd/MM/yyyy HH:mm:ss'}}
+        </div>
         <div class="cell text-left" data-title="Time">
           {{submission.userTeam?.team?.name}}
+        </div>
+        <div class="cell text-left" data-title="Arquivos">
+          {{submission.files?.length ? submission.files?.length : 0}}
         </div>
         <div class="cell text-left" data-title="Linguagem">
           {{submission?.language?.id}}
         </div>
         <div class="cell text-left" data-title="Resultado">
-          <nb-tag size="tiny" status="success" appearance="outline" [text]="'A: '+submission?.runPercentA"></nb-tag>
-          <nb-tag size="tiny" status="info" appearance="outline" [text]="'B: '+submission?.runPercentB"></nb-tag>
-          <nb-tag size="tiny" status="warning" appearance="outline" [text]="'C: '+submission?.runPercentC"></nb-tag>
-          <nb-tag size="tiny" status="danger" appearance="outline" [text]="'D: '+submission?.runPercentD"></nb-tag>
+          <nb-tag class="m-1" size="tiny" [status]="submission.runResult.getColor()" appearance="outline"
+                  [text]="submission?.runResult?.name"></nb-tag>
+        </div>
+        <div class="cell text-left" data-title="Notas">
+          <nb-tag class="m-1" size="tiny" status="success" appearance="outline"
+                  [text]="'A: '+submission?.runPercentA"></nb-tag>
+          <nb-tag class="m-1" size="tiny" status="info" appearance="outline"
+                  [text]="'B: '+submission?.runPercentB"></nb-tag>
+          <nb-tag class="m-1" size="tiny" status="warning" appearance="outline"
+                  [text]="'C: '+submission?.runPercentC"></nb-tag>
+          <nb-tag class="m-1" size="tiny" status="danger" appearance="outline"
+                  [text]="'D: '+submission?.runPercentD"></nb-tag>
         </div>
         <div class="cell text-right">
           <div class="input-table">

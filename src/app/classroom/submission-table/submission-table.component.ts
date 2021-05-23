@@ -10,7 +10,15 @@ export class SubmissionTableComponent implements OnInit {
   @Input() submissions: ISubmission[];
   tableColumn = [
     {
+      title: 'Data',
+      class: 'text-left'
+    },
+    {
       title: 'Time',
+      class: 'text-left'
+    },
+    {
+      title: 'Arquivos',
       class: 'text-left'
     },
     {
@@ -19,6 +27,14 @@ export class SubmissionTableComponent implements OnInit {
     },
     {
       title: 'Resultado',
+      class: 'text-left'
+    },
+    {
+      title: 'Notas',
+      class: 'text-left'
+    },
+    {
+      title: '',
       class: 'text-left'
     }
   ];

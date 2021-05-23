@@ -28,8 +28,8 @@ export class SubmissionService {
     }));
   }
 
-  getSubmissionsBySlugs(authorities: Authority[], courseSlug: string, disciplineSlug: string) {
-    const url = `${this.sF.routeAuthSwitch(authorities)}courses/${courseSlug}/disciplines/${disciplineSlug}/submissions`;
+  getSubmissionsBySlugs(authorities: Authority[], moduleTopicExerciseId) {
+    const url = `${this.sF.routeAuthSwitch(authorities)}modules/topics/exercises/${moduleTopicExerciseId}/submissions`;
     return this.http.get<ISubmission[]>(`${SERVER_API_URL}${url}`).pipe(map((submissions) => {
       return submissions.map((submission) => {
         return new Submission(submission);
