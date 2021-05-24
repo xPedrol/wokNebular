@@ -5,6 +5,9 @@ import {IModuleTopicExerciseScenario, ModuleTopicExerciseScenario} from '../mode
 import {IModuleTopicExercise} from '../models/basic/module-topic-exercise.model';
 import {SERVER_API_URL} from '../../app.constants';
 import {map} from 'rxjs/operators';
+import {IScenarioSkill} from '../models/scenario-skill.model';
+import {IScenarioTestFile} from '../models/scenario-test-file.model';
+import {IScenarioTest} from '../models/scenario-test.model';
 
 @Injectable({
   providedIn: 'root'
@@ -24,5 +27,15 @@ export class ModuleTopicExerciseScenarioService {
           return new ModuleTopicExerciseScenario(scenario);
         });
       }));
+  }
+
+  getScenarioSkillsByScenarioId(scenarioId: number): Observable<IScenarioSkill[]> {
+    return this.http
+      .get<IScenarioSkill[]>(`${SERVER_API_URL}teacher/scenarios/${scenarioId}/skills`);
+  }
+
+  getScenarioFilesByScenarioId(scenarioId: number): Observable<IScenarioTest[]> {
+    return this.http
+      .get<IScenarioTest[]>(`${SERVER_API_URL}teacher/scenarios/${scenarioId}/tests/files`);
   }
 }

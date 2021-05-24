@@ -1,0 +1,18 @@
+<nb-card>
+  <nb-card-body *ngIf="files && files?.length > 0">
+    <div class="row" *ngFor="let file of files">
+      <nb-card>
+        <nb-card-header class="border-0">
+          <h6 class="header-title-color">{{file?.name}}</h6>
+        </nb-card-header>
+        <nb-card-body>
+          <pre><code>{{file?.testFile?.inFile}}</code></pre>
+          <hr>
+          <pre><code> {{file?.testFile?.outFile}}</code></pre>
+        </nb-card-body>
+<!--        <nb-card-footer>By Wikipedia</nb-card-footer>-->
+      </nb-card>
+    </div>
+  </nb-card-body>
+  <app-not-found-card class="m-3" *ngIf="!files || files?.length === 0"></app-not-found-card>
+</nb-card>

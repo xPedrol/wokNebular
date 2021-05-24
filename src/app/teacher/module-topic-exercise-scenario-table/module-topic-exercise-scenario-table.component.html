@@ -17,7 +17,8 @@
             {{scenario?.scenario?.name}}
           </div>
           <div class="cell text-left" data-title="Dificuldade">
-            <nb-tag appearance="outline" [status]="scenario?.scenario?.getColor()" [text]="scenario?.scenario?.difficultyLevelId"></nb-tag>
+            <nb-tag appearance="outline" size="small" [status]="scenario?.scenario?.getColor()"
+                    [text]="scenario?.scenario?.difficultyLevelId"></nb-tag>
           </div>
           <div class="cell text-left" data-title="Mensagem de ajuda" style="white-space: nowrap;
     overflow: hidden;
@@ -28,10 +29,16 @@
             <div class="input-table">
               <button size="small" nbButton ghost status="basic" (click)="selectedIndex = i">Salvar
               </button>
-              <button size="small" nbButton ghost status="info" type="button">
+              <button size="small" nbButton ghost status="info" type="button"
+                      [nbSpinner]="loadingSkills && selectedIndex === i" nbSpinnerStatus="info"
+                      nbSpinnerSize="medium"
+                      (click)="selectedIndex = i;getScenarioSkills(scenario.id)">
                 Habilidades
               </button>
-              <button size="small" nbButton ghost status="info" type="button">
+              <button size="small" nbButton ghost status="info" type="button"
+                      [nbSpinner]="loadingFiles && selectedIndex === i" nbSpinnerStatus="info"
+                      nbSpinnerSize="medium"
+                      (click)="selectedIndex = i;getScenarioFiles(scenario.id)">
                 Arquivos
               </button>
             </div>

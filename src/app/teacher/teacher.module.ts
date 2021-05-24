@@ -12,6 +12,7 @@ import { ModuleTopicExerciseTableComponent } from './module-topic-exercise-table
 import { ModuleTopicExerciseManagerComponent } from './module-topic-exercise-manager/module-topic-exercise-manager.component';
 import { ModuleTopicExerciseScenarioTableComponent } from './module-topic-exercise-scenario-table/module-topic-exercise-scenario-table.component';
 import { ScenarioSkillsDialogComponent } from './scenario-skills-dialog/scenario-skills-dialog.component';
+import { ScenarioFilesDialogComponent } from './scenario-files-dialog/scenario-files-dialog.component';
 
 const routes: Routes = [
   {
@@ -32,7 +33,8 @@ const routes: Routes = [
     ModuleTopicExerciseTableComponent,
     ModuleTopicExerciseManagerComponent,
     ModuleTopicExerciseScenarioTableComponent,
-    ScenarioSkillsDialogComponent
+    ScenarioSkillsDialogComponent,
+    ScenarioFilesDialogComponent
   ],
     imports: [
         CommonModule,

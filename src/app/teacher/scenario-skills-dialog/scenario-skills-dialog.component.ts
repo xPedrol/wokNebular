@@ -7,6 +7,7 @@ import {IScenarioSkill} from '../../shared/models/scenario-skill.model';
   styleUrls: ['./scenario-skills-dialog.component.scss']
 })
 export class ScenarioSkillsDialogComponent implements OnInit {
+  skills: IScenarioSkill[];
   tableColumn = [
     {
       title: 'Habilidade',
@@ -17,7 +18,6 @@ export class ScenarioSkillsDialogComponent implements OnInit {
       class: 'text-center'
     }
   ];
-  scenarioSkills: IScenarioSkill[];
 
   constructor() {
   }

@@ -50,7 +50,7 @@
                   </div>
                   <div class="col-6 text-right">
                     <nb-tag size="tiny" status="success" appearance="outline"
-                            [text]="moduleTopic.numAExercisesCached"></nb-tag>
+                            [text]="moduleTopic?.numAExercisesCached"></nb-tag>
                   </div>
                 </div>
               </nb-list-item>
@@ -61,7 +61,7 @@
                   </div>
                   <div class="col-6 text-right">
                     <nb-tag size="tiny" status="info" appearance="outline"
-                            [text]="moduleTopic.numBExercisesCached"></nb-tag>
+                            [text]="moduleTopic?.numBExercisesCached"></nb-tag>
                   </div>
                 </div>
               </nb-list-item>
@@ -72,7 +72,7 @@
                   </div>
                   <div class="col-6 text-right">
                     <nb-tag size="tiny" status="warning" appearance="outline"
-                            [text]="moduleTopic.numCExercisesCached"></nb-tag>
+                            [text]="moduleTopic?.numCExercisesCached"></nb-tag>
                   </div>
                 </div>
               </nb-list-item>
@@ -83,7 +83,7 @@
                   </div>
                   <div class="col-6 text-right">
                     <nb-tag size="tiny" status="danger" appearance="outline"
-                            [text]="moduleTopic.numDExercisesCached"></nb-tag>
+                            [text]="moduleTopic?.numDExercisesCached"></nb-tag>
                   </div>
                 </div>
               </nb-list-item>
@@ -94,7 +94,7 @@
                                 </div>
                                 <div class="col-6 text-right">
                                   <nb-tag size="tiny" status="basic" appearance="outline"
-                                          [text]="moduleTopic.numOExercisesCached()"></nb-tag>
+                                          [text]="moduleTopic?.numOExercisesCached()"></nb-tag>
                                 </div>
                               </div>
 
@@ -297,7 +297,10 @@
           </div>
           <div class="form-row">
             <div class="form-group col-12 text-right">
-              <button class="m-1" nbButton status="primary" type="button" size="medium" (click)="synchronizeMTDates()">
+              <button *ngIf="!course" class="m-1" nbButton status="primary" type="button" size="medium" [nbSpinner]="!course" nbSpinnerStatus="info" nbSpinnerSize="giant">
+                Carregando...
+              </button>
+              <button *ngIf="course" class="m-1" nbButton status="primary" type="button" size="medium" (click)="synchronizeMTDates()">
                 Sincronizar datas
               </button>
               <button class="m-1" nbButton status="info" type="submit" size="medium"

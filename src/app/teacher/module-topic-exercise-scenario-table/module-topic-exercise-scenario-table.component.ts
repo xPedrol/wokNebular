@@ -1,6 +1,12 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {FormArray, FormBuilder, FormGroup} from '@angular/forms';
 import {IModuleTopicExerciseScenario} from '../../shared/models/module-topic-exercise-scenario.model';
+import {ScenarioSkillsDialogComponent} from '../scenario-skills-dialog/scenario-skills-dialog.component';
+import {NbDialogService} from '@nebular/theme';
+import {IScenarioSkill} from '../../shared/models/scenario-skill.model';
+import {ModuleTopicExerciseScenarioService} from '../../shared/services/module-topic-exercise-scenario.service';
+import {IScenarioTestFile} from '../../shared/models/scenario-test-file.model';
+import {ScenarioFilesDialogComponent} from '../scenario-files-dialog/scenario-files-dialog.component';
 
 @Component({
   selector: 'app-module-topic-exercise-scenario-table',
@@ -10,6 +16,8 @@ import {IModuleTopicExerciseScenario} from '../../shared/models/module-topic-exe
 export class ModuleTopicExerciseScenarioTableComponent implements OnInit {
   mTForm: FormGroup;
   selectedIndex: number;
+  loadingSkills = false;
+  loadingFiles = false;
   @Input() scenarios: IModuleTopicExerciseScenario[];
   tableColumn = [
     {
@@ -36,7 +44,8 @@ export class ModuleTopicExerciseScenarioTableComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    // private dialogService: NbDialogService
+    private dialogService: NbDialogService,
+    private scenarioService: ModuleTopicExerciseScenarioService
   ) {
   }
 
@@ -63,11 +72,31 @@ export class ModuleTopicExerciseScenarioTableComponent implements OnInit {
     });
   }
 
+  getScenarioSkills(scenarioId: number): void {
+    this.loadingSkills = true;
+    this.scenarioService.getScenarioSkillsByScenarioId(scenarioId).subscribe((skills) => {
+      this.openScenarioSkills(skills);
+      this.loadingSkills = false;
+    }, () => this.loadingSkills = false);
+  }
+
+  getScenarioFiles(scenarioId: number): void {
+    this.loadingFiles = true;
+    this.scenarioService.getScenarioFilesByScenarioId(scenarioId).subscribe((files) => {
+      this.openScenarioFiles(files);
+      this.loadingFiles = false;
+    }, () => this.loadingFiles = false);
+  }
+
   saveScenario(): void {
   }
 
-  // openScenarioSkill() {
-  //   this.dialogService.open(ScenarioSkillsDialogComponent);
-  // }
+  openScenarioSkills(skills: IScenarioSkill[]) {
+    this.dialogService.open(ScenarioSkillsDialogComponent, {context: {skills}});
+  }
+
+  openScenarioFiles(files: IScenarioTestFile[]) {
+    this.dialogService.open(ScenarioFilesDialogComponent, {context: {files}});
+  }
 
 }

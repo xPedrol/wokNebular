@@ -13,7 +13,7 @@ export interface IUserSkill {
   colorSkill: string;
   slugSkill: string;
 
-  getPercent(round?: boolean): number;
+  getPercent(round?: boolean): string;
 }
 
 export class UserSkill implements IUserSkill {
@@ -28,13 +28,13 @@ export class UserSkill implements IUserSkill {
   slugSkill: string;
   user: IUserBasic;
 
-  getPercent(round?: boolean): number {
+  getPercent(round?: boolean): string {
     if (this.point && this.maxPoint) {
-      return round
+      return (round
         ? Math.round((this.point / this.maxPoint) * 100)
-        : (this.point / this.maxPoint) * 100;
+        : (this.point / this.maxPoint) * 100).toFixed(2);
     }
-    return 0;
+    return '0';
   }
 
   constructor(userSkill: IUserSkill) {

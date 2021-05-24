@@ -85,6 +85,7 @@ export class ModuleTopicManagerComponent implements OnInit, OnDestroy {
         activated: new FormControl(false)
       });
       this.findBasicCourseByModuleId();
+      this.loadingMT = false;
       this.updateForm();
     }, () => this.loadingMT = false);
   }
@@ -144,8 +145,8 @@ export class ModuleTopicManagerComponent implements OnInit, OnDestroy {
   findBasicCourseByModuleId(): void {
     this.courseService.findBasicCourseByModuleId(this.moduleTopic?.module?.id).subscribe((course) => {
       this.course = course || undefined;
-      this.loadingMT = false;
-    }, () => this.loadingMT = false);
+      // this.loadingMT = false;
+    });
   }
 
   getModuleTopicExercisesByModuleTopicId(): void {

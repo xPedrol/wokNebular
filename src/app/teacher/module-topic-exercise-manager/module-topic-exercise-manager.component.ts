@@ -8,6 +8,7 @@ import {Authority} from '../../shared/constants/authority.constants';
 import {SharedFunctions} from '../../shared/shared.functions';
 import {ISubmission} from '../../shared/models/submission.model';
 import {SubmissionService} from '../../shared/services/submission.service';
+import {IScenarioSkill} from '../../shared/models/scenario-skill.model';
 
 @Component({
   selector: 'app-module-topic-exercise-manager',
