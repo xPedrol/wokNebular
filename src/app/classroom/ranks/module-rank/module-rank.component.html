@@ -7,7 +7,7 @@
         </div>
       </div>
 
-      <div class="row" *ngFor="let rank of moduleRank">
+      <a target="_blank" [routerLink]="['/account/profile',rank.login]" class="row" *ngFor="let rank of moduleRank">
         <div class="cell" data-title="Usuário">
           <nb-user
             size="large"
@@ -22,7 +22,7 @@
         <div class="cell" data-title="Submissões">
           <p>{{rank.totalSub}}</p>
         </div>
-      </div>
+      </a>
     </div>
   </div>
 </div>

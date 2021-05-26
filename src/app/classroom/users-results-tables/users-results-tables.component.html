@@ -2,8 +2,10 @@
   <div *ngFor="let results of usersResults">
     <nb-card>
       <nb-card-header class="border-0">
+        <a target="_blank" [routerLink]="['/account/profile',results[0].loginUser]">
         <nb-user [name]="results[0].loginUser" [title]="results[0].emailUser"
                  [picture]="results[0].imageUrlUser"></nb-user>
+        </a>
         <hr>
       </nb-card-header>
       <div class="m-3 border-0">
