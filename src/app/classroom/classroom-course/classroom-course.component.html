@@ -35,13 +35,11 @@
                   <div class="col-12">
                     <button nbButton outline class="m-1" size="small" *ngIf="isTeacher"
                             [routerLink]="['/'+sF.routeAuthSwitch(authorities,true)+'manager/course',course?.slug,'module',module?.discipline?.slug]">
-                      <span class="d-none d-sm-block">Gerenciar</span>
-                      <nb-icon class="d-block d-sm-none" icon="diagonal-arrow-right-up-outline"></nb-icon>
+                      Gerenciar
                     </button>
                     <button nbButton outline class="m-1" size="small" *ngIf="authorities"
                             [routerLink]="['/'+sF.routeAuthSwitch(authorities,true)+'classroom/course',course?.slug,'module',module?.discipline?.slug]">
-                      <span class="d-none d-sm-block">Abrir</span>
-                      <nb-icon icon="diagonal-arrow-right-up-outline"></nb-icon>
+                      Abrir
                     </button>
                   </div>
                 </div>
