@@ -1,8 +1,10 @@
-import {AfterViewInit, Component, ElementRef, OnInit, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {SharedFunctions} from '../../shared/shared.functions';
 import {Authority} from '../../shared/constants/authority.constants';
 import {Subject} from 'rxjs';
+import {SolutionService} from '../../shared/services/solution.service';
+import {ISolution} from '../../shared/models/solution.model';
 
 @Component({
   selector: 'app-classroom-solution',
@@ -19,10 +21,13 @@ export class ClassroomSolutionComponent implements OnInit, AfterViewInit {
   authorities: Authority[];
   isTeacher = false;
   solutionSlug: string;
+  solution: ISolution;
+  loadingSolution = true;
 
   constructor(
     private activatedRoute: ActivatedRoute,
     private sF: SharedFunctions,
+    private solutionService: SolutionService
   ) {
     this.sF.setPageData('Solução');
   }
@@ -41,9 +46,14 @@ export class ClassroomSolutionComponent implements OnInit, AfterViewInit {
     this.topicSlug = this.activatedRoute.snapshot.params.topicSlug;
     this.courseSlug = this.activatedRoute.snapshot.params.courseSlug;
     this.solutionSlug = this.activatedRoute.snapshot.params.solutionSlug;
+    this.getSolution();
   }
 
   getSolution() {
-
+    this.loadingSolution = true;
+    this.solutionService.getSolution(this.solutionSlug).subscribe((solution) => {
+      this.solution = solution || undefined;
+      this.loadingSolution = false;
+    }, () => this.loadingSolution = false);
   }
 }

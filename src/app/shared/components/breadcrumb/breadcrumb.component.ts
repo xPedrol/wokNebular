@@ -11,6 +11,7 @@ export class BreadcrumbComponent implements OnInit {
   @Input() disciplineSlug?: string;
   @Input() topicSlug?: string;
   @Input() exerciseSlug?: string;
+  @Input() solutionSlug?: string;
   @Input() last: number;
   @Input() classroom = true;
   routeType = '';

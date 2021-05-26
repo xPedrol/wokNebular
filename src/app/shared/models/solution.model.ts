@@ -1,5 +1,5 @@
 import {IExerciseBasic} from './basic/exercise-basic.model';
-import {IDifficultyLevelBasic} from './basic/difficultyLevel-basic.model';
+import {DifficultyLevelBasic, IDifficultyLevelBasic} from './basic/difficultyLevel-basic.model';
 import {ISolutionFile} from './solution-file.model';
 
 export interface ISolution {
@@ -13,14 +13,22 @@ export interface ISolution {
 }
 
 export class Solution implements ISolution {
-  constructor(
-    public id?: number,
-    public name?: string,
-    public slug?: string,
-    public description?: string,
-    public exercise?: IExerciseBasic,
-    public difficultyLevel?: IDifficultyLevelBasic,
-    public files?: ISolutionFile[]
-  ) {
+  description: string;
+  difficultyLevel: IDifficultyLevelBasic;
+  exercise: IExerciseBasic;
+  files: ISolutionFile[];
+  id: number;
+  name: string;
+  slug: string;
+
+  constructor(solution: ISolution) {
+    this.description = solution.description;
+    this.difficultyLevel = new DifficultyLevelBasic(solution.difficultyLevel);
+    this.exercise = solution.exercise;
+    this.files = solution.files;
+    this.id = solution.id;
+    this.name = solution.name;
+    this.slug = solution.slug;
   }
+
 }
