@@ -12,7 +12,6 @@ import {IUserExerciseResult, UserExerciseResult} from '../models/user/user-exerc
 import {IUserTopicResult} from '../models/user/user-topic-result.model';
 import {ISubmission} from '../models/submission.model';
 import {SharedFunctions} from '../shared.functions';
-import {ISkillBasic} from '../models/basic/skill-basic.model';
 import {IUserSkill, UserSkill} from '../models/user/user-skill.model';
 import {IReportResults, ReportResults} from '../models/module-topic-user-result.model';
 
@@ -148,5 +147,10 @@ export class UserService {
         });
         return results;
       }));
+  }
+
+  findUserTeamsByAccount(): Observable<IUserTeamBasic[]> {
+    const url = 'account/userteams';
+    return this.http.get<IUserTeamBasic[]>(`${SERVER_API_URL}${url}`);
   }
 }

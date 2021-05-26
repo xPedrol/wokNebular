@@ -1,0 +1,83 @@
+<div class="row">
+  <div class="col-12">
+    <nb-card>
+      <nb-card-header class="border-0">
+        <h6 class="header-title-color">Enviar arquivos - {{mTExercise?.exercise?.name}}</h6>
+      </nb-card-header>
+      <nb-card-body>
+        <form [formGroup]="submissionForm" (ngSubmit)="submitFiles()">
+          <div class="form-row">
+            <div class="form-group col-12">
+              <label class="label">Linguagem</label>
+              <nb-form-field>
+                <nb-select fullWidth placeholder="Selecione uma linguagem..." formControlName="languageId"
+                           [status]="(submissionForm.get('languageId').dirty || submissionForm.get('languageId').touched) ? (submissionForm.get('languageId').invalid  ? 'danger' : 'success') : 'basic'">
+                  <nb-option [value]="language.id" *ngFor="let language of languages">{{language?.name}}</nb-option>
+                </nb-select>
+              </nb-form-field>
+              <ng-container
+                *ngIf="submissionForm.get('languageId').invalid && submissionForm.get('languageId').touched">
+                <p class="text-danger" *ngIf="submissionForm.get('languageId').errors?.required">
+                  Campo obrigatório
+                </p>
+              </ng-container>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-12">
+              <label class="label">Classe principal</label>
+              <nb-form-field>
+                <nb-select fullWidth placeholder="Selecione um arquivo..." formControlName="entryPoint"
+                           [status]="(submissionForm.get('entryPoint').dirty || submissionForm.get('entryPoint').touched) ? (submissionForm.get('entryPoint').invalid  ? 'danger' : 'success') : 'basic'">
+                  <nb-option [disabled]="true" *ngIf="!files || files?.length === 0">Vazio</nb-option>
+                  <nb-option [value]="file.name" *ngFor="let file of files">{{file?.name}}</nb-option>
+                </nb-select>
+              </nb-form-field>
+              <ng-container
+                *ngIf="submissionForm.get('entryPoint').invalid && submissionForm.get('entryPoint').touched">
+                <p class="text-danger" *ngIf="submissionForm.get('entryPoint').errors?.required">
+                  Campo obrigatório
+                </p>
+              </ng-container>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-12">
+              <label class="label">Time</label>
+              <nb-form-field>
+                <nb-select fullWidth placeholder="Selecione um time..." formControlName="userTeamId"
+                           [status]="(submissionForm.get('userTeamId').dirty || submissionForm.get('userTeamId').touched) ? (submissionForm.get('userTeamId').invalid  ? 'danger' : 'success') : 'basic'">
+                  <nb-option [value]="team.id" *ngFor="let team of teams">{{team?.team?.name}}</nb-option>
+                </nb-select>
+              </nb-form-field>
+              <ng-container
+                *ngIf="submissionForm.get('userTeamId').invalid && submissionForm.get('userTeamId').touched">
+                <p class="text-danger" *ngIf="submissionForm.get('userTeamId').errors?.required">
+                  Campo obrigatório
+                </p>
+              </ng-container>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-12 col-md-12">
+              <ngx-dropzone (change)="onSelect($event)" class="dropzone-background">
+                <ngx-dropzone-label>Coloque os arquivos aqui!</ngx-dropzone-label>
+                <ngx-dropzone-preview *ngFor="let f of files" [removable]="true" (removed)="onRemove(f)">
+                  <ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label>
+                </ngx-dropzone-preview>
+              </ngx-dropzone>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-12 text-right">
+              <button nbButton size="medium" status="info"
+                      [disabled]="submissionForm.invalid || (!files || files?.length === 0)">Enviar
+              </button>
+            </div>
+          </div>
+        </form>
+      </nb-card-body>
+    </nb-card>
+  </div>
+</div>
+

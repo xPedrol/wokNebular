@@ -20,6 +20,8 @@ import {UsersResultsTablesComponent} from './users-results-tables/users-results-
 import {UsersResultsTableComponent} from './users-results-tables/users-results-table/users-results-table.component';
 import {SubmitExerciseResolutionComponent} from './submit-exercise-resolution/submit-exercise-resolution.component';
 import {SubmissionTableComponent} from './submission-table/submission-table.component';
+import {ClassroomSubmissionUploadDialogComponent} from './classroom-submission-upload-dialog/classroom-submission-upload-dialog.component';
+import {NgxDropzoneModule} from 'ngx-dropzone';
 
 @NgModule({
   declarations: [
@@ -39,13 +41,15 @@ import {SubmissionTableComponent} from './submission-table/submission-table.comp
     UsersResultsTablesComponent,
     UsersResultsTableComponent,
     SubmitExerciseResolutionComponent,
-    SubmissionTableComponent
+    SubmissionTableComponent,
+    ClassroomSubmissionUploadDialogComponent
   ],
   imports: [
     CommonModule,
     SharedModule,
     RouterModule,
     ReactiveFormsModule,
+    NgxDropzoneModule
   ],
   exports: [
     ClassroomContentComponent,

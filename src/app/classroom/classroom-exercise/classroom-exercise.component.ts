@@ -10,6 +10,8 @@ import {ISolution} from '../../shared/models/solution.model';
 import {takeUntil} from 'rxjs/operators';
 import {UserService} from '../../shared/services/user.service';
 import {SolutionService} from '../../shared/services/solution.service';
+import {NbDialogService} from '@nebular/theme';
+import {ClassroomSubmissionUploadDialogComponent} from '../classroom-submission-upload-dialog/classroom-submission-upload-dialog.component';
 
 @Component({
   selector: 'app-classroom-exercise',
@@ -38,6 +40,7 @@ export class ClassroomExerciseComponent implements OnInit, OnDestroy {
     private mTEService: ModuleTopicExerciseService,
     private userService: UserService,
     private solutionService: SolutionService,
+    private dialogService: NbDialogService
   ) {
     this.sF.setPageData('Exercício');
   }
@@ -101,6 +104,18 @@ export class ClassroomExerciseComponent implements OnInit, OnDestroy {
         this.solutions = solutions || [];
         this.loadingContent = false;
       }, () => this.loadingContent = false);
+  }
+
+  openSubmissionUploadDialog(): void {
+    this.dialogService.open(ClassroomSubmissionUploadDialogComponent, {
+      context: {
+        mTExercise: this.exercise,
+        courseSlug: this.courseSlug,
+        disciplineSlug: this.disciplineSlug,
+        topicSlug: this.topicSlug,
+        exerciseSlug: this.exerciseSlug,
+      }
+    });
   }
 
 }

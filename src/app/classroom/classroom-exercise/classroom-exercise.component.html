@@ -48,7 +48,7 @@
             <span *ngIf="!isTeacher"><h6 class="header-title-color">Submissões</h6></span>
           </div>
           <div class="col-6 text-right">
-            <button nbButton size="small" status="info">
+            <button nbButton size="small" status="info" (click)="openSubmissionUploadDialog()">
               <nb-icon icon="cloud-upload-outline"></nb-icon>
               Upload
             </button>

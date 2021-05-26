@@ -7,6 +7,7 @@ import {ISubmissionFile, SubmissionFile} from '../models/submission-file.model';
 import {Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
 import {ISubmission, Submission} from '../models/submission.model';
+import {ISubmissionPost} from '../models/submission-post.model';
 
 @Injectable({
   providedIn: 'root'
@@ -35,5 +36,11 @@ export class SubmissionService {
         return new Submission(submission);
       });
     }));
+  }
+
+  submitFiles(files: ISubmissionPost, courseSlug: string, disciplineSlug: string, topicSlug: string, exerciseSlug: string)
+    : Observable<ISubmissionPost> {
+    const url = `account/courses/${courseSlug}/disciplines/${disciplineSlug}/topics/${topicSlug}/exercises/${exerciseSlug}/submissions`;
+    return this.http.post<ISubmissionPost>(`${SERVER_API_URL}${url}`, files);
   }
 }

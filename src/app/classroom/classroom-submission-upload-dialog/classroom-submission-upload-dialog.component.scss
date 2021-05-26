@@ -1,0 +1,9 @@
+@import '../../@theme/styles/themes';
+@media screen and (min-width: 768px) {
+  nb-card{
+    width: 600px;
+  }
+}
+.dropzone-background{
+  background-color: nb-theme(hr-background);
+}

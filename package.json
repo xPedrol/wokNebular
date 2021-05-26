@@ -36,6 +36,7 @@
     "nebular-icons": "1.1.0",
     "ng2-completer": "^9.0.1",
     "ngx-cookie": "^5.0.2",
+    "ngx-dropzone": "^3.0.0",
     "ngx-echarts": "^4.2.2",
     "ngx-mask": "^11.1.5",
     "ngx-webstorage": "^7.0.1",
