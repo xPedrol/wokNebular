@@ -93,7 +93,8 @@
                 <h6 style="color: #8f9bb3">Sobre</h6>
               </div>
               <div class="col-6 text-right">
-                <button nbButton status="basic" ghost (click)="openEditAboutDialog()"><nb-icon icon="edit-outline"></nb-icon></button>
+                <button nbButton status="basic" ghost (click)="openEditAboutDialog()"><nb-icon
+                  icon="edit-outline"></nb-icon></button>
               </div>
             </div>
       </nb-card-header>
@@ -109,7 +110,7 @@
                   </div>
          </nb-card-body>
        </nb-card>
-       <nb-card>
+       <nb-card *ngIf="!userLogin">
          <nb-card-header class="border-0 mb-2">
         <h6 style="color: #8f9bb3">Editar perfil</h6>
       </nb-card-header>
@@ -117,7 +118,7 @@
            <app-edit-profile *ngIf="user" [user]="user"></app-edit-profile>
          </nb-card-body>
        </nb-card>
-        <nb-card>
+        <nb-card *ngIf="!userLogin">
          <nb-card-header class="border-0 mb-2">
         <h6 style="color: #8f9bb3">Editar usuário</h6>
       </nb-card-header>

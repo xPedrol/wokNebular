@@ -49,10 +49,22 @@ export class UserService {
     }));
   }
 
+  public getProfileByLogin(login: string): Observable<ICompleteUser> {
+    return this.http.get<ICompleteUser>(
+      `${SERVER_API_URL}public/profiles/${login}`
+    );
+  }
+
   getUserProfileStatistics() {
     const url = 'account/reportUser';
     return this.http.get<IUserProfileStatistics>(`${SERVER_API_URL}${url}`);
   }
+
+  getUserProfileStatisticsByLogin(login: string) {
+    const url = `account/users/${login}/reportUser`;
+    return this.http.get<IUserProfileStatistics>(`${SERVER_API_URL}${url}`);
+  }
+
 
   getExercisesResult(
     courseSlug: string,
@@ -98,6 +110,23 @@ export class UserService {
     const url = `${this.sF.routeAuthSwitch(authorities)}courses/${courseSlug}/disciplines/${disciplineSlug}/topics/${topicSlug}/exercises/${exerciseSlug}/submissions`;
     return this.http
       .get<ISubmission[]>(`${SERVER_API_URL}${url}`, {params: options});
+  }
+
+  public getUserSkillsByLogin(
+    login: string
+  ): Observable<IUserSkill[]> {
+    const url = `account/users/${login}/skills`;
+    return this.http.get<IUserSkill[][]>(`${SERVER_API_URL}${url}`).pipe(map((skill) => {
+      const skillA: IUserSkill[] = (Object.keys(skill).map((key) => {
+        return skill ? skill[key] : [];
+      })).reduce(
+        (acc, val) => acc.concat(val),
+        []
+      );
+      return skillA.map((skill1) => {
+        return new UserSkill(skill1);
+      });
+    }));
   }
 
   getUserSkillsMatriz(): Observable<IUserSkill[][]> {

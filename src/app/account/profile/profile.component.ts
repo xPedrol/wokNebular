@@ -7,6 +7,8 @@ import {IUserProfileStatistics} from '../../shared/models/user/user-profile-stat
 import {IUserSkill} from '../../shared/models/user/user-skill.model';
 import {NbDialogService} from '@nebular/theme';
 import {EditAboutDialogComponent} from './edit-about-dialog/edit-about-dialog.component';
+import {SharedFunctions} from '../../shared/shared.functions';
+import {ActivatedRoute} from '@angular/router';
 
 @Component({
   selector: 'app-profile',
@@ -21,22 +23,58 @@ export class ProfileComponent implements OnInit, OnDestroy {
   loadingUserStatistics = true;
   userSkills: IUserSkill[];
   loadingUserSkills = true;
+  userLogin: string;
 
   constructor(
     private userService: UserService,
-    private dialogService: NbDialogService
+    private dialogService: NbDialogService,
+    private sF: SharedFunctions,
+    private activatedRoute: ActivatedRoute
   ) {
   }
 
   ngOnInit(): void {
-    this.getCompleteUser();
-    this.getUserProfileStatistics();
-    this.getUserSkills();
+    this.userLogin = this.activatedRoute.snapshot.params.userSlug;
+    if (!this.userLogin) {
+      this.getCompleteUser();
+      this.getUserProfileStatistics();
+      this.getUserSkills();
+    } else {
+      this.getCompleteUserF();
+      this.getUserProfileStatisticsF();
+      this.getUserSkillsF();
+    }
+    this.sF.setPageData('Perfil');
   }
 
   ngOnDestroy(): void {
     this.subject$.next();
     this.subject$.complete();
+  }
+
+  getCompleteUserF(): void {
+    this.loadingUser = true;
+    this.userService.getProfileByLogin(this.userLogin).subscribe(user => {
+      this.loadingUser = false;
+      this.user = user;
+    }, () => this.loadingUser = false);
+  }
+
+  getUserProfileStatisticsF(): void {
+    this.loadingUserStatistics = true;
+    this.userService.getUserProfileStatisticsByLogin(this.userLogin).subscribe((statistics) => {
+      this.loadingUserStatistics = false;
+      this.userStatistics = statistics;
+    }, () => this.loadingUserStatistics = false);
+  }
+
+  getUserSkillsF(): void {
+    this.loadingUserStatistics = true;
+    this.userService.getUserSkillsByLogin(this.userLogin).subscribe((skills) => {
+      this.userSkills = this.betterSkillsFisrt(skills);
+      this.userSkills.splice(5, this.userSkills.length);
+      this.loadingUserSkills = false;
+    }, () => this.loadingUserSkills = false);
   }
 
   getCompleteUser(): void {
