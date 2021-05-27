@@ -282,7 +282,7 @@
       <span>
         <nb-checkbox formControlName="activated"
                      [status]="(mTForm.get('activated').dirty || mTForm.get('activated').touched) ? (mTForm.get('activated').invalid  ? 'danger' : 'info') : 'basic'">
-          Ativado
+          Ativo
         </nb-checkbox>
         <ng-container *ngIf="mTForm.get('activated').invalid && mTForm.get('activated').touched">
           <p class="text-danger" *ngIf="mTForm.get('activated').errors?.required">
