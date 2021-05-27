@@ -93,7 +93,7 @@ export class ModuleManagerComponent implements OnInit, OnDestroy {
   }
 
   synchronizeMTsDates(): void {
-    this.moduleTopics = ModuleTopic.synchronizeMTsDates(this.moduleTopics, this.module?.course?.startDate, this.module?.course?.endTime);
+    this.moduleTopics = ModuleTopic.synchronizeMTsDates(this.moduleTopics, this.module?.course?.startDate, this.module?.course?.endDate);
     this.moduleTopics?.forEach((moduleTopic) => {
       const moduleTopicDates = {
         activeTime: moduleTopic?.activeTime,

@@ -2,8 +2,13 @@ import {Routes} from '@angular/router';
 import {ModuleManagerComponent} from './module-manager/module-manager.component';
 import {ModuleTopicManagerComponent} from './module-topic-manager/module-topic-manager.component';
 import {ModuleTopicExerciseManagerComponent} from './module-topic-exercise-manager/module-topic-exercise-manager.component';
+import {CourseManagerComponent} from './course-manager/course-manager.component';
 
 export const childrenManagerRoutes: Routes = [
+  {
+    path: 'course/:courseSlug',
+    component: CourseManagerComponent
+  },
   {
     path: 'course/:courseSlug/module/:disciplineSlug',
     component: ModuleManagerComponent

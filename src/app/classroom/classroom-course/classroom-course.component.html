@@ -10,6 +10,9 @@
     <nb-card *ngIf="course" class="custom-sticky">
       <nb-card-header class="border-0 mb-2">
         <h6 class="header-title-color">{{course?.name}}</h6>
+        <small style="font-size: 11px" class="dateRange">
+          {{course.startDate.toISOString() | date:'dd/MM/yyyy'}} - {{course.endDate.toISOString() | date:'dd/MM/yyyy'}}
+        </small>
       </nb-card-header>
       <nb-card-body>
         <nb-user size="giant"
@@ -75,7 +78,8 @@
         <app-users-results-tables [authorities]="authorities"
                                   [moduleId]="course.modules[0].id"></app-users-results-tables>
       </nb-tab>
-      <nb-tab [tabId]="2" tabTitle="Classificações" [nbSpinner]="loadingCourseRank" nbSpinnerStatus="info" nbSpinnerSize="giant" style="min-height: 100px;">
+      <nb-tab [tabId]="2" tabTitle="Classificações" [nbSpinner]="loadingCourseRank" nbSpinnerStatus="info"
+              nbSpinnerSize="giant" style="min-height: 100px;">
         <app-course-rank [courseRank]="courseRank"
                          *ngIf="(courseRank && courseRank?.length > 0) && !loadingCourseRank"></app-course-rank>
         <app-not-found-card

@@ -1,4 +1,5 @@
-<nb-card class="course-card border-bottom" [routerLink]="['',isTeacher?'teacher':'student','classroom','course',course?.slug]">
+<nb-card class="course-card border-bottom"
+         [routerLink]="['',isTeacher?'teacher':'student','classroom','course',course?.slug]">
   <nb-card-header class="border-0 mb-4">
     <nb-user [name]="course.name"></nb-user>
     <!--                  {{course.name}}-->
@@ -24,9 +25,10 @@
       <nb-tag size="tiny" status="info" appearance="outline" class="m-2"
               [text]="'Exercícios: '+(course?.amountExercises?course.amountExercises:0)"></nb-tag>
     </p>
-    <!--            <button size="small" class="m-1" nbButton outline status="info" [routerLink]="['']"-->
-    <!--                    *ngIf="isTeacher">Gerenciar-->
-    <!--            </button>-->
+    <button size="small" class="m-1" nbButton outline status="info"
+            [routerLink]="['',isTeacher?'teacher':'student','manager','course',course.slug]"
+            *ngIf="isTeacher">Gerenciar
+    </button>
     <!--            <button size="small" class="m-1" nbButton outline status="info"-->
     <!--                    [routerLink]="['',isTeacher?'teacher':'student','classroom','course',course?.slug]">-->
     <!--              Abrir-->

@@ -1,0 +1,179 @@
+<div class="row layout-content">
+  <div class="col-12">
+    <app-breadcrumb [courseSlug]="courseSlug" [last]="0"
+                    [classroom]="true"
+                    [routePrefix]="routePrefix"></app-breadcrumb>
+  </div>
+  <div class="col-12 col-lg-5">
+    <nb-card>
+      <nb-card-header class="border-0 mb-2" *ngIf="course">
+        <h6 class="header-title-color">{{course?.name}}</h6>
+      </nb-card-header>
+      <nb-card-body [nbSpinner]="loadingCourse" nbSpinnerStatus="info" nbSpinnerSize="giant"
+                    style="min-height: 100px;">
+        <span *ngIf="course">
+              <p>{{course?.description}}</p>
+        <div class="row">
+          <div class="col-12 mb-3">
+            <nb-tag size="tiny" status="info" appearance="outline" class="m-1"
+                    [text]="'Início '+(course.startDate.toISOString() | date:'dd/MM/yyyy HH:mm:ss')"></nb-tag>
+            <nb-tag size="tiny" status="info" appearance="outline" class="m-1"
+                    [text]="'Término '+(course.endDate.toISOString() | date:'dd/MM/yyyy HH:mm:ss')"></nb-tag>
+                        <hr>
+          </div>
+           <div class="col-12">
+            <nb-list [hidden]="loadingCourse || (!loadingCourse && !course)">
+              <nb-list-item class="d-block">
+                <div class="row">
+                  <div class="col-6">
+                    Tipo
+                  </div>
+                  <div class="col-6 text-right">
+                    <nb-tag size="tiny" status="info" appearance="outline"
+                            [text]="course?.courseType"></nb-tag>
+                  </div>
+                </div>
+              </nb-list-item>
+              <nb-list-item class="d-block">
+                <div class="row">
+                  <div class="col-6">
+                    Universidade
+                  </div>
+                  <div class="col-6 text-right">
+                    <nb-tag size="tiny" status="info" appearance="outline"
+                            [text]="course.affiliation.name"></nb-tag>
+                  </div>
+                </div>
+              </nb-list-item>
+              <nb-list-item class="d-block">
+                <div class="row">
+                  <div class="col-6">
+                    Código de acesso
+                  </div>
+                  <div class="col-6 text-right">
+                    <nb-tag size="tiny" status="info" appearance="outline"
+                            [text]="course.passcode"></nb-tag>
+                  </div>
+                </div>
+              </nb-list-item>
+            </nb-list>
+            <app-not-found-card
+              *ngIf="!loadingCourse && !course"></app-not-found-card>
+          </div>
+        </div>
+          </span>
+      </nb-card-body>
+    </nb-card>
+  </div>
+  <div class="col-12 col-lg-7">
+    <nb-card>
+      <nb-card-header class="border-0">
+        <h6 class="header-title-color">Editar</h6>
+      </nb-card-header>
+      <nb-card-body [nbSpinner]="loadingCourse" nbSpinnerStatus="info" nbSpinnerSize="giant"
+                    style="min-height: 100px;">
+        <form [formGroup]="courseForm" (ngSubmit)="saveCourse()" *ngIf="course && !loadingCourse">
+          <div class="form-row">
+            <div class="form-group col-12 col-md-4">
+              <label class="label">Data de início</label>
+              <nb-form-field>
+                <input fieldSize="large" type="datetime-local" nbInput fullWidth placeholder="Data de início"
+                       formControlName="startDate"
+                       [status]="(courseForm.get('startDate').dirty || courseForm.get('startDate').touched) ? (courseForm.get('startDate').invalid  ? 'danger' : 'success') : 'basic'">
+              </nb-form-field>
+              <ng-container
+                *ngIf="courseForm.get('startDate').invalid && courseForm.get('startDate').touched">
+                <p class="text-danger" *ngIf="courseForm.get('startDate').errors?.required">
+                  Campo obrigatório
+                </p>
+              </ng-container>
+            </div>
+            <div class="form-group col-12 col-md-4">
+              <label class="label">Data de término</label>
+              <nb-form-field>
+                <input fieldSize="large" type="datetime-local" nbInput fullWidth placeholder="Data de início"
+                       formControlName="endDate"
+                       [status]="(courseForm.get('endDate').dirty || courseForm.get('endDate').touched) ? (courseForm.get('endDate').invalid  ? 'danger' : 'success') : 'basic'">
+              </nb-form-field>
+              <ng-container
+                *ngIf="courseForm.get('endDate').invalid && courseForm.get('endDate').touched">
+                <p class="text-danger" *ngIf="courseForm.get('endDate').errors?.required">
+                  Campo obrigatório
+                </p>
+              </ng-container>
+            </div>
+            <div class="form-group col-12 col-md-4">
+              <label class="label">Código de acesso</label>
+              <nb-form-field>
+                <input fieldSize="large" type="text" nbInput fullWidth placeholder="Código de acesso"
+                       formControlName="passcode"
+                       [status]="(courseForm.get('passcode').dirty || courseForm.get('passcode').touched) ? (courseForm.get('passcode').invalid  ? 'danger' : 'success') : 'basic'">
+              </nb-form-field>
+              <ng-container *ngIf="courseForm.get('passcode').invalid && courseForm.get('passcode').touched">
+                <p class="text-danger" *ngIf="courseForm.get('passcode').errors?.required">
+                  Campo obrigatório
+                </p>
+              </ng-container>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-12">
+              <nb-checkbox formControlName="activated"
+                           [status]="(courseForm.get('activated').dirty || courseForm.get('activated').touched) ? (courseForm.get('activated').invalid  ? 'danger' : 'info') : 'basic'">
+                Ativado
+              </nb-checkbox>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-12 text-right">
+              <button class="m-1" nbButton status="info" type="submit" size="medium"
+                      [disabled]="courseForm.invalid">
+                Salvar
+              </button>
+            </div>
+          </div>
+        </form>
+      </nb-card-body>
+    </nb-card>
+  </div>
+<!--  <div class="col-12 my-2 text-right">-->
+<!--    <button nbButton size="tiny" outline status="success">Adicionar módulo</button>-->
+<!--  </div>-->
+  <div class="col-12">
+
+    <nb-tabset>
+      <nb-tab tabTitle="Módulos">
+        <div class="row" style="width: 100%">
+          <div class="col-12 col-md-12 col-lg-6 col-xl-4" *ngFor="let module of course?.modules">
+            <nb-card>
+              <nb-card-header class="border-0">
+                <nb-user size="medium"
+                         [name]="module?.alias"
+                         [picture]="module?.discipline?.imageUrl">
+                </nb-user>
+              </nb-card-header>
+              <nb-card-body>
+                <div class="form">
+                  <div class="col-12">
+                    {{module?.discipline?.shortDescription}}
+                  </div>
+                  <div class="col-12 mt-3 text-right">
+                    <button nbButton size="tiny" status="basic" outline class="m-1"
+                            [routerLink]="['/'+sF.routeAuthSwitch(authorities,true)+'manager/course',course?.slug,'module',module?.discipline?.slug]">Gerenciar</button>
+                    <button nbButton size="tiny" status="info" outline class="m-1"
+                    [routerLink]="['/'+sF.routeAuthSwitch(authorities,true)+'classroom/course',course?.slug,'module',module?.discipline?.slug]">Abrir</button>
+                    <button nbButton size="tiny" status="danger" outline class="m-1">Excluir</button>
+                  </div>
+                </div>
+              </nb-card-body>
+            </nb-card>
+          </div>
+          <div class="col-12 col-md-12 col-lg-4 col-xl-2" style="align-self: center;text-align: center">
+            <button nbButton shape="round" outline size="medium" status="basic"><nb-icon icon="plus-outline"></nb-icon></button>
+          </div>
+        </div>
+      </nb-tab>
+    </nb-tabset>
+
+  </div>
+</div>

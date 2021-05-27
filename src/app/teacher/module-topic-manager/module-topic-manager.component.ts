@@ -137,7 +137,7 @@ export class ModuleTopicManagerComponent implements OnInit, OnDestroy {
     this.moduleTopic = ModuleTopic.synchronizeMTDates(
       this.moduleTopic,
       this.course.startDate,
-      this.course.endTime
+      this.course.endDate
     );
     this.updateForm();
   }

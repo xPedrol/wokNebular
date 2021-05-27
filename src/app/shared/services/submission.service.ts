@@ -38,9 +38,9 @@ export class SubmissionService {
     }));
   }
 
-  submitFiles(files: ISubmissionPost, courseSlug: string, disciplineSlug: string, topicSlug: string, exerciseSlug: string)
+  submitFiles(submissionPost: ISubmissionPost, courseSlug: string, disciplineSlug: string, topicSlug: string, exerciseSlug: string)
     : Observable<ISubmissionPost> {
     const url = `account/courses/${courseSlug}/disciplines/${disciplineSlug}/topics/${topicSlug}/exercises/${exerciseSlug}/submissions`;
-    return this.http.post<ISubmissionPost>(`${SERVER_API_URL}${url}`, files);
+    return this.http.post<ISubmissionPost>(`${SERVER_API_URL}${url}`, submissionPost);
   }
 }

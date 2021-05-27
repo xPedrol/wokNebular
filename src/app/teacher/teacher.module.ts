@@ -13,6 +13,7 @@ import { ModuleTopicExerciseManagerComponent } from './module-topic-exercise-man
 import { ModuleTopicExerciseScenarioTableComponent } from './module-topic-exercise-scenario-table/module-topic-exercise-scenario-table.component';
 import { ScenarioSkillsDialogComponent } from './scenario-skills-dialog/scenario-skills-dialog.component';
 import { ScenarioFilesDialogComponent } from './scenario-files-dialog/scenario-files-dialog.component';
+import { CourseManagerComponent } from './course-manager/course-manager.component';
 
 const routes: Routes = [
   {
@@ -34,7 +35,8 @@ const routes: Routes = [
     ModuleTopicExerciseManagerComponent,
     ModuleTopicExerciseScenarioTableComponent,
     ScenarioSkillsDialogComponent,
-    ScenarioFilesDialogComponent
+    ScenarioFilesDialogComponent,
+    CourseManagerComponent
   ],
     imports: [
         CommonModule,

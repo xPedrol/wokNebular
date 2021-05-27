@@ -8,20 +8,20 @@ export interface ICoursebasic {
   affiliation?: IAffiliationBasic;
   teacher?: IUserBasic;
   startDate?: Moment;
-  endTime?: Moment;
+  endDate?: Moment;
 }
 
 export class Coursebasic implements ICoursebasic {
   affiliation: IAffiliationBasic;
-  endTime: moment.Moment;
+  endDate: Moment;
   id: number;
   name: string;
-  startDate: moment.Moment;
+  startDate: Moment;
   teacher: IUserBasic;
 
   constructor(course: ICoursebasic) {
     this.affiliation = course.affiliation;
-    this.endTime = course.endTime;
+    this.endDate = course.endDate;
     this.id = course.id;
     this.name = course.name;
     this.startDate = course.startDate;

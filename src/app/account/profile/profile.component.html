@@ -63,7 +63,7 @@
      <span *ngIf="user">
        <nb-card>
          <nb-card-header class="border-0 mb-2">
-        <h6 style="color: #8f9bb3">Informações Gerais</h6>
+        <h6 class="header-title-color">Informações Gerais</h6>
       </nb-card-header>
          <nb-card-body [nbSpinner]="loadingUser" nbSpinnerStatus="info" nbSpinnerSize="giant"
                        style="min-height: 100px;">
@@ -92,7 +92,7 @@
               <div class="col-6">
                 <h6 style="color: #8f9bb3">Sobre</h6>
               </div>
-              <div class="col-6 text-right">
+              <div class="col-6 text-right" *ngIf="!userLogin">
                 <button nbButton status="basic" ghost (click)="openEditAboutDialog()"><nb-icon
                   icon="edit-outline"></nb-icon></button>
               </div>

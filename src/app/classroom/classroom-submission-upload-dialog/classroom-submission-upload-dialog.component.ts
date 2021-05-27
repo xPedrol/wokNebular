@@ -8,6 +8,7 @@ import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {ISubmissionPost, SubmissionPost} from '../../shared/models/submission-post.model';
 import {SubmissionService} from '../../shared/services/submission.service';
 import {NbToastrService} from '@nebular/theme';
+import {ISubmissionFileBasic, SubmissionFileBasic} from '../../shared/models/basic/submission-file-basic.model';
 
 @Component({
   selector: 'app-classroom-submission-upload-dialog',
@@ -63,14 +64,15 @@ export class ClassroomSubmissionUploadDialogComponent implements OnInit {
     });
   }
 
-  submitFiles(): void {
+  async submitFiles(): Promise<void> {
     if (this.submissionForm.valid) {
       const submissionPost: ISubmissionPost = new SubmissionPost(
+        // this.files,
         this.submissionForm.get('entryPoint').value,
-        this.files,
         this.submissionForm.get('languageId').value,
         Number(this.submissionForm.get('userTeamId').value)
       );
+      submissionPost.files = await this.createSubmissionFileArray(this.files);
       this.submissionService.submitFiles(
         submissionPost,
         this.courseSlug,
@@ -81,5 +83,43 @@ export class ClassroomSubmissionUploadDialogComponent implements OnInit {
         this.toastService.show('', 'Enviado com sucesso', {status: 'success'});
       });
     }
+  }
+
+  async createSubmissionFileArray(files: File[]): Promise<ISubmissionFileBasic[]> {
+    const submissionFileArray: ISubmissionFileBasic[] = [];
+    for (const item of files) {
+      // Get extension
+      let extension = item.name.split('/').pop();
+      if (extension) {
+        extension = extension.indexOf('.') < 1 ? '' : extension.split('.').pop();
+      }
+      const file = await this.readFileContent(item);
+      const submissionFile = {
+        ...new SubmissionFileBasic(),
+        name: item.name,
+        solutionFile: file,
+        extension
+      };
+      submissionFileArray.push(submissionFile);
+    }
+    return submissionFileArray;
+  }
+
+  readFileContent(file: File): Promise<string> {
+    return new Promise<string>((resolve) => {
+      if (!file) {
+        resolve('');
+      }
+
+      const reader = new FileReader();
+
+      reader.onload = (e) => {
+        const text = reader.result.toString();
+        resolve(btoa(text));
+
+      };
+
+      reader.readAsText(file);
+    });
   }
 }
