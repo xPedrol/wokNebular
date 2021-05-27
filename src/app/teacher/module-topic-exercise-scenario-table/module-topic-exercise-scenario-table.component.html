@@ -20,9 +20,7 @@
             <nb-tag appearance="outline" size="small" [status]="scenario?.scenario?.getColor()"
                     [text]="scenario?.scenario?.difficultyLevelId"></nb-tag>
           </div>
-          <div class="cell text-left" data-title="Mensagem de ajuda" style="white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis; max-width: 200px;">
+          <div class="cell text-left no-wrap" data-title="Mensagem de ajuda" style=" max-width: 200px;">
             {{scenario?.scenario?.helpMsg}}
           </div>
           <div class="cell text-right">

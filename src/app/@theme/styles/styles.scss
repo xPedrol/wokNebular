@@ -136,6 +136,14 @@ hr {
   max-height: 600px;
   overflow: auto;
 }
-.dateRange{
+
+.dateRange {
   color: #b0b1b3;
+}
+
+.no-wrap {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%
 }

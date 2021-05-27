@@ -4,7 +4,7 @@
                     [classroom]="true"
                     [routePrefix]="routePrefix"></app-breadcrumb>
   </div>
-  <div class="col-12 col-lg-5">
+  <div class="col-12 col-lg-4">
     <nb-card>
       <nb-card-header class="border-0 mb-2" *ngIf="course">
         <h6 class="header-title-color">{{course?.name}}</h6>
@@ -40,7 +40,7 @@
                     Universidade
                   </div>
                   <div class="col-6 text-right">
-                    <nb-tag size="tiny" status="info" appearance="outline"
+                    <nb-tag size="tiny" status="info" appearance="outline" class="no-wrap"
                             [text]="course.affiliation.name"></nb-tag>
                   </div>
                 </div>
@@ -65,7 +65,7 @@
       </nb-card-body>
     </nb-card>
   </div>
-  <div class="col-12 col-lg-7">
+  <div class="col-12 col-lg-8">
     <nb-card>
       <nb-card-header class="border-0">
         <h6 class="header-title-color">Editar</h6>
@@ -169,7 +169,7 @@
             </nb-card>
           </div>
           <div class="col-12 col-md-12 col-lg-4 col-xl-2" style="align-self: center;text-align: center">
-            <button nbButton shape="round" outline size="medium" status="basic"><nb-icon icon="plus-outline"></nb-icon></button>
+            <button (click)="openAddModuleDialog()" nbButton shape="round" outline size="medium" status="basic"><nb-icon icon="plus-outline"></nb-icon></button>
           </div>
         </div>
       </nb-tab>

@@ -14,6 +14,7 @@ import { ModuleTopicExerciseScenarioTableComponent } from './module-topic-exerci
 import { ScenarioSkillsDialogComponent } from './scenario-skills-dialog/scenario-skills-dialog.component';
 import { ScenarioFilesDialogComponent } from './scenario-files-dialog/scenario-files-dialog.component';
 import { CourseManagerComponent } from './course-manager/course-manager.component';
+import { AddModuleDialogComponent } from './add-module-dialog/add-module-dialog.component';
 
 const routes: Routes = [
   {
@@ -36,7 +37,8 @@ const routes: Routes = [
     ModuleTopicExerciseScenarioTableComponent,
     ScenarioSkillsDialogComponent,
     ScenarioFilesDialogComponent,
-    CourseManagerComponent
+    CourseManagerComponent,
+    AddModuleDialogComponent
   ],
     imports: [
         CommonModule,

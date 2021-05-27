@@ -7,7 +7,8 @@ import {CourseService} from '../../shared/services/course.service';
 import {ActivatedRoute} from '@angular/router';
 import {SharedFunctions} from '../../shared/shared.functions';
 import {DATE_TIME_FORMAT} from '../../shared/constants/input.constants';
-import {ModuleService} from "../../shared/services/module.service";
+import {NbDialogService} from "@nebular/theme";
+import {AddModuleDialogComponent} from "../add-module-dialog/add-module-dialog.component";
 
 @Component({
   selector: 'app-course-manager',
@@ -26,7 +27,8 @@ export class CourseManagerComponent implements OnInit {
   constructor(
     private courseService: CourseService,
     public sF: SharedFunctions,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private dialogService: NbDialogService
   ) {
   }
 
@@ -61,5 +63,9 @@ export class CourseManagerComponent implements OnInit {
     this.courseForm.get('endDate').setValue(this.course.endDate.format(DATE_TIME_FORMAT));
     this.courseForm.get('passcode').setValue(this.course.passcode);
     this.courseForm.get('activated').setValue(this.course.activated ? this.course.activated : false);
+  }
+
+  openAddModuleDialog(): void {
+    this.dialogService.open(AddModuleDialogComponent);
   }
 }
