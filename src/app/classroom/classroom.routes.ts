@@ -6,6 +6,7 @@ import {CourseResolve, ModuleTopicResolve} from '../shared/resolves';
 import {ClassroomTopicComponent} from './classroom-topic/classroom-topic.component';
 import {ClassroomExerciseComponent} from './classroom-exercise/classroom-exercise.component';
 import {ClassroomSolutionComponent} from './classroom-solution/classroom-solution.component';
+import {ClassroomSubmissionComponent} from "./classroom-submission/classroom-submission.component";
 
 
 export const childrenRoutes: Routes = [
@@ -51,6 +52,10 @@ export const childrenRoutes: Routes = [
       {
         path: 'course/:courseSlug/module/:disciplineSlug/topic/:topicSlug/exercise/:exerciseSlug/solution/:solutionSlug',
         component: ClassroomSolutionComponent
+      },
+      {
+        path: 'course/:courseSlug/module/:disciplineSlug/topic/:topicSlug/exercise/:exerciseSlug/submission/:submissionId',
+        component: ClassroomSubmissionComponent
       }
     ]
   },

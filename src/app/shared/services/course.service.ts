@@ -3,7 +3,7 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {SERVER_API_URL} from '../../app.constants';
 import {Course, ICourse} from '../models/course.model';
 import {map} from 'rxjs/operators';
-import {EMPTY, Observable, of} from 'rxjs';
+import {Observable, of} from 'rxjs';
 import {AccountService} from './account.service';
 import {ICourseStatistics} from '../models/course-statistics.model';
 import {SharedFunctions} from '../shared.functions';
@@ -25,7 +25,10 @@ export class CourseService {
   getLearningCourses(authorities: Authority[], all: boolean = false, refresh: boolean = false): Observable<ICourse[]> {
     const url = `${this.sF.routeAuthSwitch(authorities)}courses?all=${all}`;
     const options = {headers: new HttpHeaders({force: String(refresh)})};
-    return this.http.get<ICourse[]>(`${SERVER_API_URL}${url}`, {...options, responseType: 'json'}).pipe(map((courses) => {
+    return this.http.get<ICourse[]>(`${SERVER_API_URL}${url}`, {
+      ...options,
+      responseType: 'json'
+    }).pipe(map((courses) => {
       return courses.map((course: ICourse) => {
         return new Course(course);
       });
@@ -36,7 +39,10 @@ export class CourseService {
     if (this.accountService.account.isTeacher()) {
       const url = `teacher/courses?all=${all}`;
       const options = {headers: new HttpHeaders({force: String(refresh)})};
-      return this.http.get<ICourse[]>(`${SERVER_API_URL}${url}`, {...options, responseType: 'json'}).pipe(map((courses) => {
+      return this.http.get<ICourse[]>(`${SERVER_API_URL}${url}`, {
+        ...options,
+        responseType: 'json'
+      }).pipe(map((courses) => {
         return courses.map((course: ICourse) => {
           return new Course(course);
         });
@@ -63,13 +69,7 @@ export class CourseService {
   }
 
   getCourseStatistics(authorities: Authority[], courseId: number): Observable<ICourseStatistics> {
-    let url = ``;
-    if (this.accountService.account.isTeacher()) {
-      url = `teacher/courses/${courseId}/statistics`;
-    } else if (this.accountService.account.isStudent()) {
-      url = `account/courses/${courseId}/statistics`;
-    }
-
+    const url = `${this.sF.routeAuthSwitch(authorities)}courses/${courseId}/statistics`;
     return this.http.get<ICourseStatistics>(`${SERVER_API_URL}${url}`);
   }
 
@@ -96,5 +96,15 @@ export class CourseService {
         }
         return null;
       }));
+  }
+
+  updateCourseByTeacher(course: ICourse): Observable<ICourse> {
+    const url = `teacher/courses`;
+    return this.http.put<ICourse>(`${SERVER_API_URL}${url}`, course).pipe(map((course1) => {
+      if (course1) {
+        return new Course(course1);
+      }
+      return null;
+    }));
   }
 }

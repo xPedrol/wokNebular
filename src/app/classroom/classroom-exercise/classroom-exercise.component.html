@@ -3,7 +3,8 @@
     <app-changed-user-alert></app-changed-user-alert>
   </div>
   <div class="col-12">
-    <app-breadcrumb [last]="3" [classroom]="true" [courseSlug]="courseSlug" [disciplineSlug]="disciplineSlug" [topicSlug]="topicSlug" [exerciseSlug]="exerciseSlug"
+    <app-breadcrumb [last]="3" [classroom]="true" [courseSlug]="courseSlug" [disciplineSlug]="disciplineSlug"
+                    [topicSlug]="topicSlug" [exerciseSlug]="exerciseSlug"
                     [routePrefix]="routePrefix"></app-breadcrumb>
   </div>
   <div class="col-12 col-xl-7">
@@ -50,11 +51,11 @@
         <span *ngIf="!isTeacher">
         <nb-list *ngIf="!((!submissions || submissions?.length === 0) && !loadingContent)" [nbSpinner]="loadingContent"
                  nbSpinnerStatus="info" nbSpinnerSize="giant" style="min-height: 100px;">
-          <nb-list-item class="d-block content-item" *ngFor="let submission of submissions">
+          <nb-list-item class="d-block content-item" *ngFor="let submission of submissions" [routerLink]="['submission',submission.id]">
             <div class="row align-items-center">
               <div class="col-5 text-left">
                 <nb-user
-                  [name]="submission?.cacheResultScoreTopic?.toString()"
+                  [name]="submission?.cacheResultScoreTopic?submission?.cacheResultScoreTopic?.toString():'Não julgado'"
                   [title]="submission?.runResult?.id"
                 ></nb-user>
               </div>
@@ -98,7 +99,8 @@
                 <nb-tag class="m-1" size="tiny" [status]="solution.difficultyLevel.getColor()"
                         appearance="outline"
                         [text]="solution.files?solution.files.length:0+' arquivo(s)'"></nb-tag>
-                 <nb-tag *ngIf="solution.difficultyLevel" class="m-1" size="tiny" [status]="solution.difficultyLevel.getColor()"
+                 <nb-tag *ngIf="solution.difficultyLevel" class="m-1" size="tiny"
+                         [status]="solution.difficultyLevel.getColor()"
                          appearance="outline"
                          [text]="'Dificuldade '+solution?.difficultyLevel?.id"></nb-tag>
                 <!--                <nb-tag *ngIf="exerciseR?.nameRunResult" class="m-1" size="tiny" status="info" appearance="outline"-->
