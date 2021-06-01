@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 
-import { HttpErrorInterceptor } from './http-erro-interceptor.service';
+import { HttpErrorInterceptor } from './http-error-interceptor.service';
 
 describe('HttpErroInterceptorService', () => {
   let service: HttpErrorInterceptor;

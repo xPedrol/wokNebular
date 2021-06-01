@@ -1,5 +1,5 @@
-import {ChangeDetectorRef, Component, Inject, OnInit} from '@angular/core';
-import {NB_AUTH_OPTIONS, NbAuthService, NbAuthSocialLink, NbLoginComponent} from '@nebular/auth';
+import {Component, OnInit} from '@angular/core';
+import {NbAuthSocialLink} from '@nebular/auth';
 import {ActivatedRoute, Router} from '@angular/router';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {LocalStorageService} from 'ngx-webstorage';

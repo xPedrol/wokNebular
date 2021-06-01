@@ -104,7 +104,6 @@ export class EditModuleTopicsTableComponent implements OnInit {
       const moduleTopic: IModuleTopic = userCtrl.at(this.selectedIndex).value;
       if (moduleTopic.id) {
         const completedModuleTopic = this.getModuleTopic(moduleTopic.id);
-        console.warn(moduleTopic);
         if (completedModuleTopic) {
           completedModuleTopic.maxGrade = moduleTopic.maxGrade;
           completedModuleTopic.targetScore = moduleTopic.targetScore;

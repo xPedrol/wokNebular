@@ -6,13 +6,25 @@ import {AppComponent} from './app.component';
 import {ThemeModule} from './@theme/theme.module';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {NotFoundComponent} from './shared/components/not-found/not-found.component';
-import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClient, HttpClientModule} from '@angular/common/http';
 import {NgxWebstorageModule} from 'ngx-webstorage';
 import {AuthInterceptor} from './shared/services/auth-interceptor.service';
 import {CachingInterceptorService} from './shared/services/cacheInterceptor';
 import {CookieModule} from 'ngx-cookie';
 import {HomeComponent} from './home/home.component';
 import {NgxMaskModule} from 'ngx-mask';
+import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
+import {TranslateHttpLoader} from '@ngx-translate/http-loader';
+import {HttpErrorInterceptor} from './shared/services/http-error-interceptor.service';
+
+
+export function createTranslateLoader(http: HttpClient) {
+  return new TranslateHttpLoader(http, './assets/i18n/', '.json');
+}
+
+export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
+  return new TranslateHttpLoader(http);
+}
 
 @NgModule({
   declarations: [
@@ -29,6 +41,14 @@ import {NgxMaskModule} from 'ngx-mask';
     CookieModule.forRoot(),
     NgxWebstorageModule.forRoot(),
     ThemeModule.forRoot(),
+    TranslateModule.forRoot({
+      defaultLanguage: 'pt',
+      loader: {
+        provide: TranslateLoader,
+        useFactory: HttpLoaderFactory,
+        deps: [HttpClient]
+      }
+    })
   ],
   providers: [
     {
@@ -39,6 +59,11 @@ import {NgxMaskModule} from 'ngx-mask';
     {
       provide: HTTP_INTERCEPTORS,
       useClass: CachingInterceptorService,
+      multi: true
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: HttpErrorInterceptor,
       multi: true
     }
   ],

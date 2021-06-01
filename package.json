@@ -26,6 +26,7 @@
     "@nebular/security": "7.0.0",
     "@nebular/theme": "7.0.0",
     "@ngx-translate/core": "^13.0.0",
+    "@ngx-translate/http-loader": "^6.0.0",
     "angular2-chartjs": "0.4.1",
     "bootstrap": "^4.6.0",
     "chart.js": "^2.9.4",

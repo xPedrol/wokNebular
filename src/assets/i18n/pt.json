@@ -1,0 +1,15 @@
+{
+  "error": {
+    "http": {
+      "401": {
+        "title": "Usuário inválido",
+        "description": "Verifique seu login e senha"
+      }
+    },
+    "validation": {
+      "title": "Campo inválido",
+      "description": "Verifique os dados inseridos"
+    }
+  },
+  "teste": "certo1-"
+}
