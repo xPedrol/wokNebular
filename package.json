@@ -3,12 +3,17 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve --port=8080",
+    "start": "node express-index",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "rendertron": "node express-index"
+    "rendertron": "node express-index",
+    "postinstall": "ng build --aot --prod"
+  },
+  "engines": {
+    "node": "16.2.0",
+    "npm": "7.14.0"
   },
   "private": true,
   "dependencies": {

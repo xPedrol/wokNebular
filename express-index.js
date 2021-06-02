@@ -13,7 +13,7 @@ app.get('*', (req, res) => {
   res.sendFile(DIST_FOLDER + '/index.html');
 });
 app.use(rendertron.makeMiddleware({
-  proxyUrl: 'https://render-tron.appspot.com/render',
+  proxyUrl: 'https://my-rendertron-315600.rj.r.appspot.com/render',
   userAgentPattern: BOT_UA_PATTERN
 }));
 // Start Express Server
