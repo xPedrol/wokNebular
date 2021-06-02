@@ -20,6 +20,7 @@ const bots = [
   'vkShare',
   'W3C_Validator',
   'whatsapp',
+  'googlebot'
 ];
 
 app.use(rendertron.makeMiddleware({
