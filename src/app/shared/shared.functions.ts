@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {AccountService} from './services/account.service';
 import {Authority} from './constants/authority.constants';
 import {RoutePrefix} from './constants/route-prefix';
-import {Title} from '@angular/platform-browser';
+import {Meta, Title} from '@angular/platform-browser';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +11,8 @@ export class SharedFunctions {
 
   constructor(
     public accountService: AccountService,
-    private titleService: Title
+    private titleService: Title,
+    private meta: Meta
   ) {
   }
 
@@ -40,9 +41,20 @@ export class SharedFunctions {
   setPageData(title?: string): void {
     if (!title) {
       title = 'Mundo do código';
-    }else{
+    } else {
       title = `WOK - ${title}`;
     }
     this.titleService.setTitle(title);
+    this.meta.updateTag({name: 'twitter:card', content: 'summary'});
+    this.meta.updateTag({name: 'twitter:site', content: '@content'});
+    this.meta.updateTag({name: 'twitter:title', content: title});
+    this.meta.updateTag({name: 'twitter:description', content: 'teste'});
+    // this.meta.updateTag({name: 'twitter:image', content: config.image});
+    this.meta.updateTag({property: 'og:type', content: 'article'});
+    this.meta.updateTag({property: 'og:site_name', content: 'content'});
+    this.meta.updateTag({property: 'og:title', content: title});
+    this.meta.updateTag({property: 'og:description', content: 'descricao top'});
+    // this.meta.updateTag({property: 'og:image', content: config.image});
+    // this.meta.updateTag({property: 'og:url', content: `https://www.example.com/${config.slug}`});
   }
 }

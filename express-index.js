@@ -1,6 +1,23 @@
 const express = require('express');
 const rendertron = require('rendertron-middleware');
-const BOTS = rendertron.botUserAgents.concat('googlebot');
+const BOTS = rendertron.botUserAgents.concat(
+  'googlebot',
+  'baiduspider',
+  'bingbot',
+  'embedly',
+  'facebookexternalhit',
+  'linkedinbot',
+  'outbrain',
+  'pinterest',
+  'quora link preview',
+  'rogerbot',
+  'showyoubot',
+  'slackbot',
+  'twitterbot',
+  'vkShare',
+  'W3C_Validator',
+  'whatsapp'
+);
 const BOT_UA_PATTERN = new RegExp(BOTS.join('|'), 'i');
 const app = express();
 const DIST_FOLDER = process.cwd() + '/dist/nebularWok';
