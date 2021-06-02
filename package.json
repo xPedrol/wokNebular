@@ -4,6 +4,7 @@
   "scripts": {
     "ng": "ng",
     "start": "node express-index",
+    "client": "ng serve --port=8080",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",

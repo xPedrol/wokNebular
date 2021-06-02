@@ -55,7 +55,7 @@ export class SharedFunctions {
     this.meta.updateTag({property: 'og:title', content: title});
     this.meta.updateTag({property: 'og:description', content: 'descricao top'});
     this.meta.updateTag({property: 'og:image', content: 'https://veja.abril.com.br/wp-content/uploads/2019/12/amazonia-floresta-coraccca7ao.jpg.jpg'});
-    
+
     // this.meta.updateTag({property: 'og:url', content: `https://www.example.com/${config.slug}`});
   }
 }
