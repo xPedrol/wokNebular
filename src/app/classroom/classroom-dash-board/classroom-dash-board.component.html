@@ -1,6 +1,6 @@
 <div class="clearfix layout-content">
   <app-changed-user-alert></app-changed-user-alert>
-  <h4>Dashboard</h4>
+  <h4 [translate]="'dashboard'">Dashboard</h4>
   <hr>
   <section [nbSpinner]="loadingSummary" nbSpinnerStatus="info" nbSpinnerSize="giant" style="min-height: 100px;">
     <div class="row" *ngIf="summary">

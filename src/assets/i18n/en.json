@@ -1,8 +1,25 @@
 {
   "error": {
     "http": {
-      "ss": "Autentificação necessária para acessar a pagina"
+      "401": {
+        "title": "Invalid user",
+        "description": "Verifique seu login e senha"
+      }
+    },
+    "validation": {
+      "title": "Invalid field",
+      "description": "Verifique os dados inseridos"
     }
   },
-  "teste": "certosss"
+  "dashboard": "Dashboard",
+  "languages": [
+    {
+      "name": "Portuguese",
+      "initials": "pt"
+    },
+    {
+      "name": "English",
+      "initials": "en"
+    }
+  ]
 }

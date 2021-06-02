@@ -7,6 +7,7 @@ import {Router} from '@angular/router';
 import {AccountService} from '../../../shared/services/account.service';
 import {AuthService} from '../../../shared/services/auth.service';
 import {Authority} from '../../../shared/constants/authority.constants';
+import {TranslateService} from "@ngx-translate/core";
 
 @Component({
   selector: 'ngx-header',
@@ -21,6 +22,9 @@ export class HeaderComponent implements OnInit, OnDestroy {
     {title: 'dark'},
     {title: 'cosmic'},
     {title: 'corporate'}
+  ];
+  languagesAction = [
+    {title: 'Loading', id: -1, initials: 'l-1'}
   ];
   userPictureOnly = false;
   themes = [
@@ -54,11 +58,13 @@ export class HeaderComponent implements OnInit, OnDestroy {
               // private userService: UserData,
               // private layoutService: LayoutService,
               private breakpointService: NbMediaBreakpointsService,
-              private router: Router
+              private router: Router,
+              private translateService: TranslateService
   ) {
   }
 
   ngOnInit(): void {
+    this.getTranslationActions();
     this.menuService.onItemClick()
       .pipe(
         filter(({tag}) => tag === 'themeMenu'),
@@ -66,6 +72,17 @@ export class HeaderComponent implements OnInit, OnDestroy {
       )
       .subscribe((theme) => {
         this.changeTheme(theme);
+      });
+    this.menuService.onItemClick()
+      .pipe(
+        filter(({tag}) => tag === 'languageMenu'),
+        map((item: any) => item),
+      )
+      .subscribe(({item}) => {
+        if (item.initials) {
+          this.translateService.use(item.initials);
+          this.getTranslationActions();
+        }
       });
     this.menuService.onItemClick()
       .pipe(
@@ -100,6 +117,15 @@ export class HeaderComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.destroy$.next();
     this.destroy$.complete();
+  }
+
+  getTranslationActions(): void {
+    this.translateService.get('languages').subscribe((languagesT: any[]) => {
+      this.languagesAction = [];
+      languagesT.forEach((language, i) => {
+        this.languagesAction.push({title: language.name, initials: language.initials, id: i});
+      });
+    });
   }
 
   changeTheme(themeName: string): void {

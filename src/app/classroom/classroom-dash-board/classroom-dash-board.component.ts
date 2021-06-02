@@ -10,6 +10,7 @@ import {AddCourseDialogComponent} from '../add-public-course-dialog/add-course-d
 import {Subject} from 'rxjs';
 import {takeUntil} from 'rxjs/operators';
 import {SharedFunctions} from '../../shared/shared.functions';
+import {TranslateService} from "@ngx-translate/core";
 
 @Component({
   selector: 'app-classroom-dash-board',
@@ -35,9 +36,12 @@ export class ClassroomDashBoardComponent implements OnInit, OnDestroy {
     private courseService: CourseService,
     private dashboardService: DashboardService,
     private dialogService: NbDialogService,
-    private sF: SharedFunctions
+    private sF: SharedFunctions,
+    private translateService: TranslateService
   ) {
-    this.sF.setPageData('Painel de controle');
+    this.translateService.get('dashboard').subscribe((res) => {
+      this.sF.setPageData(res);
+    });
   }
 
   ngOnDestroy(): void {

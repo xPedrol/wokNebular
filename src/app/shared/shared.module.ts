@@ -13,6 +13,7 @@ import {EchartsBarComponent} from './components/echarts/echarts-bar.component';
 import {NotFoundCardComponent} from './components/not-found-card/not-found-card.component';
 import {ChangedUserAlertComponent} from './components/changed-user-alert/changed-user-alert.component';
 import {BreadcrumbComponent} from './components/breadcrumb/breadcrumb.component';
+import {TranslateModule} from '@ngx-translate/core';
 
 
 @NgModule({
@@ -30,7 +31,7 @@ import {BreadcrumbComponent} from './components/breadcrumb/breadcrumb.component'
     CommonModule,
     SharedThemeModuleModule,
     RouterModule,
-    NgxEchartsModule,
+    NgxEchartsModule
     // Ng2SmartTableModule
   ],
   providers: [SharedFunctions],
@@ -42,7 +43,8 @@ import {BreadcrumbComponent} from './components/breadcrumb/breadcrumb.component'
     // SmartTableComponent,
     NotFoundCardComponent,
     ChangedUserAlertComponent,
-    BreadcrumbComponent
+    BreadcrumbComponent,
+    TranslateModule
   ]
 })
 export class SharedModule {

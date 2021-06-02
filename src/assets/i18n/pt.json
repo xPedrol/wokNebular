@@ -11,5 +11,15 @@
       "description": "Verifique os dados inseridos"
     }
   },
-  "teste": "certo1-"
+  "dashboard": "Painel de controle",
+  "languages": [
+    {
+      "name": "Português",
+      "initials": "pt"
+    },
+    {
+      "name": "Inglês",
+      "initials": "en"
+    }
+  ]
 }
