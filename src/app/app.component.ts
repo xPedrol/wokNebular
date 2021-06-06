@@ -2,6 +2,7 @@ import {Component} from '@angular/core';
 import {TranslateService} from '@ngx-translate/core';
 import {NbThemeService} from '@nebular/theme';
 import {SessionStorageService} from 'ngx-webstorage';
+import {themes} from './shared/constants/themes.constants';
 
 @Component({
   selector: 'app-root',
@@ -24,7 +25,7 @@ export class AppComponent {
   }
 
   setTheme(): void {
-    if (this.sessionStorage.retrieve('theme') !== this.themeService.currentTheme) {
+    if (this.sessionStorage.retrieve('theme') && themes.includes(this.sessionStorage.retrieve('theme')) && this.sessionStorage.retrieve('theme') !== this.themeService.currentTheme) {
       this.themeService.changeTheme(this.sessionStorage.retrieve('theme'));
     }
   }

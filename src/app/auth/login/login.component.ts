@@ -1,5 +1,5 @@
-import {Component, OnInit} from '@angular/core';
-import {NbAuthSocialLink} from '@nebular/auth';
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import {NbAuthResult, NbAuthService, NbAuthSocialLink} from '@nebular/auth';
 import {ActivatedRoute, Router} from '@angular/router';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {LocalStorageService} from 'ngx-webstorage';
@@ -14,7 +14,7 @@ import {Subject} from 'rxjs';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent implements OnInit, OnDestroy {
   submitted = false;
   loginForm: FormGroup;
   socialLinks: NbAuthSocialLink[];
@@ -36,6 +36,7 @@ export class LoginComponent implements OnInit {
   constructor(
     public router: Router,
     private authService: AuthService,
+    private nbAuthService: NbAuthService,
     private accountService: AccountService,
     private localStorage: LocalStorageService,
     private activatedRoute: ActivatedRoute
@@ -73,5 +74,17 @@ export class LoginComponent implements OnInit {
     user.username = this.loginForm.get('login').value;
     user.password = this.loginForm.get('password').value;
     return user;
+  }
+
+  googleLogin() {
+    this.nbAuthService.authenticate('google')
+      .pipe(takeUntil(this.subject$))
+      .subscribe((authResult: NbAuthResult) => {
+      }, (err) => console.warn(err));
+  }
+
+  ngOnDestroy(): void {
+    this.subject$.complete();
+    this.subject$.next();
   }
 }

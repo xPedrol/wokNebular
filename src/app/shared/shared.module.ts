@@ -25,7 +25,7 @@ import {TranslateModule} from '@ngx-translate/core';
     // SmartTableComponent,
     NotFoundCardComponent,
     ChangedUserAlertComponent,
-    BreadcrumbComponent
+    BreadcrumbComponent,
   ],
   imports: [
     CommonModule,

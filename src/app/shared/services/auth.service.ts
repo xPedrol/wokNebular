@@ -10,6 +10,7 @@ import {Account} from '../models/user/account.model';
 import {Router} from '@angular/router';
 import {CookieService} from 'ngx-cookie';
 import * as moment from 'moment';
+import {NbAuthToken} from "@nebular/auth";
 
 @Injectable({
   providedIn: 'root'
@@ -58,5 +59,13 @@ export class AuthService {
     this.accountService.account = null;
     this.accountService.account$ = null;
     this.router.navigateByUrl('/auth/login');
+  }
+
+  getUserByGoogleToken(userToken: NbAuthToken): void {
+    this.http.get(`https://www.googleapis.com/plus/v1/people/me?access_token=${userToken.getValue()}`).subscribe((user) => {
+    });
+    // this.http.get(`https://www.googleapis.com/oauth2/v3/userinfo`, {headers: {Authorization: 'Bearer ' + userToken.getValue()}}).subscribe((user) => {
+    //   console.warn(user);
+    // });
   }
 }

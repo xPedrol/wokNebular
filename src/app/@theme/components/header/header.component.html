@@ -12,8 +12,8 @@
     <a *ngIf="accountService.account" class="header-link"
        [routerLink]="[accountService.account.isTeacher()?'teacher':'student','dashboard']">Painel de controle</a>
     <a *ngIf="accountService.account" class="header-link" [routerLink]="['teacher','dashboard']">Seu rendimento</a>
-    <a *ngIf="!accountService.account" class="header-link">Login</a>
-    <a *ngIf="!accountService.account" class="header-link">Registro</a>
+    <a *ngIf="!accountService.account" class="header-link" [routerLink]="['auth','login']">Login</a>
+    <a *ngIf="!accountService.account" class="header-link" [routerLink]="['auth','register']">Registro</a>
   </div>
   <!--  <nb-select [selected]="currentTheme" (selectedChange)="changeTheme($event)" status="primary">-->
   <!--    <nb-option *ngFor="let theme of themes" [value]="theme.value"> {{ theme.name }}</nb-option>-->

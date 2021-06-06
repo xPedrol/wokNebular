@@ -89,9 +89,10 @@ export class HeaderComponent implements OnInit, OnDestroy {
     this.menuService.onItemClick()
       .pipe(
         filter(({tag}) => tag === 'userMenu'),
-        map(({item: {title}}) => title),
+        map(({item}) => item),
       )
       .subscribe((menu: any) => {
+        console.warn(menu);
         if (menu.id === 0) {
           this.router.navigate(['/account/profile']);
         }

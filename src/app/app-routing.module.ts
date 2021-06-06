@@ -5,6 +5,7 @@ import {NotFoundComponent} from './shared/components/not-found/not-found.compone
 import {Authority} from './shared/constants/authority.constants';
 import {AccessDeniedComponent} from './shared/components/access-denied/access-denied.component';
 import {NoAuthGuard} from './shared/services/no-auth-guard.service';
+import {NbOAuth2CallbackComponent} from './auth/nb-oauth2-callback/nb-oauth2-callback.component';
 
 const routes: Routes = [
   {
