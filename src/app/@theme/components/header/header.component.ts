@@ -8,6 +8,7 @@ import {AccountService} from '../../../shared/services/account.service';
 import {AuthService} from '../../../shared/services/auth.service';
 import {Authority} from '../../../shared/constants/authority.constants';
 import {TranslateService} from '@ngx-translate/core';
+import {SessionStorageService} from "ngx-webstorage";
 
 @Component({
   selector: 'ngx-header',
@@ -55,6 +56,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
               private themeService: NbThemeService,
               public authService: AuthService,
               public accountService: AccountService,
+              private sessionStorage: SessionStorageService,
               // private userService: UserData,
               // private layoutService: LayoutService,
               private breakpointService: NbMediaBreakpointsService,
@@ -133,6 +135,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   changeTheme(themeName: string): void {
     this.themeService.changeTheme(themeName);
+    this.sessionStorage.store('theme', themeName);
   }
 
   toggleSidebar(): boolean {
