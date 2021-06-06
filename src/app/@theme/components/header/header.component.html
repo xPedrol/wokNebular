@@ -3,15 +3,17 @@
     <!--    <a (click)="toggleSidebar()" href="#" class="sidebar-toggle">-->
     <!--      <nb-icon icon="menu-2-outline"></nb-icon>-->
     <!--    </a>-->
-<!--    <a [routerLink]="[('/'+sF.routeAuthSwitch(authorities,true)+'dashboard')]">-->
-      <img width="80" src="assets/images/logo-wok.png">
-<!--    </a>-->
+    <!--    <a [routerLink]="[('/'+sF.routeAuthSwitch(authorities,true)+'dashboard')]">-->
+    <img width="80" src="assets/images/logo-wok.png">
+    <!--    </a>-->
     <!--    <a class="logo d-none d-sm-block" href="#" (click)="navigateHome()" style="font-size: 18px;"><strong>Mundo do código</strong></a>-->
   </div>
   <div style="width: 100%;">
-    <a [hidden]="!accountService.account" class="header-link" [routerLink]="['teacher','dashboard']">Painel de controle</a>
-    <a [hidden]="accountService.account" class="header-link">Login</a>
-    <a [hidden]="accountService.account" class="header-link">Registro</a>
+    <a *ngIf="accountService.account" class="header-link"
+       [routerLink]="[accountService.account.isTeacher()?'teacher':'student','dashboard']">Painel de controle</a>
+    <a *ngIf="accountService.account" class="header-link" [routerLink]="['teacher','dashboard']">Seu rendimento</a>
+    <a *ngIf="!accountService.account" class="header-link">Login</a>
+    <a *ngIf="!accountService.account" class="header-link">Registro</a>
   </div>
   <!--  <nb-select [selected]="currentTheme" (selectedChange)="changeTheme($event)" status="primary">-->
   <!--    <nb-option *ngFor="let theme of themes" [value]="theme.value"> {{ theme.name }}</nb-option>-->
@@ -26,7 +28,8 @@
     </nb-action>
     <!--    <nb-action class="control-item" icon="bell-outline"></nb-action>-->
     <!--    <nb-action class="control-item" icon="settings-2-outline"></nb-action>-->
-    <nb-action class="control-item" icon="globe-2-outline" [nbContextMenu]="languagesAction" [id]="0" nbContextMenuTag="languageMenu"></nb-action>
+    <nb-action class="control-item" icon="globe-2-outline" [nbContextMenu]="languagesAction" [id]="0"
+               nbContextMenuTag="languageMenu"></nb-action>
     <nb-action class="control-item" icon="sun-outline" [nbContextMenu]="items" nbContextMenuTag="themeMenu"></nb-action>
     <nb-action class="user-action">
       <nb-user [nbContextMenu]="userMenu" *ngIf="accountService.account"

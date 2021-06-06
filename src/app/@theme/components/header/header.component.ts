@@ -48,7 +48,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   currentTheme = 'default';
 
-  userMenu = [{title: 'Profile'}, {title: 'Sair'}];
+  userMenu = [{title: 'Perfil', id: 0}, {title: 'Sair', id: 1}];
 
   constructor(private sidebarService: NbSidebarService,
               private menuService: NbMenuService,
@@ -89,11 +89,11 @@ export class HeaderComponent implements OnInit, OnDestroy {
         filter(({tag}) => tag === 'userMenu'),
         map(({item: {title}}) => title),
       )
-      .subscribe((menu) => {
-        if (menu === 'Profile') {
+      .subscribe((menu: any) => {
+        if (menu.id === 0) {
           this.router.navigate(['/account/profile']);
         }
-        if (menu === 'Log out') {
+        if (menu.id === 1) {
           this.authService.logout();
         }
       });
