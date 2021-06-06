@@ -5,18 +5,17 @@ import {NotFoundComponent} from './shared/components/not-found/not-found.compone
 import {Authority} from './shared/constants/authority.constants';
 import {AccessDeniedComponent} from './shared/components/access-denied/access-denied.component';
 import {NoAuthGuard} from './shared/services/no-auth-guard.service';
-import {HomeComponent} from './home/home.component';
 
 const routes: Routes = [
   {
     path: '',
-    redirectTo: '/home',
+    redirectTo: '/auth/login',
     pathMatch: 'full'
   },
-  {
-    path: 'home',
-    component: HomeComponent
-  },
+  // {
+  //   path: 'home',
+  //   component: HomeComponent
+  // },
   {
     path: 'auth',
     loadChildren: () => import('./auth/auth.module').then(m => m.AuthModule),
