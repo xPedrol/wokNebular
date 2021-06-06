@@ -1,7 +1,22 @@
 @import '~bootstrap/scss/mixins/breakpoints';
 @import '~@nebular/theme/styles/global/breakpoints';
 @import '../../styles/themes';
-
+.header-link{
+  margin-inline: 20px;
+  transition: 0.4s;
+  cursor: pointer;
+  font-size: 14px;
+  text-decoration: none;
+  padding: 10px;
+  border-radius: 5px;
+}
+.header-link:hover{
+  //opacity: 0.6;
+  color: #0095ff;
+  border-bottom: 1px solid #0095ff;
+  transform: scale(1.1);
+  background-color: nb-theme(hr-background);
+}
 @include nb-install-component() {
   display: flex;
   justify-content: space-between;

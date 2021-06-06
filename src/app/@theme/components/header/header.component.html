@@ -4,9 +4,14 @@
     <!--      <nb-icon icon="menu-2-outline"></nb-icon>-->
     <!--    </a>-->
 <!--    <a [routerLink]="[('/'+sF.routeAuthSwitch(authorities,true)+'dashboard')]">-->
-      <img width="80" src="https://www.mundodocodigo.com.br/assets/images/logo/logo-mundodocodigo-2021-base-74x100.png">
+      <img width="80" src="assets/images/logo-wok.png">
 <!--    </a>-->
     <!--    <a class="logo d-none d-sm-block" href="#" (click)="navigateHome()" style="font-size: 18px;"><strong>Mundo do código</strong></a>-->
+  </div>
+  <div style="width: 100%;">
+    <a [hidden]="!accountService.account" class="header-link" [routerLink]="['teacher','dashboard']">Painel de controle</a>
+    <a [hidden]="accountService.account" class="header-link">Login</a>
+    <a [hidden]="accountService.account" class="header-link">Registro</a>
   </div>
   <!--  <nb-select [selected]="currentTheme" (selectedChange)="changeTheme($event)" status="primary">-->
   <!--    <nb-option *ngFor="let theme of themes" [value]="theme.value"> {{ theme.name }}</nb-option>-->
