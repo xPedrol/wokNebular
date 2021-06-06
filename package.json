@@ -3,8 +3,8 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve --port=8080",
-    "build": "ng build",
+    "start": "node dist/nebularWok/server/main.js",
+    "build": "ng build --prod && ng run nebularWok:server:production",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
