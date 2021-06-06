@@ -1,5 +1,5 @@
 import {NgModule} from '@angular/core';
-import {BrowserModule} from '@angular/platform-browser';
+import {BrowserModule, TransferState} from '@angular/platform-browser';
 
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
@@ -16,7 +16,8 @@ import {NgxMaskModule} from 'ngx-mask';
 import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 import {HttpErrorInterceptor} from './shared/services/http-error-interceptor.service';
-
+import {translateBrowserLoaderFactory} from './shared/translate-browser.loader';
+import {TransferHttpCacheModule} from '@nguniversal/common';
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -33,9 +34,10 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
     HomeComponent
   ],
   imports: [
-    BrowserModule,
+    BrowserModule.withServerTransition({appId: 'serverApp'}),
     BrowserAnimationsModule,
     AppRoutingModule,
+    TransferHttpCacheModule,
     HttpClientModule,
     NgxMaskModule.forRoot(),
     CookieModule.forRoot(),
@@ -45,8 +47,8 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
       defaultLanguage: 'pt',
       loader: {
         provide: TranslateLoader,
-        useFactory: HttpLoaderFactory,
-        deps: [HttpClient]
+        useFactory: translateBrowserLoaderFactory,
+        deps: [HttpClient, TransferState]
       },
       extend: true
     })

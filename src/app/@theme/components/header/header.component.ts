@@ -7,7 +7,7 @@ import {Router} from '@angular/router';
 import {AccountService} from '../../../shared/services/account.service';
 import {AuthService} from '../../../shared/services/auth.service';
 import {Authority} from '../../../shared/constants/authority.constants';
-import {TranslateService} from "@ngx-translate/core";
+import {TranslateService} from '@ngx-translate/core';
 
 @Component({
   selector: 'ngx-header',
@@ -24,7 +24,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
     {title: 'corporate'}
   ];
   languagesAction = [
-    {title: 'Loading', id: -1, initials: 'l-1'}
+    {title: 'Loading'}
   ];
   userPictureOnly = false;
   themes = [
@@ -122,9 +122,12 @@ export class HeaderComponent implements OnInit, OnDestroy {
   getTranslationActions(): void {
     this.translateService.get('languages').subscribe((languagesT: any[]) => {
       this.languagesAction = [];
-      languagesT.forEach((language, i) => {
-        this.languagesAction.push({title: language.name, initials: language.initials, id: i});
-      });
+      if (languagesT && languagesT?.length > 0) {
+        languagesT?.forEach((language, i) => {
+          // @ts-ignore
+          this.languagesAction.push({title: language.name, initials: language.initials, id: i});
+        });
+      }
     });
   }
 

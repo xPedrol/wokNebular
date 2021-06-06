@@ -33,6 +33,7 @@ import {SharedThemeModuleModule} from './shared-theme-module.module';
 import {FormsModule} from '@angular/forms';
 import {RouterModule} from '@angular/router';
 
+const status = '';
 const NB_MODULES = [
 //   NbLayoutModule,
   NbMenuModule.forRoot(),

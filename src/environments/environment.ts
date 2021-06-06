@@ -7,7 +7,8 @@ export const environment = {
   API_URL: 'https://apiteste.mundodocodigo.com.br/api/',
   // API_URL: 'http://localhost:8081/api/',
   IMAGES_URL: 'https://apiteste.mundodocodigo.com.br/storage/',
-  VERSION: 2.0
+  VERSION: 2.0,
+  APP_PORT: 8080
 };
 
 /*
