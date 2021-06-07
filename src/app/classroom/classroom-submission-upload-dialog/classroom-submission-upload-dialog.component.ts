@@ -9,6 +9,7 @@ import {ISubmissionPost, SubmissionPost} from '../../shared/models/submission-po
 import {SubmissionService} from '../../shared/services/submission.service';
 import {NbToastrService} from '@nebular/theme';
 import {ISubmissionFileBasic, SubmissionFileBasic} from '../../shared/models/basic/submission-file-basic.model';
+import {Authority} from '../../shared/constants/authority.constants';
 
 @Component({
   selector: 'app-classroom-submission-upload-dialog',
@@ -16,6 +17,7 @@ import {ISubmissionFileBasic, SubmissionFileBasic} from '../../shared/models/bas
   styleUrls: ['./classroom-submission-upload-dialog.component.scss']
 })
 export class ClassroomSubmissionUploadDialogComponent implements OnInit {
+  authorities: Authority[];
   mTExercise: IModuleTopicExercise;
   courseSlug: string;
   disciplineSlug: string;
@@ -59,7 +61,7 @@ export class ClassroomSubmissionUploadDialogComponent implements OnInit {
   }
 
   public getUserTeams(): void {
-    this.userService.findUserTeamsByAccount().subscribe((teams: IUserTeamBasic[]) => {
+    this.userService.findUserTeamsByAccount(this.authorities).subscribe((teams: IUserTeamBasic[]) => {
       this.teams = teams || [];
     });
   }

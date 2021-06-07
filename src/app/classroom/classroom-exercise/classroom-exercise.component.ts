@@ -114,6 +114,7 @@ export class ClassroomExerciseComponent implements OnInit, OnDestroy {
         disciplineSlug: this.disciplineSlug,
         topicSlug: this.topicSlug,
         exerciseSlug: this.exerciseSlug,
+        authorities: this.authorities
       }
     });
   }
