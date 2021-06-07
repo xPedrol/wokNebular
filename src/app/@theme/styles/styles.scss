@@ -68,12 +68,12 @@ html {
   position: -webkit-sticky;
   top: 90px; /* required */
 }
-
-.layout-content {
-  max-width: 1350px;
-  margin: auto;
+@media screen and (min-width: 768px) {
+  .layout-content {
+    max-width: 1350px;
+    margin: auto;
+  }
 }
-
 .badge {
   font-weight: normal;
 }

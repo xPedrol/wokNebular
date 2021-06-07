@@ -1,18 +1,28 @@
 <div class="border-0" nbInfiniteList listenWindowScroll (bottomThreshold)="updateResults()" [threshold]="0">
+  <div class="row mb-3" style="width: 100%">
+    <div class="col-12 col-md-6">
+      <nb-select placeholder="Usuário" fullWidth (click)="getUserTeams()">
+        <nb-option [disabled]="true" *ngIf="loadingUserTeams">Carregando...</nb-option>
+        <nb-option [disabled]="true" *ngIf="!loadingUserTeams && (!userTeams || userTeams?.length === 0)">Sem usuários
+        </nb-option>
+        <nb-option [value]="userTeam" *ngFor="let userTeam of userTeams">{{userTeam?.team?.name}}</nb-option>
+      </nb-select>
+    </div>
+  </div>
   <div *ngFor="let results of usersResults">
     <nb-card>
       <nb-card-header class="border-0">
         <a target="_blank" [routerLink]="['/account/profile',results[0].loginUser]">
-        <nb-user [name]="results[0].loginUser" [title]="results[0].emailUser"
-                 [picture]="results[0].imageUrlUser"></nb-user>
+          <nb-user [name]="results[0].loginUser" [title]="results[0].emailUser"
+                   [picture]="results[0].imageUrlUser"></nb-user>
         </a>
         <hr>
       </nb-card-header>
       <div class="m-3 border-0">
-        <app-users-results-table  [results]="results"></app-users-results-table>
+        <app-users-results-table [results]="results"></app-users-results-table>
       </div>
     </nb-card>
   </div>
   <div class="col-12"
-    [nbSpinner]="loadingResults" nbSpinnerStatus="info" nbSpinnerSize="giant" style="min-height: 100px;"></div>
+       [nbSpinner]="loadingResults" nbSpinnerStatus="info" nbSpinnerSize="giant" style="min-height: 100px;"></div>
 </div>

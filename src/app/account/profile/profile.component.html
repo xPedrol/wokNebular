@@ -33,12 +33,12 @@
       <nb-card-body>
         <div class="row mt-4">
           <div class="col-12">
-            <nb-tabset fullWidth>
+            <nb-tabset>
               <nb-tab tabTitle="Skills">
-                <div class="row" *ngIf="!((!userSkills || userSkills?.length === 0) && !loadingUserSkills)"
+                <div class="" *ngIf="!((!userSkills || userSkills?.length === 0) && !loadingUserSkills)"
                      [nbSpinner]="loadingUserSkills" nbSpinnerStatus="info" nbSpinnerSize="giant"
                      style="min-height: 100px;">
-                  <div class="col-12 my-2" *ngFor="let userSkill of userSkills">
+                  <div class="my-2" *ngFor="let userSkill of userSkills">
                     <div>{{userSkill?.nameSkill}}</div>
                     <small>{{userSkill.getPercent()}}%</small>
                     <nb-progress-bar [value]="userSkill.getPercent(true)" status="info"></nb-progress-bar>

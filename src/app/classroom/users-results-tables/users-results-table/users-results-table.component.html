@@ -12,10 +12,13 @@
           {{result?.nameTopic}}
         </div>
         <div class="cell text-left" data-title="Pontos">
-          <nb-progress-bar *ngIf="result.getProgress() > 0" [value]="result.getProgress()" status="info"><span style="font-size: 12px">{{result?.point}}
+          <nb-progress-bar *ngIf="result.getProgress() > 0" [value]="result.getProgress()" status="info"><span
+            style="font-size: 12px">{{result?.point}}
             / {{result?.targetScore}}</span></nb-progress-bar>
-          <span  style="font-size: 14px" *ngIf="result.getProgress() <= 0">{{result?.point}}
-            / {{result?.targetScore}}</span>
+<!--          <span style="font-size: 14px" *ngIf="result.getProgress() <= 0">{{result?.point}}-->
+<!--            / {{result?.targetScore}}</span>-->
+          <nb-tag *ngIf="result.getProgress() <= 0" class="m-1" status="basic" size="tiny" appearance="outline"
+                  [text]="result?.point +'/'+ result?.targetScore"></nb-tag>
         </div>
         <div class="cell text-left m-md-2" data-title="Exercícios">
           <nb-tag class="m-1" status="success" size="tiny" appearance="outline"

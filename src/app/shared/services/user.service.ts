@@ -178,8 +178,8 @@ export class UserService {
       }));
   }
 
-  findUserTeamsByAccount(): Observable<IUserTeamBasic[]> {
-    const url = 'account/userteams';
+  findUserTeamsByAccount(authorities: Authority[]): Observable<IUserTeamBasic[]> {
+    const url = `${this.sF.routeAuthSwitch(authorities)}userteams`;
     return this.http.get<IUserTeamBasic[]>(`${SERVER_API_URL}${url}`);
   }
 }

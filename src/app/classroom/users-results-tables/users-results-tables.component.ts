@@ -4,6 +4,7 @@ import {UserService} from '../../shared/services/user.service';
 import {IReportResults} from '../../shared/models/module-topic-user-result.model';
 import {Authority} from '../../shared/constants/authority.constants';
 import {takeUntil} from 'rxjs/operators';
+import {IUserTeamBasic} from '../../shared/models/basic/userTeam-basic.model';
 
 @Component({
   selector: 'app-users-results-tables',
@@ -17,6 +18,8 @@ export class UsersResultsTablesComponent implements OnInit, OnDestroy {
   usersResults: IReportResults[][];
   loadingResults = true;
   options = {size: 2, page: 0};
+  userTeams: IUserTeamBasic[];
+  loadingUserTeams = false;
 
   constructor(
     private userService: UserService
@@ -50,5 +53,13 @@ export class UsersResultsTablesComponent implements OnInit, OnDestroy {
       this.options.page++;
       this.getUsersResults();
     }
+  }
+
+  getUserTeams(): void {
+    this.loadingUserTeams = true;
+    this.userService.getUserTeamsByAccount().subscribe((userTeams) => {
+      this.userTeams = userTeams;
+      this.loadingUserTeams = false;
+    }, () => this.loadingUserTeams = false);
   }
 }
