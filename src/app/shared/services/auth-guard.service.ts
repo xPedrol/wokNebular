@@ -1,22 +1,26 @@
-import {Injectable} from '@angular/core';
-import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTree} from '@angular/router';
+import {Inject, Injectable, PLATFORM_ID} from '@angular/core';
+import {ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTree} from '@angular/router';
 import {Observable, of} from 'rxjs';
 import {AccountService} from './account.service';
 import {catchError, map} from 'rxjs/operators';
 import {LocalStorageService} from 'ngx-webstorage';
 import {NbToastrService} from '@nebular/theme';
+import {isPlatformBrowser} from '@angular/common';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthGuard implements CanActivate {
+  isBrowser;
 
   constructor(
+    @Inject(PLATFORM_ID) platformId: string,
     private accountService: AccountService,
     private router: Router,
     private localStorage: LocalStorageService,
     private toastService: NbToastrService
   ) {
+    this.isBrowser = isPlatformBrowser(platformId);
   }
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot)
@@ -41,8 +45,10 @@ export class AuthGuard implements CanActivate {
   }
 
   showErrorMessage(url: string) {
-    this.toastService.show(`Você não tem acesso à pagina ${url}`, 'Acesso negado', {status: 'danger'});
-    this.localStorage.store('url_back', url);
-    this.router.navigateByUrl('/accessdenied');
+    if (this.isBrowser) {
+      this.toastService.show(`Você não tem acesso à pagina ${url}`, 'Acesso negado', {status: 'danger'});
+      this.localStorage.store('url_back', url);
+      this.router.navigateByUrl('/accessdenied');
+    }
   }
 }

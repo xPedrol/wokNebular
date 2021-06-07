@@ -3,14 +3,14 @@ import {HttpClient} from '@angular/common/http';
 import {IUserAuth} from '../models/user/UserLogin.model';
 import {SERVER_API_URL} from '../../app.constants';
 import {catchError, map, mergeMap} from 'rxjs/operators';
-import {LocalStorageService, SessionStorageService} from 'ngx-webstorage';
+import {LocalStorageService} from 'ngx-webstorage';
 import {Observable, of} from 'rxjs';
 import {AccountService} from './account.service';
 import {Account} from '../models/user/account.model';
 import {Router} from '@angular/router';
 import {CookieService} from 'ngx-cookie';
 import * as moment from 'moment';
-import {NbAuthToken} from "@nebular/auth";
+import {NbAuthToken} from '@nebular/auth';
 
 @Injectable({
   providedIn: 'root'
@@ -42,8 +42,7 @@ export class AuthService {
         return of(false);
       }),
       map((obj: any) => {
-        const date = new Date(moment().add(3, 'days').format('YYYY-MM-DD'));
-        console.warn(date);
+        const date = new Date(moment().add(1, 'months').format('YYYY-MM-DD'));
         this.cookieService.put('id_token', obj?.id_token, {expires: date});
         return true;
       }));

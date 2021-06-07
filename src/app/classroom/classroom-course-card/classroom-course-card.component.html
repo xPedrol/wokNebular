@@ -17,12 +17,12 @@
     <!--                <span class="badge badge-info">Exercícios: {{course.amountExercises}}</span>-->
   </nb-card-body>
   <nb-card-footer class="text-right border-0">
-    <p>
-      <nb-tag size="tiny" status="info" appearance="outline" class="m-2"
+    <p role="list">
+      <nb-tag role="listitem" size="tiny" status="info" appearance="outline" class="m-2"
               [text]="'Módulos: '+(course?.modules?.length?course?.modules?.length:0)"></nb-tag>
-      <nb-tag size="tiny" status="info" appearance="outline" class="m-2"
+      <nb-tag role="listitem" size="tiny" status="info" appearance="outline" class="m-2"
               [text]="'Tópicos: '+(course?.amountTopics?course.amountTopics:0)"></nb-tag>
-      <nb-tag size="tiny" status="info" appearance="outline" class="m-2"
+      <nb-tag role="listitem" size="tiny" status="info" appearance="outline" class="m-2"
               [text]="'Exercícios: '+(course?.amountExercises?course.amountExercises:0)"></nb-tag>
     </p>
     <button size="small" class="m-1" nbButton outline status="info"

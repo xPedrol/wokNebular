@@ -8,7 +8,7 @@
         <div [routerLink]="[url,mT.topic.slug]" class="col-12 col-sm-6 col-md-3 my-1 topic-card" *ngFor="let mT of mTs"
              style="cursor: pointer;" (mouseenter)="selectTopic(mT)" (mouseleave)="unSelectTopic()">
           <div *ngIf="mT.availableToSee || isTeacher">
-            <img width="40" [src]="mT.topic.imageUrl">
+            <img [alt]="mT!.topic!.name" width="40" [src]="mT.topic.imageUrl">
             <p class="mt-3">{{mT.topic.name}}</p>
             <ng-container>
               <nb-tag size="tiny" status="success" appearance="filled" text="Aberto" *ngIf="mT.availableToDo"></nb-tag>

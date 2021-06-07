@@ -1,8 +1,6 @@
 import {Component} from '@angular/core';
 import {TranslateService} from '@ngx-translate/core';
-import {NbThemeService} from '@nebular/theme';
-import {SessionStorageService} from 'ngx-webstorage';
-import {themes} from './shared/constants/themes.constants';
+import {SharedFunctions} from './shared/shared.functions';
 
 @Component({
   selector: 'app-root',
@@ -13,10 +11,9 @@ export class AppComponent {
 
   constructor(
     private translate: TranslateService,
-    private themeService: NbThemeService,
-    private sessionStorage: SessionStorageService
+    private sF: SharedFunctions
   ) {
-    this.setTheme();
+    this.sF.setTheme();
     translate.addLangs(['en', 'pt']);
     this.translate.setDefaultLang('pt');
 
@@ -24,9 +21,5 @@ export class AppComponent {
     this.translate.use('pt');
   }
 
-  setTheme(): void {
-    if (this.sessionStorage.retrieve('theme') && themes.includes(this.sessionStorage.retrieve('theme')) && this.sessionStorage.retrieve('theme') !== this.themeService.currentTheme) {
-      this.themeService.changeTheme(this.sessionStorage.retrieve('theme'));
-    }
-  }
+
 }

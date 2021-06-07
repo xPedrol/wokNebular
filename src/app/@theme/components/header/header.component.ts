@@ -8,7 +8,9 @@ import {AccountService} from '../../../shared/services/account.service';
 import {AuthService} from '../../../shared/services/auth.service';
 import {Authority} from '../../../shared/constants/authority.constants';
 import {TranslateService} from '@ngx-translate/core';
-import {SessionStorageService} from "ngx-webstorage";
+import {SessionStorageService} from 'ngx-webstorage';
+import {CookieService} from 'ngx-cookie';
+import {SharedFunctions} from '../../../shared/shared.functions';
 
 @Component({
   selector: 'ngx-header',
@@ -61,7 +63,9 @@ export class HeaderComponent implements OnInit, OnDestroy {
               // private layoutService: LayoutService,
               private breakpointService: NbMediaBreakpointsService,
               private router: Router,
-              private translateService: TranslateService
+              private translateService: TranslateService,
+              private cookieService: CookieService,
+              private sF: SharedFunctions
   ) {
   }
 
@@ -73,7 +77,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
         map(({item: {title}}) => title),
       )
       .subscribe((theme) => {
-        this.changeTheme(theme);
+        this.sF.changeTheme(theme);
       });
     this.menuService.onItemClick()
       .pipe(
@@ -134,20 +138,15 @@ export class HeaderComponent implements OnInit, OnDestroy {
     });
   }
 
-  changeTheme(themeName: string): void {
-    this.themeService.changeTheme(themeName);
-    this.sessionStorage.store('theme', themeName);
-  }
-
-  toggleSidebar(): boolean {
-    this.sidebarService.toggle(false, 'menu-sidebar');
-    // this.layoutService.changeLayoutSize();
-
-    return false;
-  }
-
-  navigateHome() {
-    this.menuService.navigateHome();
-    return false;
-  }
+  // toggleSidebar(): boolean {
+  //   this.sidebarService.toggle(false, 'menu-sidebar');
+  //   // this.layoutService.changeLayoutSize();
+  //
+  //   return false;
+  // }
+  //
+  // navigateHome() {
+  //   this.menuService.navigateHome();
+  //   return false;
+  // }
 }

@@ -13,7 +13,7 @@
                     style="min-height: 100px;">
         <span *ngIf="moduleTopic">
           <div class="module-header">
-            <img width="80" [src]="moduleTopic.topic.imageUrl" alt="" class="mb-3">
+            <img width="80" [src]="moduleTopic.topic.imageUrl" [alt]="moduleTopic!.topic!.name" class="mb-3">
             <h6 class="header-title-color">{{moduleTopic?.topic?.name}}</h6>
             <!--            <p>{{module.alias}}</p>-->
             <span>{{moduleTopic.exercises?.length ? moduleTopic.exercises?.length : 0}} Exercícios</span>
