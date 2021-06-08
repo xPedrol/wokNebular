@@ -187,4 +187,6 @@ export class UserService {
     const url = `${this.sF.routeAuthSwitch(authorities)}userteams`;
     return this.http.get<IUserTeamBasic[]>(`${SERVER_API_URL}${url}`);
   }
+
+
 }

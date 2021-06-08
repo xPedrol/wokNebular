@@ -1,6 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
-import {Account, IAccount} from '../../../shared/models/user/account.model';
+import {IAccount} from '../../../shared/models/user/account.model';
 import {AccountService} from '../../../shared/services/account.service';
 import {NbToastrService} from '@nebular/theme';
 import {ICompleteUser} from '../../../shared/models/user/complete-user.model';

@@ -8,18 +8,33 @@
         <div class="form-group col-12">
           <label class="label">Sobre mim</label>
           <textarea nbInput fullWidth formControlName="aboutMe"></textarea>
+          <ng-container *ngIf="aboutForm.get('aboutMe').invalid && aboutForm.get('aboutMe').touched">
+            <p class="text-danger" *ngIf="aboutForm.get('aboutMe').errors?.maxlength">
+              Máximo de caracteres atingido. Max: 100
+            </p>
+          </ng-container>
         </div>
       </div>
       <div class="form-row mt-3">
         <div class="form-group col-12">
           <label class="label">Formação</label>
           <textarea nbInput fullWidth formControlName="education"></textarea>
+          <ng-container *ngIf="aboutForm.get('education').invalid && aboutForm.get('education').touched">
+            <p class="text-danger" *ngIf="aboutForm.get('education').errors?.maxlength">
+              Máximo de caracteres atingido. Max: 100
+            </p>
+          </ng-container>
         </div>
       </div>
       <div class="form-row mt-3">
         <div class="form-group col-12">
           <label class="label">Experiençia</label>
           <textarea nbInput fullWidth formControlName="experience"></textarea>
+          <ng-container *ngIf="aboutForm.get('experience').invalid && aboutForm.get('experience').touched">
+            <p class="text-danger" *ngIf="aboutForm.get('experience').errors?.maxlength">
+              Máximo de caracteres atingido. Max: 100
+            </p>
+          </ng-container>
         </div>
       </div>
       <div class="form-row">
