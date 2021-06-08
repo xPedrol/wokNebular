@@ -7,7 +7,7 @@
         <nb-user size="giant"
                  [name]="user.firstName"
                  [title]="user.email"
-                 [picture]="user.imageUrl"
+                 [picture]="sF.getImage() | async"
         >
         </nb-user>
         <hr>
@@ -67,7 +67,7 @@
       </nb-card-header>
          <nb-card-body [nbSpinner]="loadingUser" nbSpinnerStatus="info" nbSpinnerSize="giant"
                        style="min-height: 100px;">
-            <div class="row mt-3">
+            <div class="row mt-3" style="max-width: 100%">
               <div class="col-4 text-center">
                 <nb-icon style="font-size: 25px;" status="info" icon="person-outline"></nb-icon>
                 <p><strong>Nome completo</strong></p>
@@ -76,7 +76,7 @@
               <div class="col-4 text-center">
                 <nb-icon style="font-size: 25px;" status="info" icon="map-outline"></nb-icon>
                 <p><strong>Localização</strong></p>
-                <p>{{user.fullAddress}}</p>
+                <p style="max-width: 100%">{{user.fullAddress}}</p>
               </div>
               <div class="col-4 text-center">
                 <nb-icon style="font-size: 25px;" status="info" icon="phone-call-outline"></nb-icon>
@@ -104,15 +104,15 @@
            <div class="row">
                 <div class="col-12 col-sm-6 col-lg-4">
                     <strong>Sobre {{user?.login}}</strong>
-                    <p>{{user.profile.aboutMe ? user.profile.aboutMe : 'Não informado'}}</p>
+                    <p>{{user?.profile?.aboutMe ? user?.profile?.aboutMe : 'Não informado'}}</p>
                   </div>
                   <div class="col-12 col-sm-6 col-lg-4">
                     <strong>Educação</strong>
-                    <p>{{user.profile.education ? user.profile.education : 'Não informado'}}</p>
+                    <p>{{user?.profile?.education ? user?.profile?.education : 'Não informado'}}</p>
                   </div>
                   <div class="col-12 col-sm-12 col-lg-4">
                     <strong>Experiência</strong>
-                    <p>{{user.profile.experience ? user.profile.experience : 'Não informado'}}</p>
+                    <p>{{user?.profile?.experience ? user?.profile?.experience : 'Não informado'}}</p>
                   </div>
              </div>
 <!--             </div>-->

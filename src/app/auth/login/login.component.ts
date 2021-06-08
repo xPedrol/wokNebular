@@ -57,11 +57,11 @@ export class LoginComponent implements OnInit, OnDestroy {
       this.authService.login(this.getUserFromForm()).pipe(takeUntil(this.subject$)).subscribe(() => {
         let urlBack: string = this.localStorage.retrieve('url_back');
         if (urlBack) {
-          urlBack = urlBack.replace('student', `${this.accountService.account.isTeacher() ? 'teacher' : 'student'}`).replace('teacher', `${this.accountService.account.isTeacher() ? 'teacher' : 'student'}`);
+          urlBack = urlBack.replace('student', `${this.accountService.account?.isTeacher() ? 'teacher' : 'student'}`).replace('teacher', `${this.accountService.account.isTeacher() ? 'teacher' : 'student'}`);
           this.router.navigateByUrl(urlBack);
           this.localStorage.clear('url_back');
         } else {
-          this.router.navigateByUrl(`/${this.accountService.account.isTeacher() ? 'teacher' : 'student'}/dashboard`);
+          this.router.navigateByUrl(`/${this.accountService.account?.isTeacher() ? 'teacher' : 'student'}/dashboard`);
         }
         this.submitted = false;
       }, () => this.submitted = false);

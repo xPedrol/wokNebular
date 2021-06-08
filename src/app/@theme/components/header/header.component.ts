@@ -65,7 +65,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
               private router: Router,
               private translateService: TranslateService,
               private cookieService: CookieService,
-              private sF: SharedFunctions
+              public sF: SharedFunctions
   ) {
   }
 
@@ -96,7 +96,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
         map(({item}) => item),
       )
       .subscribe((menu: any) => {
-        console.warn(menu);
         if (menu.id === 0) {
           this.router.navigate(['/account/profile']);
         }

@@ -29,7 +29,7 @@
     <div class="form-group col-12 col-md-8">
       <label class="label">Email</label>
       <nb-form-field>
-        <input type="text" nbInput fullWidth placeholder="Email" formControlName="email" fieldSize="large"
+        <input type="text" nbInput fullWidth placeholder="Email" formControlName="email" fieldSize="large" [readOnly]="true"
                [status]="(profileForm.get('email').dirty || profileForm.get('email').touched) ? (profileForm.get('email').invalid  ? 'danger' : 'success') : 'basic'">
       </nb-form-field>
       <ng-container *ngIf="profileForm.get('email').invalid && profileForm.get('email').touched">

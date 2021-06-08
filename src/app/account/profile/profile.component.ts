@@ -28,7 +28,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
   constructor(
     private userService: UserService,
     private dialogService: NbDialogService,
-    private sF: SharedFunctions,
+    public sF: SharedFunctions,
     private activatedRoute: ActivatedRoute
   ) {
   }

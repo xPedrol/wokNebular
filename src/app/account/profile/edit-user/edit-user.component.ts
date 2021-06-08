@@ -44,7 +44,7 @@ export class EditUserComponent implements OnInit {
   updateForm() {
     this.userForm.get('city').setValue(this.user.profile.city);
     this.userForm.get('uf').setValue(this.user.profile.uf);
-    this.userForm.get('country').setValue(this.user.profile.country);
+    this.userForm.get('country').setValue(this.user.profile.country ? this.user.profile.country : 'BR');
     this.userForm.get('mobileNumber').setValue(this.user.profile.mobileNumber);
     this.userForm.get('gender').setValue(this.user.profile.gender);
     this.userForm.get('birthday').setValue(this.user.profile.birthday.format('yyyy-MM-DD'));
@@ -72,6 +72,7 @@ export class EditUserComponent implements OnInit {
     profile.birthday = this.userForm.get('birthday').value;
     profile.publicProfile = this.userForm.get('publicProfile').value;
     profile.publicRank = this.userForm.get('publicRank').value;
+    console.warn(this.userForm.get('mobileNumber').value);
     return profile;
   }
 
