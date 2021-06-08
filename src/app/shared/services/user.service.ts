@@ -42,6 +42,11 @@ export class UserService {
     }
   }
 
+  getUserTeamsByCourse(courseId: number): Observable<IUserTeamBasic[]> {
+    const url = `teacher/courses/${courseId}/users/teams`;
+    return this.http.get<IUserTeamBasic[]>(`${SERVER_API_URL}${url}`);
+  }
+
   getCompleteUser() {
     const url = 'account/users';
     return this.http.get<ICompleteUser>(`${SERVER_API_URL}${url}`).pipe(map(user => {

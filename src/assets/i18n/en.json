@@ -3,7 +3,11 @@
     "http": {
       "401": {
         "title": "Invalid user",
-        "description": "Verifique seu login e senha"
+        "description": "Verifique seu login e senha. Código: 400"
+      },
+      "400": {
+        "title": "Server error",
+        "description": "Server returned a error. Code: 400"
       }
     },
     "validation": {

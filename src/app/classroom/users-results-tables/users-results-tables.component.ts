@@ -15,11 +15,14 @@ export class UsersResultsTablesComponent implements OnInit, OnDestroy {
   subject = new Subject();
   @Input() authorities: Authority[];
   @Input() moduleId: number;
+  @Input() courseId: number;
   usersResults: IReportResults[][];
+  usersResultsFiltered: IReportResults[][];
   loadingResults = true;
   options = {size: 2, page: 0};
   userTeams: IUserTeamBasic[];
   loadingUserTeams = false;
+  userTeam: IUserTeamBasic;
 
   constructor(
     private userService: UserService
@@ -44,12 +47,13 @@ export class UsersResultsTablesComponent implements OnInit, OnDestroy {
         } else {
           this.usersResults = results || [];
         }
+        this.usersResultsFiltered = this.usersResults;
         this.loadingResults = false;
       }, () => this.loadingResults = false);
   }
 
   updateResults() {
-    if (!this.loadingResults) {
+    if (!this.loadingResults && !this.userTeam) {
       this.options.page++;
       this.getUsersResults();
     }
@@ -57,9 +61,37 @@ export class UsersResultsTablesComponent implements OnInit, OnDestroy {
 
   getUserTeams(): void {
     this.loadingUserTeams = true;
-    this.userService.getUserTeamsByAccount().subscribe((userTeams) => {
+    this.userService.getUserTeamsByCourse(this.courseId).subscribe((userTeams) => {
       this.userTeams = userTeams;
       this.loadingUserTeams = false;
     }, () => this.loadingUserTeams = false);
+  }
+
+  filterUserResultsByUser(): void {
+    if (this.usersResults && this.usersResults?.length > 0 && this.userTeam) {
+      let userRAux: IReportResults[][] = [];
+      this.usersResults.forEach((userResults1, i) => {
+        userRAux.push([]);
+        if (userResults1 && userResults1?.length > 0) {
+          userResults1.forEach((userResult) => {
+            if (userResult.userId === this.userTeam?.user?.id) {
+              userRAux[i].push(userResult);
+            }
+          });
+        }
+      });
+      userRAux = userRAux.filter((userRs) => {
+        if (!userRs || userRs.length === 0) {
+          return null;
+        }
+        return userRs;
+      });
+      this.usersResultsFiltered = userRAux;
+    }
+  }
+
+  cleanURFiltered(): void {
+    this.usersResultsFiltered = this.usersResults;
+    this.userTeam = undefined;
   }
 }

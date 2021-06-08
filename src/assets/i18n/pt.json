@@ -4,6 +4,10 @@
       "401": {
         "title": "Usuário inválido",
         "description": "Verifique seu login e senha"
+      },
+      "400": {
+        "title": "Erro do servidor",
+        "description": "O servidor retornou um erro para a solicitação"
       }
     },
     "validation": {

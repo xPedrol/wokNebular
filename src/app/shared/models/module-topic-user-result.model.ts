@@ -10,6 +10,7 @@ export interface IReportResults {
   imageUrlTopic?: string;
   imageUrlUser?: string;
   loginUser?: string;
+  userId?: number;
   idModuleTopic?: number;
   langKeyTopic?: string;
   nameTopic?: string;
@@ -34,6 +35,7 @@ export class ReportResults implements IReportResults {
   imageUrlUser?: string;
   langKeyTopic?: string;
   loginUser?: string;
+  userId?: number;
   maxGrade?: number;
   minScore?: number;
   nameTopic?: string;
@@ -71,6 +73,7 @@ export class ReportResults implements IReportResults {
     this.point = result.point;
     this.slugTopic = result.slugTopic;
     this.targetScore = result.targetScore;
+    this.userId = result.userId;
   }
 
   getProgress(): number {

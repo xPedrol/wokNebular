@@ -11,7 +11,7 @@
   <div style="width: 100%;">
     <a *ngIf="accountService.account" class="header-link"
        [routerLink]="[accountService.account.isTeacher()?'teacher':'student','dashboard']">Painel de controle</a>
-    <a *ngIf="accountService.account" class="header-link" [routerLink]="['teacher','dashboard']">Seu rendimento</a>
+<!--    <a *ngIf="accountService.account" class="header-link" [routerLink]="['teacher','dashboard']">Seu rendimento</a>-->
     <a *ngIf="!accountService.account" class="header-link" [routerLink]="['auth','login']">Login</a>
     <a *ngIf="!accountService.account" class="header-link" [routerLink]="['auth','register']">Registro</a>
   </div>

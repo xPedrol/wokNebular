@@ -6,7 +6,7 @@ import {ClassroomDashBoardComponent} from './classroom-dash-board/classroom-dash
 import {SharedModule} from '../shared/shared.module';
 import {AddCourseDialogComponent} from './add-public-course-dialog/add-course-dialog.component';
 import {ClassroomCourseComponent} from './classroom-course/classroom-course.component';
-import {ReactiveFormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {CourseRankComponent} from './ranks/course-rank/course-rank.component';
 import {TreeViewComponent} from './tree-view/tree-view.component';
 import {ClassroomTopicComponent} from './classroom-topic/classroom-topic.component';
@@ -44,13 +44,14 @@ import {NgxDropzoneModule} from 'ngx-dropzone';
     SubmissionTableComponent,
     ClassroomSubmissionUploadDialogComponent
   ],
-  imports: [
-    CommonModule,
-    SharedModule,
-    RouterModule,
-    ReactiveFormsModule,
-    NgxDropzoneModule
-  ],
+    imports: [
+        CommonModule,
+        SharedModule,
+        RouterModule,
+        ReactiveFormsModule,
+        NgxDropzoneModule,
+        FormsModule
+    ],
   exports: [
     ClassroomContentComponent,
     SharedModule,
