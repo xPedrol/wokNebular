@@ -49,10 +49,9 @@ export class EditProfileComponent implements OnInit {
   }
 
   savePhoto(event: any) {
-    event.preventDefault();
     if (this.photo) {
       this.accountService.imageUpload(this.photo).subscribe(() => {
-        console.warn('salvoo');
+        this.toastService.show('', 'Imagem atualizada', {status: 'success'});
       });
     }
   }
@@ -69,6 +68,5 @@ export class EditProfileComponent implements OnInit {
 
   changePhoto(target) {
     this.photo = target.files.item(0);
-    console.warn(this.photo);
   }
 }
